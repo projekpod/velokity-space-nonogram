@@ -3,8 +3,10 @@
 from collections import Counter
 import json
 
-from build_levels import OUTPUT, PLANETS, ROOT, generated_files
+from build_daily import BANDS, COUNTS, SIZES, OUTPUT as DAILY_OUTPUT
+from build_levels import OUTPUT, PLANETS, generated_files
 from nonogram import count_solutions, puzzle_clues
+from star_battle import canonical_grid, solve, valid_solution, validate_regions
 
 
 def check_levels():
@@ -28,12 +30,45 @@ def check_levels():
     print(f"Nonogram: {len(files)} levels, one solution each")
 
 
+def check_daily():
+    expected = {
+        f"daily-{tier}-{index:02d}.json": tier
+        for tier, count in enumerate(COUNTS, 1)
+        for index in range(1, count + 1)
+    }
+    paths = list(DAILY_OUTPUT.rglob("*.json"))
+    files = {path.name: path for path in paths}
+    if len(paths) != len(expected) or set(files) != set(expected) or any(path.parent != DAILY_OUTPUT for path in paths):
+        raise SystemExit("Daily catalog filenames do not match the weekday rotation")
+    seen = set()
+    for name, tier in expected.items():
+        try:
+            puzzle = json.loads(files[name].read_text(encoding="utf-8"))
+            regions = puzzle["regions"]
+            columns = puzzle["solution"]
+            validate_regions(regions)
+            if not (puzzle["difficulty"] == tier and len(regions) == puzzle["size"] == SIZES[tier - 1]):
+                raise ValueError("Unexpected size or difficulty tier")
+            if not valid_solution(regions, columns):
+                raise ValueError("Invalid stored solution")
+            signature = canonical_grid(regions)
+            if signature in seen:
+                raise ValueError("Duplicate region layout")
+            seen.add(signature)
+            paths, effort = solve(regions)
+            if paths != [tuple(columns)]:
+                raise ValueError("Expected exactly one solution matching the stored solution")
+            lower, upper = BANDS[tier - 1]
+            if puzzle["effort"] != effort or not lower <= effort <= upper:
+                raise ValueError("Search effort is outside the weekday band")
+        except (KeyError, TypeError, ValueError) as error:
+            raise SystemExit(f"{name}: {error}") from error
+    print(f"Rasi Bintang: {len(files)} puzzles, one solution each, seven increasing difficulty bands")
+
+
 def main():
     check_levels()
-    daily = sorted((ROOT / "data" / "daily").glob("*.json"))
-    if daily:
-        raise SystemExit(f"Daily: {len(daily)} puzzle files lack a uniqueness validator.")
-    print("Daily: no puzzles yet")
+    check_daily()
 
 
 if __name__ == "__main__":
