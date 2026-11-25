@@ -91,7 +91,7 @@ func _ready() -> void:
 	_update_balance(_economy.balance())
 	_events.coins_changed.connect(_update_balance)
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
-	_ads.set_gameplay_banner(bonus_index < 0)
+	_ads.set_gameplay_active(true, bonus_index < 0)
 	_puzzle.correct_fill.connect(_on_correct_fill)
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.finished.connect(_on_finished)
@@ -99,7 +99,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	_ads.set_gameplay_banner(false)
+	_ads.set_gameplay_active(false)
 
 
 func _build_tools() -> void:
@@ -166,7 +166,7 @@ func _resume_game() -> void:
 	_feedback.hide()
 	_result.hide()
 	_tools.show()
-	_ads.set_gameplay_banner(true)
+	_ads.set_gameplay_active(true)
 	_portrait.mascot.set_idle(Mascot.Face.THINKING)
 	_puzzle.continue_game()
 	_update_lives()
@@ -228,7 +228,7 @@ func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
 
 func _on_finished(won: bool) -> void:
 	_tools.hide()
-	_ads.set_gameplay_banner(false)
+	_ads.set_gameplay_active(false)
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
 	if won:
 		_portrait.mascot.set_idle(Mascot.Face.PROUD)

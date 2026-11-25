@@ -71,6 +71,13 @@ jobs:
       - name: Report Web build size
         shell: bash
         run: python3 tools/report_web_size.py build/web | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Package itch.io Web build
+        run: python3 tools/package_itch.py build/web build/velokity-itch.zip
+      - uses: actions/upload-artifact@v6
+        with:
+          name: velokity-itch
+          path: build/velokity-itch.zip
+          if-no-files-found: error
       - uses: actions/upload-artifact@v6
         with:
           name: velokity-web

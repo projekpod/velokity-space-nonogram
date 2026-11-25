@@ -4,6 +4,9 @@ const SaveScript := preload("res://scripts/autoload/save.gd")
 const EconomyRules := preload("res://scripts/autoload/economy.gd")
 const AdsScript := preload("res://scripts/autoload/ads.gd")
 const FakeAds := preload("res://scripts/ads/fake_ads.gd")
+const BridgeAds := preload("res://scripts/ads/bridge_ads.gd")
+const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
+const Purchases := preload("res://scripts/payments/purchase_provider.gd")
 const AdsProvider := preload("res://scripts/ads/ads_provider.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
@@ -57,6 +60,10 @@ func _run() -> void:
 	_test_drag()
 	await _test_fake_ads()
 	await _test_ads_recovery()
+	await _test_bridge_ads()
+	_test_support_config()
+	_test_free_coin_quota()
+	await _test_shop_monetization()
 	await _test_nonogram_flow()
 	await _test_mascot_reactions()
 	await _test_calm_visuals()
@@ -164,7 +171,7 @@ func _test_fake_ads() -> void:
 	await ads.interstitial_closed
 	check(not paused and fake.interstitial_count == 1, "Interstitial close resumes gameplay exactly once")
 	check(not ads.request_interstitial_after_result(10), "Interstitial close begins a ninety-second cooldown")
-	ads.set_gameplay_banner(true)
+	ads.set_gameplay_active(true)
 	check(fake.banner_visible, "Banner visibility reaches the provider")
 	# Let the resumed sample finish so the audio mixer can release its playback.
 	if player.playing:
@@ -264,8 +271,8 @@ func _test_combo_rewards_and_migration() -> void:
 		"daily": {"last_day": 22000, "streak": 2},
 		"nonogram": {"legacy": {"reward": 25, "doubled": true}},
 	}
-	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V5")
-	check(save.data.version == 5 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
+	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V6")
+	check(save.data.version == 6 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
 	check(economy.player_level() == 2 and save.data.daily.clears == 2 and save.data.settings.language == "id", "Legacy daily history starts at the known streak and contributes to the player level")
 	check(economy.award_nonogram("legacy", 2, 6) == 0 and not economy.has_flawless_badge("legacy") and save.data.meta.xp == 300, "An imperfect replay grants zero coins and no badge")
 	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.has_flawless_badge("legacy") and save.data.meta.xp == 320, "A flawless replay earns its badge with zero coins")
@@ -718,10 +725,10 @@ func _test_daily_puzzle() -> void:
 
 func _test_daily_rewards() -> void:
 	var previous := SaveScript.migrate({"version": 1, "coins": 80, "settings": {"language": "id"}})
-	check(previous.version == 5 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
+	check(previous.version == 6 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
 	check(previous.daily == Daily.empty_progress(), "V1 starts with an empty daily streak")
 	var v2 := SaveScript.migrate({"version": 2, "coins": 14, "daily": {"last_day": 20780, "streak": 5}})
-	check(v2.version == 5 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
+	check(v2.version == 6 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
 	check(SaveScript.migrate({"daily": {"last_day": 1.25, "streak": 2}}).daily.streak == 0, "Reject fractional saved dates")
 	var save := root.get_node("Save")
 	var economy := root.get_node("Economy")
@@ -1039,6 +1046,191 @@ func _test_meta_menu() -> void:
 	check(_press_button(screen, tr("LOGIN_CLAIM") % Meta.LOGIN_REWARDS[0]) and economy.login_status(Daily.today()).reward == 0, "The login screen claims today's reward and disables repeat claims")
 	main.queue_free()
 	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+class TestPortalAds extends RefCounted:
+	signal rewarded_state_changed(state: String)
+	signal interstitial_state_changed(state: String)
+
+	var is_rewarded_supported := true
+	var is_interstitial_supported := true
+	var is_banner_supported := true
+	var requests: Array[String] = []
+	var banners: Array[String] = []
+
+	func show_rewarded(placement: String) -> void:
+		requests.append(placement)
+
+	func show_interstitial() -> void:
+		requests.append("interstitial")
+
+	func show_banner(position: String) -> void:
+		banners.append(position)
+
+	func hide_banner() -> void:
+		banners.append("hidden")
+
+
+class TestPortal extends RefCounted:
+	var id := "mock"
+	var is_external_links_allowed := true
+	var messages: Array[String] = []
+
+	func send_message(message: String) -> void:
+		messages.append(message)
+
+
+func _test_bridge_ads() -> void:
+	var ads := AdsScript.new()
+	var portal_ads := TestPortalAds.new()
+	var platform := TestPortal.new()
+	var provider := BridgeAds.new(portal_ads, platform)
+	var prior_mute := AudioServer.is_bus_mute(0)
+	AudioServer.set_bus_mute(0, false)
+	ads.set_provider(provider)
+	root.add_child(ads)
+	check(root.get_node("Ads")._provider is FakeAds, "Godot headless uses FakeAds")
+	ads.notify_menu_shown()
+	ads.notify_menu_shown()
+	ads.set_gameplay_active(true)
+	check(platform.messages == ["game_ready", "gameplay_started"] and portal_ads.banners == ["top"], "Report readiness once and start gameplay with a top banner")
+	var results: Array[Array] = []
+	ads.rewarded_finished.connect(func(placement: StringName, granted: bool) -> void:
+		results.append([placement, granted])
+	)
+	check(ads.request_rewarded(AdsScript.FREE_COINS), "Shop uses a distinct Bridge rewarded placement")
+	check(paused and AudioServer.is_bus_mute(0) and portal_ads.requests == ["free_coins"], "Bridge requests pause and mute the game")
+	check(platform.messages.back() == "gameplay_stopped" and portal_ads.banners.back() == "hidden", "Hide the banner and report stopped before the full-screen ad")
+	portal_ads.rewarded_state_changed.emit("opened")
+	portal_ads.rewarded_state_changed.emit("rewarded")
+	await process_frame
+	check(paused and results.is_empty(), "Wait for close even after Bridge reports a reward")
+	portal_ads.rewarded_state_changed.emit("closed")
+	await process_frame
+	check(not paused and not AudioServer.is_bus_mute(0) and results == [[AdsScript.FREE_COINS, true]], "Bridge close fulfills the granted placement exactly once")
+	check(platform.messages.back() == "gameplay_started" and portal_ads.banners.back() == "top", "Resume the active puzzle and restore its banner")
+	check(ads.request_rewarded(&"hint"), "Accept a second rewarded ad")
+	portal_ads.rewarded_state_changed.emit("closed")
+	await process_frame
+	check(results.back() == [&"hint", false], "Closing Bridge without a reward denies the grant")
+
+	AudioServer.set_bus_mute(0, true)
+	check(ads.request_rewarded(&"continue"), "Begin a request that will time out")
+	ads._on_timeout()
+	check(not paused and AudioServer.is_bus_mute(0) and results.back() == [&"continue", false], "The watchdog restores the prior audio mute and denies the request")
+	check(not ads.request_rewarded(&"hint"), "Do not attribute a timed-out Bridge callback to a new request")
+	var count := results.size()
+	portal_ads.rewarded_state_changed.emit("rewarded")
+	portal_ads.rewarded_state_changed.emit("closed")
+	await process_frame
+	check(results.size() == count and ads.can_request_rewarded(), "Drain late Bridge events before accepting another request")
+	check(ads.request_rewarded(&"hint"), "Accept the next request after draining an expired Bridge ad")
+	portal_ads.rewarded_state_changed.emit("failed")
+	await process_frame
+	check(results.size() == count + 1 and results.back() == [&"hint", false], "Bridge failure recovers without a payout")
+
+	ads.set_gameplay_active(false)
+	portal_ads.is_banner_supported = false
+	portal_ads.is_rewarded_supported = false
+	var banner_count := portal_ads.banners.size()
+	ads.set_gameplay_active(true)
+	check(portal_ads.banners.size() == banner_count and not ads.request_rewarded(&"hint"), "Platforms without banner or rewarded support never call those APIs")
+	ads.set_gameplay_active(false)
+	ads._session_started = Time.get_ticks_msec() - 120000
+	check(ads.request_interstitial_after_result(10) and paused, "Eligible results also use the Bridge interstitial")
+	portal_ads.interstitial_state_changed.emit("closed")
+	await process_frame
+	check(not paused and platform.messages.back() == "gameplay_stopped", "An interstitial outside a puzzle restores input without starting gameplay")
+	check(ads.allows_support_link(), "Bridge mock represents a standalone site")
+	for id in ["crazy_games", "poki", "playgama", "game_distribution", "standalone", "unknown"]:
+		platform.id = id
+		check(not ads.allows_support_link(), "Never show the support link on %s" % id)
+	platform.id = "mock"
+	platform.is_external_links_allowed = false
+	check(not ads.allows_support_link(), "An external link also requires Bridge permission")
+	ads.queue_free()
+	await process_frame
+	AudioServer.set_bus_mute(0, prior_mute)
+
+
+func _test_support_config() -> void:
+	var path := "user://test-support-%d.cfg" % OS.get_process_id()
+	var config := ConfigFile.new()
+	check(MonetizationConfig.support_url().is_empty(), "The shipped support URL is unset by default")
+	for invalid in ["", "http://example.test", "https://", "https://?go=example.test", "https://portal.test@example.test", "https://example.test/test path"]:
+		config.set_value("support", "url", invalid)
+		config.save(path)
+		check(MonetizationConfig.support_url(path).is_empty(), "Reject a missing or unsafe support link")
+	var valid := "https://example.test/velokity?from=game"
+	config.set_value("support", "url", valid)
+	config.save(path)
+	check(MonetizationConfig.support_url(path) == valid, "Read the configured support URL")
+	DirAccess.remove_absolute(path)
+
+
+func _test_free_coin_quota() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-coin-ads-%d.json" % OS.get_process_id()
+	var day := 22000
+	save.storage_path = path
+	save.data = SaveScript.migrate({"version": 5, "coins": 80, "meta": {"xp": 400}})
+	check(economy.free_coin_ads_remaining(day) == 5 and economy.balance() == 80 and economy.player_level() == 3, "V5 keeps progress and starts with a full ad quota")
+	for i in range(5):
+		check(economy.award_free_ad_coins(day) == 25 and economy.free_coin_ads_remaining(day) == 4 - i, "Pay 25 coins per completed ad")
+	check(economy.award_free_ad_coins(day) == 0 and economy.balance() == 205, "The sixth reward is capped")
+	check(save.load_game() == OK and economy.award_free_ad_coins(day) == 0 and economy.award_free_ad_coins(day - 1) == 0, "Reload and date rollback preserve the used quota")
+	var snapshot: Dictionary = save.data.duplicate(true)
+	save.storage_path = path + "/missing-directory/save.json"
+	check(economy.award_free_ad_coins(day + 1) == -1 and save.data == snapshot, "A failed save changes neither quota nor balance")
+	save.storage_path = path
+	check(economy.award_free_ad_coins(day + 1) == 25 and economy.free_coin_ads_remaining(day + 1) == 4, "The next local date starts a new quota")
+	check(economy.award_free_ad_coins(day) == 0 and economy.award_free_ad_coins(Daily.MAX_DAY + 1) == 0, "Only nondecreasing, supported local dates qualify")
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+func _test_shop_monetization() -> void:
+	var save := root.get_node("Save")
+	var ads := root.get_node("Ads")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var prior_provider: RefCounted = ads._provider
+	var path := "user://test-shop-ads-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	var fake := FakeAds.new()
+	ads.set_provider(fake)
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var screen: MetaScreen = main._open_meta(MetaScreen.Page.SHOP)
+	var caption := tr("FREE_COINS_BUTTON") % [25, 5]
+	fake.grant_rewards = false
+	check(_press_button(screen, caption), "Shop exposes the rewarded ad action")
+	await ads.rewarded_finished
+	check(economy.balance() == 0 and economy.free_coin_ads_remaining(Daily.today()) == 5, "A denied shop ad uses no quota")
+	fake.grant_rewards = true
+	save.storage_path = path + "/missing-directory/save.json"
+	check(_press_button(screen, caption), "The same quota is still eligible after an ad denial")
+	await ads.rewarded_finished
+	check(economy.balance() == 0 and screen._coin_reward_day == Daily.today(), "A granted ad is retained for save retry")
+	save.storage_path = path
+	check(_press_button(screen, "SAVE_RETRY") and economy.balance() == 25, "Retry the save with no second ad")
+	check(_press_button(screen, "IAP_TITLE") and screen.page == MetaScreen.Page.PURCHASES, "Shop opens the purchase options")
+	var items := screen.find_children("*", "Button", true, false)
+	for title: String in Purchases.PRODUCTS.values():
+		check(items.any(func(button: Button) -> bool: return button.text == title and button.disabled), "IAP product is disabled by its stub")
+	check(not Purchases.new().request_purchase(&"no_ads"), "The IAP stub cannot start a purchase")
+	main.queue_free()
+	await process_frame
+	ads.set_provider(prior_provider)
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path

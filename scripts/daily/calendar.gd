@@ -3,6 +3,7 @@ extends RefCounted
 const WEEKDAY_COUNTS := [18, 17, 17, 17, 17, 17, 17]
 const REWARDS := [10, 15, 20, 25, 30, 40, 60]
 const SECONDS_PER_DAY := 86400
+const MAX_DAY := 3652059
 
 
 static func day_number(date: Dictionary) -> int:
@@ -53,7 +54,7 @@ static func clean_progress(saved: Variant) -> Dictionary:
 
 
 static func _is_whole_number(value: Variant) -> bool:
-	return (value is int or value is float) and value >= 0 and value <= 3652059 and value == floor(value)
+	return (value is int or value is float) and value >= 0 and value <= MAX_DAY and value == floor(value)
 
 
 static func active_streak(progress: Dictionary, day: int) -> int:
