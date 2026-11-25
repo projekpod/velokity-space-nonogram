@@ -1,6 +1,7 @@
 extends Node
 
-const VERSION := 1
+const Daily := preload("res://scripts/daily/calendar.gd")
+const VERSION := 2
 const PATH := "user://save.json"
 
 var data := defaults()
@@ -16,13 +17,14 @@ static func defaults() -> Dictionary:
 	return {
 		"version": VERSION,
 		"coins": 0,
+		"daily": Daily.empty_progress(),
 		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
 
 static func migrate(raw: Dictionary) -> Dictionary:
 	var version: Variant = raw.get("version", 0)
-	if not (version is int or version is float) or (version != 0 and version != VERSION):
+	if not (version is int or version is float) or version < 0 or version > VERSION or version != floor(version):
 		return {}
 	var result := defaults()
 	var coins: Variant = raw.get("coins", 0)
@@ -36,6 +38,7 @@ static func migrate(raw: Dictionary) -> Dictionary:
 				result.settings[key] = value
 		if result.settings.language not in ["", "en", "id"]:
 			result.settings.language = ""
+	result.daily = Daily.clean_progress(raw.get("daily"))
 	return result
 
 
