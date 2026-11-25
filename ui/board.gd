@@ -1,4 +1,4 @@
-extends Control
+extends "res://ui/board_feedback.gd"
 
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const WIDTH := 696.0
@@ -26,6 +26,7 @@ var _gutter := Vector2.ZERO
 
 
 func _ready() -> void:
+	super()
 	_gutter = Vector2(_clue_depth(puzzle.row_clues), _clue_depth(puzzle.column_clues))
 	update_minimum_size()
 	focus_mode = Control.FOCUS_ALL
@@ -34,6 +35,7 @@ func _ready() -> void:
 	mouse_exited.connect(cancel_drag)
 	get_window().focus_exited.connect(cancel_drag)
 	puzzle.cell_changed.connect(_redraw_cell)
+	puzzle.correct_fill.connect(_on_fill)
 	puzzle.line_completed.connect(_redraw_line)
 	puzzle.mistake.connect(_show_mistake)
 	puzzle.finished.connect(_redraw_result)
@@ -142,8 +144,13 @@ func _redraw_cell(_cell: Vector2i) -> void:
 	queue_redraw()
 
 
-func _redraw_line(_is_row: bool, _index: int) -> void:
+func _redraw_line(is_row: bool, index: int) -> void:
+	_glow(is_row, index)
 	queue_redraw()
+
+
+func _on_fill(cell: Vector2i, _completed_lines: int) -> void:
+	_bounce(cell)
 
 
 func _redraw_result(_won: bool) -> void:
@@ -152,6 +159,7 @@ func _redraw_result(_won: bool) -> void:
 
 func _show_mistake(cell: Vector2i) -> void:
 	cancel_drag()
+	_shake()
 	_mistake = cell
 	queue_redraw()
 
@@ -162,6 +170,7 @@ func _draw() -> void:
 	var grid := _grid()
 	var edge := grid.size.x / puzzle.size
 	var block := Vector2.ONE * (edge - 2.0)
+	draw_set_transform(_shake_offset())
 	for y in range(puzzle.size):
 		for x in range(puzzle.size):
 			var cell := Vector2i(x, y)
@@ -172,13 +181,17 @@ func _draw() -> void:
 				color = puzzle.reveal(cell)
 			elif mark == Puzzle.Cell.FILLED:
 				color = MARK_COLOR
-			draw_rect(Rect2(position_on_board, block), color)
+			var tile := Rect2(position_on_board, block)
+			draw_rect(tile, EMPTY_COLOR)
+			if color != EMPTY_COLOR:
+				draw_rect(_bounced(tile, cell), color)
 			if mark == Puzzle.Cell.CROSSED and puzzle.state != Puzzle.State.WON:
 				_draw_cross(position_on_board + block * 0.5, edge * 0.14)
 			if cell == _mistake:
 				draw_rect(Rect2(position_on_board + Vector2.ONE, block - Vector2.ONE * 2.0), Color("#ff8f99"), false, 2.0)
 			if cell == _cursor and has_focus() and puzzle.state == Puzzle.State.PLAYING:
 				draw_rect(Rect2(position_on_board + Vector2.ONE * 2.0, block - Vector2.ONE * 4.0), Color("#f8de9e"), false, 2.0)
+	_paint_glow(grid, edge)
 	if puzzle.size >= 10:
 		for separator in range(5, puzzle.size, 5):
 			var offset := edge * separator - 1.0

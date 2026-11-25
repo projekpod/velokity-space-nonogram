@@ -6,6 +6,8 @@ const Daily := preload("res://scripts/daily/calendar.gd")
 const Puzzle := preload("res://scripts/daily/puzzle.gd")
 const Board := preload("res://ui/daily_board.gd")
 const UI := preload("res://ui/controls.gd")
+const Portrait := preload("res://ui/mission_art.gd")
+const Mascot := preload("res://ui/mascot.gd")
 
 const WEEKDAYS := [&"DAY_MON", &"DAY_TUE", &"DAY_WED", &"DAY_THU", &"DAY_FRI", &"DAY_SAT", &"DAY_SUN"]
 
@@ -21,6 +23,7 @@ var _puzzle: Puzzle
 var _board: Board
 var _lives: Label
 var _status: Label
+var _portrait: Portrait
 var _streak: Label
 var _slots: Array[PanelContainer] = []
 var _place: Button
@@ -51,7 +54,16 @@ func _start() -> void:
 	UI.button(top, "GAME_BACK").pressed.connect(back_requested.emit)
 	_lives = UI.label(top, "", 26, UI.GOLD)
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	UI.label(self, "DAILY_TITLE", 43, UI.MINT)
+	var intro := UI.row(self)
+	var text := VBoxContainer.new()
+	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	text.alignment = BoxContainer.ALIGNMENT_CENTER
+	intro.add_child(text)
+	UI.label(text, "DAILY_TITLE", 43, UI.MINT)
+	_portrait = Portrait.new()
+	_portrait.compact = true
+	_portrait.idle_expression = Mascot.Face.THINKING
+	intro.add_child(_portrait)
 	if level.is_empty():
 		UI.label(self, "DAILY_UNAVAILABLE", 24, UI.MUTED)
 		return
@@ -61,7 +73,7 @@ func _start() -> void:
 	_ads.set_gameplay_banner(true)
 	_update_lives()
 	var day_label := tr(WEEKDAYS[Daily.weekday(_day)])
-	var date_label := UI.label(self, "", 22, UI.MUTED)
+	var date_label := UI.label(text, "", 22, UI.MUTED)
 	date_label.text = tr("DAILY_DATE") % [day_label, _date.day, _date.month, _date.year, level.difficulty]
 	_status = UI.label(self, "DAILY_PLAYED" if _save.data.daily.last_day == _day else "DAILY_READY", 24)
 	var rules := UI.label(self, "DAILY_RULES", 21, UI.MUTED)
@@ -105,6 +117,7 @@ func _start() -> void:
 	_retry = UI.button(self, "GAME_RETRY")
 	_retry.pressed.connect(_start)
 	_puzzle.mistake.connect(_on_mistake)
+	_puzzle.star_placed.connect(_on_star_placed)
 	_puzzle.finished.connect(_on_finished)
 	_board.grab_focus()
 
@@ -117,9 +130,14 @@ func _choose_mode(note: bool) -> void:
 
 
 func _on_mistake(_cell: Vector2i) -> void:
+	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
 	_update_lives()
 	_status.text = "GAME_MISTAKE"
 	_settings.vibrate_for_mistake()
+
+
+func _on_star_placed(_cell: Vector2i) -> void:
+	_portrait.mascot.react(Mascot.Reaction.FILL)
 
 
 func _on_finished(won: bool) -> void:
@@ -129,8 +147,12 @@ func _on_finished(won: bool) -> void:
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
 	_status.add_theme_color_override("font_color", UI.MINT if won else Board.MISTAKE)
 	if not won:
+		_portrait.mascot.idle_expression = Mascot.Face.SAD
 		_status.text = "GAME_LOST"
-	elif Daily.today() != _day:
+		return
+	_portrait.mascot.set_idle(Mascot.Face.PROUD)
+	_portrait.mascot.react(Mascot.Reaction.WIN)
+	if Daily.today() != _day:
 		_status.text = "DAILY_ROLLOVER"
 		_retry.text = "DAILY_OPEN_TODAY"
 	else:

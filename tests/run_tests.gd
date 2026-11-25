@@ -10,6 +10,8 @@ const Board := preload("res://ui/board.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const DailyPuzzle := preload("res://scripts/daily/puzzle.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
+const Mascot := preload("res://ui/mascot.gd")
+const Backdrop := preload("res://ui/space_backdrop.gd")
 
 var checks := 0
 var failures := 0
@@ -43,6 +45,8 @@ func _run() -> void:
 	await _test_fake_ads()
 	await _test_ads_recovery()
 	await _test_nonogram_flow()
+	await _test_mascot_reactions()
+	await _test_calm_visuals()
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
@@ -301,6 +305,76 @@ func _test_nonogram_flow() -> void:
 	DirAccess.remove_absolute(save.storage_path)
 	save.data = previous_data
 	save.storage_path = previous_path
+
+
+func _test_mascot_reactions() -> void:
+	var save := root.get_node("Save")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	save.data = SaveScript.defaults()
+	save.data.settings.vibration = false
+	save.storage_path = "user://test-mascot-%d.json" % OS.get_process_id()
+	var screen := NonogramScreen.new()
+	screen.level = {
+		"id": "mascot-test", "size": 4, "solution": ["a...", ".a..", "..a.", "...a"],
+		"palette": {}, "title": {"en": "Test", "id": "Tes"},
+	}
+	root.add_child(screen)
+	var mascot := screen._portrait.mascot
+	var board := screen._board
+	screen._puzzle.mark(Vector2i.ZERO, false)
+	check(mascot._reaction == Mascot.Reaction.FILL and board._fills.has(Vector2i.ZERO), "A correct mark reacts and bounces")
+	check(screen._correct_lines == 2 and board._rows.has(0) and board._columns.has(0), "A correct fill can complete and light both lines")
+	screen._puzzle.mark(Vector2i(1, 1), false)
+	check(mascot._reaction == Mascot.Reaction.COMBO and screen._correct_lines == 4, "Cross the three-line combo threshold without a mistake")
+	screen._puzzle.mark(Vector2i(3, 2), false)
+	check(mascot._reaction == Mascot.Reaction.MISTAKE and board._shake_time > 0.0 and screen._correct_lines == 0, "Mistakes shake once and reset the combo count")
+	screen._puzzle.mark(Vector2i(2, 2), false)
+	check(mascot._reaction == Mascot.Reaction.MISTAKE and screen._correct_lines == 2, "A normal fill does not interrupt the active mistake reaction")
+	screen._puzzle.mark(Vector2i(3, 3), false)
+	check(mascot._reaction == Mascot.Reaction.WIN and mascot.idle_expression == Mascot.Face.PROUD, "Win supersedes combo and settles into proud")
+	screen.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(save.storage_path)
+	save.data = previous_data
+	save.storage_path = previous_path
+
+
+func _test_calm_visuals() -> void:
+	var save := root.get_node("Save")
+	var events := root.get_node("Events")
+	var previous_data: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	var backdrop := Backdrop.new()
+	backdrop.size = Vector2(720, 1280)
+	root.add_child(backdrop)
+	var mascot := Mascot.new()
+	mascot.size = Vector2(290, 291)
+	root.add_child(mascot)
+	var board := Board.new()
+	board.puzzle = Puzzle.new({"size": 3, "solution": ["a..", ".a.", "..a"], "palette": {}})
+	root.add_child(board)
+	backdrop._process(0.25)
+	check(backdrop._layers.size() == 3 and backdrop._layers[0].position != backdrop._layers[2].position, "Starfield layers move at different depths")
+	mascot._time = PI / 4.2
+	mascot._apply_pose()
+	check(absf(mascot._body.position.y) > 3.0, "Normal idle pose visibly floats")
+	save.data.settings.calm_mode = true
+	events.settings_changed.emit()
+	mascot.react(Mascot.Reaction.WIN)
+	mascot._set_progress(0.5)
+	mascot._apply_pose()
+	board.puzzle.mark(Vector2i.ZERO, false)
+	board.puzzle.mark(Vector2i(2, 1), false)
+	check(not backdrop.is_processing() and backdrop._layers[2].position == Vector2.ZERO, "Calm Mode holds the star layers still")
+	check(absf(mascot._body.position.y) < 1.5 and not mascot._sparks.emitting, "Calm Mode shortens the reaction and limits mascot motion")
+	check(board._fills.is_empty() and board._rows.is_empty() and board._columns.is_empty() and board._shake_time == 0.0, "Calm Mode skips board animations")
+	check(board.puzzle.lives == 2 and board.puzzle.at(Vector2i.ZERO) == Puzzle.Cell.FILLED, "Calm Mode preserves play and mistake correction")
+	for node in [board, mascot, backdrop]:
+		node.queue_free()
+	await process_frame
+	save.data = previous_data
+	events.settings_changed.emit()
 
 
 func _test_settings_menu() -> void:

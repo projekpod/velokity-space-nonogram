@@ -1,4 +1,4 @@
-extends Control
+extends "res://ui/board_feedback.gd"
 
 const Puzzle := preload("res://scripts/daily/puzzle.gd")
 const UI := preload("res://ui/controls.gd")
@@ -18,11 +18,13 @@ var _mistake := Vector2i(-1, -1)
 
 
 func _ready() -> void:
+	super()
 	custom_minimum_size = Vector2(572, 562)
 	focus_mode = Control.FOCUS_ALL
 	focus_entered.connect(queue_redraw)
 	focus_exited.connect(queue_redraw)
 	puzzle.changed.connect(_on_changed)
+	puzzle.star_placed.connect(_on_star)
 	puzzle.mistake.connect(_on_mistake)
 
 
@@ -66,7 +68,14 @@ func _on_changed() -> void:
 
 func _on_mistake(cell: Vector2i) -> void:
 	_mistake = cell
+	_shake()
 	queue_redraw()
+
+
+func _on_star(cell: Vector2i) -> void:
+	_bounce(cell)
+	_glow(true, cell.y)
+	_glow(false, cell.x)
 
 
 func _draw() -> void:
@@ -74,6 +83,7 @@ func _draw() -> void:
 		return
 	var board := _rect()
 	var edge := board.size.x / puzzle.size
+	draw_set_transform(_shake_offset())
 	for y in range(puzzle.size):
 		for x in range(puzzle.size):
 			var cell := Vector2i(x, y)
@@ -85,11 +95,12 @@ func _draw() -> void:
 			elif cell == _cursor and has_focus() and puzzle.state == Puzzle.State.PLAYING:
 				draw_rect(tile.grow(-4), UI.GOLD, false, 2.0)
 			if puzzle.is_star(cell):
-				_draw_star(tile.get_center(), edge * 0.30)
+				_draw_star(tile.get_center(), _bounced(tile, cell).size.x * 0.30)
 			elif puzzle.is_eliminated(cell):
 				_draw_cross(tile.get_center(), edge * 0.23, MISTAKE, 4.0)
 			elif puzzle.has_note(cell):
 				_draw_cross(tile.get_center(), edge * 0.15, BORDER, 2.0)
+	_paint_glow(board, edge)
 	for index in range(1, puzzle.size):
 		var offset := edge * index
 		draw_line(board.position + Vector2(offset, 0), Vector2(board.position.x + offset, board.end.y), Color("#19263b"), 2.0)
