@@ -3,5 +3,8 @@
 !/build/.gdignore
 __pycache__/
 *.keystore
+*.jks
+/export_credentials.cfg
+/android/
 
 /i18n/*.translation
