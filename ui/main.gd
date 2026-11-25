@@ -6,13 +6,15 @@ const UI := preload("res://ui/controls.gd")
 const DailyScreen := preload("res://ui/daily_screen.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const Meta := preload("res://scripts/meta/progression.gd")
+const MetaScreen := preload("res://ui/meta_screen.gd")
 
 @onready var center: CenterContainer = $Center
 @onready var _economy := get_node("/root/Economy")
 @onready var _settings := get_node("/root/Settings")
 @onready var _ads := get_node("/root/Ads")
 
-var _levels := Catalog.read()
+@onready var _levels: Array[Dictionary] = _economy.levels
 var _column: VBoxContainer
 
 
@@ -24,16 +26,37 @@ func _ready() -> void:
 
 
 func show_menu() -> void:
-	_reset_column()
-	_column.add_child(MissionArt.new())
-	UI.label(_column, "GAME_NAME", 98, UI.MINT)
-	UI.label(_column, "GAME_SUBTITLE", 38)
-	UI.label(_column, tr("COIN_BALANCE") % _economy.balance(), 25, UI.GOLD)
+	_reset_column(632)
+	var portrait := MissionArt.new()
+	portrait.display_height = 316
+	_column.add_child(portrait)
+	UI.label(_column, "GAME_NAME", 90, UI.MINT)
+	UI.label(_column, "GAME_SUBTITLE", 36)
+	var status := UI.row(_column)
+	var player := UI.label(status, tr("META_LEVEL_XP") % [_economy.player_level(), _economy.xp_progress(), Meta.XP_PER_LEVEL], 23, UI.MUTED)
+	player.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var balance := UI.label(status, tr("COIN_BALANCE") % _economy.balance(), 25, UI.GOLD)
+	balance.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var play := UI.button(_column, "MENU_PLAY", true)
 	play.pressed.connect(_show_planets)
-	UI.button(_column, "MENU_DAILY").pressed.connect(_open_daily)
+	var days := UI.row(_column)
+	UI.action(days, "MENU_DAILY_SHORT").pressed.connect(_open_daily)
+	UI.action(days, "META_LOGIN").pressed.connect(_open_meta.bind(MetaScreen.Page.LOGIN))
+	var collection := UI.row(_column)
+	UI.action(collection, "META_ALBUM").pressed.connect(_open_meta.bind(MetaScreen.Page.ALBUM))
+	UI.action(collection, "META_SHOP").pressed.connect(_open_meta.bind(MetaScreen.Page.SHOP))
 	UI.button(_column, "MENU_SETTINGS").pressed.connect(_show_settings)
 	play.grab_focus()
+
+
+func _open_meta(page: MetaScreen.Page, planet := "moon") -> MetaScreen:
+	_reset_column(632, 0)
+	var screen := MetaScreen.new()
+	screen.page = page
+	screen.planet = planet
+	screen.back_requested.connect(show_menu)
+	_column.add_child(screen)
+	return screen
 
 
 func _show_planets() -> void:
@@ -125,10 +148,7 @@ func _planet_title(planet: String) -> String:
 
 
 func _planet_cleared(planet: String) -> int:
-	var count := 0
-	for index in _planet_levels(planet):
-		count += int(_economy.is_nonogram_cleared(_levels[index].id))
-	return count
+	return _economy.album_collected(planet)
 
 
 func _is_planet_unlocked(planet: String) -> bool:

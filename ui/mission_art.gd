@@ -4,15 +4,18 @@ const Mascot := preload("res://ui/mascot.gd")
 const Art := preload("res://ui/mascot_art.gd")
 
 var compact := false
+var display_height := 358.0
+var preview_outfit: Variant = null
 var idle_expression := Mascot.Face.HAPPY
 var mascot: Mascot
 
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	custom_minimum_size = Vector2(112, 104) if compact else Vector2(0, 358)
+	custom_minimum_size = Vector2(112, 104) if compact else Vector2(0, display_height)
 	mascot = Mascot.new()
 	mascot.idle_expression = idle_expression
+	mascot.preview_outfit = preview_outfit
 	add_child(mascot)
 	mascot.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if not compact:

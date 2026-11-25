@@ -3,10 +3,14 @@ extends Node
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const Catalog := preload("res://scripts/nonogram/catalog.gd")
+const Meta := preload("res://scripts/meta/progression.gd")
 const MAX_COINS := 2147483647
 const MAX_FIRST_CLEAR := 60
-const HINT_COST := 10
-const CONTINUE_COST := 20
+const HINT_COST := 30
+const CONTINUE_COST := 50
+
+var levels := Catalog.read()
 
 @onready var _save := get_node("/root/Save")
 @onready var _events := get_node("/root/Events")
@@ -29,9 +33,108 @@ func is_nonogram_cleared(level_id: String) -> bool:
 
 
 func player_level() -> int:
-	var clears: int = _save.data.nonogram.size() + _save.data.daily.get("clears", _save.data.daily.streak)
+	var xp: int = _save.data.meta.xp
 	@warning_ignore("integer_division")
-	return 1 + clears / 2
+	return 1 + xp / Meta.XP_PER_LEVEL
+
+
+func xp_progress() -> int:
+	return _save.data.meta.xp % Meta.XP_PER_LEVEL
+
+
+func album_collected(planet: String) -> int:
+	var count := 0
+	for level in levels:
+		if level.planet == planet and is_nonogram_cleared(level.id):
+			count += 1
+	return count
+
+
+func achievement_progress(id: String) -> int:
+	match id:
+		"explorer":
+			return _save.data.nonogram.size()
+		"flawless":
+			return badge_count()
+		"stargazer":
+			return _save.data.daily.clears
+		"bonus_pilot":
+			return _save.data.bonus_clears
+	return 0
+
+
+func owns_costume(id: String) -> bool:
+	var costume: Dictionary = Meta.COSTUMES.get(id, {})
+	if costume.has("price"):
+		return _save.data.meta.purchased.has(id)
+	if costume.has("album"):
+		return album_collected(costume.album) >= Catalog.PICTURES_PER_ALBUM
+	if costume.has("achievement"):
+		var goal: int = Meta.ACHIEVEMENTS[costume.achievement].goal
+		return achievement_progress(costume.achievement) >= goal
+	return false
+
+
+func buy_costume(id: String) -> bool:
+	var price: int = Meta.COSTUMES.get(id, {}).get("price", 0)
+	if price <= 0 or price > balance() or owns_costume(id):
+		return false
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	snapshot.meta.purchased[id] = true
+	snapshot.coins -= price
+	return _commit(snapshot)
+
+
+func equipped_costumes() -> Dictionary:
+	var equipped := {}
+	for slot: String in _save.data.meta.equipped:
+		var id: String = _save.data.meta.equipped[slot]
+		if Meta.COSTUMES.get(id, {}).get("slot") == slot and owns_costume(id):
+			equipped[slot] = id
+	return equipped
+
+
+func equip_costume(slot: String, id: String) -> bool:
+	if slot not in Meta.SLOTS:
+		return false
+	if not id.is_empty() and (Meta.COSTUMES.get(id, {}).get("slot") != slot or not owns_costume(id)):
+		return false
+	if _save.data.meta.equipped.get(slot, "") == id:
+		return true
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	if id.is_empty():
+		snapshot.meta.equipped.erase(slot)
+	else:
+		snapshot.meta.equipped[slot] = id
+	return _commit(snapshot)
+
+
+func login_status(day: int) -> Dictionary:
+	var progress: Dictionary = _save.data.meta.login
+	var slots := Daily.collected_slots(progress, maxi(day, progress.last_day), Meta.LOGIN_REWARDS.size())
+	var next := Daily.advance(progress, day)
+	return {
+		"slots": slots,
+		"reward": 0 if next.is_empty() else _login_reward(next.streak),
+		"clock_behind": day < progress.last_day,
+	}
+
+
+func claim_login(day: int) -> int:
+	var next := Daily.advance(_save.data.meta.login, day)
+	if next.is_empty():
+		return 0
+	var amount := _login_reward(next.streak)
+	if amount > MAX_COINS - balance():
+		return -1
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	snapshot.meta.login = next
+	snapshot.coins += amount
+	return amount if _commit(snapshot) else -1
+
+
+static func _login_reward(streak: int) -> int:
+	return Meta.LOGIN_REWARDS[(streak - 1) % Meta.LOGIN_REWARDS.size()]
 
 
 func has_flawless_badge(level_id: String) -> bool:
@@ -59,8 +162,10 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	if first_clear:
 		snapshot.nonogram[level_id] = {"reward": amount, "doubled": false}
+		_add_xp(snapshot, Meta.CLEAR_XP)
 	if new_badge:
 		snapshot.nonogram[level_id].flawless = true
+		_add_xp(snapshot, Meta.BADGE_XP)
 	snapshot.coins += amount
 	return amount if _commit(snapshot) else -1
 
@@ -78,6 +183,7 @@ func award_bonus(index: int) -> int:
 		return -1
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.bonus_clears += 1
+	_add_xp(snapshot, Meta.BONUS_XP)
 	snapshot.coins += amount
 	return amount if _commit(snapshot) else -1
 
@@ -105,8 +211,13 @@ func award_daily(day: int) -> int:
 		return -1
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.daily = progress
+	_add_xp(snapshot, Meta.CLEAR_XP)
 	snapshot.coins += amount
 	return amount if _commit(snapshot) else -1
+
+
+static func _add_xp(snapshot: Dictionary, amount: int) -> void:
+	snapshot.meta.xp = mini(snapshot.meta.xp + amount, Meta.MAX_XP)
 
 
 func _set_balance(value: int) -> bool:

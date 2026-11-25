@@ -2,7 +2,8 @@ extends Node
 
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
-const VERSION := 4
+const Meta := preload("res://scripts/meta/progression.gd")
+const VERSION := 5
 const PATH := "user://save.json"
 
 var data := defaults()
@@ -24,6 +25,7 @@ static func defaults() -> Dictionary:
 		"daily": Daily.empty_progress(),
 		"nonogram": {},
 		"bonus_clears": 0,
+		"meta": Meta.defaults(),
 		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
@@ -62,7 +64,27 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	var bonus_clears: Variant = raw.get("bonus_clears")
 	if version >= 4 and _is_version(bonus_clears) and bonus_clears <= Bonus.unlocked_clears(badges):
 		result.bonus_clears = int(bonus_clears)
+	var legacy_xp: int = (result.nonogram.size() + result.daily.clears) * Meta.CLEAR_XP
+	result.meta.xp = mini(legacy_xp, Meta.MAX_XP)
+	var stored_meta: Variant = raw.get("meta")
+	if version >= 5 and stored_meta is Dictionary:
+		_restore_meta(result.meta, stored_meta)
 	return result
+
+
+static func _restore_meta(meta: Dictionary, stored: Dictionary) -> void:
+	var xp: Variant = stored.get("xp")
+	if _is_version(xp) and xp <= Meta.MAX_XP:
+		meta.xp = maxi(meta.xp, int(xp))
+	meta.login = Daily.clean_progress(stored.get("login"))
+	var purchased: Variant = stored.get("purchased")
+	var equipped: Variant = stored.get("equipped")
+	for id: String in Meta.COSTUMES:
+		var costume: Dictionary = Meta.COSTUMES[id]
+		if costume.has("price") and purchased is Dictionary and purchased.get(id) is bool and purchased[id]:
+			meta.purchased[id] = true
+		if equipped is Dictionary and equipped.get(costume.slot) == id:
+			meta.equipped[costume.slot] = id
 
 
 static func _is_version(version: Variant) -> bool:

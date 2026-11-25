@@ -11,6 +11,7 @@ const Mascot := preload("res://ui/mascot.gd")
 const Celebration := preload("res://ui/celebration.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const Meta := preload("res://scripts/meta/progression.gd")
 const BOARD_WIDTH := Board.WIDTH
 
 @onready var _economy := get_node("/root/Economy")
@@ -239,14 +240,18 @@ func _on_finished(won: bool) -> void:
 
 
 func _record_win() -> void:
+	var previous_level: int = _economy.player_level()
 	if bonus_index >= 0:
 		_win_coins = _economy.award_bonus(bonus_index)
 		_show_result(true)
-		if _win_coins > 0 and Bonus.multiplier(bonus_index) == Bonus.STAGES:
-			_celebration.play(4, "CELEBRATION_BONUS", tr("GAME_EARNED") % Bonus.ROUND_COINS)
+		if _win_coins > 0:
+			var player_level: int = _economy.player_level()
+			if Bonus.multiplier(bonus_index) == Bonus.STAGES:
+				_celebration.play(4, "CELEBRATION_BONUS", tr("BONUS_TOTAL") % Bonus.ROUND_COINS)
+			elif player_level > previous_level:
+				_celebration.play(4, tr("CELEBRATION_LEVEL") % player_level)
 		return
 
-	var previous_level: int = _economy.player_level()
 	var had_badge: bool = _economy.has_flawless_badge(level.id)
 	var was_album_complete := album_complete.is_valid() and bool(album_complete.call())
 	_win_coins = _economy.award_nonogram(level.id, _puzzle.lives, _peak_lines)
@@ -259,8 +264,9 @@ func _record_win() -> void:
 	var detail := tr("BONUS_UNLOCKED") if round_unlocked else ""
 	var player_level: int = _economy.player_level()
 	if album_complete.is_valid() and not was_album_complete and album_complete.call():
-		if detail.is_empty() and player_level > previous_level:
-			detail = tr("CELEBRATION_LEVEL") % player_level
+		if detail.is_empty():
+			var reward: String = Meta.ALBUM_REWARDS[level.planet]
+			detail = tr("ALBUM_REWARD") % tr(Meta.costume_title(reward))
 		_celebration.play(4, "CELEBRATION_ALBUM", detail)
 	elif player_level > previous_level:
 		_celebration.play(4, tr("CELEBRATION_LEVEL") % player_level, detail)

@@ -1,6 +1,7 @@
 extends SceneTree
 
 const SaveScript := preload("res://scripts/autoload/save.gd")
+const EconomyRules := preload("res://scripts/autoload/economy.gd")
 const AdsScript := preload("res://scripts/autoload/ads.gd")
 const FakeAds := preload("res://scripts/ads/fake_ads.gd")
 const AdsProvider := preload("res://scripts/ads/ads_provider.gd")
@@ -15,6 +16,9 @@ const Backdrop := preload("res://ui/space_backdrop.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Celebration := preload("res://ui/celebration.gd")
+const Meta := preload("res://scripts/meta/progression.gd")
+const MetaScreen := preload("res://ui/meta_screen.gd")
+const AlbumPicture := preload("res://ui/album_picture.gd")
 
 var checks := 0
 var failures := 0
@@ -39,6 +43,10 @@ func _run() -> void:
 	await _test_settings_menu()
 	_test_economy()
 	_test_combo_rewards_and_migration()
+	_test_xp_migration()
+	_test_costume_economy()
+	_test_login_calendar()
+	await _test_meta_menu()
 	_test_catalog()
 	await _test_level_progression()
 	await _test_bonus_flow()
@@ -256,18 +264,18 @@ func _test_combo_rewards_and_migration() -> void:
 		"daily": {"last_day": 22000, "streak": 2},
 		"nonogram": {"legacy": {"reward": 25, "doubled": true}},
 	}
-	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V4")
-	check(save.data.version == 4 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
+	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V5")
+	check(save.data.version == 5 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
 	check(economy.player_level() == 2 and save.data.daily.clears == 2 and save.data.settings.language == "id", "Legacy daily history starts at the known streak and contributes to the player level")
-	check(economy.award_nonogram("legacy", 2, 6) == 0 and not economy.has_flawless_badge("legacy"), "An imperfect replay grants zero coins and no badge")
-	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.has_flawless_badge("legacy"), "A flawless replay earns its badge with zero coins")
+	check(economy.award_nonogram("legacy", 2, 6) == 0 and not economy.has_flawless_badge("legacy") and save.data.meta.xp == 300, "An imperfect replay grants zero coins and no badge")
+	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.has_flawless_badge("legacy") and save.data.meta.xp == 320, "A flawless replay earns its badge with zero coins")
 	check(save.load_game() == OK and economy.badge_count() == 1 and economy.balance() == 80, "Badge and balance persist on replay")
-	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.badge_count() == 1, "The same level never grants a second badge")
+	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.badge_count() == 1 and save.data.meta.xp == 320, "The same level never grants a second badge")
 	check(save.data.nonogram.legacy.reward == 25 and economy.double_nonogram_reward("legacy") == 0, "Preserve the historical win reward and ad claim")
 	check(economy.award_nonogram("combo-x2", 1, 3) == 40 and economy.player_level() == 3, "An x2 first clear pays twice the base and counts once for player level")
-	check(economy.award_nonogram("combo-cap", 3, 8) == 60 and economy.has_flawless_badge("combo-cap"), "First-clear reward caps base and combo at 60 and saves the flawless badge")
+	check(economy.award_nonogram("combo-cap", 3, 8) == 60 and economy.has_flawless_badge("combo-cap") and save.data.meta.xp == 540, "First-clear reward caps base and combo at 60 and saves the flawless badge")
 	check(economy.award_daily(22002) == 10 and save.data.daily.streak == 1 and economy.player_level() == 4, "First daily clear after a streak gap increases lifetime progress")
-	check(economy.award_daily(22002) == 0 and save.data.daily.clears == 3, "A daily replay never adds to lifetime progress")
+	check(economy.award_daily(22002) == 0 and save.data.daily.clears == 3 and save.data.meta.xp == 640, "A daily replay never adds to lifetime progress")
 	var snapshot: Dictionary = save.data.duplicate(true)
 	save.storage_path = path + "/missing-dir/save.json"
 	check(economy.award_nonogram("unwritten", 3, 6) == -1 and save.data == snapshot, "Failed first-clear write leaves the coins, badge and progress intact")
@@ -313,7 +321,7 @@ func _test_nonogram_flow() -> void:
 	ads.set_provider(fake)
 	save.storage_path = "user://test-game-flow-%d.json" % OS.get_process_id()
 	save.data = SaveScript.defaults()
-	save.data.coins = 30
+	save.data.coins = 80
 	save.data.settings.vibration = false
 	var screen := NonogramScreen.new()
 	screen.level = {
@@ -325,12 +333,12 @@ func _test_nonogram_flow() -> void:
 	check(fake.banner_visible and screen._tools.visible and not screen._result.visible, "Banner and controls appear in gameplay")
 	var hint_cell := puzzle.hint_cell()
 	screen._hint.pressed.emit()
-	check(puzzle.at(hint_cell) == Puzzle.Cell.FILLED and save.data.coins == 20, "A paid hint changes exactly the selected cell and spends coins")
+	check(puzzle.at(hint_cell) == Puzzle.Cell.FILLED and save.data.coins == 50, "A paid hint changes exactly the selected cell and spends 30 coins")
 	for cell in [Vector2i(1, 1), Vector2i(1, 2), Vector2i(2, 2)]:
 		puzzle.mark(cell, false)
 	check(puzzle.state == Puzzle.State.LOST and not fake.banner_visible and screen._result.visible, "Loss opens a result with the banner hidden")
 	screen._continue.pressed.emit()
-	check(puzzle.state == Puzzle.State.PLAYING and puzzle.lives == 1 and save.data.coins == 0, "Paid continue resumes the same board with one life")
+	check(puzzle.state == Puzzle.State.PLAYING and puzzle.lives == 1 and save.data.coins == 0, "Paid continue spends 50 coins and resumes the same board with one life")
 	check(puzzle.at(hint_cell) == Puzzle.Cell.FILLED and not puzzle.can_continue() and screen._hint.disabled, "Continuation retains marks and disables unaffordable hints")
 	fake.grant_rewards = false
 	var next_hint := puzzle.hint_cell()
@@ -710,10 +718,10 @@ func _test_daily_puzzle() -> void:
 
 func _test_daily_rewards() -> void:
 	var previous := SaveScript.migrate({"version": 1, "coins": 80, "settings": {"language": "id"}})
-	check(previous.version == 4 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
+	check(previous.version == 5 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
 	check(previous.daily == Daily.empty_progress(), "V1 starts with an empty daily streak")
 	var v2 := SaveScript.migrate({"version": 2, "coins": 14, "daily": {"last_day": 20780, "streak": 5}})
-	check(v2.version == 4 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
+	check(v2.version == 5 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
 	check(SaveScript.migrate({"daily": {"last_day": 1.25, "streak": 2}}).daily.streak == 0, "Reject fractional saved dates")
 	var save := root.get_node("Save")
 	var economy := root.get_node("Economy")
@@ -779,6 +787,7 @@ func _test_bonus_flow() -> void:
 	check(economy.badge_count() == 4 and normal._celebration._detail.text == tr("BONUS_UNLOCKED"), "A flawless fourth clear saves the badge and announces the unlock")
 	normal._celebration.dismiss()
 	var balance: int = economy.balance()
+	var xp: int = save.data.meta.xp
 	check(_press_button(normal._result, "BONUS_TITLE"), "The fourth win offers the Bonus Round")
 	var first := main._column.get_child(0) as NonogramScreen
 	check(first.bonus_index == 0 and first._puzzle.size == 5 and first._hint == null, "The round opens the first dedicated 5x5 without paid hints")
@@ -804,6 +813,7 @@ func _test_bonus_flow() -> void:
 	var third := main._column.get_child(0) as NonogramScreen
 	_solve_nonogram(third)
 	check(third.bonus_index == 2 and economy.balance() == balance + 60, "The final stage awards x3 for a total of 60")
+	check(save.data.meta.xp == xp + 120 and economy.owns_costume("bonus_booster"), "Three bonus stages grant 40 XP each and unlock their achievement costume")
 	check(third._celebration.tier == 4 and third._celebration._title.text == "CELEBRATION_BONUS", "Completing the round shows the max celebration")
 	check(save.load_game() == OK and economy.next_bonus_index() == -1 and economy.badge_count() == 4, "Finishing exhausts one round and preserves badges across reload")
 	for i in range(4, 8):
@@ -886,3 +896,149 @@ func _test_milestone_celebrations() -> void:
 	DirAccess.remove_absolute(path)
 	save.storage_path = previous_path
 	save.data = previous_data
+
+
+func _test_xp_migration() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var progress := {}
+	for i in range(6):
+		progress["moon-test-%d" % i] = {"reward": 60, "doubled": i == 0, "flawless": i < 4}
+	for total in [7, 8, 17, 18, 27, 28, 37, 38, 57, 58, 60]:
+		var legacy := {
+			"version": 4, "coins": 90, "nonogram": progress, "bonus_clears": 1,
+			"daily": {"last_day": 22000, "streak": 1, "clears": total - progress.size()},
+		}
+		save.data = SaveScript.migrate(legacy)
+		@warning_ignore("integer_division")
+		var old_level: int = 1 + total / 2
+		var player_level: int = economy.player_level()
+		check(player_level == old_level and Combo.theme_count(player_level) == Combo.theme_count(old_level), "V4 preserves the level and combo themes at %d first clears" % total)
+		check(economy.xp_progress() == (total % 2) * 100, "V4 preserves progress toward the next level")
+	check(save.data.coins == 90 and economy.badge_count() == 4 and save.data.bonus_clears == 1, "XP migration keeps coins, badges, and the in-progress Bonus Round")
+	check(save.data.nonogram["moon-test-0"].doubled and save.data.meta.login == Daily.empty_progress(), "V4 keeps the ad claim and starts with a fresh login calendar")
+
+	var malformed: Dictionary = save.data.duplicate(true)
+	malformed.meta = {
+		"xp": -5, "login": {"last_day": 22000.5, "streak": 7},
+		"purchased": {"invalid": true, "moonlight": true, "mint_visor": true},
+		"equipped": {"helmet": "red_dust", "suit": "pathfinder"},
+	}
+	var clean := SaveScript.migrate(malformed)
+	check(clean.meta.xp == 6000 and clean.meta.login == Daily.empty_progress(), "Invalid V5 fields retain the XP floor and reset invalid login data")
+	check(clean.meta.purchased == {"mint_visor": true} and clean.meta.equipped == {"suit": "pathfinder"}, "V5 sanitizes costume sources and equipment slots")
+	save.data = original
+
+
+func _test_costume_economy() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-costumes-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	save.data.coins = 1600
+	var min_price := EconomyRules.MAX_COINS
+	var max_price := 0
+	for id: String in Meta.COSTUMES:
+		var item: Dictionary = Meta.COSTUMES[id]
+		if item.has("price"):
+			min_price = mini(min_price, item.price)
+			max_price = maxi(max_price, item.price)
+	check(min_price == 400 and max_price == 2000, "Shop prices span the requested range")
+	check(not economy.buy_costume("moonlight") and not economy.buy_costume("pathfinder"), "Album and achievement rewards cannot be purchased")
+	check(not economy.buy_costume("prism_pack") and not economy.equip_costume("helmet", "mint_visor"), "Reject an unaffordable purchase and an unowned equipment request")
+	save.storage_path = path + "/missing-dir/save.json"
+	check(not economy.buy_costume("mint_visor") and economy.balance() == 1600 and not economy.owns_costume("mint_visor"), "A failed purchase changes neither balance nor ownership")
+	save.storage_path = path
+	check(economy.buy_costume("mint_visor") and economy.balance() == 1200 and economy.owns_costume("mint_visor"), "Purchase saves ownership and debits the set price")
+	check(not economy.buy_costume("mint_visor") and economy.balance() == 1200, "Owning an item prevents duplicate charges")
+	check(not economy.equip_costume("suit", "mint_visor") and economy.equip_costume("helmet", "mint_visor"), "Only the matching slot can equip the purchased item")
+	check(economy.buy_costume("nebula_suit") and economy.equip_costume("suit", "nebula_suit"), "Unlock and equip a second slot independently")
+	check(save.load_game() == OK and economy.equipped_costumes() == {"helmet": "mint_visor", "suit": "nebula_suit"} and economy.balance() == 550, "Reload two equipped slots and the balance")
+	check(economy.equip_costume("helmet", "") and economy.equipped_costumes() == {"suit": "nebula_suit"}, "Resetting one slot preserves the other")
+	check(not economy.owns_costume("pathfinder") and not economy.owns_costume("perfect_signal"), "Achievements start locked")
+
+	for planet: String in Catalog.PLANETS:
+		var entries: Array = economy.levels.filter(func(level: Dictionary) -> bool: return level.planet == planet)
+		var reward: String = Meta.ALBUM_REWARDS[planet]
+		for level: Dictionary in entries.slice(0, 19):
+			economy.award_nonogram(level.id, 3)
+		check(economy.album_collected(planet) == 19 and not economy.owns_costume(reward), "Nineteen published pictures cannot unlock the album reward")
+		economy.award_nonogram(entries[19].id, 2)
+		check(economy.album_collected(planet) == 20 and economy.owns_costume(reward), "The twentieth picture unlocks its album costume")
+	check(economy.owns_costume("pathfinder") and economy.owns_costume("perfect_signal"), "First clears and flawless badges unlock their achievement costumes")
+	check(save.load_game() == OK and economy.owns_costume("moonlight") and economy.equip_costume("helmet", "moonlight"), "Reloading preserves eligibility for album-exclusive equipment")
+
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+func _test_login_calendar() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-login-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	var day := 22000
+	var balance := 0
+	for i in range(Meta.LOGIN_REWARDS.size()):
+		var reward: int = Meta.LOGIN_REWARDS[i]
+		check(economy.login_status(day + i).reward == reward, "Show the available reward before claiming")
+		check(economy.claim_login(day + i) == reward and economy.claim_login(day + i) == 0, "Grant exactly one claim per local day")
+		balance += reward
+	check(economy.balance() == balance and economy.login_status(day + 6).slots == 7, "The seventh day fills the calendar")
+	check(save.data.daily == Daily.empty_progress() and economy.player_level() == 1, "Login claims leave Rasi Bintang progress and XP independent")
+	check(save.load_game() == OK and economy.claim_login(day + 5) == 0 and economy.login_status(day + 5).clock_behind, "A rollback after reloading cannot grant a claim or hide the date gate")
+	check(economy.award_daily(day + 6) == Daily.REWARDS[0] and economy.claim_login(day + 6) == 0, "Rasi Bintang can be cleared independently on the claimed date")
+	check(economy.claim_login(day + 7) == Meta.LOGIN_REWARDS[0], "The calendar rolls over after seven days")
+	check(economy.claim_login(day + 10) == Meta.LOGIN_REWARDS[0] and economy.login_status(day + 10).slots == 1, "A missed day starts a new login cycle")
+	var snapshot: Dictionary = save.data.duplicate(true)
+	save.storage_path = path + "/missing-dir/save.json"
+	check(economy.claim_login(day + 11) == -1 and save.data == snapshot, "A write failure leaves the next login claim available")
+	save.storage_path = path
+	check(economy.claim_login(day + 11) == Meta.LOGIN_REWARDS[1], "The next successful write collects the correct reward once")
+	check(economy.claim_login(4000000) == 0 and economy.claim_login(-1) == 0, "Reject unsupported dates that could not be persisted")
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+func _test_meta_menu() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-meta-menu-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.data.coins = 850
+	save.storage_path = path
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	economy.award_nonogram(main._levels[0].id, 2)
+	check(_press_button(main._column, "META_ALBUM"), "The menu opens the planet albums")
+	var screen := main._column.get_child(0) as MetaScreen
+	var pictures := screen.find_children("*", "Control", true, false).filter(func(node: Node) -> bool: return node.get_script() == AlbumPicture)
+	check(pictures.size() == 20 and pictures[0].level == main._levels[0] and pictures[1].level.is_empty(), "Album cards display only pictures from cleared levels")
+	check(_press_button(screen, "META_ACHIEVEMENTS") and screen.page == MetaScreen.Page.ACHIEVEMENTS, "The album links to achievement progress")
+	check(_press_button(screen, "META_BACK_ALBUM") and screen.page == MetaScreen.Page.ALBUM, "Achievements return to the album")
+	main.show_menu()
+	check(_press_button(main._column, "META_SHOP"), "The menu opens the wardrobe and shop")
+	screen = main._column.get_child(0) as MetaScreen
+	check(_press_button(screen, "COSTUME_MINT_VISOR") and screen._portrait.preview_outfit.helmet == "mint_visor" and economy.equipped_costumes().is_empty(), "Previewing a shop item leaves the saved outfit unchanged")
+	check(_press_button(screen, tr("COSTUME_BUY") % 400) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
+	check(_press_button(screen, "COSTUME_EQUIP") and economy.equipped_costumes().helmet == "mint_visor", "The shop action equips a purchased costume")
+	main.show_menu()
+	check(_press_button(main._column, "META_LOGIN"), "The menu opens the separate login calendar")
+	screen = main._column.get_child(0) as MetaScreen
+	check(_press_button(screen, tr("LOGIN_CLAIM") % Meta.LOGIN_REWARDS[0]) and economy.login_status(Daily.today()).reward == 0, "The login screen claims today's reward and disables repeat claims")
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path

@@ -76,13 +76,23 @@ static func spark(part: CanvasItem, center: Vector2, radius: float, color: Color
 	part.draw_colored_polygon(points, color)
 
 
-static func backpack(part: CanvasItem) -> void:
+static func _costume_palette(color: Color, standard: Array) -> Array:
+	if color == Color.TRANSPARENT:
+		return standard
+	return [color.lightened(0.58), color, color.darkened(0.45)]
+
+
+static func backpack(part: CanvasItem, color := Color.TRANSPARENT) -> void:
+	var palette := _costume_palette(color, CONTOUR)
 	for side in [-1, 1]:
 		var x: float = side * 44.0
 		ellipse(part, Vector2(x, 69), Vector2(24, 44), INK)
-		_lit(part, Vector2(x, 67), Vector2(20, 37), CONTOUR)
+		_lit(part, Vector2(x, 67), Vector2(20, 37), palette)
 		ellipse(part, Vector2(x + side * 3.0, 82), Vector2(17, 24), TEAL)
 		_stroke(part, [Vector2(x - 6, 61), Vector2(x + 6, 59)], MINT, 3)
+		if color != Color.TRANSPARENT:
+			ellipse(part, Vector2(x + side * 16.0, 92), Vector2(9, 19), INK)
+			_lit(part, Vector2(x + side * 16.0, 92), Vector2(6, 15), palette)
 
 
 static func tail(part: CanvasItem) -> void:
@@ -97,26 +107,26 @@ static func tail(part: CanvasItem) -> void:
 	_stroke(part, [Vector2(63, -33), Vector2(55, -34), Vector2(48, -25)], CREAM, 14)
 
 
-static func arm(part: CanvasItem) -> void:
+static func arm(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	_stroke(part, [Vector2.ZERO, Vector2(14, 14), Vector2(24, 31)], INK, 29)
-	_stroke(part, [Vector2.ZERO, Vector2(14, 14), Vector2(24, 31)], Color("#bccfe9"), 23)
+	_stroke(part, [Vector2.ZERO, Vector2(14, 14), Vector2(24, 31)], Color("#bccfe9") if color == Color.TRANSPARENT else color, 23)
 	_stroke(part, [Vector2(3, 0), Vector2(14, 12), Vector2(20, 23)], WHITE, 14)
 	ellipse(part, Vector2(23, 28), Vector2(15, 12), TEAL)
 	ellipse(part, Vector2(27, 38), Vector2(17, 15), INK)
-	_lit(part, Vector2(27, 36), Vector2(14, 12), ENAMEL)
+	_lit(part, Vector2(27, 36), Vector2(14, 12), _costume_palette(color, ENAMEL))
 	ellipse(part, Vector2(16, 31), Vector2(7, 8), Color("#d7eaf3"))
 
 
-static func boot(part: CanvasItem) -> void:
+static func boot(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(4, 13), Vector2(27, 23), INK)
 	ellipse(part, Vector2(4, 16), Vector2(24, 17), TEAL)
-	_lit(part, Vector2(5, 10), Vector2(22, 16), ENAMEL)
+	_lit(part, Vector2(5, 10), Vector2(22, 16), _costume_palette(color, ENAMEL))
 	_stroke(part, [Vector2(-4, 10), Vector2(12, 8)], MINT, 4)
 
 
-static func suit(part: CanvasItem) -> void:
+static func suit(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(0, 63), Vector2(59, 53), INK)
-	_lit(part, Vector2(0, 61), Vector2(55, 49), ENAMEL)
+	_lit(part, Vector2(0, 61), Vector2(55, 49), _costume_palette(color, ENAMEL))
 	ellipse(part, Vector2(0, 89), Vector2(51, 18), Color("#9ab2cd"))
 	ellipse(part, Vector2(0, 85), Vector2(48, 11), Color("#c7dcec"))
 	ellipse(part, Vector2(3, 66), Vector2(27, 20), SEAM)
@@ -128,9 +138,9 @@ static func suit(part: CanvasItem) -> void:
 	_arc(part, Vector2(0, 32), Vector2(44, 12), 0.15, PI - 0.15, MINT, 3)
 
 
-static func helmet(part: CanvasItem) -> void:
+static func helmet(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(0, -10), Vector2(101, 88), INK)
-	_lit(part, Vector2(0, -12), Vector2(97, 84), ENAMEL)
+	_lit(part, Vector2(0, -12), Vector2(97, 84), _costume_palette(color, ENAMEL))
 	ellipse(part, Vector2(1, -6), Vector2(85, 69), SEAM)
 	_lit(part, Vector2(0, -9), Vector2(83, 67), CONTOUR)
 	_lit(part, Vector2(0, -7), Vector2(77, 62), GLASS)
@@ -242,12 +252,16 @@ static func visor(part: CanvasItem) -> void:
 	_stroke(part, [Vector2(-18, 63), Vector2(15, 63)], WHITE, 3)
 
 
-static func antenna(part: CanvasItem) -> void:
+static func antenna(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	_stroke(part, [Vector2.ZERO, Vector2(-6, -18), Vector2(-18, -27)], INK, 9)
 	_stroke(part, [Vector2.ZERO, Vector2(-6, -18), Vector2(-18, -27)], Color("#9ec6d9"), 4)
 	ellipse(part, Vector2(-18, -27), Vector2(11, 11), INK)
-	ellipse(part, Vector2(-18, -27), Vector2(8, 8), GOLD)
-	ellipse(part, Vector2(-21, -30), Vector2(3, 3), CREAM)
+	if color == Color.TRANSPARENT:
+		ellipse(part, Vector2(-18, -27), Vector2(8, 8), GOLD)
+		ellipse(part, Vector2(-21, -30), Vector2(3, 3), CREAM)
+	else:
+		spark(part, Vector2(-18, -27), 11, color)
+		ellipse(part, Vector2(-18, -27), Vector2(3, 3), CREAM)
 
 
 static func spark_texture() -> ImageTexture:

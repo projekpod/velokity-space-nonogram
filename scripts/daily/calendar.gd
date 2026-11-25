@@ -61,7 +61,7 @@ static func active_streak(progress: Dictionary, day: int) -> int:
 
 
 static func advance(progress: Dictionary, day: int) -> Dictionary:
-	if day < 0 or day <= progress.last_day:
+	if not _is_whole_number(day) or day <= progress.last_day:
 		return {}
 	return {
 		"last_day": day,
@@ -74,10 +74,10 @@ static func reward(streak: int) -> int:
 	return REWARDS[(streak - 1) % REWARDS.size()]
 
 
-static func collected_slots(progress: Dictionary, day: int) -> int:
+static func collected_slots(progress: Dictionary, day: int, cycle_size := REWARDS.size()) -> int:
 	var streak := active_streak(progress, day)
 	if streak == 0:
 		return 0
 	if progress.last_day == day:
-		return (streak - 1) % REWARDS.size() + 1
-	return streak % REWARDS.size()
+		return (streak - 1) % cycle_size + 1
+	return streak % cycle_size
