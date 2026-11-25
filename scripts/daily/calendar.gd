@@ -36,7 +36,7 @@ static func puzzle_for(day: int) -> Dictionary:
 
 
 static func empty_progress() -> Dictionary:
-	return {"last_day": -1, "streak": 0}
+	return {"last_day": -1, "streak": 0, "clears": 0}
 
 
 static func clean_progress(saved: Variant) -> Dictionary:
@@ -45,7 +45,10 @@ static func clean_progress(saved: Variant) -> Dictionary:
 		var streak: Variant = saved.get("streak")
 		if _is_whole_number(day) and _is_whole_number(streak):
 			if day >= 0 and streak > 0 and streak <= day + 1:
-				return {"last_day": int(day), "streak": int(streak)}
+				var clears: Variant = saved.get("clears", streak)
+				if not _is_whole_number(clears) or clears < streak or clears > day + 1:
+					clears = streak
+				return {"last_day": int(day), "streak": int(streak), "clears": int(clears)}
 	return empty_progress()
 
 
@@ -60,7 +63,11 @@ static func active_streak(progress: Dictionary, day: int) -> int:
 static func advance(progress: Dictionary, day: int) -> Dictionary:
 	if day < 0 or day <= progress.last_day:
 		return {}
-	return {"last_day": day, "streak": active_streak(progress, day) + 1}
+	return {
+		"last_day": day,
+		"streak": active_streak(progress, day) + 1,
+		"clears": progress.get("clears", progress.streak) + 1,
+	}
 
 
 static func reward(streak: int) -> int:

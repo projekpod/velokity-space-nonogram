@@ -1,0 +1,22 @@
+{
+  "id": "bonus-12-satellite-dish",
+  "size": 5,
+  "solution": [
+    "a....",
+    "aa...",
+    "aaa..",
+    "..aaa",
+    "..bbb"
+  ],
+  "palette": {
+    "a": "#8de5e5",
+    "b": "#9d9af4",
+    "c": "#ffdf8e",
+    "d": "#fba1bd"
+  },
+  "planet": "bonus",
+  "title": {
+    "en": "Satellite Dish",
+    "id": "Piringan satelit"
+  }
+}

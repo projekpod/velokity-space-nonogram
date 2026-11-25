@@ -12,6 +12,9 @@ const DailyPuzzle := preload("res://scripts/daily/puzzle.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 const Mascot := preload("res://ui/mascot.gd")
 const Backdrop := preload("res://ui/space_backdrop.gd")
+const Combo := preload("res://scripts/nonogram/combo.gd")
+const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const Celebration := preload("res://ui/celebration.gd")
 
 var checks := 0
 var failures := 0
@@ -35,8 +38,10 @@ func _run() -> void:
 	_test_settings()
 	await _test_settings_menu()
 	_test_economy()
+	_test_combo_rewards_and_migration()
 	_test_catalog()
 	await _test_level_progression()
+	await _test_bonus_flow()
 	_test_puzzle()
 	_test_continue()
 	_test_hint()
@@ -47,6 +52,8 @@ func _run() -> void:
 	await _test_nonogram_flow()
 	await _test_mascot_reactions()
 	await _test_calm_visuals()
+	await _test_celebrations()
+	await _test_milestone_celebrations()
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
@@ -230,6 +237,47 @@ func _test_economy() -> void:
 	save.storage_path = previous_path
 
 
+func _test_combo_rewards_and_migration() -> void:
+	for level in range(1, 32):
+		var expected := 2
+		for unlock in [5, 10, 15, 20, 30]:
+			expected += int(level >= unlock)
+		check(Combo.theme_count(level) == expected, "Theme pool at player level %d" % level)
+	check([0, 1, 2, 3, 4, 5, 6, 20].map(Combo.multiplier) == [1, 1, 1, 2, 3, 4, 5, 5], "Combo multipliers rise from three lines and stop at five")
+
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var path := "user://test-combo-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	var legacy := {
+		"version": 3, "coins": 80, "settings": {"language": "id"},
+		"daily": {"last_day": 22000, "streak": 2},
+		"nonogram": {"legacy": {"reward": 25, "doubled": true}},
+	}
+	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V4")
+	check(save.data.version == 4 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
+	check(economy.player_level() == 2 and save.data.daily.clears == 2 and save.data.settings.language == "id", "Legacy daily history starts at the known streak and contributes to the player level")
+	check(economy.award_nonogram("legacy", 2, 6) == 0 and not economy.has_flawless_badge("legacy"), "An imperfect replay grants zero coins and no badge")
+	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.has_flawless_badge("legacy"), "A flawless replay earns its badge with zero coins")
+	check(save.load_game() == OK and economy.badge_count() == 1 and economy.balance() == 80, "Badge and balance persist on replay")
+	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.badge_count() == 1, "The same level never grants a second badge")
+	check(save.data.nonogram.legacy.reward == 25 and economy.double_nonogram_reward("legacy") == 0, "Preserve the historical win reward and ad claim")
+	check(economy.award_nonogram("combo-x2", 1, 3) == 40 and economy.player_level() == 3, "An x2 first clear pays twice the base and counts once for player level")
+	check(economy.award_nonogram("combo-cap", 3, 8) == 60 and economy.has_flawless_badge("combo-cap"), "First-clear reward caps base and combo at 60 and saves the flawless badge")
+	check(economy.award_daily(22002) == 10 and save.data.daily.streak == 1 and economy.player_level() == 4, "First daily clear after a streak gap increases lifetime progress")
+	check(economy.award_daily(22002) == 0 and save.data.daily.clears == 3, "A daily replay never adds to lifetime progress")
+	var snapshot: Dictionary = save.data.duplicate(true)
+	save.storage_path = path + "/missing-dir/save.json"
+	check(economy.award_nonogram("unwritten", 3, 6) == -1 and save.data == snapshot, "Failed first-clear write leaves the coins, badge and progress intact")
+	save.storage_path = path
+	check(save.load_game() == OK and save.data == snapshot, "Reload current badges, capped reward and daily count together")
+	DirAccess.remove_absolute(path)
+	save.storage_path = previous_path
+	save.data = previous_data
+
+
 func _test_settings() -> void:
 	var save := root.get_node("Save")
 	var settings := root.get_node("Settings")
@@ -295,10 +343,10 @@ func _test_nonogram_flow() -> void:
 	check(puzzle.at(next_hint) == Puzzle.Cell.FILLED and save.data.coins == 0, "A rewarded ad only applies its hint after the grant")
 	for cell in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(0, 2)]:
 		puzzle.mark(cell, false)
-	check(puzzle.state == Puzzle.State.WON and screen._result.visible and save.data.coins == 20, "A win opens a result and saves its first-clear coins")
+	check(puzzle.state == Puzzle.State.WON and screen._result.visible and save.data.coins == 60, "A win opens a result and saves its capped first-clear coins")
 	screen._request_ad(&"double_coins")
 	await ads.rewarded_finished
-	check(save.data.coins == 40 and save.data.nonogram["screen-test"].doubled, "A granted double ad persists the bonus")
+	check(save.data.coins == 120 and save.data.nonogram["screen-test"].doubled, "A granted double ad persists the separate ad reward")
 	screen.queue_free()
 	await process_frame
 	check(not fake.banner_visible, "Leaving the game clears the banner")
@@ -327,8 +375,10 @@ func _test_mascot_reactions() -> void:
 	check(screen._correct_lines == 2 and board._rows.has(0) and board._columns.has(0), "A correct fill can complete and light both lines")
 	screen._puzzle.mark(Vector2i(1, 1), false)
 	check(mascot._reaction == Mascot.Reaction.COMBO and screen._correct_lines == 4, "Cross the three-line combo threshold without a mistake")
+	check(screen._celebration.tier == 2 and screen._combo_theme in [0, 1], "A level-one combo uses an unlocked theme and a tier two overlay")
 	screen._puzzle.mark(Vector2i(3, 2), false)
 	check(mascot._reaction == Mascot.Reaction.MISTAKE and board._shake_time > 0.0 and screen._correct_lines == 0, "Mistakes shake once and reset the combo count")
+	check(screen._celebration.tier == 0 and screen._peak_lines == 4, "A mistake ends the active combo and retains the best run for the reward")
 	screen._puzzle.mark(Vector2i(2, 2), false)
 	check(mascot._reaction == Mascot.Reaction.MISTAKE and screen._correct_lines == 2, "A normal fill does not interrupt the active mistake reaction")
 	screen._puzzle.mark(Vector2i(3, 3), false)
@@ -660,10 +710,10 @@ func _test_daily_puzzle() -> void:
 
 func _test_daily_rewards() -> void:
 	var previous := SaveScript.migrate({"version": 1, "coins": 80, "settings": {"language": "id"}})
-	check(previous.version == 3 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
+	check(previous.version == 4 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
 	check(previous.daily == Daily.empty_progress(), "V1 starts with an empty daily streak")
 	var v2 := SaveScript.migrate({"version": 2, "coins": 14, "daily": {"last_day": 20780, "streak": 5}})
-	check(v2.version == 3 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
+	check(v2.version == 4 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
 	check(SaveScript.migrate({"daily": {"last_day": 1.25, "streak": 2}}).daily.streak == 0, "Reject fractional saved dates")
 	var save := root.get_node("Save")
 	var economy := root.get_node("Economy")
@@ -693,3 +743,146 @@ func _test_daily_rewards() -> void:
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path
+
+
+func _solve_nonogram(screen: NonogramScreen) -> void:
+	for y in range(screen._puzzle.size):
+		for x in range(screen._puzzle.size):
+			if screen.level.solution[y][x] != ".":
+				screen._puzzle.mark(Vector2i(x, y), false)
+
+
+func _press_button(parent: Node, key: String) -> bool:
+	for button: Button in parent.find_children("*", "Button", true, false):
+		if button.text == key and not button.disabled:
+			button.pressed.emit()
+			return true
+	return false
+
+
+func _test_bonus_flow() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var path := "user://test-bonus-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.data.settings.vibration = false
+	save.storage_path = path
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	for i in range(1, 4):
+		economy.award_nonogram(main._levels[i].id, 3)
+	check(main._open_bonus() == null and economy.award_bonus(0) == -1, "Three badges cannot open a round or claim its rewards")
+	var normal: NonogramScreen = main._play(0)
+	_solve_nonogram(normal)
+	check(economy.badge_count() == 4 and normal._celebration._detail.text == tr("BONUS_UNLOCKED"), "A flawless fourth clear saves the badge and announces the unlock")
+	normal._celebration.dismiss()
+	var balance: int = economy.balance()
+	check(_press_button(normal._result, "BONUS_TITLE"), "The fourth win offers the Bonus Round")
+	var first := main._column.get_child(0) as NonogramScreen
+	check(first.bonus_index == 0 and first._puzzle.size == 5 and first._hint == null, "The round opens the first dedicated 5x5 without paid hints")
+	save.storage_path = path + "/missing-dir/save.json"
+	_solve_nonogram(first)
+	check(economy.balance() == balance and economy.next_bonus_index() == 0, "Failed Bonus Round save keeps the current stage and coins")
+	save.storage_path = path
+	check(_press_button(first._result, "SAVE_RETRY") and economy.balance() == balance + 10, "Retrying the bonus save awards x1 once")
+	check(economy.award_bonus(0) == -1 and economy.next_bonus_index() == 1, "A stale stage cannot award again")
+	first._leave(&"levels")
+	check(save.load_game() == OK and _press_button(main._column, "BONUS_TITLE"), "Reloading keeps the round accessible from the planet list")
+	var second := main._column.get_child(0) as NonogramScreen
+	check(second.bonus_index == 1 and second.level.id != first.level.id, "Resuming opens the next separate puzzle")
+	for y in range(second._puzzle.size):
+		for x in range(second._puzzle.size):
+			second._puzzle.mark(Vector2i(x, y), second.level.solution[y][x] != ".")
+	check(second._puzzle.state == Puzzle.State.LOST and economy.next_bonus_index() == 1 and economy.balance() == balance + 10, "Losing leaves the current bonus stage available with no coins")
+	check(_press_button(second._result, "GAME_RETRY"), "A lost bonus puzzle can be retried")
+	var retry := main._column.get_child(0) as NonogramScreen
+	_solve_nonogram(retry)
+	check(retry.level.id == second.level.id and economy.balance() == balance + 30, "The second stage awards x2 on retry")
+	check(_press_button(retry._result, "GAME_NEXT"), "The second win advances in the same round")
+	var third := main._column.get_child(0) as NonogramScreen
+	_solve_nonogram(third)
+	check(third.bonus_index == 2 and economy.balance() == balance + 60, "The final stage awards x3 for a total of 60")
+	check(third._celebration.tier == 4 and third._celebration._title.text == "CELEBRATION_BONUS", "Completing the round shows the max celebration")
+	check(save.load_game() == OK and economy.next_bonus_index() == -1 and economy.badge_count() == 4, "Finishing exhausts one round and preserves badges across reload")
+	for i in range(4, 8):
+		economy.award_nonogram(main._levels[i].id, 3)
+	check(economy.next_bonus_index() == 3 and Bonus.puzzle_for(3).id != first.level.id, "Four additional badges open a new set of puzzles")
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.storage_path = previous_path
+	save.data = previous_data
+
+
+func _test_celebrations() -> void:
+	var save := root.get_node("Save")
+	var previous_data: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	var host := Control.new()
+	root.add_child(host)
+	var focus := Button.new()
+	host.add_child(focus)
+	var overlay := Celebration.new()
+	overlay.attach(host)
+	focus.grab_focus()
+
+	overlay.play_combo(0, 3)
+	check(overlay.tier == 2 and overlay._duration == 1.0 and overlay.mouse_filter == Control.MOUSE_FILTER_IGNORE, "Combo lasts one second and leaves board input available")
+	overlay.freeze_at(0.48)
+	check(not overlay.is_processing() and is_equal_approx(overlay._elapsed, 0.48), "QA freezes the combined visual at a known frame")
+	for tier in [3, 4]:
+		overlay.play(tier, "CELEBRATION_FLAWLESS")
+		var start := overlay._mascot.position
+		overlay._process(0.99)
+		check(not overlay._skip.visible and overlay._mascot.position.x > start.x, "Tier %d flies in and waits one second before Skip" % tier)
+		check(overlay._mascot.position + overlay._mascot.size * 0.5 == overlay.size * 0.5 and overlay._mascot.size.x >= 320, "Tier %d uses a large Velokity centered on the viewport" % tier)
+		overlay._process(0.02)
+		check(overlay._skip.visible and overlay._duration == Celebration.SECONDS[tier], "Tier %d is skippable during its full-length celebration" % tier)
+		overlay._skip.pressed.emit()
+		check(overlay.tier == 0 and not overlay.visible and focus.has_focus(), "Skip closes the overlay and restores focus")
+
+	save.data.settings.calm_mode = true
+	overlay.play(4, "CELEBRATION_BONUS")
+	var calm_start := overlay._mascot.position
+	overlay._process(1.0)
+	check(overlay._mascot.position == calm_start and overlay._duration < 2.0 and not overlay._skip.visible, "Calm Mode skips the flight and shortens the max celebration")
+	overlay._process(0.2)
+	check(not overlay.visible, "Shortened celebrations still close automatically")
+	host.queue_free()
+	await process_frame
+	save.data = previous_data
+
+
+func _test_milestone_celebrations() -> void:
+	var save := root.get_node("Save")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var path := "user://test-milestones-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var level: Dictionary = main._levels[0]
+	var screen: NonogramScreen = main._play(0)
+	_solve_nonogram(screen)
+	check(screen._celebration.tier == 3, "The first flawless clear triggers the big celebration")
+	for i in range(1, 19):
+		save.data.nonogram[main._levels[i].id] = {"reward": 25, "doubled": false}
+	screen = main._play(19)
+	_solve_nonogram(screen)
+	check(screen._celebration.tier == 4 and screen._celebration._title.text == "CELEBRATION_ALBUM", "The final planet clear celebrates the completed album")
+	check(save.data.nonogram.has(level.id), "Album completion retains the first clear")
+
+	save.data.daily = {"last_day": Daily.today() - 1, "streak": 6, "clears": 6}
+	var daily = main._open_daily()
+	var daily_level := Daily.puzzle_for(daily._day)
+	for y in range(daily_level.solution.size()):
+		daily._puzzle.place(Vector2i(int(daily_level.solution[y]), y), false)
+	check(daily._celebration.tier == 4 and daily._celebration._title.text == "CELEBRATION_STREAK", "The seventh daily win celebrates the streak")
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.storage_path = previous_path
+	save.data = previous_data

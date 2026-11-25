@@ -87,3 +87,22 @@ QA_FILL,Fill,Isi sel
 QA_MISTAKE,Mistake,Salah
 QA_COMBO,Combo,Kombo
 QA_WIN,Win,Menang
+COMBO_SHOOTING_STAR,Shooting Star,Bintang Jatuh
+COMBO_COMET,Comet,Komet
+COMBO_SUPERNOVA,Supernova,Supernova
+COMBO_METEOR_SHOWER,Meteor Shower,Hujan Meteor
+COMBO_WARP,Warp,Lompatan Warp
+COMBO_AURORA,Aurora,Aurora
+COMBO_BLACK_HOLE,Black Hole,Lubang Hitam
+COMBO_DETAILS,%d lines in a row · ×%d coins,%d garis berturut-turut · ×%d koin
+BONUS_TITLE,Bonus Round,Ronde Bonus
+BONUS_STAGE,Puzzle %d/%d · ×%d coins,Teka-teki %d/%d · ×%d koin
+BONUS_BADGES,Bonus Round · %d/%d flawless badges,Ronde Bonus · %d/%d lencana sempurna
+BONUS_UNLOCKED,Bonus Round unlocked!,Ronde Bonus terbuka!
+BADGE_EARNED,Flawless badge earned!,Lencana sempurna didapat!
+CELEBRATION_SKIP,Skip,Lewati
+CELEBRATION_FLAWLESS,Flawless clear!,Selesai sempurna!
+CELEBRATION_BONUS,Bonus Round complete!,Ronde Bonus selesai!
+CELEBRATION_ALBUM,Album complete!,Album lengkap!
+CELEBRATION_STREAK,Seven-day streak!,Tujuh hari berturut-turut!
+CELEBRATION_LEVEL,Player level %d!,Pemain naik ke level %d!

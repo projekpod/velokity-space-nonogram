@@ -5,6 +5,7 @@ const MissionArt := preload("res://ui/mission_art.gd")
 const UI := preload("res://ui/controls.gd")
 const DailyScreen := preload("res://ui/daily_screen.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
+const Bonus := preload("res://scripts/nonogram/bonus.gd")
 
 @onready var center: CenterContainer = $Center
 @onready var _economy := get_node("/root/Economy")
@@ -57,6 +58,10 @@ func _show_planets() -> void:
 	for planet: String in ["jupiter", "neptune"]:
 		var caption := (tr("PLANET_LOCKED") % _planet_title(planet)) + "\n" + tr("PLANET_FUTURE")
 		UI.button(_column, caption).disabled = true
+	if _economy.next_bonus_index() >= 0:
+		UI.button(_column, "BONUS_TITLE", true).pressed.connect(_open_bonus)
+	else:
+		UI.label(_column, tr("BONUS_BADGES") % [_economy.badge_count() % Bonus.BADGES_PER_ROUND, Bonus.BADGES_PER_ROUND], 22, UI.MUTED)
 	if first != null:
 		first.grab_focus()
 
@@ -131,6 +136,10 @@ func _is_planet_unlocked(planet: String) -> bool:
 	return planet == Catalog.PLANETS[0] or (not previous.is_empty() and _planet_cleared(previous) >= Catalog.PLANET_CLEAR_REQUIREMENT)
 
 
+func _album_complete(planet: String) -> bool:
+	return _planet_cleared(planet) == _planet_levels(planet).size()
+
+
 func _planet_unlock_label(planet: String) -> String:
 	var previous := Catalog.previous_planet(planet)
 	return tr("PLANET_REQUIRES_CLEARS") % [Catalog.PLANET_CLEAR_REQUIREMENT, _planet_title(previous)]
@@ -154,6 +163,7 @@ func _play(level_index: int) -> NonogramScreen:
 	var screen := NonogramScreen.new()
 	screen.level = _levels[level_index]
 	screen.can_play_next = _is_level_unlocked.bind(level_index + 1)
+	screen.album_complete = _album_complete.bind(screen.level.planet)
 	screen.exit_requested.connect(_leave_game.bind(level_index))
 	_column.add_child(screen)
 	return screen
@@ -161,6 +171,9 @@ func _play(level_index: int) -> NonogramScreen:
 
 func _leave_game(action: StringName, result_closed: bool, level_index: int) -> void:
 	match action:
+		&"bonus":
+			_open_bonus()
+			return
 		&"next":
 			if _play(level_index + 1) == null:
 				return
@@ -170,6 +183,27 @@ func _leave_game(action: StringName, result_closed: bool, level_index: int) -> v
 			_show_levels(_levels[level_index].planet)
 	if result_closed:
 		_ads.request_interstitial_after_result(level_index + 1)
+
+
+func _open_bonus() -> NonogramScreen:
+	var index: int = _economy.next_bonus_index()
+	var level := Bonus.puzzle_for(index)
+	if level.is_empty():
+		return null
+	_reset_column(NonogramScreen.BOARD_WIDTH, 0)
+	var screen := NonogramScreen.new()
+	screen.level = level
+	screen.bonus_index = index
+	screen.can_play_next = func() -> bool:
+		return Bonus.multiplier(index) < Bonus.STAGES and _economy.next_bonus_index() == index + 1
+	screen.exit_requested.connect(_leave_bonus)
+	_column.add_child(screen)
+	return screen
+
+
+func _leave_bonus(action: StringName, _result_closed: bool) -> void:
+	if action == &"levels" or _open_bonus() == null:
+		_show_planets()
 
 
 func _open_daily() -> DailyScreen:

@@ -8,8 +8,10 @@ const UI := preload("res://ui/controls.gd")
 const EconomyRules := preload("res://scripts/autoload/economy.gd")
 const Portrait := preload("res://ui/mission_art.gd")
 const Mascot := preload("res://ui/mascot.gd")
+const Celebration := preload("res://ui/celebration.gd")
+const Combo := preload("res://scripts/nonogram/combo.gd")
+const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const BOARD_WIDTH := Board.WIDTH
-const COMBO_LINES := 3
 
 @onready var _economy := get_node("/root/Economy")
 @onready var _events := get_node("/root/Events")
@@ -19,6 +21,8 @@ const COMBO_LINES := 3
 
 var level: Dictionary
 var can_play_next: Callable
+var album_complete: Callable
+var bonus_index := -1
 var _puzzle: Puzzle
 var _board: Board
 var _lives: Label
@@ -28,7 +32,11 @@ var _feedback: Label
 var _tools: VBoxContainer
 var _result: VBoxContainer
 var _portrait: Portrait
+var _celebration: Celebration
 var _correct_lines := 0
+var _peak_lines := 0
+var _combo_theme := -1
+var _new_badge := false
 var _fill: Button
 var _cross: Button
 var _hint: Button
@@ -45,7 +53,7 @@ func _ready() -> void:
 	_analytics.record(&"puzzle_started")
 
 	var header := UI.row(self)
-	UI.button(header, "GAME_BACK_LEVELS").pressed.connect(_leave.bind(&"levels"))
+	UI.button(header, "LEVEL_BACK" if bonus_index >= 0 else "GAME_BACK_LEVELS").pressed.connect(_leave.bind(&"levels"))
 	_lives = UI.label(header, "", 25, UI.GOLD)
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_coins = UI.label(header, "", 25, UI.GOLD)
@@ -55,7 +63,10 @@ func _ready() -> void:
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	text.alignment = BoxContainer.ALIGNMENT_CENTER
 	intro.add_child(text)
-	UI.label(text, UI.level_title(level), 42)
+	UI.label(text, "BONUS_TITLE" if bonus_index >= 0 else UI.level_title(level), 42)
+	if bonus_index >= 0:
+		var stage := Bonus.multiplier(bonus_index)
+		UI.label(text, tr("BONUS_STAGE") % [stage, Bonus.STAGES, stage], 24, UI.GOLD)
 	_status = UI.label(text, "GAME_READY", 23, UI.MUTED)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_portrait = Portrait.new()
@@ -72,12 +83,14 @@ func _ready() -> void:
 	_result.add_theme_constant_override("separation", 10)
 	add_child(_result)
 	_result.hide()
+	_celebration = Celebration.new()
+	_celebration.attach(self)
 
 	_update_lives()
 	_update_balance(_economy.balance())
 	_events.coins_changed.connect(_update_balance)
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
-	_ads.set_gameplay_banner(true)
+	_ads.set_gameplay_banner(bonus_index < 0)
 	_puzzle.correct_fill.connect(_on_correct_fill)
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.finished.connect(_on_finished)
@@ -104,6 +117,8 @@ func _build_tools() -> void:
 	_fill.pressed.connect(_choose_mark.bind(false))
 	_cross.pressed.connect(_choose_mark.bind(true))
 	UI.action(marks, "GAME_RETRY").pressed.connect(_leave.bind(&"retry"))
+	if bonus_index >= 0:
+		return
 	var hints := UI.row(_tools)
 	_hint = UI.action(hints, tr("GAME_HINT_COINS") % EconomyRules.HINT_COST)
 	_hint.pressed.connect(_use_paid_hint)
@@ -188,6 +203,8 @@ func _on_rewarded_finished(placement: StringName, granted: bool) -> void:
 
 func _on_mistake(_cell: Vector2i) -> void:
 	_correct_lines = 0
+	_combo_theme = -1
+	_celebration.dismiss()
 	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
 	_update_lives()
 	_status.text = "GAME_MISTAKE"
@@ -195,9 +212,17 @@ func _on_mistake(_cell: Vector2i) -> void:
 
 
 func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
-	var crossed_threshold := _correct_lines < COMBO_LINES and _correct_lines + completed_lines >= COMBO_LINES
+	var previous_multiplier := Combo.multiplier(_correct_lines)
 	_correct_lines += completed_lines
-	_portrait.mascot.react(Mascot.Reaction.COMBO if crossed_threshold else Mascot.Reaction.FILL)
+	_peak_lines = maxi(_peak_lines, _correct_lines)
+	var multiplier := Combo.multiplier(_correct_lines)
+	if bonus_index < 0 and multiplier > previous_multiplier:
+		if _combo_theme < 0:
+			_combo_theme = randi_range(0, Combo.theme_count(_economy.player_level()) - 1)
+		_celebration.play_combo(_combo_theme, _correct_lines)
+		_portrait.mascot.react(Mascot.Reaction.COMBO)
+	else:
+		_portrait.mascot.react(Mascot.Reaction.FILL)
 
 
 func _on_finished(won: bool) -> void:
@@ -207,10 +232,40 @@ func _on_finished(won: bool) -> void:
 	if won:
 		_portrait.mascot.set_idle(Mascot.Face.PROUD)
 		_portrait.mascot.react(Mascot.Reaction.WIN)
-		_win_coins = _economy.award_nonogram(level.id, _puzzle.lives)
+		_record_win()
 	else:
 		_portrait.mascot.idle_expression = Mascot.Face.SAD
-	_show_result(won)
+		_show_result(false)
+
+
+func _record_win() -> void:
+	if bonus_index >= 0:
+		_win_coins = _economy.award_bonus(bonus_index)
+		_show_result(true)
+		if _win_coins > 0 and Bonus.multiplier(bonus_index) == Bonus.STAGES:
+			_celebration.play(4, "CELEBRATION_BONUS", tr("GAME_EARNED") % Bonus.ROUND_COINS)
+		return
+
+	var previous_level: int = _economy.player_level()
+	var had_badge: bool = _economy.has_flawless_badge(level.id)
+	var was_album_complete := album_complete.is_valid() and bool(album_complete.call())
+	_win_coins = _economy.award_nonogram(level.id, _puzzle.lives, _peak_lines)
+	_new_badge = not had_badge and _economy.has_flawless_badge(level.id)
+	_show_result(true)
+	if _win_coins < 0:
+		return
+
+	var round_unlocked: bool = _new_badge and _economy.badge_count() % Bonus.BADGES_PER_ROUND == 0
+	var detail := tr("BONUS_UNLOCKED") if round_unlocked else ""
+	var player_level: int = _economy.player_level()
+	if album_complete.is_valid() and not was_album_complete and album_complete.call():
+		if detail.is_empty() and player_level > previous_level:
+			detail = tr("CELEBRATION_LEVEL") % player_level
+		_celebration.play(4, "CELEBRATION_ALBUM", detail)
+	elif player_level > previous_level:
+		_celebration.play(4, tr("CELEBRATION_LEVEL") % player_level, detail)
+	elif _puzzle.lives == Puzzle.MAX_LIVES:
+		_celebration.play(3, "CELEBRATION_FLAWLESS", detail)
 
 
 func _show_result(won: bool) -> void:
@@ -220,10 +275,12 @@ func _show_result(won: bool) -> void:
 	_continue = null
 	_feedback.hide()
 	_status.text = "GAME_WON" if won else "GAME_LOST"
+	if won and bonus_index >= 0 and _win_coins > 0 and Bonus.multiplier(bonus_index) == Bonus.STAGES:
+		_status.text = "CELEBRATION_BONUS"
 	_status.add_theme_color_override("font_color", UI.MINT if won else UI.ERROR_COLOR)
 	if won:
 		_show_win_reward()
-	elif _puzzle.can_continue():
+	elif bonus_index < 0 and _puzzle.can_continue():
 		var choices := UI.row(_result)
 		_continue = UI.action(choices, tr("GAME_CONTINUE_COINS") % EconomyRules.CONTINUE_COST)
 		_continue.disabled = _economy.balance() < EconomyRules.CONTINUE_COST
@@ -231,12 +288,18 @@ func _show_result(won: bool) -> void:
 		UI.action(choices, "GAME_CONTINUE_AD", _continue.disabled).pressed.connect(_request_ad.bind(&"continue"))
 	var nav := UI.row(_result)
 	var show_next := won and can_play_next.is_valid() and bool(can_play_next.call())
-	var retry := UI.action(nav, "GAME_RETRY", not show_next)
-	retry.pressed.connect(_leave.bind(&"retry"))
-	var focus := retry
+	var focus: Button
+	if won and bonus_index >= 0:
+		focus = UI.action(nav, "LEVEL_BACK", not show_next)
+		focus.pressed.connect(_leave.bind(&"levels"))
+	else:
+		focus = UI.action(nav, "GAME_RETRY", not show_next)
+		focus.pressed.connect(_leave.bind(&"retry"))
 	if show_next:
 		focus = UI.action(nav, "GAME_NEXT", true)
 		focus.pressed.connect(_leave.bind(&"next"))
+	if won and bonus_index < 0 and _economy.next_bonus_index() >= 0:
+		UI.button(_result, "BONUS_TITLE", true).pressed.connect(_leave.bind(&"bonus"))
 	_result.show()
 	focus.grab_focus()
 
@@ -245,6 +308,8 @@ func _show_win_reward() -> void:
 	if _win_coins < 0:
 		_show_feedback("SAVE_FAILED")
 		UI.button(_result, "SAVE_RETRY").pressed.connect(_retry_win)
+	elif bonus_index >= 0:
+		UI.label(_result, tr("GAME_EARNED") % _win_coins, 25, UI.GOLD)
 	elif _win_coins == 0:
 		UI.label(_result, "GAME_ALREADY_CLEARED", 23, UI.MUTED)
 	else:
@@ -254,11 +319,12 @@ func _show_win_reward() -> void:
 			UI.button(_result, "SAVE_RETRY").pressed.connect(_save_bonus)
 		elif not _bonus_granted:
 			UI.button(_result, "GAME_DOUBLE_AD").pressed.connect(_request_ad.bind(&"double_coins"))
+	if _new_badge:
+		UI.label(_result, "BADGE_EARNED", 23, UI.MINT)
 
 
 func _retry_win() -> void:
-	_win_coins = _economy.award_nonogram(level.id, _puzzle.lives)
-	_show_result(true)
+	_record_win()
 
 
 func _save_bonus() -> void:
@@ -277,7 +343,8 @@ func _show_feedback(key: String) -> void:
 
 func _update_balance(balance: int) -> void:
 	_coins.text = tr("COIN_BALANCE") % balance
-	_hint.disabled = balance < EconomyRules.HINT_COST
+	if _hint != null:
+		_hint.disabled = balance < EconomyRules.HINT_COST
 	if is_instance_valid(_continue):
 		_continue.disabled = balance < EconomyRules.CONTINUE_COST
 
