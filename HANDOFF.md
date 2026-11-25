@@ -5,7 +5,7 @@ Branch `codex/t11-release-kit` berangkat dari `origin/main` yang sudah memuat T1
 ## Yang berjalan
 
 - Save baru langsung membuka Moon 01. Tiga langkah tutorial bisa dilewati sambil papan tetap bisa dimainkan. Hasil kemenangan pertama menawarkan tombol Menu. Progres, hadiah, dan penyelesaian onboarding tersimpan dalam satu transaksi. Save lama masuk menu seperti sebelumnya.
-- Banner Bridge hanya diminta saat gameplay yang mendukungnya pada viewport lanskap selebar minimal 600 CSS px. Layout mengikuti tinggi strip yang diukur dari elemen DOM, termasuk perubahan ukuran saat bermain. Iklan layar penuh tetap mengikuti batas level, cooldown, waktu sesi, dan jeda audio.
+- Banner Bridge hanya diminta saat gameplay yang mendukungnya pada viewport lanskap selebar minimal 600 CSS px. Layout mengikuti tinggi strip yang diukur dari elemen DOM, termasuk perubahan ukuran saat bermain. Perubahan kelayakan banner mengikuti event resize browser. Iklan layar penuh tetap mengikuti batas level, cooldown, waktu sesi, dan jeda audio.
 - `docs/store/` berisi ikon 512×512, favicon 64×64, seluruh cover CrazyGames dan itch.io, tiga thumbnail GameDistribution, empat screenshot gameplay 720×1280, dan teks EN/ID. File terbesar 160.141 byte. `docs/.gdignore` tetap aktif. `art/icon.png` bersumber dari ikon toko.
 - Playwright merekam pengisian sel, kombo, dan kemenangan Moon 01 melalui input biasa. Dua MP4 H.264 berdurasi 15,27 detik. Lanskap 1920×1080 berukuran 842.612 byte, potret 1080×1620 berukuran 1.135.515 byte. Job `qa-screenshots` membuat artefak `velokity-store-videos` saat push branch `codex/**` atau pada PR. Oz mengambilnya dari bagian **Artifacts** pada run **Quality gates** yang hijau.
 - Panduan rilis `docs/RELEASE.md` memuat file dan kolom unggahan serta cek per portal, berurutan dari itch.io hingga GameDistribution. `docs/privacy.md` menjelaskan save browser dan penggunaan SDK portal.
@@ -13,11 +13,11 @@ Branch `codex/t11-release-kit` berangkat dari `origin/main` yang sudah memuat T1
 
 ## Pemeriksaan
 
-Impor Godot 4.7.2, kedua ekspor Web, 464 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.091.207 byte (41,09 MB)** untuk 12 file. Web QA 41.106.107 byte. ZIP rilis `velokity-itch.zip` **11.070.351 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.
+Impor Godot 4.7.2, kedua ekspor Web, 464 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.091.751 byte (41,09 MB)** untuk 12 file. Web QA 41.106.651 byte. ZIP rilis `velokity-itch.zip` **11.070.880 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.
 
-Playwright menyelesaikan Moon 01–05, Rasi Bintang, album dan pencapaian, tiga tahap Ronde Bonus, serta pratinjau, beli, dan pasang kostum. Muat ulang mempertahankan progres dan kostum. Uji banner melalui SDK simulasi mencakup lebar 599/600 CSS px, rotasi, dan pengukuran ulang tinggi 78/213 px. Build Web rilis mengabaikan rute QA.
+Playwright menyelesaikan Moon 01–05, Rasi Bintang, album dan pencapaian, tiga tahap Ronde Bonus, serta pratinjau, beli, dan pasang kostum. Muat ulang diuji setelah progres dan kostum persisten di IndexedDB. Sinkronisasi browser berlangsung asinkron, jadi muat ulang sebelum transaksi IndexedDB selesai dapat memuat snapshot sebelumnya. Uji banner melalui SDK simulasi mencakup lebar 599/600 CSS px, rotasi, dan pengukuran ulang tinggi 78/213 px. Build Web rilis mengabaikan rute QA.
 
-Pengukuran profil sentuh 393×851 CSS @2× dengan SwiftShader dan CPU 4× lebih lambat menghasilkan **2,8 FPS, p95 800 ms** pada runner ini. Uji pembanding dengan batching bintang tidak meningkatkan hasil. CI melaporkan FPS dan p95 di ringkasan run. Gate performa T11 masih terbuka sampai pengujian pada ponsel kelas menengah dengan GPU perangkat.
+Pengukuran profil sentuh 393×851 CSS @2× dengan SwiftShader menghasilkan **4,7 FPS, p95 417 ms** pada runner ini. Uji stres dengan CPU 4× lebih lambat menghasilkan 2,8 FPS dan p95 800 ms. Uji pembanding dengan batching bintang tidak meningkatkan hasil. CI melaporkan FPS dan p95 di ringkasan run. Gate performa T11 masih terbuka sampai pengujian pada ponsel kelas menengah dengan GPU perangkat.
 
 ## Yang masih terbuka
 
@@ -57,6 +57,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR, cek artefak dari commit rilis, dan ulangi pengukuran 30 FPS / p95 50 ms pada ponsel kelas menengah. Setelah lulus, uji dan terbitkan draf itch.io dengan tautan Traktir.
+1. Oz buka PR dan cek artefak dari commit rilis. Di ponsel kelas menengah, rekam 10–15 detik saat mengisi Moon 01 sampai menang lewat panel Performance di Chrome DevTools dengan remote debugging. Targetnya minimal 30 FPS dengan p95 durasi frame maksimal 50 ms. Setelah lulus, uji dan terbitkan draf itch.io dengan tautan Traktir.
 2. Jalankan QA portal berikutnya sesuai urutan di `docs/RELEASE.md`. Selesaikan syarat Playgama dan GameDistribution sebelum menekan Submit di masing-masing portal.
 3. T12 — Tambahkan konten v1.1, termasuk 300 Nonogram hingga 15×15, zoom/pan, 365 puzzle harian, dan kurva kesulitan.

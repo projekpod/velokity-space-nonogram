@@ -25,6 +25,9 @@ var _reported_gameplay := false
 var _banner_shown := false
 var _timeout: Timer
 var _banner_space := 0.0
+var _banner_fits_viewport := true
+var _browser: JavaScriptObject
+var _resize_callback: JavaScriptObject
 
 
 func _ready() -> void:
@@ -45,12 +48,26 @@ func _ready() -> void:
 			_provider = unavailable
 	_connect_provider()
 	set_process(OS.has_feature("web"))
+	if OS.has_feature("web"):
+		_browser = JavaScriptBridge.get_interface("window")
+		_resize_callback = JavaScriptBridge.create_callback(_on_browser_resize)
+		_browser.addEventListener("resize", _resize_callback)
+		_on_browser_resize([])
+
+
+func _exit_tree() -> void:
+	if _browser != null:
+		_browser.removeEventListener("resize", _resize_callback)
 
 
 func _process(_delta: float) -> void:
-	if _banner_wanted:
-		_sync_platform()
 	_on_banner_space_changed()
+
+
+func _on_browser_resize(_args: Array) -> void:
+	var width := float(_browser.innerWidth)
+	_banner_fits_viewport = width >= 600.0 and width > float(_browser.innerHeight)
+	_sync_platform()
 
 
 func set_provider(provider: AdsProvider) -> bool:
@@ -144,16 +161,10 @@ func _sync_platform() -> void:
 	if active != _reported_gameplay:
 		_reported_gameplay = active
 		_provider.set_gameplay_active(active)
-	var banner := active and _banner_wanted and _viewport_allows_banner()
+	var banner := active and _banner_wanted and _banner_fits_viewport
 	if banner != _banner_shown:
 		_banner_shown = banner
 		_provider.set_banner_visible(banner)
-
-
-func _viewport_allows_banner() -> bool:
-	if not OS.has_feature("web"):
-		return true
-	return bool(JavaScriptBridge.eval("window.innerWidth >= 600 && window.innerWidth > window.innerHeight", true))
 
 
 func _begin(placement: StringName) -> void:
