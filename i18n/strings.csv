@@ -159,3 +159,11 @@ LOGIN_CLAIM,Claim %d coins,Klaim %d koin
 LOGIN_TOMORROW,Next reward tomorrow,Hadiah berikutnya besok
 LOGIN_CLOCK,Wait for the next claim date,Tunggu tanggal klaim berikutnya
 BONUS_TOTAL,Round total · %d coins,Total ronde · %d koin
+MENU_SUPPORT,Support Velokity,Traktir Velokity
+FREE_COINS_BUTTON,Free coins · +%d (%d left),Koin gratis · +%d (sisa %d)
+FREE_COINS_LIMIT,Daily free coin limit reached,Batas koin gratis hari ini tercapai
+IAP_TITLE,Purchases,Pembelian
+IAP_NO_ADS,No Ads,Bebas Iklan
+IAP_COINS_500,500 coins,500 koin
+IAP_COINS_2000,2000 coins,2.000 koin
+IAP_UNAVAILABLE,Purchases are unavailable,Pembelian belum tersedia

@@ -94,65 +94,61 @@
             <div id="status-notice"></div>
         </div>
 
+        <script src="./playgama-bridge.js"></script>
         <script src="$GODOT_URL"></script>
         <script>
-            const GODOT_CONFIG = $GODOT_CONFIG
-            const ENGINE = new Engine(GODOT_CONFIG)
-            const CANVAS = document.getElementById('canvas')
+            const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+            const engine = new Engine($GODOT_CONFIG);
+            const canvas = document.getElementById('canvas');
+            const loadingStatus = document.getElementById('status');
+            const progress = document.getElementById('status-progress');
 
-            let bridgeScript = null
-            let bridgeTimeout = null
-            let bridgeLoaded = false
-
-            function addLocalBridge() {
-                if (bridgeLoaded) return
-                bridgeLoaded = true
-                clearTimeout(bridgeTimeout)
-
-                if (bridgeScript && bridgeScript.parentNode) {
-                    bridgeScript.onload = null
-                    bridgeScript.onerror = null
-                    bridgeScript.parentNode.removeChild(bridgeScript)
+            async function start() {
+                loadingStatus.style.visibility = 'visible';
+                const sdk = window.bridge;
+                let timeout;
+                try {
+                    if (sdk) {
+                        sdk.engine = 'godot-4';
+                        await Promise.race([
+                            sdk.initialize(),
+                            new Promise((_, reject) => {
+                                timeout = setTimeout(() => reject(new Error('Initialization timed out')), 12000);
+                            }),
+                        ]);
+                        sdk.setGameLoadingProgress(0);
+                    }
+                } catch (error) {
+                    console.error('Velokity: Playgama Bridge initialization failed.', error);
+                    window.bridge = null;
+                } finally {
+                    clearTimeout(timeout);
                 }
 
-                window.bridge = null
-                window.playgamaBridge = null
-
-                const scriptElement = document.createElement('script')
-                scriptElement.src = './playgama-bridge.js'
-                scriptElement.onload = function() {
-                    initializeBridge()
-                }
-                document.body.appendChild(scriptElement)
-            }
-
-            bridgeScript = document.createElement('script')
-            bridgeScript.src = 'https://bridge.playgama.com/v2/stable/playgama-bridge.js'
-            bridgeScript.onload = initializeBridge
-            bridgeScript.onerror = addLocalBridge
-
-            bridgeTimeout = setTimeout(() => {
-                console.warn('CDN bridge failed to load within 2 seconds, loading local bridge')
-                addLocalBridge()
-            }, 2000)
-
-            document.head.appendChild(bridgeScript)
-
-            function initializeBridge() {
-                clearTimeout(bridgeTimeout)
-                bridge.engine = 'godot-4'
-                bridge.initialize().then(() => {
-                    bridge.setGameLoadingProgress(0)
-                    ENGINE.startGame({
-                        onProgress: function (current, total) {
-                            bridge.setGameLoadingProgress((current / total) * 100);
+                try {
+                    await engine.startGame({
+                        onProgress(current, total) {
+                            if (total > 0) {
+                                progress.style.display = 'block';
+                                progress.max = total;
+                                progress.value = current;
+                                window.bridge?.setGameLoadingProgress(current / total * 100);
+                            }
                         },
-                    }).then(() => {
-                        CANVAS.focus()
                     });
-                })
+                    loadingStatus.remove();
+                    canvas.focus();
+                } catch (error) {
+                    document.getElementById('status-splash').style.display = 'none';
+                    progress.style.display = 'none';
+                    const notice = document.getElementById('status-notice');
+                    notice.textContent = String(error);
+                    notice.style.display = 'block';
+                    console.error(error);
+                }
             }
-        </script>
 
+            start();
+        </script>
     </body>
 </html>                                                                                                                                                  

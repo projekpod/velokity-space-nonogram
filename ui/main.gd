@@ -8,6 +8,7 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
+const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 
 @onready var center: CenterContainer = $Center
 @onready var _economy := get_node("/root/Economy")
@@ -46,7 +47,16 @@ func show_menu() -> void:
 	UI.action(collection, "META_ALBUM").pressed.connect(_open_meta.bind(MetaScreen.Page.ALBUM))
 	UI.action(collection, "META_SHOP").pressed.connect(_open_meta.bind(MetaScreen.Page.SHOP))
 	UI.button(_column, "MENU_SETTINGS").pressed.connect(_show_settings)
+	var support := MonetizationConfig.support_url()
+	if not support.is_empty() and _ads.allows_support_link():
+		UI.button(_column, "MENU_SUPPORT").pressed.connect(_open_support.bind(support))
 	play.grab_focus()
+	_ads.notify_menu_shown()
+
+
+func _open_support(url: String) -> void:
+	if _ads.allows_support_link():
+		OS.shell_open(url)
 
 
 func _open_meta(page: MetaScreen.Page, planet := "moon") -> MetaScreen:

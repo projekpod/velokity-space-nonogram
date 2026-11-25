@@ -18,14 +18,16 @@ func _export_begin(features, is_debug, path, flags):
 		
 		_copy_file(JS_SDK_FILE_NAME)
 		_copy_file(JS_SDK_CONFIG_FILE_NAME)
+		_copy_file("../LICENSE", "playgama-bridge-LICENSE.txt")
 
-func _copy_file(file_name):
+func _copy_file(file_name, export_name = ""):
 	var file_from = FileAccess.open(JS_SDK_PATH + file_name, FileAccess.READ)
 	if file_from == null:
 		push_error("Bridge: failed to read " + JS_SDK_PATH + file_name)
 		return
 	
-	var file_to = FileAccess.open(_path.get_base_dir() + "/" + file_name, FileAccess.WRITE)
+	var output_name = file_name if export_name.is_empty() else export_name
+	var file_to = FileAccess.open(_path.get_base_dir().path_join(output_name), FileAccess.WRITE)
 	if file_to == null:
 		push_error("Bridge: failed to write " + file_name)
 		return

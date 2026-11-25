@@ -174,6 +174,8 @@ var _mp = null
 
 func _ready():
 	if OS.has_feature("web"):
+		if not JavaScriptBridge.eval("window.bridge?.isInitialized === true", true):
+			return
 		var js_bridge = JavaScriptBridge.get_interface("bridge")
 		_platform = load("res://addons/playgama_bridge/modules/platform/platform.gd").new(js_bridge.platform)
 		_device = load("res://addons/playgama_bridge/modules/device/device.gd").new(js_bridge.device)

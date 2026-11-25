@@ -7,10 +7,11 @@
 		"rewarded": {
 			"preloadOnStart": true
 		},
-		"useBuiltInErrorPopup": true,
+		"useBuiltInErrorPopup": false,
 		"backfillId": ""
 	},
 	"payments": [],
 	"leaderboards": [],
-	"sendAnalyticsEvents": true
+	"disableLoadingLogo": true,
+	"sendAnalyticsEvents": false
 }

@@ -9,12 +9,17 @@ const Daily := preload("res://scripts/daily/calendar.gd")
 const Picture := preload("res://ui/album_picture.gd")
 const Portrait := preload("res://ui/mission_art.gd")
 
-enum Page { ALBUM, SHOP, ACHIEVEMENTS, LOGIN }
+const AdsRules := preload("res://scripts/autoload/ads.gd")
+const EconomyRules := preload("res://scripts/autoload/economy.gd")
+const Purchases := preload("res://scripts/payments/purchase_provider.gd")
+
+enum Page { ALBUM, SHOP, ACHIEVEMENTS, LOGIN, PURCHASES }
 
 const PANEL := Color("#16243b")
 const LINE := Color("#304768")
 
 @onready var _economy := get_node("/root/Economy")
+@onready var _ads := get_node("/root/Ads")
 
 var page := Page.ALBUM
 var planet := "moon"
@@ -25,11 +30,15 @@ var _preview_title: Label
 var _portrait: Portrait
 var _message := ""
 var _message_color := UI.MINT
+var _coin_ad_waiting := false
+var _coin_reward_day := -1
+var _purchases := Purchases.new()
 
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 12)
 	_preview_id = _economy.equipped_costumes().get(_slot, "")
+	_ads.rewarded_finished.connect(_on_coin_ad_finished)
 	_render()
 
 
@@ -39,7 +48,12 @@ func _render(focus := "") -> void:
 		child.queue_free()
 
 	var top := UI.row(self)
-	var back := UI.button(top, "META_BACK_ALBUM" if page == Page.ACHIEVEMENTS else "GAME_BACK")
+	var back_key := "GAME_BACK"
+	if page == Page.ACHIEVEMENTS:
+		back_key = "META_BACK_ALBUM"
+	elif page == Page.PURCHASES:
+		back_key = "META_SHOP"
+	var back := UI.button(top, back_key)
 	back.pressed.connect(_back)
 	back.grab_focus()
 	var spacer := Control.new()
@@ -58,11 +72,17 @@ func _render(focus := "") -> void:
 			_render_achievements()
 		Page.LOGIN:
 			_render_login()
+		Page.PURCHASES:
+			_render_purchases()
 
 
 func _back() -> void:
 	if page == Page.ACHIEVEMENTS:
 		page = Page.ALBUM
+		_render()
+	elif page == Page.PURCHASES:
+		page = Page.SHOP
+		_message = ""
 		_render()
 	else:
 		back_requested.emit()
@@ -159,7 +179,85 @@ func _render_shop(focus: String) -> void:
 		var item: Dictionary = Meta.COSTUMES[id]
 		if item.slot == _slot:
 			_shop_row(id, item, equipped.get(_slot, ""), focus)
+	_render_shop_actions()
 	_show_message()
+
+
+func _render_shop_actions() -> void:
+	var actions := UI.row(self)
+	var today := Daily.today()
+	var remaining: int = _economy.free_coin_ads_remaining(today)
+	var label := tr("FREE_COINS_BUTTON") % [EconomyRules.FREE_COIN_AMOUNT, remaining]
+	if _coin_reward_day >= 0:
+		UI.action(actions, "SAVE_RETRY", true).pressed.connect(_save_coin_reward)
+	else:
+		var free_coins := UI.action(actions, label, true)
+		free_coins.disabled = remaining == 0 or not _ads.can_request_rewarded()
+		free_coins.pressed.connect(_request_coin_ad)
+	UI.button(actions, "IAP_TITLE").pressed.connect(_open_purchases)
+	_watch_local_day(today)
+
+
+func _request_coin_ad() -> void:
+	if _coin_ad_waiting or _coin_reward_day >= 0 or _economy.free_coin_ads_remaining(Daily.today()) == 0:
+		return
+	_coin_ad_waiting = _ads.request_rewarded(AdsRules.FREE_COINS)
+	if not _coin_ad_waiting:
+		_ad_unavailable()
+
+
+func _on_coin_ad_finished(placement: StringName, granted: bool) -> void:
+	if placement != AdsRules.FREE_COINS or not _coin_ad_waiting or not is_inside_tree():
+		return
+	_coin_ad_waiting = false
+	if granted:
+		_coin_reward_day = Daily.today()
+		_save_coin_reward()
+	else:
+		_ad_unavailable()
+
+
+func _save_coin_reward() -> void:
+	if _coin_reward_day < 0:
+		return
+	var amount: int = _economy.award_free_ad_coins(_coin_reward_day)
+	if amount < 0:
+		_fail()
+	else:
+		_coin_reward_day = -1
+		_message = tr("GAME_EARNED") % amount if amount > 0 else "FREE_COINS_LIMIT"
+		_message_color = UI.MINT
+	_render()
+
+
+func _ad_unavailable() -> void:
+	_message = "AD_UNAVAILABLE"
+	_message_color = UI.ERROR_COLOR
+	_render()
+
+
+func _open_purchases() -> void:
+	_message = ""
+	page = Page.PURCHASES
+	_render()
+
+
+func _render_purchases() -> void:
+	UI.label(self, "IAP_TITLE", 46)
+	var available := false
+	for id: StringName in Purchases.PRODUCTS:
+		var product := UI.button(self, Purchases.PRODUCTS[id])
+		product.disabled = not _purchases.is_product_available(id)
+		available = available or not product.disabled
+		product.pressed.connect(_request_purchase.bind(id))
+	if not available or not _message.is_empty():
+		UI.label(self, "IAP_UNAVAILABLE", 23, UI.MUTED)
+
+
+func _request_purchase(id: StringName) -> void:
+	if _purchases.is_product_available(id) and not _purchases.request_purchase(id):
+		_message = "IAP_UNAVAILABLE"
+		_render()
 
 
 func _select_slot(slot: String) -> void:
@@ -288,7 +386,10 @@ func _render_login() -> void:
 	claim.disabled = status.reward <= 0
 	claim.pressed.connect(_claim_login)
 	_show_message()
+	_watch_local_day(today)
 
+
+func _watch_local_day(today: int) -> void:
 	var timer := Timer.new()
 	timer.wait_time = 1.0
 	add_child(timer)

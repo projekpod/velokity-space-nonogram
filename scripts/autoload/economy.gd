@@ -5,6 +5,9 @@ const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
+const SaveSchema := preload("res://scripts/autoload/save.gd")
+const FREE_COIN_AMOUNT := 25
+const FREE_COIN_LIMIT := SaveSchema.MAX_FREE_COIN_ADS
 const MAX_COINS := 2147483647
 const MAX_FIRST_CLEAR := 60
 const HINT_COST := 30
@@ -131,6 +134,26 @@ func claim_login(day: int) -> int:
 	snapshot.meta.login = next
 	snapshot.coins += amount
 	return amount if _commit(snapshot) else -1
+
+
+func free_coin_ads_remaining(day: int) -> int:
+	var claims: Dictionary = _save.data.free_coin_ads
+	if day < 0 or day > Daily.MAX_DAY or day < claims.last_day:
+		return 0
+	return FREE_COIN_LIMIT - claims.count if day == claims.last_day else FREE_COIN_LIMIT
+
+
+# Called after a rewarded ad closes with a grant. Save the quota and coins together.
+func award_free_ad_coins(day: int) -> int:
+	var remaining := free_coin_ads_remaining(day)
+	if remaining == 0:
+		return 0
+	if FREE_COIN_AMOUNT > MAX_COINS - balance():
+		return -1
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	snapshot.free_coin_ads = {"last_day": day, "count": FREE_COIN_LIMIT - remaining + 1}
+	snapshot.coins += FREE_COIN_AMOUNT
+	return FREE_COIN_AMOUNT if _commit(snapshot) else -1
 
 
 static func _login_reward(streak: int) -> int:

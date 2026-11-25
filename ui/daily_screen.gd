@@ -39,10 +39,11 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	_ads.set_gameplay_banner(false)
+	_ads.set_gameplay_active(false)
 
 
 func _start() -> void:
+	_ads.set_gameplay_active(false)
 	for child in get_children():
 		remove_child(child)
 		child.queue_free()
@@ -72,7 +73,7 @@ func _start() -> void:
 
 	_puzzle = Puzzle.new(level)
 	_analytics.record(&"puzzle_started")
-	_ads.set_gameplay_banner(true)
+	_ads.set_gameplay_active(true)
 	_update_lives()
 	var day_label := tr(WEEKDAYS[Daily.weekday(_day)])
 	var date_label := UI.label(text, "", 22, UI.MUTED)
@@ -145,7 +146,7 @@ func _on_star_placed(_cell: Vector2i) -> void:
 
 
 func _on_finished(won: bool) -> void:
-	_ads.set_gameplay_banner(false)
+	_ads.set_gameplay_active(false)
 	_place.disabled = true
 	_note.disabled = true
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")

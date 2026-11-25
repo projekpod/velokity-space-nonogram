@@ -3,7 +3,8 @@ extends Node
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
-const VERSION := 5
+const VERSION := 6
+const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
 
 var data := defaults()
@@ -25,6 +26,7 @@ static func defaults() -> Dictionary:
 		"daily": Daily.empty_progress(),
 		"nonogram": {},
 		"bonus_clears": 0,
+		"free_coin_ads": {"last_day": -1, "count": 0},
 		"meta": Meta.defaults(),
 		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
 	}
@@ -69,6 +71,12 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	var stored_meta: Variant = raw.get("meta")
 	if version >= 5 and stored_meta is Dictionary:
 		_restore_meta(result.meta, stored_meta)
+	var ad_claims: Variant = raw.get("free_coin_ads")
+	if version >= 6 and ad_claims is Dictionary:
+		var day: Variant = ad_claims.get("last_day")
+		var count: Variant = ad_claims.get("count")
+		if _is_version(day) and day <= Daily.MAX_DAY and _is_version(count):
+			result.free_coin_ads = {"last_day": int(day), "count": int(min(count, MAX_FREE_COIN_ADS))}
 	return result
 
 
