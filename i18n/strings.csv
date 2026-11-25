@@ -1,0 +1,24 @@
+key,en,id
+GAME_NAME,Velokity,Velokity
+GAME_SUBTITLE,Space Nonogram,Nonogram Antariksa
+MENU_PLAY,Play nonogram,Main nonogram
+MENU_DAILY,Rasi Bintang · Coming soon,Rasi Bintang · Segera hadir
+MENU_TAGLINE,Discover a picture one clue at a time.,Temukan gambar dari petunjuk angka.
+MENU_PLANET,Planet,Planet
+MENU_LEVEL,Puzzle,Teka-teki
+PLANET_MOON,Moon,Bulan
+PLANET_MARS,Mars,Mars
+PLANET_SATURN,Saturn,Saturnus
+GAME_BACK,Menu,Menu
+GAME_LIVES,Lives %s / 3,Nyawa %s / 3
+GAME_FILL,Fill,Isi
+GAME_CROSS,Mark X,Tandai X
+GAME_HINT,Hint,Petunjuk
+GAME_RETRY,Try again,Coba lagi
+GAME_NEXT,Next puzzle,Teka-teki berikutnya
+GAME_READY,Use the clues to reveal the picture.,Gunakan petunjuk angka untuk membuka gambar.
+GAME_MISTAKE,That mark costs one life.,Tanda itu mengurangi satu nyawa.
+GAME_WON,Picture revealed!,Gambar terbuka!
+GAME_LOST,Out of lives.,Nyawa habis.
+GAME_FINAL,Last puzzle in this catalog.,Teka-teki terakhir dalam katalog ini.
+GAME_CONTROLS,Drag in one direction to mark a line.,Seret dalam satu arah untuk menandai garis.

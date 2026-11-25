@@ -1,0 +1,7 @@
+.godot/
+/build/*
+!/build/.gdignore
+__pycache__/
+*.keystore
+
+/i18n/*.translation

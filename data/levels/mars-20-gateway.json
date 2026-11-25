@@ -1,0 +1,25 @@
+{
+  "id": "mars-20-gateway",
+  "size": 8,
+  "solution": [
+    "..cccc..",
+    ".cccccc.",
+    "cccccccc",
+    "cc....cc",
+    "cc....cc",
+    "cc....cc",
+    "cc....cc",
+    "aaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Gateway",
+    "id": "Gerbang"
+  }
+}

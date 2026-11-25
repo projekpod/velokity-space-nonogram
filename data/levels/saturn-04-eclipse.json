@@ -1,0 +1,27 @@
+{
+  "id": "saturn-04-eclipse",
+  "size": 10,
+  "solution": [
+    "....aa....",
+    "..aaaaaa..",
+    ".aaaaaaaa.",
+    ".aaaaaaaa.",
+    "aaaaaaaaaa",
+    "aaaaaaaaaa",
+    ".aaaaaaaa.",
+    ".aaaaaaaa.",
+    "..aaaaaa..",
+    "....aa...."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Eclipse",
+    "id": "Gerhana"
+  }
+}

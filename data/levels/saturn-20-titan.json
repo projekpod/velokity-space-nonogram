@@ -1,0 +1,27 @@
+{
+  "id": "saturn-20-titan",
+  "size": 10,
+  "solution": [
+    "....aa....",
+    "..aaaaaa..",
+    ".aaaaa.aa.",
+    ".aabbbaaa.",
+    "aabbbbaaba",
+    "aabbbbaaba",
+    ".aabbbaaa.",
+    ".aaaaa.aa.",
+    "..aaaaaa..",
+    "....aa...."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Titan",
+    "id": "Titan"
+  }
+}

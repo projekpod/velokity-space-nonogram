@@ -1,0 +1,27 @@
+{
+  "id": "saturn-08-ray",
+  "size": 10,
+  "solution": [
+    "c........c",
+    "cc......cc",
+    "ccc....ccc",
+    "cccccccccc",
+    ".cccccccc.",
+    "..cccccc..",
+    "...cccc...",
+    "....cc....",
+    "....cc....",
+    ".....c...."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Ray",
+    "id": "Pari"
+  }
+}

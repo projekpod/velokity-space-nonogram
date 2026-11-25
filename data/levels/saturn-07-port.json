@@ -1,0 +1,27 @@
+{
+  "id": "saturn-07-port",
+  "size": 10,
+  "solution": [
+    "....d.....",
+    "....dd....",
+    "....ddd...",
+    "....dddd..",
+    "....d.....",
+    "...bbb....",
+    "..bbbbb...",
+    ".bbbbbbb..",
+    "bbbbbbbbbb",
+    "c.c.cc.c.c"
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Spaceport",
+    "id": "Pelabuhan Antariksa"
+  }
+}

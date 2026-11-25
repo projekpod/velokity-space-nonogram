@@ -1,0 +1,25 @@
+{
+  "id": "mars-17-comet",
+  "size": 8,
+  "solution": [
+    "a.......",
+    "aa......",
+    "aaa.....",
+    ".aaaa...",
+    "..aaaaa.",
+    "...aaaaa",
+    "....aaaa",
+    ".....aa."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Red Comet",
+    "id": "Komet Merah"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mars-10-flag",
+  "size": 8,
+  "solution": [
+    ".aaaaaa.",
+    ".abbbaa.",
+    ".abbbba.",
+    ".aaaaaa.",
+    ".a......",
+    ".a......",
+    ".a......",
+    "aaaa...."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Mars Flag",
+    "id": "Bendera Mars"
+  }
+}

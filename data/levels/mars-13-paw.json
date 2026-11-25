@@ -1,0 +1,25 @@
+{
+  "id": "mars-13-paw",
+  "size": 8,
+  "solution": [
+    "a.a..a.a",
+    "a.a..a.a",
+    ".aaaaaa.",
+    "..aaaa..",
+    ".aaaaaa.",
+    "aaaaaaaa",
+    ".aaaaaa.",
+    "..aaaa.."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Paw Print",
+    "id": "Jejak Kaki Kucing"
+  }
+}

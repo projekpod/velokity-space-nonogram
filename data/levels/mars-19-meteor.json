@@ -1,0 +1,25 @@
+{
+  "id": "mars-19-meteor",
+  "size": 8,
+  "solution": [
+    "b.......",
+    "bb......",
+    "bbb.....",
+    ".bbaa...",
+    "..baaaa.",
+    "...aaaaa",
+    "...aaaaa",
+    "....aaa."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Meteor",
+    "id": "Meteor"
+  }
+}

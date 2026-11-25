@@ -1,0 +1,25 @@
+{
+  "id": "mars-04-tower",
+  "size": 8,
+  "solution": [
+    "...b....",
+    "..bbb...",
+    "...a....",
+    "..aaa...",
+    "..aaa...",
+    ".aaaaa..",
+    ".aa.aa..",
+    "aaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Radio Tower",
+    "id": "Menara Radio"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "saturn-11-diamond",
+  "size": 10,
+  "solution": [
+    "....d.....",
+    "...ddd....",
+    "..ddddd...",
+    ".ddddddd..",
+    "ddddddddd.",
+    ".ddddddd..",
+    "..ddddd...",
+    "...ddd....",
+    "....d.....",
+    ".........."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Diamond Dust",
+    "id": "Debu Berlian"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "saturn-03-spires",
+  "size": 10,
+  "solution": [
+    "....c.....",
+    "....c..c..",
+    "...ccc.c..",
+    ".c.cccccc.",
+    ".cccccccc.",
+    ".ccccccccc",
+    "cccccccccc",
+    ".bbbbbbbb.",
+    "..bbbbbb..",
+    "...bbbb..."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Crystal Spires",
+    "id": "Menara Kristal"
+  }
+}

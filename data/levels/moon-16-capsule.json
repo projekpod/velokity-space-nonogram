@@ -1,0 +1,22 @@
+{
+  "id": "moon-16-capsule",
+  "size": 5,
+  "solution": [
+    "..b..",
+    ".bbb.",
+    "bacab",
+    "ba.ab",
+    ".bbb."
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Capsule",
+    "id": "Kapsul"
+  }
+}
