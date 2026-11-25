@@ -4,5 +4,5 @@ extends Node
 
 
 func play_effect(player: AudioStreamPlayer) -> void:
-	if _settings.get_value("sound"):
+	if not get_tree().paused and _settings.get_value("sound"):
 		player.play()

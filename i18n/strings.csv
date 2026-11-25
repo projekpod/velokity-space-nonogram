@@ -2,7 +2,7 @@ key,en,id
 GAME_NAME,Velokity,Velokity
 GAME_SUBTITLE,Space Nonogram,Nonogram Antariksa
 MENU_PLAY,Play nonogram,Main nonogram
-MENU_DAILY,Rasi Bintang · Coming soon,Rasi Bintang · Segera hadir
+MENU_DAILY,Rasi Bintang · Daily puzzle,Rasi Bintang · Teka-teki harian
 MENU_TAGLINE,Discover a picture one clue at a time.,Temukan gambar dari petunjuk angka.
 MENU_PLANET,Planet,Planet
 MENU_LEVEL,Puzzle,Teka-teki
@@ -22,3 +22,24 @@ GAME_WON,Picture revealed!,Gambar terbuka!
 GAME_LOST,Out of lives.,Nyawa habis.
 GAME_FINAL,Last puzzle in this catalog.,Teka-teki terakhir dalam katalog ini.
 GAME_CONTROLS,Drag in one direction to mark a line.,Seret dalam satu arah untuk menandai garis.
+DAILY_TITLE,Rasi Bintang,Rasi Bintang
+DAILY_DATE,%s · %02d/%02d/%04d · Difficulty %d/7,%s · %02d/%02d/%04d · Kesulitan %d/7
+DAILY_READY,Find a place for each star.,Temukan tempat untuk setiap bintang.
+DAILY_RULES,One star per row per column and per region. Stars cannot touch even diagonally.,Satu bintang per baris per kolom dan per wilayah. Bintang tak boleh bersentuhan termasuk diagonal.
+DAILY_PLACE,Place star,Pasang bintang
+DAILY_NOTE,X note,Catatan X
+DAILY_STREAK,Streak · %d days,Beruntun · %d hari
+DAILY_REWARD_DAY,Day %d,Hari %d
+DAILY_WON,Constellation complete! +%d coins,Rasi lengkap! +%d koin
+DAILY_PLAYED,Today's reward has been collected.,Hadiah hari ini sudah diambil.
+DAILY_UNAVAILABLE,Today's puzzle is unavailable.,Teka-teki hari ini tidak tersedia.
+DAILY_SAVE_FAILED,Reward could not be saved.,Hadiah gagal disimpan.
+DAILY_ROLLOVER,A new daily puzzle is ready.,Teka-teki harian baru sudah siap.
+DAILY_OPEN_TODAY,Open today's puzzle,Buka teka-teki hari ini
+DAY_MON,Monday,Senin
+DAY_TUE,Tuesday,Selasa
+DAY_WED,Wednesday,Rabu
+DAY_THU,Thursday,Kamis
+DAY_FRI,Friday,Jumat
+DAY_SAT,Saturday,Sabtu
+DAY_SUN,Sunday,Minggu
