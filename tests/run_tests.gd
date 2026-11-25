@@ -34,6 +34,7 @@ func _run() -> void:
 	await _test_settings_menu()
 	_test_economy()
 	_test_catalog()
+	await _test_level_progression()
 	_test_puzzle()
 	_test_continue()
 	_test_hint()
@@ -323,6 +324,79 @@ func _test_catalog() -> void:
 		check(levels[0].planet == "moon" and levels[0].size == 5, "Moon album comes first")
 		check(levels[20].planet == "mars" and levels[20].size == 8, "Mars album comes second")
 		check(levels[40].planet == "saturn" and levels[40].size == 10, "Saturn album comes third")
+
+
+func _test_level_progression() -> void:
+	var save := root.get_node("Save")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var previous_locale := TranslationServer.get_locale()
+	var path := "user://test-progression-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path + "/unwritable"
+	TranslationServer.set_locale("en")
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var levels: Array[Dictionary] = main._levels
+	var open_levels := []
+	for index in range(levels.size()):
+		if main._is_level_unlocked(index):
+			open_levels.append(index)
+	check(open_levels == [0], "A fresh save opens only Moon 01")
+	main._show_planets()
+	var planet_list: Control = main._column
+	var mars_card := planet_list.get_child(3) as Button
+	check(mars_card.disabled and "Clear 15 puzzles in Moon" in mars_card.text, "Locked Mars displays its requirement")
+	mars_card.pressed.emit()
+	check(main._column == planet_list, "A locked planet cannot open its level list")
+	main._show_levels("moon")
+	var moon_list: Control = main._column
+	var grid := moon_list.get_child(3) as GridContainer
+	var moon_02 := grid.get_child(1) as Button
+	check(moon_02.disabled and "Clear 01" in moon_02.text, "Locked level displays its prerequisite")
+	moon_02.pressed.emit()
+	check(main._column == moon_list and main._play(20) == null, "A locked level cannot start through selection or direct play")
+
+	var screen: NonogramScreen = main._play(0)
+	var solution: Array = levels[0].solution
+	for y in range(solution.size()):
+		for x in range(solution.size()):
+			if solution[y][x] != ".":
+				screen._puzzle.mark(Vector2i(x, y), false)
+	var buttons := screen._result.find_children("*", "Button", true, false)
+	check(not main._is_level_unlocked(1) and not buttons.any(func(button: Node) -> bool: return button.text == "GAME_NEXT"), "An unsaved win cannot expose a locked Next")
+	save.storage_path = path
+	screen._retry_win()
+	buttons = screen._result.find_children("*", "Button", true, false)
+	check(main._is_level_unlocked(0) and main._is_level_unlocked(1) and not main._is_level_unlocked(2), "Clearing Moon 01 keeps it replayable and opens Moon 02")
+	check(buttons.any(func(button: Node) -> bool: return button.text == "GAME_NEXT"), "Next appears after recording the clear")
+
+	for planet in ["moon", "mars"]:
+		var indices: Array[int] = main._planet_levels(planet)
+		var next_planet := "mars" if planet == "moon" else "saturn"
+		for offset in range(14):
+			save.data.nonogram[levels[indices[offset]].id] = {"reward": 30, "doubled": false}
+		check(not main._is_planet_unlocked(next_planet), "Fourteen %s clears leave %s locked" % [planet, next_planet])
+		save.data.nonogram[levels[indices[14]].id] = {"reward": 30, "doubled": false}
+		var next_first: int = main._planet_levels(next_planet)[0]
+		check(main._is_planet_unlocked(next_planet) and main._is_level_unlocked(next_first), "Fifteen %s clears open %s level 01" % [planet, next_planet])
+		check(not main._is_level_unlocked(next_first + 1), "Planet unlock still requires clearing level 01")
+
+	var legacy := SaveScript.defaults()
+	legacy.nonogram[levels[21].id] = {"reward": 25, "doubled": true}
+	check(save.write_game(legacy) == OK and save.load_game() == OK, "Read a sparse save from before progression")
+	check(not main._is_planet_unlocked("mars") and main._is_level_unlocked(21) and not main._is_level_unlocked(22), "Legacy Mars clear is replayable without opening new Mars levels")
+	main._show_planets()
+	var legacy_replay := main._column.get_child(4) as Button
+	check(not legacy_replay.disabled and "Replay cleared puzzles" in legacy_replay.text, "Locked albums with legacy clears offer replay")
+	legacy_replay.pressed.emit()
+	check(main._play(21) != null and main._play(22) == null, "Legacy replay cannot bypass the planet lock")
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = previous_data
+	save.storage_path = previous_path
+	TranslationServer.set_locale(previous_locale)
 
 
 func _test_puzzle() -> void:

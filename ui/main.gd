@@ -39,25 +39,35 @@ func _show_planets() -> void:
 	var first: Button
 	for planet: String in Catalog.PLANETS:
 		var indices := _planet_levels(planet)
-		var cleared := 0
-		for index in indices:
-			cleared += int(_economy.is_nonogram_cleared(_levels[index].id))
-		var card := UI.button(_column, tr("PLANET_PROGRESS") % [_planet_title(planet), cleared, indices.size()])
-		card.disabled = indices.is_empty()
+		var cleared := _planet_cleared(planet)
+		var unlocked := _is_planet_unlocked(planet)
+		var caption := tr("PLANET_PROGRESS") % [_planet_title(planet), cleared, indices.size()]
+		if not unlocked:
+			caption = (tr("PLANET_LOCKED") % _planet_title(planet)) + "\n" + _planet_unlock_label(planet)
+		var card := UI.button(_column, caption)
+		card.disabled = not unlocked or indices.is_empty()
 		card.pressed.connect(_show_levels.bind(planet))
 		if first == null and not card.disabled:
 			first = card
+		if not unlocked and cleared > 0:
+			UI.button(_column, tr("PLANET_REPLAY") % _planet_title(planet)).pressed.connect(_show_levels.bind(planet))
 	for planet: String in ["jupiter", "neptune"]:
-		UI.button(_column, tr("PLANET_LOCKED") % _planet_title(planet)).disabled = true
+		var caption := (tr("PLANET_LOCKED") % _planet_title(planet)) + "\n" + tr("PLANET_FUTURE")
+		UI.button(_column, caption).disabled = true
 	if first != null:
 		first.grab_focus()
 
 
 func _show_levels(planet: String) -> void:
+	var planet_unlocked := _is_planet_unlocked(planet)
+	if not planet_unlocked and _planet_cleared(planet) == 0:
+		return
 	_reset_column()
 	UI.button(_column, "LEVEL_BACK").pressed.connect(_show_planets)
 	UI.label(_column, _planet_title(planet), 44, UI.MINT)
 	UI.label(_column, "LEVELS_TITLE", 26, UI.MUTED)
+	if not planet_unlocked:
+		UI.label(_column, _planet_unlock_label(planet), 21, UI.MUTED)
 	var grid := GridContainer.new()
 	grid.columns = 4
 	grid.add_theme_constant_override("h_separation", 9)
@@ -68,19 +78,30 @@ func _show_levels(planet: String) -> void:
 	for position in range(indices.size()):
 		var index := indices[position]
 		var cleared: bool = _economy.is_nonogram_cleared(_levels[index].id)
-		var caption := "%02d" % (position + 1)
+		var unlocked := _is_level_unlocked(index)
+		var number := "%02d" % (position + 1)
+		var caption := number
 		if cleared:
-			caption = tr("LEVEL_CLEARED") % caption
+			caption = tr("LEVEL_CLEARED") % number
+		elif not unlocked:
+			var requirement := tr("LEVEL_REQUIRES_PREVIOUS") % ("%02d" % position) if planet_unlocked else tr("LEVEL_REQUIRES_PLANET")
+			caption = (tr("LEVEL_LOCKED") % number) + "\n" + requirement
 		var button := UI.button(grid, caption, cleared)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.tooltip_text = UI.level_title(_levels[index])
+		button.disabled = not unlocked
+		if button.disabled:
+			button.add_theme_font_size_override("font_size", 18)
 		button.pressed.connect(_play.bind(index))
-		if first_uncleared == null and not cleared:
+		if first_uncleared == null and not cleared and unlocked:
 			first_uncleared = button
 	if first_uncleared != null:
 		first_uncleared.grab_focus()
-	elif grid.get_child_count() > 0:
-		grid.get_child(0).grab_focus()
+	else:
+		for button: Button in grid.get_children():
+			if not button.disabled:
+				button.grab_focus()
+				break
 
 
 func _planet_levels(planet: String) -> Array[int]:
@@ -95,19 +116,51 @@ func _planet_title(planet: String) -> String:
 	return tr("PLANET_" + planet.to_upper())
 
 
-func _play(level_index: int) -> void:
+func _planet_cleared(planet: String) -> int:
+	var count := 0
+	for index in _planet_levels(planet):
+		count += int(_economy.is_nonogram_cleared(_levels[index].id))
+	return count
+
+
+func _is_planet_unlocked(planet: String) -> bool:
+	var previous := Catalog.previous_planet(planet)
+	return planet == Catalog.PLANETS[0] or (not previous.is_empty() and _planet_cleared(previous) >= Catalog.PLANET_CLEAR_REQUIREMENT)
+
+
+func _planet_unlock_label(planet: String) -> String:
+	var previous := Catalog.previous_planet(planet)
+	return tr("PLANET_REQUIRES_CLEARS") % [Catalog.PLANET_CLEAR_REQUIREMENT, _planet_title(previous)]
+
+
+func _is_level_unlocked(index: int) -> bool:
+	if index < 0 or index >= _levels.size():
+		return false
+	var level := _levels[index]
+	if _economy.is_nonogram_cleared(level.id):
+		return true
+	if not _is_planet_unlocked(level.planet):
+		return false
+	return index == 0 or level.planet != _levels[index - 1].planet or _economy.is_nonogram_cleared(_levels[index - 1].id)
+
+
+func _play(level_index: int) -> NonogramScreen:
+	if not _is_level_unlocked(level_index):
+		return null
 	_reset_column(NonogramScreen.BOARD_WIDTH, 0)
 	var screen := NonogramScreen.new()
 	screen.level = _levels[level_index]
-	screen.has_next = level_index + 1 < _levels.size()
+	screen.can_play_next = _is_level_unlocked.bind(level_index + 1)
 	screen.exit_requested.connect(_leave_game.bind(level_index))
 	_column.add_child(screen)
+	return screen
 
 
 func _leave_game(action: StringName, result_closed: bool, level_index: int) -> void:
 	match action:
 		&"next":
-			_play(level_index + 1)
+			if _play(level_index + 1) == null:
+				return
 		&"retry":
 			_play(level_index)
 		_:

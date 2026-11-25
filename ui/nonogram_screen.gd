@@ -15,7 +15,7 @@ const BOARD_WIDTH := Board.WIDTH
 @onready var _ads := get_node("/root/Ads")
 
 var level: Dictionary
-var has_next := false
+var can_play_next: Callable
 var _puzzle: Puzzle
 var _board: Board
 var _lives: Label
@@ -201,10 +201,11 @@ func _show_result(won: bool) -> void:
 		_continue.pressed.connect(_use_paid_continue)
 		UI.action(choices, "GAME_CONTINUE_AD", _continue.disabled).pressed.connect(_request_ad.bind(&"continue"))
 	var nav := UI.row(_result)
-	var retry := UI.action(nav, "GAME_RETRY", not won or not has_next)
+	var show_next := won and can_play_next.is_valid() and bool(can_play_next.call())
+	var retry := UI.action(nav, "GAME_RETRY", not show_next)
 	retry.pressed.connect(_leave.bind(&"retry"))
 	var focus := retry
-	if won and has_next:
+	if show_next:
 		focus = UI.action(nav, "GAME_NEXT", true)
 		focus.pressed.connect(_leave.bind(&"next"))
 	_result.show()

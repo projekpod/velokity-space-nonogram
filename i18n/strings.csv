@@ -12,9 +12,15 @@ PLANET_JUPITER,Jupiter,Jupiter
 PLANET_NEPTUNE,Neptune,Neptunus
 PLANET_PROGRESS,%s · %d/%d cleared,%s · %d/%d selesai
 PLANET_LOCKED,%s · Locked,%s · Terkunci
+PLANET_REQUIRES_CLEARS,Clear %d puzzles in %s,Selesaikan %d teka-teki di %s
+PLANET_REPLAY,Replay cleared puzzles · %s,Ulangi teka-teki yang selesai · %s
+PLANET_FUTURE,Coming in a future update,Hadir di pembaruan mendatang
 LEVELS_TITLE,Choose a puzzle,Pilih teka-teki
 LEVEL_BACK,Planets,Daftar planet
 LEVEL_CLEARED,✓ %s,✓ %s
+LEVEL_LOCKED,%s · Locked,%s · Terkunci
+LEVEL_REQUIRES_PREVIOUS,Clear %s,Selesaikan %s
+LEVEL_REQUIRES_PLANET,Unlock the planet,Buka planet ini
 COIN_BALANCE,%d coins,%d koin
 GAME_BACK,Menu,Menu
 GAME_BACK_LEVELS,Puzzles,Daftar teka-teki
