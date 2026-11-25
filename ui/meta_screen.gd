@@ -194,7 +194,8 @@ func _render_shop_actions() -> void:
 		var free_coins := UI.action(actions, label, true)
 		free_coins.disabled = remaining == 0 or not _ads.can_request_rewarded()
 		free_coins.pressed.connect(_request_coin_ad)
-	UI.button(actions, "IAP_TITLE").pressed.connect(_open_purchases)
+	if _purchases.has_available_products():
+		UI.button(actions, "IAP_TITLE").pressed.connect(_open_purchases)
 	_watch_local_day(today)
 
 
@@ -237,6 +238,8 @@ func _ad_unavailable() -> void:
 
 
 func _open_purchases() -> void:
+	if not _purchases.has_available_products():
+		return
 	_message = ""
 	page = Page.PURCHASES
 	_render()
@@ -244,13 +247,10 @@ func _open_purchases() -> void:
 
 func _render_purchases() -> void:
 	UI.label(self, "IAP_TITLE", 46)
-	var available := false
 	for id: StringName in Purchases.PRODUCTS:
-		var product := UI.button(self, Purchases.PRODUCTS[id])
-		product.disabled = not _purchases.is_product_available(id)
-		available = available or not product.disabled
-		product.pressed.connect(_request_purchase.bind(id))
-	if not available or not _message.is_empty():
+		if _purchases.is_product_available(id):
+			UI.button(self, Purchases.PRODUCTS[id]).pressed.connect(_request_purchase.bind(id))
+	if not _purchases.has_available_products() or not _message.is_empty():
 		UI.label(self, "IAP_UNAVAILABLE", 23, UI.MUTED)
 
 
@@ -301,6 +301,9 @@ func _shop_row(id: String, item: Dictionary, equipped: String, focus: String) ->
 	row.add_child(copy)
 	var preview := UI.button(copy, _costume_title(id))
 	preview.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	for state in ["normal", "hover", "pressed", "hover_pressed"]:
+		preview.add_theme_stylebox_override(state, StyleBoxEmpty.new())
+	preview.add_theme_color_override("font_hover_color", UI.MINT)
 	preview.custom_minimum_size.y = 32
 	preview.add_theme_font_size_override("font_size", 21)
 	preview.pressed.connect(_preview_costume.bind(id))

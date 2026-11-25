@@ -2,6 +2,7 @@ extends Node
 
 signal rewarded_finished(placement: StringName, granted: bool)
 signal interstitial_closed
+signal banner_space_changed
 
 const AdsProvider := preload("res://scripts/ads/ads_provider.gd")
 const FakeAds := preload("res://scripts/ads/fake_ads.gd")
@@ -57,12 +58,14 @@ func set_provider(provider: AdsProvider) -> bool:
 		_provider.rewarded_finished.disconnect(_on_rewarded_finished)
 		_provider.interstitial_closed.disconnect(_on_interstitial_closed)
 		_provider.request_failed.disconnect(_on_request_failed)
+		_provider.banner_space_changed.disconnect(_on_banner_space_changed)
 	_provider = provider
 	if is_node_ready():
 		_connect_provider()
 		if _menu_shown:
 			_provider.game_ready()
 		_sync_platform()
+		banner_space_changed.emit()
 	return true
 
 
@@ -70,6 +73,15 @@ func _connect_provider() -> void:
 	_provider.rewarded_finished.connect(_on_rewarded_finished, CONNECT_DEFERRED)
 	_provider.interstitial_closed.connect(_on_interstitial_closed, CONNECT_DEFERRED)
 	_provider.request_failed.connect(_on_request_failed, CONNECT_DEFERRED)
+	_provider.banner_space_changed.connect(_on_banner_space_changed)
+
+
+func _on_banner_space_changed() -> void:
+	banner_space_changed.emit()
+
+
+func banner_clearance() -> float:
+	return _provider.banner_clearance()
 
 
 func can_request_rewarded() -> bool:

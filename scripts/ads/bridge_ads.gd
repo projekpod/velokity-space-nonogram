@@ -1,5 +1,8 @@
 extends "res://scripts/ads/ads_provider.gd"
 
+# Bridge's largest standard banner is 300×250 CSS pixels.
+const BANNER_CLEARANCE := 258.0
+
 enum Kind { NONE, REWARDED, INTERSTITIAL }
 
 var _advertisement: Object
@@ -8,11 +11,14 @@ var _kind := Kind.NONE
 var _request_id := 0
 var _rewarded := false
 var _abandoned := false
+var _banner_requested := false
+var _banner_state := "hidden"
 
 
 func _init(advertisement: Object, platform: Object) -> void:
 	_advertisement = advertisement
 	_platform = platform
+	_advertisement.banner_state_changed.connect(_on_banner_state)
 	_advertisement.rewarded_state_changed.connect(_on_rewarded)
 	_advertisement.interstitial_state_changed.connect(_on_interstitial)
 
@@ -42,11 +48,24 @@ func request_interstitial(request_id: int) -> void:
 
 
 func set_banner_visible(visible: bool) -> void:
-	if not _advertisement.is_banner_supported:
-		return
-	if visible:
-		_advertisement.show_banner("top")
-	else:
+	_banner_requested = visible and _advertisement.is_banner_supported
+	if _banner_requested:
+		_on_banner_state("loading")
+		_advertisement.show_banner("bottom")
+	elif banner_clearance() > 0.0:
+		_advertisement.hide_banner()
+
+
+func banner_clearance() -> float:
+	return BANNER_CLEARANCE if _banner_state in ["loading", "shown"] else 0.0
+
+
+func _on_banner_state(state: String) -> void:
+	var previous := banner_clearance()
+	_banner_state = state
+	if banner_clearance() != previous:
+		banner_space_changed.emit()
+	if state == "shown" and not _banner_requested:
 		_advertisement.hide_banner()
 
 

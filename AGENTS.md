@@ -29,7 +29,7 @@
 ## Monetization rules (behind Ads/Economy interfaces)
 - Rewarded: continue after all 3 lives are lost (once per puzzle), hint, 2x coins after a level.
 - Interstitial: only from level 10, cooldown >= 90 s, never in the first 2 minutes of a session, only after the win/lose flow has closed.
-- Banner: top of the gameplay screen only. No-Ads/payers (later): no interstitial or banner.
+- Banner: bottom of the gameplay screen only. Keep controls clear of its reserved area in portrait and landscape. No-Ads/payers (later): no interstitial or banner.
 - Web SDK later via the Playgama Bridge Godot 4 plugin. Until then use FakeAds.
 
 ## Quality gates (every PR; run them yourself)

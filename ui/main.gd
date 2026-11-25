@@ -10,16 +10,19 @@ const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
 const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 
-@onready var center: CenterContainer = $Center
+@onready var center: Control = $Center
 @onready var _economy := get_node("/root/Economy")
 @onready var _settings := get_node("/root/Settings")
 @onready var _ads := get_node("/root/Ads")
 
 @onready var _levels: Array[Dictionary] = _economy.levels
 var _column: VBoxContainer
+var _support_button: Button
 
 
 func _ready() -> void:
+	center.resized.connect(_layout_content)
+	_ads.banner_space_changed.connect(_layout_content)
 	if OS.has_feature("web") and OS.has_feature("qa"):
 		if load("res://scripts/qa/web_preview.gd").open(self):
 			return
@@ -49,7 +52,9 @@ func show_menu() -> void:
 	UI.button(_column, "MENU_SETTINGS").pressed.connect(_show_settings)
 	var support := MonetizationConfig.support_url()
 	if not support.is_empty() and _ads.allows_support_link():
-		UI.button(_column, "MENU_SUPPORT").pressed.connect(_open_support.bind(support))
+		_support_button = UI.button(center, "MENU_SUPPORT")
+		_support_button.pressed.connect(_open_support.bind(support))
+		_layout_content()
 	play.grab_focus()
 	_ads.notify_menu_shown()
 
@@ -292,6 +297,10 @@ func _change_toggle(enabled: bool, key: String, toggle: CheckButton, status: Lab
 
 
 func _reset_column(width := 568.0, gap := 14) -> void:
+	if is_instance_valid(_support_button):
+		center.remove_child(_support_button)
+		_support_button.queue_free()
+		_support_button = null
 	if is_instance_valid(_column):
 		center.remove_child(_column)
 		_column.queue_free()
@@ -299,3 +308,25 @@ func _reset_column(width := 568.0, gap := 14) -> void:
 	_column.custom_minimum_size.x = width
 	_column.add_theme_constant_override("separation", gap)
 	center.add_child(_column)
+	_column.minimum_size_changed.connect(_layout_content)
+	_layout_content()
+
+
+func _layout_content() -> void:
+	if not is_instance_valid(_column) or _column.get_parent() != center:
+		return
+	var usable := center.size
+	var clearance: float = _ads.banner_clearance()
+	if clearance > 0.0:
+		var window_height := float(get_window().size.y)
+		if OS.has_feature("web"):
+			window_height = float(JavaScriptBridge.eval("window.innerHeight", true))
+		usable.y = maxf(1.0, usable.y - clearance * center.size.y / maxf(window_height, 1.0))
+	var minimum := _column.get_combined_minimum_size()
+	var fit := minf(1.0, usable.y / maxf(minimum.y, 1.0)) if clearance > 0.0 else 1.0
+	_column.size = minimum
+	_column.position = ((usable - minimum * fit) * 0.5).floor()
+	_column.scale = Vector2.ONE * fit
+	if is_instance_valid(_support_button):
+		_support_button.position = _column.position + Vector2(0, minimum.y + 14)
+		_support_button.size = Vector2(minimum.x, _support_button.get_combined_minimum_size().y)
