@@ -1,7 +1,8 @@
 extends Node
 
 const Daily := preload("res://scripts/daily/calendar.gd")
-const VERSION := 3
+const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const VERSION := 4
 const PATH := "user://save.json"
 
 var data := defaults()
@@ -22,6 +23,7 @@ static func defaults() -> Dictionary:
 		"coins": 0,
 		"daily": Daily.empty_progress(),
 		"nonogram": {},
+		"bonus_clears": 0,
 		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
@@ -44,6 +46,7 @@ static func migrate(raw: Dictionary) -> Dictionary:
 			result.settings.language = ""
 	result.daily = Daily.clean_progress(raw.get("daily"))
 	var progress: Variant = raw.get("nonogram")
+	var badges := 0
 	if version >= 3 and progress is Dictionary:
 		for level_id: Variant in progress:
 			var record: Variant = progress[level_id]
@@ -53,6 +56,12 @@ static func migrate(raw: Dictionary) -> Dictionary:
 			var doubled: Variant = record.get("doubled")
 			if _is_version(reward) and reward > 0 and reward <= 2147483647 and doubled is bool:
 				result.nonogram[level_id] = {"reward": int(reward), "doubled": doubled}
+				if version >= 4 and record.get("flawless") is bool and record.flawless:
+					result.nonogram[level_id].flawless = true
+					badges += 1
+	var bonus_clears: Variant = raw.get("bonus_clears")
+	if version >= 4 and _is_version(bonus_clears) and bonus_clears <= Bonus.unlocked_clears(badges):
+		result.bonus_clears = int(bonus_clears)
 	return result
 
 

@@ -8,6 +8,7 @@ const Board := preload("res://ui/daily_board.gd")
 const UI := preload("res://ui/controls.gd")
 const Portrait := preload("res://ui/mission_art.gd")
 const Mascot := preload("res://ui/mascot.gd")
+const Celebration := preload("res://ui/celebration.gd")
 
 const WEEKDAYS := [&"DAY_MON", &"DAY_TUE", &"DAY_WED", &"DAY_THU", &"DAY_FRI", &"DAY_SAT", &"DAY_SUN"]
 
@@ -24,6 +25,7 @@ var _board: Board
 var _lives: Label
 var _status: Label
 var _portrait: Portrait
+var _celebration: Celebration
 var _streak: Label
 var _slots: Array[PanelContainer] = []
 var _place: Button
@@ -116,6 +118,8 @@ func _start() -> void:
 
 	_retry = UI.button(self, "GAME_RETRY")
 	_retry.pressed.connect(_start)
+	_celebration = Celebration.new()
+	_celebration.attach(self)
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.star_placed.connect(_on_star_placed)
 	_puzzle.finished.connect(_on_finished)
@@ -152,6 +156,7 @@ func _on_finished(won: bool) -> void:
 		return
 	_portrait.mascot.set_idle(Mascot.Face.PROUD)
 	_portrait.mascot.react(Mascot.Reaction.WIN)
+	var previous_level: int = _economy.player_level()
 	if Daily.today() != _day:
 		_status.text = "DAILY_ROLLOVER"
 		_retry.text = "DAILY_OPEN_TODAY"
@@ -160,8 +165,18 @@ func _on_finished(won: bool) -> void:
 		if coins > 0:
 			_status.text = tr("DAILY_WON") % coins
 			_update_calendar()
+			var player_level: int = _economy.player_level()
+			if _save.data.daily.streak % Daily.REWARDS.size() == 0:
+				var detail := tr("CELEBRATION_LEVEL") % player_level if player_level > previous_level else ""
+				_celebration.play(4, "CELEBRATION_STREAK", detail)
+				return
+			if player_level > previous_level:
+				_celebration.play(4, tr("CELEBRATION_LEVEL") % player_level)
+				return
 		else:
 			_status.text = "DAILY_PLAYED" if coins == 0 else "DAILY_SAVE_FAILED"
+	if _puzzle.lives == Puzzle.MAX_LIVES:
+		_celebration.play(3, "CELEBRATION_FLAWLESS")
 
 
 func _update_lives() -> void:
