@@ -73,3 +73,17 @@ DAY_THU,Thursday,Kamis
 DAY_FRI,Friday,Jumat
 DAY_SAT,Saturday,Sabtu
 DAY_SUN,Sunday,Minggu
+QA_MASCOT,Velokity · Expressions,Velokity · Ekspresi
+QA_REACTIONS,Velokity · Reactions,Velokity · Reaksi
+QA_HAPPY,Happy,Senang
+QA_PROUD,Proud,Bangga
+QA_SURPRISED,Surprised,Terkejut
+QA_SAD,Sad,Sedih
+QA_THINKING,Thinking,Berpikir
+QA_SLEEPING,Sleeping,Tidur
+QA_DANCING,Dancing,Menari
+QA_CHEERING,Cheering,Bersorak
+QA_FILL,Fill,Isi sel
+QA_MISTAKE,Mistake,Salah
+QA_COMBO,Combo,Kombo
+QA_WIN,Win,Menang

@@ -1,6 +1,7 @@
 extends RefCounted
 
 signal changed
+signal star_placed(cell: Vector2i)
 signal mistake(cell: Vector2i)
 signal finished(won: bool)
 
@@ -67,5 +68,6 @@ func place(cell: Vector2i, note: bool) -> void:
 	if _placed == size:
 		state = State.WON
 	changed.emit()
+	star_placed.emit(cell)
 	if state == State.WON:
 		finished.emit(true)

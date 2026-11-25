@@ -2,6 +2,7 @@ extends RefCounted
 
 signal cell_changed(cell: Vector2i)
 signal line_completed(is_row: bool, index: int)
+signal correct_fill(cell: Vector2i, completed_lines: int)
 signal mistake(cell: Vector2i)
 signal finished(won: bool)
 
@@ -81,9 +82,11 @@ func mark(cell: Vector2i, crossed: bool) -> void:
 		lives -= 1
 		if lives == 0:
 			state = State.LOST
-	_apply_mark(cell, filled)
+	var completed_lines := _apply_mark(cell, filled)
 	if wrong:
 		mistake.emit(cell)
+	elif filled:
+		correct_fill.emit(cell, completed_lines)
 	if state == State.LOST:
 		finished.emit(false)
 	elif _remaining == 0:
@@ -91,14 +94,13 @@ func mark(cell: Vector2i, crossed: bool) -> void:
 		finished.emit(true)
 
 
-func _apply_mark(cell: Vector2i, filled: bool) -> void:
+func _apply_mark(cell: Vector2i, filled: bool) -> int:
 	if not filled:
 		_set_cell(cell, Cell.CROSSED)
-		return
+		return 0
 	_remaining -= 1
 	_set_cell(cell, Cell.FILLED)
-	_check_line(true, cell.y)
-	_check_line(false, cell.x)
+	return int(_check_line(true, cell.y)) + int(_check_line(false, cell.x))
 
 
 func hint() -> bool:
@@ -149,13 +151,13 @@ func continue_game() -> bool:
 	return true
 
 
-func _check_line(is_row: bool, index: int) -> void:
+func _check_line(is_row: bool, index: int) -> bool:
 	if (rows_done[index] if is_row else columns_done[index]):
-		return
+		return false
 	for offset in range(size):
 		var cell := _line_cell(is_row, index, offset)
 		if _solution[cell.y][cell.x] != "." and at(cell) != Cell.FILLED:
-			return
+			return false
 	if is_row:
 		rows_done[index] = 1
 	else:
@@ -165,6 +167,7 @@ func _check_line(is_row: bool, index: int) -> void:
 		if at(cell) == Cell.UNKNOWN:
 			_set_cell(cell, Cell.CROSSED)
 	line_completed.emit(is_row, index)
+	return true
 
 
 func _set_cell(cell: Vector2i, value: Cell) -> void:

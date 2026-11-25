@@ -6,7 +6,10 @@ const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Board := preload("res://ui/board.gd")
 const UI := preload("res://ui/controls.gd")
 const EconomyRules := preload("res://scripts/autoload/economy.gd")
+const Portrait := preload("res://ui/mission_art.gd")
+const Mascot := preload("res://ui/mascot.gd")
 const BOARD_WIDTH := Board.WIDTH
+const COMBO_LINES := 3
 
 @onready var _economy := get_node("/root/Economy")
 @onready var _events := get_node("/root/Events")
@@ -24,6 +27,8 @@ var _status: Label
 var _feedback: Label
 var _tools: VBoxContainer
 var _result: VBoxContainer
+var _portrait: Portrait
+var _correct_lines := 0
 var _fill: Button
 var _cross: Button
 var _hint: Button
@@ -45,8 +50,18 @@ func _ready() -> void:
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_coins = UI.label(header, "", 25, UI.GOLD)
 
-	UI.label(self, UI.level_title(level), 42)
-	_status = UI.label(self, "GAME_READY", 25, UI.MUTED)
+	var intro := UI.row(self)
+	var text := VBoxContainer.new()
+	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	text.alignment = BoxContainer.ALIGNMENT_CENTER
+	intro.add_child(text)
+	UI.label(text, UI.level_title(level), 42)
+	_status = UI.label(text, "GAME_READY", 23, UI.MUTED)
+	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_portrait = Portrait.new()
+	_portrait.compact = true
+	_portrait.idle_expression = Mascot.Face.THINKING
+	intro.add_child(_portrait)
 	_board = Board.new()
 	_board.puzzle = _puzzle
 	add_child(_board)
@@ -63,6 +78,7 @@ func _ready() -> void:
 	_events.coins_changed.connect(_update_balance)
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
 	_ads.set_gameplay_banner(true)
+	_puzzle.correct_fill.connect(_on_correct_fill)
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.finished.connect(_on_finished)
 	_board.grab_focus()
@@ -135,6 +151,7 @@ func _resume_game() -> void:
 	_result.hide()
 	_tools.show()
 	_ads.set_gameplay_banner(true)
+	_portrait.mascot.set_idle(Mascot.Face.THINKING)
 	_puzzle.continue_game()
 	_update_lives()
 	_board.queue_redraw()
@@ -170,9 +187,17 @@ func _on_rewarded_finished(placement: StringName, granted: bool) -> void:
 
 
 func _on_mistake(_cell: Vector2i) -> void:
+	_correct_lines = 0
+	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
 	_update_lives()
 	_status.text = "GAME_MISTAKE"
 	_settings.vibrate_for_mistake()
+
+
+func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
+	var crossed_threshold := _correct_lines < COMBO_LINES and _correct_lines + completed_lines >= COMBO_LINES
+	_correct_lines += completed_lines
+	_portrait.mascot.react(Mascot.Reaction.COMBO if crossed_threshold else Mascot.Reaction.FILL)
 
 
 func _on_finished(won: bool) -> void:
@@ -180,7 +205,11 @@ func _on_finished(won: bool) -> void:
 	_ads.set_gameplay_banner(false)
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
 	if won:
+		_portrait.mascot.set_idle(Mascot.Face.PROUD)
+		_portrait.mascot.react(Mascot.Reaction.WIN)
 		_win_coins = _economy.award_nonogram(level.id, _puzzle.lives)
+	else:
+		_portrait.mascot.idle_expression = Mascot.Face.SAD
 	_show_result(won)
 
 
