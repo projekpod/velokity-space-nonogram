@@ -35,7 +35,7 @@ func _ready() -> void:
 
 
 func _open_start_screen() -> void:
-	if _save.data.onboarding_complete or _play(0, true) == null:
+	if not _save.needs_onboarding() or _play(0, true) == null:
 		show_menu()
 
 

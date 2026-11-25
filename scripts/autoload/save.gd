@@ -19,6 +19,10 @@ func _ready() -> void:
 	load_game()
 
 
+func needs_onboarding() -> bool:
+	return not data.onboarding_complete and not _future_saves.has(storage_path)
+
+
 static func defaults() -> Dictionary:
 	return {
 		"version": VERSION,

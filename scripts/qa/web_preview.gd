@@ -5,6 +5,8 @@ const SaveScript := preload("res://scripts/autoload/save.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
+const Playthrough := preload("res://scripts/qa/playthrough.gd")
+const StoreArt := preload("res://scripts/qa/store_art.gd")
 const Gallery := preload("res://scripts/qa/mascot_gallery.gd")
 const Mascot := preload("res://ui/mascot.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
@@ -15,10 +17,24 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview"]:
 		return false
-	_seed_progress(main)
+	if route not in ["playthrough", "preview"]:
+		_seed_progress(main)
 	match route:
+		"playthrough", "preview":
+			if route == "playthrough":
+				main._open_start_screen()
+			else:
+				main._play(0)
+			var observer := Playthrough.new()
+			observer.main = main
+			main.add_child(observer)
+		"store-cover", "store-icon":
+			var art := StoreArt.new()
+			art.icon_only = route == "store-icon"
+			main.add_child(art)
+			art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		"menu":
 			main.show_menu()
 		"game", "win":

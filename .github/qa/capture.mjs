@@ -1,25 +1,13 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { chromium } from "playwright";
+import { fixedDate, launch, openGame, watchErrors } from "./browser.mjs";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
 const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration"];
-const screenAttribute = "data-velokity-qa-screen";
-const engineTimeout = 30_000;
-
-const browser = await chromium.launch({
-  channel: "chromium",
-  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
-  headless: true,
-  args: [
-    "--use-gl=angle",
-    "--use-angle=swiftshader",
-    "--enable-unsafe-swiftshader",
-    "--autoplay-policy=no-user-gesture-required",
-  ],
-});
+const browser = await launch();
 
 async function captureBalance(page, screenshot) {
   // Solid gold belongs to the balance text in this band; moving stars are blue.
@@ -45,11 +33,7 @@ async function capture(path, screen = null, withoutBridge = false) {
     locale: "id-ID",
     timezoneId: "Asia/Jakarta",
   });
-  const errors = [];
-  page.on("pageerror", error => errors.push(error.message));
-  page.on("console", message => {
-    if (["error", "warning"].includes(message.type())) errors.push(message.text());
-  });
+  const errors = watchErrors(page);
 
   try {
     if (withoutBridge) {
@@ -58,45 +42,26 @@ async function capture(path, screen = null, withoutBridge = false) {
         body: "",
       }));
     }
-    await page.clock.setFixedTime(new Date("2026-11-25T05:00:00Z"));
-    const [, response] = await Promise.all([
-      page.waitForEvent("console", {
-        predicate: message => message.text().includes("WebGL 2.0"),
-        timeout: engineTimeout,
-      }),
-      page.goto(new URL(path, baseUrl).href),
-    ]);
-    assert(response?.ok(), `Could not load ${path}`);
-    await page.locator("#status").waitFor({ state: "hidden", timeout: engineTimeout });
-    if (screen !== null) {
-      await page.waitForFunction(
-        ({ attribute, screen }) => document.documentElement.getAttribute(attribute) === screen,
-        { attribute: screenAttribute, screen },
-        { timeout: engineTimeout },
-      );
-    }
-    await page.evaluate(() => new Promise(resolve => {
-      requestAnimationFrame(() => requestAnimationFrame(resolve));
-    }));
+    await fixedDate(page);
+    await openGame(page, new URL(path, baseUrl), screen);
     const renderer = await page.locator("canvas").evaluate(canvas => {
       const gl = canvas.getContext("webgl2");
       const info = gl?.getExtension("WEBGL_debug_renderer_info");
       return info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : null;
     });
     assert.match(renderer ?? "", /SwiftShader/i, `${path} must run on SwiftShader WebGL2`);
-    assert.equal(await page.locator("html").getAttribute(screenAttribute), screen);
     const screenshot = await page.locator("canvas").screenshot();
     assert(screenshot.length > 5000, `${path} produced a blank canvas`);
     assert(screenshot.length < 300_000, `${path} exceeds the 300 KB screenshot budget`);
-    // Compare opaque menu controls so the animated mascot and starfield can keep running.
-    const controls = screen === null ? Buffer.concat([
-      await page.screenshot({ clip: { x: 130, y: 791, width: 460, height: 42 } }),
-      await page.screenshot({ clip: { x: 130, y: 1027, width: 460, height: 42 } }),
-    ]) : null;
-    const balance = screen === null || screen === "menu" ? await captureBalance(page, screenshot) : [];
-    if (screen === null || screen === "menu") assert(balance.length > 0, `${path} did not display its balance`);
+    // Opaque tutorial buttons and cells make stable regions while the art animates.
+    const firstPuzzle = screen === null ? createHash("sha256").update(Buffer.concat([
+      await page.screenshot({ clip: { x: 43, y: 253, width: 296, height: 45 } }),
+      await page.screenshot({ clip: { x: 384, y: 253, width: 304, height: 45 } }),
+      await page.screenshot({ clip: { x: 56, y: 410, width: 100, height: 80 } }),
+    ])).digest("hex") : null;
+    if (screen === "menu") assert((await captureBalance(page, screenshot)).length > 0, "QA menu did not display its seeded balance");
     assert.deepEqual(errors, [], `${path} logged browser errors or warnings`);
-    return { screenshot, menu: { controls, balance } };
+    return { screenshot, firstPuzzle };
   } catch (error) {
     throw new Error(`Capture failed for ${path}: ${errors.join("\n")}`, { cause: error });
   } finally {
@@ -108,21 +73,25 @@ try {
   await mkdir(output, { recursive: true });
   const release = await capture("web/index.html");
   const fallback = await capture("web/index.html", null, true);
-  assert.deepEqual(fallback.menu, release.menu, "A missing SDK should still open the normal menu");
+  assert.deepEqual(fallback.firstPuzzle, release.firstPuzzle, "A missing SDK should still open Moon 01");
   const unknown = await capture("web-qa/index.html?qa=unknown");
-  assert.deepEqual(unknown.menu, release.menu, "Unknown QA routes should open the normal menu");
+  assert.deepEqual(unknown.firstPuzzle, release.firstPuzzle, "Unknown QA routes should open Moon 01");
 
   const screenshots = [];
   for (const screen of screens) {
-    const { screenshot, menu } = await capture(`web-qa/index.html?qa=${screen}`, screen);
-    if (screen === "menu") assert.notDeepEqual(menu.balance, release.menu.balance, "QA menu should display its seeded balance");
+    const { screenshot } = await capture(`web-qa/index.html?qa=${screen}`, screen);
     assert(!screenshot.equals(release.screenshot), `QA ${screen} did not render its fixture`);
     assert(!screenshots.some(previous => previous.equals(screenshot)), `Duplicate rendering for QA ${screen}`);
     screenshots.push(screenshot);
     await writeFile(join(output, `${screen}.png`), screenshot);
     const queriedRelease = await capture(`web/index.html?qa=${screen}`);
-    assert.deepEqual(queriedRelease.menu, release.menu, `QA ${screen} changed the release menu`);
+    assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${screen} changed release onboarding`);
     console.log(`Captured ${screen}.png and verified the release ignores ?qa=${screen}`);
+  }
+  for (const route of ["store-icon", "store-cover", "preview", "playthrough"]) {
+    const queriedRelease = await capture(`web/index.html?qa=${route}`);
+    assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${route} changed release onboarding`);
+    console.log(`Verified the release ignores ?qa=${route}`);
   }
 } finally {
   await browser.close();

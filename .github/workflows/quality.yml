@@ -2,7 +2,7 @@ name: Quality gates
 
 on:
   push:
-    branches: [main]
+    branches: [main, "codex/**"]
   pull_request:
 
 permissions:
@@ -111,7 +111,13 @@ jobs:
         run: |
           npm ci
           npx playwright install --with-deps chromium
-      - name: Capture the QA screens and verify release routing
+      - name: Ensure FFmpeg is installed
+        run: |
+          if ! command -v ffmpeg || ! command -v ffprobe; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Verify Web gameplay and capture QA screens, store art, and preview videos
         shell: bash
         run: |
           python3 -m http.server --bind 127.0.0.1 8765 --directory build &
@@ -123,8 +129,16 @@ jobs:
             exit 1
           fi
           node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
+          node .github/qa/release-check.mjs http://127.0.0.1:8765/
+          node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
+          node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
       - uses: actions/upload-artifact@v6
         with:
           name: velokity-qa-screenshots
           path: build/qa-screenshots/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        with:
+          name: velokity-store-videos
+          path: build/store-videos/*.mp4
           if-no-files-found: error
