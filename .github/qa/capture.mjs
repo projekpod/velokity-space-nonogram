@@ -5,7 +5,7 @@ import { chromium } from "playwright";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
-const screens = ["menu", "game", "win", "daily"];
+const screens = ["menu", "game", "win", "daily", "mascot", "reactions"];
 const screenAttribute = "data-velokity-qa-screen";
 const engineTimeout = 30_000;
 
@@ -21,9 +21,26 @@ const browser = await chromium.launch({
   ],
 });
 
+async function captureBalance(page, screenshot) {
+  // Solid gold belongs to the balance text in this band; moving stars are blue.
+  return page.evaluate(async png => {
+    const source = await fetch(`data:image/png;base64,${png}`);
+    const image = await createImageBitmap(await source.blob());
+    const canvas = new OffscreenCanvas(720, 32);
+    const context = canvas.getContext("2d");
+    context.drawImage(image, 0, -800);
+    const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    const gold = [];
+    for (let i = 0; i < pixels.length; i += 4) {
+      if (pixels[i] === 255 && pixels[i + 1] === 207 && pixels[i + 2] === 130) gold.push(i);
+    }
+    return gold;
+  }, screenshot.toString("base64"));
+}
+
 async function capture(path, screen = null) {
   const page = await browser.newPage({
-    viewport: { width: 720, height: 1280 },
+    viewport: screen === "reactions" ? { width: 1280, height: 800 } : { width: 720, height: 1280 },
     deviceScaleFactor: 1,
     locale: "id-ID",
     timezoneId: "Asia/Jakarta",
@@ -64,8 +81,16 @@ async function capture(path, screen = null) {
     assert.equal(await page.locator("html").getAttribute(screenAttribute), screen);
     const screenshot = await page.locator("canvas").screenshot();
     assert(screenshot.length > 5000, `${path} produced a blank canvas`);
+    assert(screenshot.length < 300_000, `${path} exceeds the 300 KB screenshot budget`);
+    // Compare opaque menu controls so the animated mascot and starfield can keep running.
+    const controls = screen === null ? Buffer.concat([
+      await page.screenshot({ clip: { x: 130, y: 858, width: 460, height: 42 } }),
+      await page.screenshot({ clip: { x: 130, y: 937, width: 460, height: 42 } }),
+    ]) : null;
+    const balance = screen === null || screen === "menu" ? await captureBalance(page, screenshot) : [];
+    if (screen === null || screen === "menu") assert(balance.length > 0, `${path} did not display its balance`);
     assert.deepEqual(errors, [], `${path} logged browser errors or warnings`);
-    return screenshot;
+    return { screenshot, menu: { controls, balance } };
   } catch (error) {
     throw new Error(`Capture failed for ${path}: ${errors.join("\n")}`, { cause: error });
   } finally {
@@ -76,16 +101,19 @@ async function capture(path, screen = null) {
 try {
   await mkdir(output, { recursive: true });
   const release = await capture("web/index.html");
-  assert((await capture("web-qa/index.html?qa=unknown")).equals(release), "Unknown QA routes should open the normal menu");
+  const unknown = await capture("web-qa/index.html?qa=unknown");
+  assert.deepEqual(unknown.menu, release.menu, "Unknown QA routes should open the normal menu");
 
   const screenshots = [];
   for (const screen of screens) {
-    const screenshot = await capture(`web-qa/index.html?qa=${screen}`, screen);
-    assert(!screenshot.equals(release), `QA ${screen} did not render its fixture`);
+    const { screenshot, menu } = await capture(`web-qa/index.html?qa=${screen}`, screen);
+    if (screen === "menu") assert.notDeepEqual(menu.balance, release.menu.balance, "QA menu should display its seeded balance");
+    assert(!screenshot.equals(release.screenshot), `QA ${screen} did not render its fixture`);
     assert(!screenshots.some(previous => previous.equals(screenshot)), `Duplicate rendering for QA ${screen}`);
     screenshots.push(screenshot);
     await writeFile(join(output, `${screen}.png`), screenshot);
-    assert((await capture(`web/index.html?qa=${screen}`)).equals(release), `QA ${screen} changed the release menu`);
+    const queriedRelease = await capture(`web/index.html?qa=${screen}`);
+    assert.deepEqual(queriedRelease.menu, release.menu, `QA ${screen} changed the release menu`);
     console.log(`Captured ${screen}.png and verified the release ignores ?qa=${screen}`);
   }
 } finally {

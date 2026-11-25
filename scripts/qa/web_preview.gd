@@ -5,11 +5,12 @@ const SaveScript := preload("res://scripts/autoload/save.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
+const Gallery := preload("res://scripts/qa/mascot_gallery.gd")
 
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions"]:
 		return false
 	_seed_progress(main)
 	match route:
@@ -28,6 +29,8 @@ static func open(main: Main) -> bool:
 			var x := int(daily.solution[0])
 			screen._puzzle.place(Vector2i(x, 0), false)
 			screen._puzzle.place(Vector2i((x + 1) % screen._puzzle.size, 0), true)
+		"mascot", "reactions":
+			Gallery.open(main, route == "reactions")
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
