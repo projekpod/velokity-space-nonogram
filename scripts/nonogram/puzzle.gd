@@ -75,36 +75,60 @@ func mark(cell: Vector2i, crossed: bool) -> void:
 	if at(cell) != Cell.UNKNOWN:
 		return
 	var filled: bool = _solution[cell.y][cell.x] != "."
-	if filled == crossed:
+	var wrong := filled == crossed
+	if wrong:
 		lives -= 1
 		if lives == 0:
 			state = State.LOST
+	_apply_mark(cell, filled)
+	if wrong:
 		mistake.emit(cell)
-		if state == State.LOST:
-			finished.emit(false)
-		return
-	if crossed:
+	if state == State.LOST:
+		finished.emit(false)
+	elif _remaining == 0:
+		state = State.WON
+		finished.emit(true)
+
+
+func _apply_mark(cell: Vector2i, filled: bool) -> void:
+	if not filled:
 		_set_cell(cell, Cell.CROSSED)
 		return
 	_remaining -= 1
 	_set_cell(cell, Cell.FILLED)
 	_check_line(true, cell.y)
 	_check_line(false, cell.x)
-	if _remaining == 0:
-		state = State.WON
-		finished.emit(true)
 
 
 func hint() -> bool:
 	if state != State.PLAYING:
 		return false
-	for y in range(size):
-		for x in range(size):
-			var cell := Vector2i(x, y)
-			if _solution[y][x] != "." and at(cell) == Cell.UNKNOWN:
-				mark(cell, false)
-				return true
-	return false
+	var nearest: Array[Vector2i] = []
+	var fewest := size + 1
+	for is_row: bool in [true, false]:
+		var completed := rows_done if is_row else columns_done
+		for index in range(size):
+			if completed[index]:
+				continue
+			var unknown := 0
+			var first_fill := Vector2i(-1, -1)
+			for offset in range(size):
+				var cell := _line_cell(is_row, index, offset)
+				if at(cell) != Cell.UNKNOWN:
+					continue
+				unknown += 1
+				if first_fill.x < 0 and _solution[cell.y][cell.x] != ".":
+					first_fill = cell
+			if first_fill.x < 0 or unknown > fewest:
+				continue
+			if unknown < fewest:
+				nearest.clear()
+				fewest = unknown
+			nearest.append(first_fill)
+	if nearest.is_empty():
+		return false
+	mark(nearest.pick_random(), false)
+	return true
 
 
 func _check_line(is_row: bool, index: int) -> void:

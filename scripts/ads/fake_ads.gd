@@ -5,12 +5,13 @@ var interstitial_count := 0
 var banner_visible := false
 
 
-func show_rewarded(_placement: StringName) -> bool:
-	return grant_rewards
+func request_rewarded(_placement: StringName, request_id: int) -> void:
+	rewarded_finished.emit.call_deferred(request_id, grant_rewards)
 
 
-func show_interstitial() -> void:
+func request_interstitial(request_id: int) -> void:
 	interstitial_count += 1
+	interstitial_closed.emit.call_deferred(request_id)
 
 
 func set_banner_visible(visible: bool) -> void:

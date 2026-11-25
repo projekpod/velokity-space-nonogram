@@ -90,7 +90,7 @@ func _localized_title(level: Dictionary) -> String:
 
 
 func _play() -> void:
-	_reset_column(608, 14)
+	_reset_column(Board.WIDTH, 14)
 	_puzzle = Puzzle.new(_levels[_level_index])
 	analytics.record(&"puzzle_started")
 

@@ -1,6 +1,12 @@
 extends Control
 
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
+const WIDTH := 696.0
+const EDGE_PADDING := 4.0
+const CLUE_PADDING := 8.0
+const CLUE_FONT_SIZE := 20
+const CLUE_STEP := 24.0
+
 const OUTSIDE := Vector2i(-1, -1)
 const EMPTY_COLOR := Color("#263851")
 const CLUE_COLOR := Color("#d6e4fa")
@@ -16,10 +22,12 @@ var _drag_cross := false
 var _drag_cells: Dictionary = {}
 var _cursor := OUTSIDE
 var _mistake := OUTSIDE
+var _gutter := Vector2.ZERO
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(608, 618)
+	_gutter = Vector2(_clue_depth(puzzle.row_clues), _clue_depth(puzzle.column_clues))
+	update_minimum_size()
 	focus_mode = Control.FOCUS_ALL
 	focus_entered.connect(queue_redraw)
 	focus_exited.connect(queue_redraw)
@@ -31,9 +39,21 @@ func _ready() -> void:
 	puzzle.finished.connect(_redraw_result)
 
 
+func _get_minimum_size() -> Vector2:
+	return Vector2(WIDTH, WIDTH - _gutter.x + _gutter.y)
+
+
+func _clue_depth(lines: Array[PackedInt32Array]) -> float:
+	var longest := 1
+	for line in lines:
+		longest = maxi(longest, line.size())
+	return CLUE_PADDING + longest * CLUE_STEP
+
+
 func _grid() -> Rect2:
-	var edge := minf(size.x, size.y) - 172.0
-	return Rect2(size.x - edge - 12.0, size.y - edge - 12.0, edge, edge)
+	var available := size - _gutter - Vector2.ONE * EDGE_PADDING
+	var edge := maxf(0.0, minf(available.x, available.y))
+	return Rect2(_gutter, Vector2.ONE * edge)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -105,7 +125,7 @@ func drag_to(cell: Vector2i) -> void:
 			continue
 		_drag_cells[_last] = true
 		puzzle.mark(_last, _drag_cross)
-		if puzzle.state != Puzzle.State.PLAYING:
+		if _anchor == OUTSIDE or puzzle.state != Puzzle.State.PLAYING:
 			cancel_drag()
 			break
 
@@ -131,6 +151,7 @@ func _redraw_result(_won: bool) -> void:
 
 
 func _show_mistake(cell: Vector2i) -> void:
+	cancel_drag()
 	_mistake = cell
 	queue_redraw()
 
@@ -158,10 +179,11 @@ func _draw() -> void:
 				draw_rect(Rect2(position_on_board + Vector2.ONE, block - Vector2.ONE * 2.0), Color("#ff8f99"), false, 2.0)
 			if cell == _cursor and has_focus() and puzzle.state == Puzzle.State.PLAYING:
 				draw_rect(Rect2(position_on_board + Vector2.ONE * 2.0, block - Vector2.ONE * 4.0), Color("#f8de9e"), false, 2.0)
-	if puzzle.size == 10:
-		var middle := grid.get_center()
-		draw_line(Vector2(middle.x - 1.0, grid.position.y), Vector2(middle.x - 1.0, grid.end.y), CLUE_COLOR, 2.0)
-		draw_line(Vector2(grid.position.x, middle.y - 1.0), Vector2(grid.end.x, middle.y - 1.0), CLUE_COLOR, 2.0)
+	if puzzle.size >= 10:
+		for separator in range(5, puzzle.size, 5):
+			var offset := edge * separator - 1.0
+			draw_line(Vector2(grid.position.x + offset, grid.position.y), Vector2(grid.position.x + offset, grid.end.y), CLUE_COLOR, 3.0)
+			draw_line(Vector2(grid.position.x, grid.position.y + offset), Vector2(grid.end.x, grid.position.y + offset), CLUE_COLOR, 3.0)
 	for index in range(puzzle.size):
 		_draw_clues(grid.position, edge, index, true, puzzle.row_clues[index], puzzle.rows_done[index] == 1)
 		_draw_clues(grid.position, edge, index, false, puzzle.column_clues[index], puzzle.columns_done[index] == 1)
@@ -177,11 +199,10 @@ func _draw_cross(midpoint: Vector2, radius: float) -> void:
 func _draw_clues(origin: Vector2, edge: float, index: int, is_row: bool, numbers: PackedInt32Array, done: bool) -> void:
 	var values := numbers if not numbers.is_empty() else PackedInt32Array([0])
 	var font := get_theme_default_font()
-	var font_size := clampi(roundi(edge * 0.47), 18, 27)
-	var gap := font_size + 4.0
+	var font_size := CLUE_FONT_SIZE
 	var color := DONE_COLOR if done else CLUE_COLOR
 	for i in range(values.size()):
-		var distance := (values.size() - i - 0.5) * gap + 6.0
+		var distance := (values.size() - i - 0.5) * CLUE_STEP + CLUE_PADDING
 		var line_center := (index + 0.5) * edge
 		var center := origin + (Vector2(-distance, line_center) if is_row else Vector2(line_center, -distance))
 		var number := str(values[i])

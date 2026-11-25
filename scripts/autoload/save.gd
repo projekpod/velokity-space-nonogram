@@ -6,11 +6,12 @@ const PATH := "user://save.json"
 
 var data := defaults()
 var storage_path := PATH
-var _startup_error := OK
+var _future_saves: Dictionary = {}
+var _corrupt_saves: Dictionary = {}
 
 
 func _ready() -> void:
-	_startup_error = load_game(storage_path)
+	load_game()
 
 
 static func defaults() -> Dictionary:
@@ -24,7 +25,7 @@ static func defaults() -> Dictionary:
 
 static func migrate(raw: Dictionary) -> Dictionary:
 	var version: Variant = raw.get("version", 0)
-	if not (version is int or version is float) or version < 0 or version > VERSION or version != floor(version):
+	if not _is_version(version) or version > VERSION:
 		return {}
 	var result := defaults()
 	var coins: Variant = raw.get("coins", 0)
@@ -42,24 +43,64 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	return result
 
 
-func load_game(path := PATH) -> Error:
+static func _is_version(version: Variant) -> bool:
+	return (version is int or version is float) and is_finite(version) and version >= 0 and version == floor(version)
+
+
+func load_game(path := "") -> Error:
+	if path.is_empty():
+		path = storage_path
 	if not FileAccess.file_exists(path):
+		data = defaults()
+		_future_saves.erase(path)
+		_corrupt_saves.erase(path)
 		return OK
-	var raw: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-	if not raw is Dictionary:
-		return ERR_FILE_CORRUPT
-	var migrated := migrate(raw)
-	if migrated.is_empty():
-		return ERR_INVALID_DATA
-	data = migrated
-	return OK
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return FileAccess.get_open_error()
+	var json := JSON.new()
+	var parsed := json.parse(file.get_as_text())
+	file.close()
+	_future_saves.erase(path)
+	_corrupt_saves.erase(path)
+	if parsed == OK and json.data is Dictionary:
+		var version: Variant = json.data.get("version", 0)
+		if _is_version(version):
+			if version > VERSION:
+				_future_saves[path] = true
+				return ERR_FILE_UNRECOGNIZED
+			data = migrate(json.data)
+			return OK
+	data = defaults()
+	_corrupt_saves[path] = true
+	return _archive_corrupt(path)
+
+
+func _archive_corrupt(path: String) -> Error:
+	if not FileAccess.file_exists(path):
+		_corrupt_saves.erase(path)
+		return OK
+	var prefix := "%s.corrupt-%d" % [path.get_basename(), int(Time.get_unix_time_from_system())]
+	var archive := prefix + ".json"
+	var suffix := 1
+	while FileAccess.file_exists(archive) or DirAccess.dir_exists_absolute(archive):
+		archive = "%s-%d.json" % [prefix, suffix]
+		suffix += 1
+	var error := DirAccess.rename_absolute(path, archive)
+	if error == OK:
+		_corrupt_saves.erase(path)
+	return error
 
 
 func write_game(snapshot: Dictionary, path := "") -> Error:
 	if path.is_empty():
-		if _startup_error != OK:
-			return _startup_error
 		path = storage_path
+	if _future_saves.has(path):
+		return ERR_FILE_UNRECOGNIZED
+	if _corrupt_saves.has(path):
+		var error := _archive_corrupt(path)
+		if error != OK:
+			return error
 	var staged := path + ".tmp"
 	var file := FileAccess.open(staged, FileAccess.WRITE)
 	if file == null:
