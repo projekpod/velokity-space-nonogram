@@ -1,0 +1,27 @@
+{
+  "id": "saturn-12-signal",
+  "size": 10,
+  "solution": [
+    "......c...",
+    ".....ccc..",
+    "....ccccc.",
+    ".....ccc..",
+    "......c...",
+    "..........",
+    "..bbbb....",
+    ".bbbbbb...",
+    "bbbbbbbb..",
+    "bbbbbbbbbb"
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Signal",
+    "id": "Sinyal"
+  }
+}

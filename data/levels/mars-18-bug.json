@@ -1,0 +1,25 @@
+{
+  "id": "mars-18-bug",
+  "size": 8,
+  "solution": [
+    ".c....c.",
+    "..c..c..",
+    "..cccc..",
+    ".ccddcc.",
+    "cccccccc",
+    ".cccccc.",
+    ".c.cc.c.",
+    ".c....c."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Robot Bug",
+    "id": "Robot Kumbang"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mars-02-dunes",
+  "size": 8,
+  "solution": [
+    ".......b",
+    "......bb",
+    ".....bbb",
+    "...bbbbb",
+    ".bbbbbbb",
+    "bbbbbbbb",
+    ".aaaaaa.",
+    "..aaaa.."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Dunes",
+    "id": "Bukit Pasir"
+  }
+}

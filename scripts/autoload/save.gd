@@ -4,10 +4,12 @@ const VERSION := 1
 const PATH := "user://save.json"
 
 var data := defaults()
+var storage_path := PATH
+var _startup_error := OK
 
 
 func _ready() -> void:
-	load_game()
+	_startup_error = load_game(storage_path)
 
 
 static func defaults() -> Dictionary:
@@ -50,7 +52,11 @@ func load_game(path := PATH) -> Error:
 	return OK
 
 
-func write_game(snapshot: Dictionary, path := PATH) -> Error:
+func write_game(snapshot: Dictionary, path := "") -> Error:
+	if path.is_empty():
+		if _startup_error != OK:
+			return _startup_error
+		path = storage_path
 	var staged := path + ".tmp"
 	var file := FileAccess.open(staged, FileAccess.WRITE)
 	if file == null:

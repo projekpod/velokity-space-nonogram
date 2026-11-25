@@ -1,0 +1,22 @@
+{
+  "id": "moon-06-crescent",
+  "size": 5,
+  "solution": [
+    "..c..",
+    ".cc..",
+    ".cc..",
+    ".ccc.",
+    "..ccc"
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Crescent",
+    "id": "Bulan Sabit"
+  }
+}

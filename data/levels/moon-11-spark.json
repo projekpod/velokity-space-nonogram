@@ -1,0 +1,22 @@
+{
+  "id": "moon-11-spark",
+  "size": 5,
+  "solution": [
+    "..c..",
+    "..c..",
+    "ccccc",
+    ".ccc.",
+    ".c.c."
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Spark",
+    "id": "Pijar"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mars-11-drill",
+  "size": 8,
+  "solution": [
+    "..cccc..",
+    ".cccccc.",
+    ".ccddcc.",
+    "aaaaaaaa",
+    ".bbbbbb.",
+    "..bbbb..",
+    "...bb...",
+    "...b...."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Drill",
+    "id": "Bor"
+  }
+}

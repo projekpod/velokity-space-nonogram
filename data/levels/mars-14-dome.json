@@ -1,0 +1,25 @@
+{
+  "id": "mars-14-dome",
+  "size": 8,
+  "solution": [
+    "........",
+    "...bb...",
+    "..bbbb..",
+    ".bbbbbb.",
+    "bbbbbbbb",
+    "bbbbbbbb",
+    "aaaaaaaa",
+    ".aaaaaa."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Habitat",
+    "id": "Habitat"
+  }
+}

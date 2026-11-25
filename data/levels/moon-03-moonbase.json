@@ -1,0 +1,22 @@
+{
+  "id": "moon-03-moonbase",
+  "size": 5,
+  "solution": [
+    "..b..",
+    "..b..",
+    ".abba",
+    "abbbb",
+    "aaaaa"
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Moonbase",
+    "id": "Pangkalan Bulan"
+  }
+}

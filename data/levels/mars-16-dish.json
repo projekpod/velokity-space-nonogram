@@ -1,0 +1,25 @@
+{
+  "id": "mars-16-dish",
+  "size": 8,
+  "solution": [
+    "......aa",
+    ".....aaa",
+    "....aaa.",
+    "...aaa..",
+    "..aaa...",
+    ".aaa....",
+    "...a....",
+    ".aaaaa.."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Radio Dish",
+    "id": "Antena Parabola"
+  }
+}

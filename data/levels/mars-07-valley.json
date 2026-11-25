@@ -1,0 +1,25 @@
+{
+  "id": "mars-07-valley",
+  "size": 8,
+  "solution": [
+    "a......a",
+    "aa....aa",
+    "aaa..aaa",
+    "aaaaaaaa",
+    ".bbbbbb.",
+    "..bbbb..",
+    "...bb...",
+    "........"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Valley",
+    "id": "Lembah"
+  }
+}

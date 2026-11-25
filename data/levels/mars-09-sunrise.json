@@ -1,0 +1,25 @@
+{
+  "id": "mars-09-sunrise",
+  "size": 8,
+  "solution": [
+    "...bb...",
+    "..bbbb..",
+    ".bbbbbb.",
+    ".bbbbbb.",
+    "aaaaaaaa",
+    ".a.a.a..",
+    "..a.a.a.",
+    "........"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Sunrise",
+    "id": "Matahari Terbit"
+  }
+}

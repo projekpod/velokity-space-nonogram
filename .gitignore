@@ -1,5 +1,6 @@
 .godot/
-build/
+/build/*
+!/build/.gdignore
 __pycache__/
 *.keystore
 

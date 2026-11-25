@@ -1,0 +1,27 @@
+{
+  "id": "saturn-02-observatory",
+  "size": 10,
+  "solution": [
+    "..........",
+    "....dd....",
+    "...dddd...",
+    "..dddddd..",
+    ".dddddddd.",
+    "dddddddddd",
+    ".bbbbbbbb.",
+    ".bbb..bbb.",
+    ".bbbbbbbb.",
+    "bbbbbbbbbb"
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Observatory",
+    "id": "Observatorium"
+  }
+}

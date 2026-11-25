@@ -1,0 +1,27 @@
+{
+  "id": "saturn-13-helmet",
+  "size": 10,
+  "solution": [
+    "...bbbb...",
+    "..bbbbbb..",
+    ".bbbbbbbb.",
+    "bbbbbbbbbb",
+    "bbccccccbb",
+    "bbccccccbb",
+    "bbccccccbb",
+    ".bbbbbbbb.",
+    "..bbbbbb..",
+    "...bbbb..."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Ring Helmet",
+    "id": "Helm Cincin"
+  }
+}

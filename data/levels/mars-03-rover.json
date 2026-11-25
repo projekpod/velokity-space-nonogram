@@ -1,0 +1,25 @@
+{
+  "id": "mars-03-rover",
+  "size": 8,
+  "solution": [
+    "...c....",
+    "...c....",
+    "..cccc..",
+    ".cccccc.",
+    "aaaaaaaa",
+    "aaaaaaaa",
+    ".a.aa.a.",
+    ".a....a."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Mars Rover",
+    "id": "Penjelajah Mars"
+  }
+}

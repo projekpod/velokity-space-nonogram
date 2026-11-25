@@ -1,0 +1,25 @@
+{
+  "id": "mars-08-cactus",
+  "size": 8,
+  "solution": [
+    "...c....",
+    ".ccc....",
+    ".ccc.c..",
+    "..cccc..",
+    "...cc...",
+    "...cc...",
+    "..cccc..",
+    "aaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Cactus",
+    "id": "Kaktus"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mars-06-hangar",
+  "size": 8,
+  "solution": [
+    "...a....",
+    "..aaa...",
+    ".aaaaa..",
+    "aaaaaaaa",
+    "aaddddaa",
+    "aaddddaa",
+    "aaddddaa",
+    "aaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Hangar",
+    "id": "Hanggar"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "moon-02-crater",
+  "size": 5,
+  "solution": [
+    ".aaa.",
+    "aaaaa",
+    "aa.aa",
+    ".aaa.",
+    "..a.."
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Crater",
+    "id": "Kawah"
+  }
+}

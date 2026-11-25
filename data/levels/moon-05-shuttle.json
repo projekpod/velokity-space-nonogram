@@ -1,0 +1,22 @@
+{
+  "id": "moon-05-shuttle",
+  "size": 5,
+  "solution": [
+    "..a..",
+    ".aaa.",
+    ".aba.",
+    ".a.a.",
+    "c...c"
+  ],
+  "palette": {
+    "a": "#75e4df",
+    "b": "#6596ef",
+    "c": "#fff1a8",
+    "d": "#f58eaa"
+  },
+  "planet": "moon",
+  "title": {
+    "en": "Shuttle",
+    "id": "Pesawat Ulang Alik"
+  }
+}

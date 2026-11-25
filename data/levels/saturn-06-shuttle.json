@@ -1,0 +1,27 @@
+{
+  "id": "saturn-06-shuttle",
+  "size": 10,
+  "solution": [
+    "....bb....",
+    "...bbbb...",
+    "...bbbb...",
+    "..bbddbb..",
+    "..bbddbb..",
+    ".bbbbbbbb.",
+    "bbbbbbbbbb",
+    "bbb.bb.bbb",
+    ".a..aa..a.",
+    "....aa...."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Ring Shuttle",
+    "id": "Pesawat Cincin"
+  }
+}

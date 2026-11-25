@@ -1,0 +1,25 @@
+{
+  "id": "mars-05-flame",
+  "size": 8,
+  "solution": [
+    "....b...",
+    "...bb...",
+    "...bbb..",
+    "..bbbbb.",
+    ".bbbbbbb",
+    "bbbbabbb",
+    ".bbaaab.",
+    "..bbbb.."
+  ],
+  "palette": {
+    "a": "#ff9c7a",
+    "b": "#ffd275",
+    "c": "#bd6cef",
+    "d": "#fff3dd"
+  },
+  "planet": "mars",
+  "title": {
+    "en": "Flame",
+    "id": "Nyala Api"
+  }
+}

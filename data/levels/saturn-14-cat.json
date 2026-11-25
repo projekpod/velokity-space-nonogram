@@ -1,0 +1,27 @@
+{
+  "id": "saturn-14-cat",
+  "size": 10,
+  "solution": [
+    "b........b",
+    "bb......bb",
+    "bbb....bbb",
+    "bbbbbbbbbb",
+    "bbbbbbbbbb",
+    "bbbdbbdbbb",
+    "bbbbbbbbbb",
+    ".bbbddbbb.",
+    "..bbbbbb..",
+    "...bbbb..."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Orbit Cat",
+    "id": "Kucing Orbit"
+  }
+}

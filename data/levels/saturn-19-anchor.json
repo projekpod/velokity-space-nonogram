@@ -1,0 +1,27 @@
+{
+  "id": "saturn-19-anchor",
+  "size": 10,
+  "solution": [
+    "....bb....",
+    "...bbbb...",
+    "...b..b...",
+    "...bbbb...",
+    "....bb....",
+    "..bbbbbb..",
+    "b...bb...b",
+    "bb..bb..bb",
+    ".bbbbbbbb.",
+    "..bbbbbb.."
+  ],
+  "palette": {
+    "a": "#ffd27b",
+    "b": "#b492fa",
+    "c": "#79e3d5",
+    "d": "#fff1e2"
+  },
+  "planet": "saturn",
+  "title": {
+    "en": "Anchor",
+    "id": "Jangkar"
+  }
+}
