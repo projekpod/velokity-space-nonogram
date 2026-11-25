@@ -6,6 +6,8 @@ signal rewarded_finished(request_id: int, granted: bool)
 signal interstitial_closed(request_id: int)
 @warning_ignore("unused_signal")
 signal request_failed(request_id: int)
+@warning_ignore("unused_signal")
+signal banner_space_changed
 
 
 func request_rewarded(_placement: StringName, request_id: int) -> void:
@@ -18,6 +20,10 @@ func request_interstitial(request_id: int) -> void:
 
 func set_banner_visible(_visible: bool) -> void:
 	pass
+
+
+func banner_clearance() -> float:
+	return 0.0
 
 
 func can_request_rewarded() -> bool:

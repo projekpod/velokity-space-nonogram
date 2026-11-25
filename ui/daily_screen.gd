@@ -16,6 +16,7 @@ const WEEKDAYS := [&"DAY_MON", &"DAY_TUE", &"DAY_WED", &"DAY_THU", &"DAY_FRI", &
 @onready var _economy := get_node("/root/Economy")
 @onready var _analytics := get_node("/root/Analytics")
 @onready var _settings := get_node("/root/Settings")
+@onready var _audio := get_node("/root/Audio")
 @onready var _ads := get_node("/root/Ads")
 
 var _day: int
@@ -123,6 +124,7 @@ func _start() -> void:
 	_celebration.attach(self)
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.star_placed.connect(_on_star_placed)
+	_puzzle.note_changed.connect(_audio.play_effect.bind(&"cross"))
 	_puzzle.finished.connect(_on_finished)
 	_board.grab_focus()
 
@@ -135,6 +137,7 @@ func _choose_mode(note: bool) -> void:
 
 
 func _on_mistake(_cell: Vector2i) -> void:
+	_audio.play_effect(&"mistake")
 	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
 	_update_lives()
 	_status.text = "GAME_MISTAKE"
@@ -142,6 +145,7 @@ func _on_mistake(_cell: Vector2i) -> void:
 
 
 func _on_star_placed(_cell: Vector2i) -> void:
+	_audio.play_effect(&"fill")
 	_portrait.mascot.react(Mascot.Reaction.FILL)
 
 
@@ -155,6 +159,7 @@ func _on_finished(won: bool) -> void:
 		_portrait.mascot.idle_expression = Mascot.Face.SAD
 		_status.text = "GAME_LOST"
 		return
+	_audio.play_effect(&"win")
 	_portrait.mascot.set_idle(Mascot.Face.PROUD)
 	_portrait.mascot.react(Mascot.Reaction.WIN)
 	var previous_level: int = _economy.player_level()

@@ -57,6 +57,8 @@ func play_combo(theme: int, lines: int) -> void:
 func play(new_tier: int, title: String, detail := "") -> void:
 	dismiss()
 	tier = new_tier
+	if tier >= 2:
+		get_node("/root/Audio").play_effect(&"combo" if tier == 2 else &"celebration")
 	_calm = _settings.get_value("calm_mode")
 	_duration = CALM_SECONDS[tier] if _calm else SECONDS[tier]
 	_elapsed = 0.0

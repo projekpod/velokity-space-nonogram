@@ -61,6 +61,7 @@ func _run() -> void:
 	await _test_fake_ads()
 	await _test_ads_recovery()
 	await _test_bridge_ads()
+	await _test_banner_clearance()
 	_test_support_config()
 	_test_free_coin_quota()
 	await _test_shop_monetization()
@@ -72,6 +73,7 @@ func _run() -> void:
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
+	await _test_audio_smoke()
 	var locale := TranslationServer.get_locale()
 	TranslationServer.set_locale("id")
 	check(TranslationServer.translate("MENU_PLAY") == "Main nonogram", "Indonesian translation")
@@ -1052,6 +1054,7 @@ func _test_meta_menu() -> void:
 
 
 class TestPortalAds extends RefCounted:
+	signal banner_state_changed(state: String)
 	signal rewarded_state_changed(state: String)
 	signal interstitial_state_changed(state: String)
 
@@ -1060,6 +1063,7 @@ class TestPortalAds extends RefCounted:
 	var is_banner_supported := true
 	var requests: Array[String] = []
 	var banners: Array[String] = []
+	var hide_immediately := true
 
 	func show_rewarded(placement: String) -> void:
 		requests.append(placement)
@@ -1069,9 +1073,12 @@ class TestPortalAds extends RefCounted:
 
 	func show_banner(position: String) -> void:
 		banners.append(position)
+		banner_state_changed.emit("shown")
 
 	func hide_banner() -> void:
 		banners.append("hidden")
+		if hide_immediately:
+			banner_state_changed.emit("hidden")
 
 
 class TestPortal extends RefCounted:
@@ -1096,7 +1103,7 @@ func _test_bridge_ads() -> void:
 	ads.notify_menu_shown()
 	ads.notify_menu_shown()
 	ads.set_gameplay_active(true)
-	check(platform.messages == ["game_ready", "gameplay_started"] and portal_ads.banners == ["top"], "Report readiness once and start gameplay with a top banner")
+	check(platform.messages == ["game_ready", "gameplay_started"] and portal_ads.banners == ["bottom"], "Report readiness once and start gameplay with a bottom banner")
 	var results: Array[Array] = []
 	ads.rewarded_finished.connect(func(placement: StringName, granted: bool) -> void:
 		results.append([placement, granted])
@@ -1111,7 +1118,7 @@ func _test_bridge_ads() -> void:
 	portal_ads.rewarded_state_changed.emit("closed")
 	await process_frame
 	check(not paused and not AudioServer.is_bus_mute(0) and results == [[AdsScript.FREE_COINS, true]], "Bridge close fulfills the granted placement exactly once")
-	check(platform.messages.back() == "gameplay_started" and portal_ads.banners.back() == "top", "Resume the active puzzle and restore its banner")
+	check(platform.messages.back() == "gameplay_started" and portal_ads.banners.back() == "bottom", "Resume the active puzzle and restore its banner")
 	check(ads.request_rewarded(&"hint"), "Accept a second rewarded ad")
 	portal_ads.rewarded_state_changed.emit("closed")
 	await process_frame
@@ -1159,7 +1166,7 @@ func _test_bridge_ads() -> void:
 func _test_support_config() -> void:
 	var path := "user://test-support-%d.cfg" % OS.get_process_id()
 	var config := ConfigFile.new()
-	check(MonetizationConfig.support_url().is_empty(), "The shipped support URL is unset by default")
+	check(MonetizationConfig.support_url() == "https://trakteer.id/velokity_project", "The shipped support URL points to Velokity on Trakteer")
 	for invalid in ["", "http://example.test", "https://", "https://?go=example.test", "https://portal.test@example.test", "https://example.test/test path"]:
 		config.set_value("support", "url", invalid)
 		config.save(path)
@@ -1223,10 +1230,11 @@ func _test_shop_monetization() -> void:
 	check(economy.balance() == 0 and screen._coin_reward_day == Daily.today(), "A granted ad is retained for save retry")
 	save.storage_path = path
 	check(_press_button(screen, "SAVE_RETRY") and economy.balance() == 25, "Retry the save with no second ad")
-	check(_press_button(screen, "IAP_TITLE") and screen.page == MetaScreen.Page.PURCHASES, "Shop opens the purchase options")
-	var items := screen.find_children("*", "Button", true, false)
-	for title: String in Purchases.PRODUCTS.values():
-		check(items.any(func(button: Button) -> bool: return button.text == title and button.disabled), "IAP product is disabled by its stub")
+	check(not _press_button(screen, "IAP_TITLE") and screen.page == MetaScreen.Page.SHOP, "Hide the IAP entry when no product is available")
+	screen._open_purchases()
+	check(screen.page == MetaScreen.Page.SHOP, "An unavailable purchase page cannot be opened directly")
+	var preview := screen.find_children("*", "Button", true, false).filter(func(button: Button) -> bool: return button.text == "COSTUME_MINT_VISOR")
+	check(preview.size() == 1 and preview[0].get_theme_stylebox("normal") is StyleBoxEmpty, "Costume names have no input-like background")
 	check(not Purchases.new().request_purchase(&"no_ads"), "The IAP stub cannot start a purchase")
 	main.queue_free()
 	await process_frame
@@ -1234,3 +1242,108 @@ func _test_shop_monetization() -> void:
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path
+
+
+
+func _test_banner_clearance() -> void:
+	var ads := root.get_node("Ads")
+	var prior_provider: RefCounted = ads._provider
+	var portal_ads := TestPortalAds.new()
+	var platform := TestPortal.new()
+	portal_ads.hide_immediately = false
+	ads.set_provider(BridgeAds.new(portal_ads, platform))
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	await process_frame
+	check(main.find_children("*", "Button", true, false).any(func(button: Button) -> bool: return button.text == "MENU_SUPPORT"), "A standalone Bridge menu shows the configured support button")
+	platform.id = "playgama"
+	main.show_menu()
+	check(not main.find_children("*", "Button", true, false).any(func(button: Button) -> bool: return button.text == "MENU_SUPPORT"), "A portal menu hides the support button")
+	main._play(0)
+	for viewport_size: Vector2 in [Vector2(720, 1280), Vector2(1800, 1280)]:
+		main.center.size = viewport_size
+		main._layout_content()
+		await process_frame
+		var column: VBoxContainer = main._column
+		var clearance: float = BridgeAds.BANNER_CLEARANCE * main.center.size.y / root.size.y
+		var bottom := column.position.y + column.size.y * column.scale.y
+		check(bottom <= maxf(1.0, main.center.size.y - clearance) + 0.01, "Banner reserve keeps all controls above the bottom strip after resize")
+		check(absf(column.position.x + column.size.x * column.scale.x * 0.5 - main.center.size.x * 0.5) <= 1.0, "The adjusted board remains horizontally centered")
+	ads.set_gameplay_active(false)
+	check(ads.banner_clearance() > 0, "Keep the strip reserved until the asynchronous banner hide finishes")
+	portal_ads.banner_state_changed.emit("hidden")
+	check(ads.banner_clearance() == 0.0, "Release the strip once the SDK reports it hidden")
+	main.queue_free()
+	await process_frame
+	ads.set_provider(prior_provider)
+
+
+func _test_audio_smoke() -> void:
+	var audio := root.get_node("Audio")
+	var ads := root.get_node("Ads")
+	var save := root.get_node("Save")
+	var events := root.get_node("Events")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-audio-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	events.settings_changed.emit()
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var music: AudioStreamPlayer = audio._music
+	var music_bus := AudioServer.get_bus_index("Music")
+	var sfx_bus := AudioServer.get_bus_index("SFX")
+	check(audio._effects.size() == 9, "Import all nine procedural effects")
+	for player: AudioStreamPlayer in audio._effects.values():
+		check(player.stream is AudioStreamWAV and player.stream.get_length() > 0 and player.stream.get_length() <= 1.05 and player.stream.loop_mode == AudioStreamWAV.LOOP_DISABLED, "A short effect imports as a nonlooping WAV")
+	for track: AudioStreamWAV in [audio._menu_music, audio._puzzle_music]:
+		check(track.loop_mode == AudioStreamWAV.LOOP_FORWARD and track.loop_begin == 0 and track.loop_end >= track.data.size() / 2.0 - 1.0, "A music WAV loops over its complete sample range")
+		check(track.get_length() >= 9.0 and track.get_length() <= 12.0, "Music loops are short")
+	check(music.playback_type == AudioServer.PLAYBACK_TYPE_STREAM, "Music loops in the mixer without browser callback gaps")
+	check(not music.playing, "Music is silent before the first real input")
+	audio._input(InputEventMouseMotion.new())
+	audio._input(InputEventMouseButton.new())
+	check(not music.playing, "Mouse motion and release do not start music")
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	audio._input(click)
+	check(music.playing and music.stream == audio._menu_music, "A pressed input starts the menu loop")
+	var screen = main._play(0)
+	check(music.playing and music.stream == audio._puzzle_music, "Opening a puzzle switches to the puzzle loop")
+	screen._puzzle.mark(Vector2i(0, 0), true)
+	check(audio._effects[&"cross"].playing, "Manually crossing a cell triggers the cross effect")
+	var before := AudioServer.get_bus_volume_db(music_bus)
+	save.data.settings.calm_mode = true
+	events.settings_changed.emit()
+	check(AudioServer.get_bus_volume_db(music_bus) < before, "Calm Mode lowers the music gain")
+	save.data.settings.sound = false
+	events.settings_changed.emit()
+	check(AudioServer.is_bus_mute(sfx_bus) and music.playing, "Sound off mutes only effects")
+	save.data.settings.music = false
+	events.settings_changed.emit()
+	check(AudioServer.is_bus_mute(music_bus) and not music.playing, "Music off stops the current loop")
+	save.data.settings.music = true
+	save.data.settings.sound = true
+	events.settings_changed.emit()
+	check(music.playing and not AudioServer.is_bus_mute(sfx_bus), "Settings can reenable each audio bus")
+	check(ads.request_rewarded(&"hint") and paused and AudioServer.is_bus_mute(0) and music.stream_paused, "Ads mute Master and halt music")
+	await ads.rewarded_finished
+	check(music.playing and not music.stream_paused and not AudioServer.is_bus_mute(0), "Ad completion resumes the loop and restores Master")
+	main.show_menu()
+	check(music.stream == audio._menu_music, "Returning to the menu switches tracks")
+	root.get_node("Economy").earn(1)
+	check(audio._effects[&"coin"].playing, "Saving an earned coin plays its cue")
+	audio._input_received = false
+	audio.set_process_input(true)
+	for player: AudioStreamPlayer in audio._effects.values():
+		player.stop()
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+	events.settings_changed.emit()
+	# Allow the audio mixer to release stopped WAV playback objects.
+	await create_timer(0.12).timeout

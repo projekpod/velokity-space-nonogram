@@ -18,6 +18,7 @@ const BOARD_WIDTH := Board.WIDTH
 @onready var _events := get_node("/root/Events")
 @onready var _settings := get_node("/root/Settings")
 @onready var _analytics := get_node("/root/Analytics")
+@onready var _audio := get_node("/root/Audio")
 @onready var _ads := get_node("/root/Ads")
 
 var level: Dictionary
@@ -93,6 +94,7 @@ func _ready() -> void:
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
 	_ads.set_gameplay_active(true, bonus_index < 0)
 	_puzzle.correct_fill.connect(_on_correct_fill)
+	_puzzle.correct_cross.connect(_audio.play_effect.bind(&"cross"))
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.finished.connect(_on_finished)
 	_board.grab_focus()
@@ -203,6 +205,7 @@ func _on_rewarded_finished(placement: StringName, granted: bool) -> void:
 
 
 func _on_mistake(_cell: Vector2i) -> void:
+	_audio.play_effect(&"mistake")
 	_correct_lines = 0
 	_combo_theme = -1
 	_celebration.dismiss()
@@ -223,6 +226,7 @@ func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
 		_celebration.play_combo(_combo_theme, _correct_lines)
 		_portrait.mascot.react(Mascot.Reaction.COMBO)
 	else:
+		_audio.play_effect(&"line" if completed_lines > 0 else &"fill")
 		_portrait.mascot.react(Mascot.Reaction.FILL)
 
 
@@ -231,6 +235,7 @@ func _on_finished(won: bool) -> void:
 	_ads.set_gameplay_active(false)
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
 	if won:
+		_audio.play_effect(&"win")
 		_portrait.mascot.set_idle(Mascot.Face.PROUD)
 		_portrait.mascot.react(Mascot.Reaction.WIN)
 		_record_win()

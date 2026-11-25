@@ -4,3 +4,6 @@ extends Node
 signal settings_changed
 @warning_ignore("unused_signal")
 signal coins_changed(balance: int)
+
+@warning_ignore("unused_signal")
+signal coins_earned

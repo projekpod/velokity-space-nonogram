@@ -250,7 +250,10 @@ func _set_balance(value: int) -> bool:
 
 
 func _commit(snapshot: Dictionary) -> bool:
+	var earned: bool = snapshot.coins > balance()
 	if _save.write_game(snapshot) != OK:
 		return false
 	_events.coins_changed.emit(snapshot.coins)
+	if earned:
+		_events.coins_earned.emit()
 	return true

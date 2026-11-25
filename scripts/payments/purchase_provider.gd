@@ -7,6 +7,13 @@ const PRODUCTS := {
 }
 
 
+func has_available_products() -> bool:
+	for product: StringName in PRODUCTS:
+		if is_product_available(product):
+			return true
+	return false
+
+
 func is_product_available(_product: StringName) -> bool:
 	return false
 

@@ -41,7 +41,12 @@ static func button(parent: Control, key: String, primary := false) -> Button:
 	button.add_theme_font_size_override("font_size", 25)
 	style_button(button, primary)
 	parent.add_child(button)
+	wire_button_sound(button)
 	return button
+
+
+static func wire_button_sound(button: BaseButton) -> void:
+	button.pressed.connect(button.get_node("/root/Audio").play_effect.bind(&"button"))
 
 
 static func style_button(button: Button, primary: bool) -> void:

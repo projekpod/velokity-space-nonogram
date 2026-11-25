@@ -2,6 +2,7 @@ extends RefCounted
 
 signal changed
 signal star_placed(cell: Vector2i)
+signal note_changed
 signal mistake(cell: Vector2i)
 signal finished(won: bool)
 
@@ -51,6 +52,7 @@ func place(cell: Vector2i, note: bool) -> void:
 		if not _notes.erase(cell):
 			_notes[cell] = true
 		changed.emit()
+		note_changed.emit()
 		return
 	if cell.x != int(_solution[cell.y]):
 		_notes.erase(cell)
