@@ -5,7 +5,7 @@ import { chromium } from "playwright";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
-const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus"];
+const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration"];
 const screenAttribute = "data-velokity-qa-screen";
 const engineTimeout = 30_000;
 
@@ -28,7 +28,7 @@ async function captureBalance(page, screenshot) {
     const image = await createImageBitmap(await source.blob());
     const canvas = new OffscreenCanvas(720, 32);
     const context = canvas.getContext("2d");
-    context.drawImage(image, 0, -800);
+    context.drawImage(image, 0, -732);
     const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
     const gold = [];
     for (let i = 0; i < pixels.length; i += 4) {
@@ -84,8 +84,8 @@ async function capture(path, screen = null) {
     assert(screenshot.length < 300_000, `${path} exceeds the 300 KB screenshot budget`);
     // Compare opaque menu controls so the animated mascot and starfield can keep running.
     const controls = screen === null ? Buffer.concat([
-      await page.screenshot({ clip: { x: 130, y: 858, width: 460, height: 42 } }),
-      await page.screenshot({ clip: { x: 130, y: 937, width: 460, height: 42 } }),
+      await page.screenshot({ clip: { x: 130, y: 791, width: 460, height: 42 } }),
+      await page.screenshot({ clip: { x: 130, y: 1027, width: 460, height: 42 } }),
     ]) : null;
     const balance = screen === null || screen === "menu" ? await captureBalance(page, screenshot) : [];
     if (screen === null || screen === "menu") assert(balance.length > 0, `${path} did not display its balance`);
