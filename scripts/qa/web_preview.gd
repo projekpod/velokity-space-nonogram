@@ -6,11 +6,13 @@ const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Gallery := preload("res://scripts/qa/mascot_gallery.gd")
+const Mascot := preload("res://ui/mascot.gd")
+const Bonus := preload("res://scripts/nonogram/bonus.gd")
 
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus"]:
 		return false
 	_seed_progress(main)
 	match route:
@@ -31,6 +33,18 @@ static func open(main: Main) -> bool:
 			screen._puzzle.place(Vector2i((x + 1) % screen._puzzle.size, 0), true)
 		"mascot", "reactions":
 			Gallery.open(main, route == "reactions")
+		"combo":
+			if not _open_combo(main):
+				push_error("The QA puzzle could not reach a combo")
+				return false
+		"bonus":
+			var save := main.get_node("/root/Save")
+			for index in range(Bonus.BADGES_PER_ROUND):
+				save.data.nonogram[main._levels[index].id].flawless = true
+			var screen := main._open_bonus()
+			if screen == null or screen.bonus_index != 0 or screen._puzzle.size != 5:
+				push_error("The QA Bonus Round could not start")
+				return false
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
@@ -58,4 +72,22 @@ static func _open_nonogram(main: Main, won: bool) -> bool:
 	for y in range(solution.size() if won else mini(4, solution.size())):
 		for x in range(solution.size()):
 			screen._puzzle.mark(Vector2i(x, y), solution[y][x] == ".")
+	screen._celebration.dismiss()
 	return screen._puzzle.state == (Puzzle.State.WON if won else Puzzle.State.PLAYING)
+
+
+static func _open_combo(main: Main) -> bool:
+	var screen := main._play(0)
+	if screen == null:
+		return false
+	for y in range(screen._puzzle.size):
+		for x in range(screen._puzzle.size):
+			if screen.level.solution[y][x] == ".":
+				continue
+			screen._puzzle.mark(Vector2i(x, y), false)
+			if screen._celebration.tier == 2 and screen._puzzle.state == Puzzle.State.PLAYING:
+				screen._celebration.play_combo(0, screen._correct_lines)
+				screen._celebration.freeze_at(0.48)
+				screen._portrait.mascot.hold_pose(Mascot.Face.DANCING, Mascot.Reaction.COMBO)
+				return true
+	return false

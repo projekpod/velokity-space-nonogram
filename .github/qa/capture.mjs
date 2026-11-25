@@ -5,7 +5,7 @@ import { chromium } from "playwright";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
-const screens = ["menu", "game", "win", "daily", "mascot", "reactions"];
+const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus"];
 const screenAttribute = "data-velokity-qa-screen";
 const engineTimeout = 30_000;
 
