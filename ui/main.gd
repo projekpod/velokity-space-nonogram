@@ -16,6 +16,9 @@ var _column: VBoxContainer
 
 
 func _ready() -> void:
+	if OS.has_feature("web") and OS.has_feature("qa"):
+		if load("res://scripts/qa/web_preview.gd").open(self):
+			return
 	show_menu()
 
 
@@ -169,11 +172,12 @@ func _leave_game(action: StringName, result_closed: bool, level_index: int) -> v
 		_ads.request_interstitial_after_result(level_index + 1)
 
 
-func _open_daily() -> void:
+func _open_daily() -> DailyScreen:
 	_reset_column(608, 0)
 	var screen := DailyScreen.new()
 	screen.back_requested.connect(show_menu)
 	_column.add_child(screen)
+	return screen
 
 
 func _show_settings() -> void:
