@@ -1,0 +1,22 @@
+{
+  "id": "bonus-09-cup",
+  "size": 5,
+  "solution": [
+    ".....",
+    "bbb..",
+    "b.bbb",
+    "bbb.b",
+    "bbbbb"
+  ],
+  "palette": {
+    "a": "#8de5e5",
+    "b": "#9d9af4",
+    "c": "#ffdf8e",
+    "d": "#fba1bd"
+  },
+  "planet": "bonus",
+  "title": {
+    "en": "Cup",
+    "id": "Cangkir"
+  }
+}

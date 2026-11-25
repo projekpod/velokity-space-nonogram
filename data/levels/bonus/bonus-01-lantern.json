@@ -1,0 +1,22 @@
+{
+  "id": "bonus-01-lantern",
+  "size": 5,
+  "solution": [
+    "..a..",
+    ".bbb.",
+    ".bcb.",
+    ".bbb.",
+    "..a.."
+  ],
+  "palette": {
+    "a": "#8de5e5",
+    "b": "#9d9af4",
+    "c": "#ffdf8e",
+    "d": "#fba1bd"
+  },
+  "planet": "bonus",
+  "title": {
+    "en": "Lantern",
+    "id": "Lentera"
+  }
+}

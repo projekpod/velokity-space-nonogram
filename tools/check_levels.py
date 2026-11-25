@@ -4,7 +4,7 @@ from collections import Counter
 import json
 
 from build_daily import BANDS, COUNTS, SIZES, OUTPUT as DAILY_OUTPUT
-from build_levels import OUTPUT, PLANETS, generated_files
+from build_levels import BONUS_OUTPUT, OUTPUT, PLANETS, generated_bonus_files, generated_files
 from nonogram import count_solutions, puzzle_clues
 from star_battle import canonical_grid, solve, valid_solution, validate_regions
 
@@ -28,6 +28,25 @@ def check_levels():
     if albums != dict.fromkeys(PLANETS, 20):
         raise SystemExit(f"Expected 20 levels per planet, got {dict(albums)}")
     print(f"Nonogram: {len(files)} levels, one solution each")
+    return images
+
+
+def check_bonus(main_images):
+    files = {path.name: path.read_text(encoding="utf-8") for path in BONUS_OUTPUT.glob("*.json")}
+    if len(files) < 12 or len(files) % 3 or files != generated_bonus_files():
+        raise SystemExit("Bonus JSON must match the pixel sources in sets of three, with at least 12 puzzles")
+    seen = {canonical_grid(image) for image in main_images if len(image) == 5}
+    for content in files.values():
+        level = json.loads(content)
+        image = tuple(tuple(pixel != "." for pixel in row) for row in level["solution"])
+        signature = canonical_grid(image)
+        if signature in seen or not any(map(any, image)):
+            raise SystemExit(f'{level["id"]}: empty or duplicate bonus puzzle')
+        seen.add(signature)
+        solutions = count_solutions(*puzzle_clues(image))
+        if solutions != 1:
+            raise SystemExit(f'{level["id"]}: expected one solution, found {solutions}')
+    print(f"Bonus Round: {len(files)} separate 5x5 levels, one solution each")
 
 
 def check_daily():
@@ -67,7 +86,7 @@ def check_daily():
 
 
 def main():
-    check_levels()
+    check_bonus(check_levels())
     check_daily()
 
 

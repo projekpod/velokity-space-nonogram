@@ -1,0 +1,22 @@
+{
+  "id": "bonus-02-key",
+  "size": 5,
+  "solution": [
+    ".bbb.",
+    ".b.b.",
+    ".bbb.",
+    "..a..",
+    "..aa."
+  ],
+  "palette": {
+    "a": "#8de5e5",
+    "b": "#9d9af4",
+    "c": "#ffdf8e",
+    "d": "#fba1bd"
+  },
+  "planet": "bonus",
+  "title": {
+    "en": "Key",
+    "id": "Kunci"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "bonus-04-window",
+  "size": 5,
+  "solution": [
+    "aaaaa",
+    "a.b.a",
+    "abbba",
+    "a.b.a",
+    "aaaaa"
+  ],
+  "palette": {
+    "a": "#8de5e5",
+    "b": "#9d9af4",
+    "c": "#ffdf8e",
+    "d": "#fba1bd"
+  },
+  "planet": "bonus",
+  "title": {
+    "en": "Window",
+    "id": "Jendela"
+  }
+}
