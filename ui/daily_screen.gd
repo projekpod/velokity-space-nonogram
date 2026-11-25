@@ -12,6 +12,8 @@ const WEEKDAYS := [&"DAY_MON", &"DAY_TUE", &"DAY_WED", &"DAY_THU", &"DAY_FRI", &
 @onready var _save := get_node("/root/Save")
 @onready var _economy := get_node("/root/Economy")
 @onready var _analytics := get_node("/root/Analytics")
+@onready var _settings := get_node("/root/Settings")
+@onready var _ads := get_node("/root/Ads")
 
 var _day: int
 var _date: Dictionary
@@ -29,6 +31,10 @@ var _retry: Button
 func _ready() -> void:
 	add_theme_constant_override("separation", 10)
 	_start()
+
+
+func _exit_tree() -> void:
+	_ads.set_gameplay_banner(false)
 
 
 func _start() -> void:
@@ -52,6 +58,7 @@ func _start() -> void:
 
 	_puzzle = Puzzle.new(level)
 	_analytics.record(&"puzzle_started")
+	_ads.set_gameplay_banner(true)
 	_update_lives()
 	var day_label := tr(WEEKDAYS[Daily.weekday(_day)])
 	var date_label := UI.label(self, "", 22, UI.MUTED)
@@ -112,9 +119,11 @@ func _choose_mode(note: bool) -> void:
 func _on_mistake(_cell: Vector2i) -> void:
 	_update_lives()
 	_status.text = "GAME_MISTAKE"
+	_settings.vibrate_for_mistake()
 
 
 func _on_finished(won: bool) -> void:
+	_ads.set_gameplay_banner(false)
 	_place.disabled = true
 	_note.disabled = true
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")

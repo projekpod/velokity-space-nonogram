@@ -9,6 +9,7 @@ const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Board := preload("res://ui/board.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const DailyPuzzle := preload("res://scripts/daily/puzzle.gd")
+const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 var checks := 0
 var failures := 0
@@ -29,14 +30,18 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_save()
 	_test_save_recovery()
+	_test_settings()
+	await _test_settings_menu()
 	_test_economy()
 	_test_catalog()
 	_test_puzzle()
+	_test_continue()
 	_test_hint()
 	_test_board_size()
 	_test_drag()
 	await _test_fake_ads()
 	await _test_ads_recovery()
+	await _test_nonogram_flow()
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
@@ -205,9 +210,110 @@ func _test_economy() -> void:
 	check(economy.earn(5) and economy.balance() == 5, "Earn coins")
 	check(economy.spend(3) and economy.balance() == 2, "Spend coins")
 	check(save.load_game(save.storage_path) == OK and economy.balance() == 2, "Persist transactions")
+	var first: int = economy.award_nonogram("moon-test", 3)
+	check(first == 30 and economy.balance() == 32 and economy.is_nonogram_cleared("moon-test"), "First clear saves reward and progress together")
+	check(economy.award_nonogram("moon-test", 1) == 0 and economy.balance() == 32, "A replay cannot collect coins")
+	check(economy.double_nonogram_reward("other") == 0, "An uncleared level has no coins to double")
+	check(economy.double_nonogram_reward("moon-test") == first and economy.balance() == 62, "Double grants the original reward once")
+	check(save.load_game() == OK and economy.is_nonogram_cleared("moon-test") and economy.balance() == 62, "Reload progress and coins together")
+	check(economy.double_nonogram_reward("moon-test") == 0 and economy.balance() == 62, "A reloaded save cannot claim double coins again")
+	DirAccess.remove_absolute(save.storage_path)
+	save.storage_path += "/fail.json"
+	check(not economy.spend(10) and economy.balance() == 62, "Failed writes never spend coins")
+	check(economy.award_nonogram("mars-test", 1) == -1 and not economy.is_nonogram_cleared("mars-test") and economy.balance() == 62, "Failed wins never change coins or progress")
+	save.data = previous_data
+	save.storage_path = previous_path
+
+
+func _test_settings() -> void:
+	var save := root.get_node("Save")
+	var settings := root.get_node("Settings")
+	var events := root.get_node("Events")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var previous_locale := TranslationServer.get_locale()
+	save.storage_path = "user://test-settings-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	check(settings.set_value("sound", false) and settings.set_value("music", false), "Save sound and music separately")
+	check(AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")) and AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")), "Mute existing audio buses when settings change")
+	check(settings.set_value("sound", true) and not AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")) and AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")), "Sound toggle does not change music")
+	check(settings.set_value("vibration", false) and settings.set_value("calm_mode", true), "Save vibration and Calm Mode")
+	check(settings.set_value("language", "id") and TranslationServer.get_locale() == "id", "Apply the saved language immediately")
+	check(not settings.set_value("language", "es") and not settings.set_value("sound", "false"), "Reject unsupported language and setting types")
+	save.data = SaveScript.defaults()
+	check(save.load_game() == OK and settings.get_value("language") == "id" and settings.get_value("calm_mode"), "Read back language and Calm Mode")
+	check(not settings.get_value("vibration") and not settings.get_value("music") and settings.get_value("sound"), "Read back audio and vibration")
+	check(settings.set_value("language", "") and TranslationServer.get_locale() == settings._device_locale, "Device language can be restored")
 	DirAccess.remove_absolute(save.storage_path)
 	save.data = previous_data
 	save.storage_path = previous_path
+	TranslationServer.set_locale(previous_locale)
+	events.settings_changed.emit()
+
+
+func _test_nonogram_flow() -> void:
+	var save := root.get_node("Save")
+	var ads := root.get_node("Ads")
+	var previous_data: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var fake := FakeAds.new()
+	ads.set_provider(fake)
+	save.storage_path = "user://test-game-flow-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.data.coins = 30
+	save.data.settings.vibration = false
+	var screen := NonogramScreen.new()
+	screen.level = {
+		"id": "screen-test", "size": 3, "solution": ["aaa", "a..", "a.."],
+		"palette": {}, "title": {"en": "Test", "id": "Tes"},
+	}
+	root.add_child(screen)
+	var puzzle: Puzzle = screen._puzzle
+	check(fake.banner_visible and screen._tools.visible and not screen._result.visible, "Banner and controls appear in gameplay")
+	var hint_cell := puzzle.hint_cell()
+	screen._hint.pressed.emit()
+	check(puzzle.at(hint_cell) == Puzzle.Cell.FILLED and save.data.coins == 20, "A paid hint changes exactly the selected cell and spends coins")
+	for cell in [Vector2i(1, 1), Vector2i(1, 2), Vector2i(2, 2)]:
+		puzzle.mark(cell, false)
+	check(puzzle.state == Puzzle.State.LOST and not fake.banner_visible and screen._result.visible, "Loss opens a result with the banner hidden")
+	screen._continue.pressed.emit()
+	check(puzzle.state == Puzzle.State.PLAYING and puzzle.lives == 1 and save.data.coins == 0, "Paid continue resumes the same board with one life")
+	check(puzzle.at(hint_cell) == Puzzle.Cell.FILLED and not puzzle.can_continue() and screen._hint.disabled, "Continuation retains marks and disables unaffordable hints")
+	fake.grant_rewards = false
+	var next_hint := puzzle.hint_cell()
+	screen._request_ad(&"hint")
+	await ads.rewarded_finished
+	check(puzzle.at(next_hint) == Puzzle.Cell.UNKNOWN and save.data.coins == 0, "An ad denial never applies a hint")
+	fake.grant_rewards = true
+	screen._request_ad(&"hint")
+	await ads.rewarded_finished
+	check(puzzle.at(next_hint) == Puzzle.Cell.FILLED and save.data.coins == 0, "A rewarded ad only applies its hint after the grant")
+	for cell in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(0, 2)]:
+		puzzle.mark(cell, false)
+	check(puzzle.state == Puzzle.State.WON and screen._result.visible and save.data.coins == 20, "A win opens a result and saves its first-clear coins")
+	screen._request_ad(&"double_coins")
+	await ads.rewarded_finished
+	check(save.data.coins == 40 and save.data.nonogram["screen-test"].doubled, "A granted double ad persists the bonus")
+	screen.queue_free()
+	await process_frame
+	check(not fake.banner_visible, "Leaving the game clears the banner")
+	DirAccess.remove_absolute(save.storage_path)
+	save.data = previous_data
+	save.storage_path = previous_path
+
+
+func _test_settings_menu() -> void:
+	var screen := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(screen)
+	for child in screen._column.get_children():
+		if child is Button and child.text == "MENU_SETTINGS":
+			child.pressed.emit()
+			break
+	var language: Array[Node] = screen._column.find_children("*", "OptionButton", false, false)
+	check(language.size() == 1 and language[0].item_count == 3, "Settings menu shows the three language choices")
+	check(screen._column.find_children("*", "CheckButton", false, false).size() == 4, "Settings menu shows all four toggles")
+	screen.queue_free()
+	await process_frame
 
 
 func _test_catalog() -> void:
@@ -270,6 +376,24 @@ func _test_hint() -> void:
 		check(puzzle.hint(), "Hint reveals one cell")
 		check(puzzle.at(Vector2i(3, 3)) == Puzzle.Cell.FILLED, "Hint targets the shortest unfinished row or column")
 		check(puzzle.at(Vector2i.ZERO) == Puzzle.Cell.UNKNOWN, "Hint leaves an unrelated top-left cell alone")
+
+
+func _test_continue() -> void:
+	var level := {"size": 4, "solution": ["aa..", ".aa.", "..aa", "a..a"], "palette": {}}
+	var puzzle := Puzzle.new(level)
+	check(not puzzle.continue_game(), "Continue cannot add lives before a loss")
+	for cell in [Vector2i(2, 0), Vector2i(3, 0), Vector2i(0, 1)]:
+		puzzle.mark(cell, false)
+	check(puzzle.continue_game() and puzzle.lives == 1 and puzzle.at(Vector2i(0, 1)) == Puzzle.Cell.CROSSED, "Continue restores one life and keeps the grid")
+	puzzle.mark(Vector2i(0, 2), false)
+	check(puzzle.state == Puzzle.State.LOST and not puzzle.continue_game(), "A second loss cannot be continued")
+	var last_cell := Puzzle.new(level)
+	last_cell.mark(Vector2i(2, 0), false)
+	last_cell.mark(Vector2i(3, 0), false)
+	for cell in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(2, 1), Vector2i(2, 2), Vector2i(3, 2), Vector2i(0, 3)]:
+		last_cell.mark(cell, false)
+	last_cell.mark(Vector2i(3, 3), true)
+	check(last_cell.state == Puzzle.State.LOST and last_cell.continue_game() and last_cell.state == Puzzle.State.WON, "Continuing after a final corrected fill reveals the win")
 
 
 func _test_drag() -> void:
@@ -388,8 +512,10 @@ func _test_daily_puzzle() -> void:
 
 func _test_daily_rewards() -> void:
 	var previous := SaveScript.migrate({"version": 1, "coins": 80, "settings": {"language": "id"}})
-	check(previous.version == 2 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
+	check(previous.version == 3 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
 	check(previous.daily == Daily.empty_progress(), "V1 starts with an empty daily streak")
+	var v2 := SaveScript.migrate({"version": 2, "coins": 14, "daily": {"last_day": 20780, "streak": 5}})
+	check(v2.version == 3 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
 	check(SaveScript.migrate({"daily": {"last_day": 1.25, "streak": 2}}).daily.streak == 0, "Reject fractional saved dates")
 	var save := root.get_node("Save")
 	var economy := root.get_node("Economy")

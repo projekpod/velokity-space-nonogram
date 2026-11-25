@@ -1,7 +1,7 @@
 extends Node
 
 const Daily := preload("res://scripts/daily/calendar.gd")
-const VERSION := 2
+const VERSION := 3
 const PATH := "user://save.json"
 
 var data := defaults()
@@ -19,6 +19,7 @@ static func defaults() -> Dictionary:
 		"version": VERSION,
 		"coins": 0,
 		"daily": Daily.empty_progress(),
+		"nonogram": {},
 		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
@@ -40,6 +41,16 @@ static func migrate(raw: Dictionary) -> Dictionary:
 		if result.settings.language not in ["", "en", "id"]:
 			result.settings.language = ""
 	result.daily = Daily.clean_progress(raw.get("daily"))
+	var progress: Variant = raw.get("nonogram")
+	if version >= 3 and progress is Dictionary:
+		for level_id: Variant in progress:
+			var record: Variant = progress[level_id]
+			if not level_id is String or level_id.is_empty() or not record is Dictionary:
+				continue
+			var reward: Variant = record.get("reward")
+			var doubled: Variant = record.get("doubled")
+			if _is_version(reward) and reward > 0 and reward <= 2147483647 and doubled is bool:
+				result.nonogram[level_id] = {"reward": int(reward), "doubled": doubled}
 	return result
 
 

@@ -4,6 +4,24 @@ const INK := Color("#edf5ff")
 const MUTED := Color("#a3b7d4")
 const MINT := Color("#93f2e4")
 const GOLD := Color("#ffcf82")
+const ERROR_COLOR := Color("#ff8f99")
+
+
+static func level_title(level: Dictionary) -> String:
+	return level.title.id if TranslationServer.get_locale().get_slice("_", 0) == "id" else level.title.en
+
+
+static func row(parent: Control) -> HBoxContainer:
+	var container := HBoxContainer.new()
+	container.add_theme_constant_override("separation", 12)
+	parent.add_child(container)
+	return container
+
+
+static func action(parent: HBoxContainer, key: String, primary := false) -> Button:
+	var control := button(parent, key, primary)
+	control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return control
 
 static func label(parent: Control, text: String, font_size: int, color := INK) -> Label:
 	var label := Label.new()

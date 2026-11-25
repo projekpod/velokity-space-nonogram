@@ -35,3 +35,8 @@ func set_value(key: String, value: Variant) -> bool:
 func _apply_locale() -> void:
 	var locale: String = get_value("language")
 	TranslationServer.set_locale(_device_locale if locale.is_empty() else locale)
+
+
+func vibrate_for_mistake() -> void:
+	if get_value("vibration") and not get_value("calm_mode"):
+		Input.vibrate_handheld(45)
