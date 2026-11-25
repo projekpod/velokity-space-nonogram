@@ -3,6 +3,7 @@ extends RefCounted
 const DIRECTORY := "res://data/levels"
 const PLANETS := ["moon", "mars", "saturn"]
 const PLANET_CLEAR_REQUIREMENT := 15
+const PICTURES_PER_ALBUM := 20
 
 
 static func previous_planet(planet: String) -> String:

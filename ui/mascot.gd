@@ -2,6 +2,7 @@ extends Control
 
 const Art := preload("res://ui/mascot_art.gd")
 const Face := Art.Face
+const Meta := preload("res://scripts/meta/progression.gd")
 
 enum Reaction { NONE, FILL, MISTAKE, COMBO, WIN }
 
@@ -23,6 +24,7 @@ const REACTION_SECONDS := [0.0, 0.38, 0.62, 1.0, 1.35]
 @onready var _settings := get_node("/root/Settings")
 
 var idle_expression := Face.HAPPY
+var preview_outfit: Variant = null
 var _reaction := Reaction.NONE
 var _expression := Face.HAPPY
 var _preview := false
@@ -55,24 +57,26 @@ var _sparks: CPUParticles2D
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var outfit: Dictionary = get_node("/root/Economy").equipped_costumes() if preview_outfit == null else preview_outfit
+	var suit_color := _outfit_color(outfit, "suit")
 	_rig = Node2D.new()
 	add_child(_rig)
 	_body = Node2D.new()
 	_rig.add_child(_body)
 	_tail = _part(_body, Vector2(45, 75), Art.tail)
-	_part(_body, Vector2.ZERO, Art.backpack)
-	_left_boot = _part(_body, Vector2(-26, 97), Art.boot, true)
-	_right_boot = _part(_body, Vector2(23, 97), Art.boot)
-	_left_arm = _part(_body, Vector2(-43, 48), Art.arm, true)
-	_right_arm = _part(_body, Vector2(43, 48), Art.arm)
-	_part(_body, Vector2.ZERO, Art.suit)
-	_head = _part(_body, Vector2(0, -20), Art.helmet)
+	_part(_body, Vector2.ZERO, Art.backpack, false, _outfit_color(outfit, "jetpack"))
+	_left_boot = _part(_body, Vector2(-26, 97), Art.boot, true, suit_color)
+	_right_boot = _part(_body, Vector2(23, 97), Art.boot, false, suit_color)
+	_left_arm = _part(_body, Vector2(-43, 48), Art.arm, true, suit_color)
+	_right_arm = _part(_body, Vector2(43, 48), Art.arm, false, suit_color)
+	_part(_body, Vector2.ZERO, Art.suit, false, suit_color)
+	_head = _part(_body, Vector2(0, -20), Art.helmet, false, _outfit_color(outfit, "helmet"))
 	_left_ear = _part(_head, Vector2(-37, -33), Art.ear)
 	_right_ear = _part(_head, Vector2(37, -33), Art.ear, true)
 	_part(_head, Vector2.ZERO, Art.fur)
 	_face = _part(_head, Vector2.ZERO, _draw_face)
 	_part(_head, Vector2.ZERO, Art.visor)
-	_antenna = _part(_head, Vector2(-55, -82), Art.antenna)
+	_antenna = _part(_head, Vector2(-55, -82), Art.antenna, false, _outfit_color(outfit, "accessory"))
 	_accents = _part(_rig, Vector2.ZERO, _draw_accents)
 	_create_sparks()
 	resized.connect(_fit)
@@ -82,13 +86,20 @@ func _ready() -> void:
 	set_idle(idle_expression)
 
 
-func _part(parent: Node2D, pivot: Vector2, paint: Callable, mirror := false) -> Node2D:
+static func _outfit_color(outfit: Dictionary, slot: String) -> Color:
+	return Meta.COSTUMES.get(outfit.get(slot, ""), {}).get("color", Color.TRANSPARENT)
+
+
+func _part(parent: Node2D, pivot: Vector2, paint: Callable, mirror := false, color: Variant = null) -> Node2D:
 	var part := Node2D.new()
 	part.position = pivot
 	if mirror:
 		part.scale.x = -1.0
 	parent.add_child(part)
-	part.draw.connect(paint.bind(part))
+	if color == null:
+		part.draw.connect(paint.bind(part))
+	else:
+		part.draw.connect(paint.bind(part, color))
 	return part
 
 

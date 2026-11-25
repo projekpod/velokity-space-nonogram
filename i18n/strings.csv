@@ -106,3 +106,56 @@ CELEBRATION_BONUS,Bonus Round complete!,Ronde Bonus selesai!
 CELEBRATION_ALBUM,Album complete!,Album lengkap!
 CELEBRATION_STREAK,Seven-day streak!,Tujuh hari berturut-turut!
 CELEBRATION_LEVEL,Player level %d!,Pemain naik ke level %d!
+MENU_DAILY_SHORT,Rasi Bintang,Rasi Bintang
+META_LEVEL_XP,Level %d · %d/%d XP,Level %d · %d/%d XP
+META_ALBUM,Planet albums,Album planet
+META_BACK_ALBUM,Albums,Album
+META_SHOP,Costume shop,Toko kostum
+META_LOGIN,Daily login,Login harian
+META_ACHIEVEMENTS,Achievements,Pencapaian
+META_UNLOCKED,Unlocked,Terbuka
+ALBUM_PROGRESS,%d/%d pictures collected,%d/%d gambar terkumpul
+ALBUM_LOCKED,Clear the puzzle to reveal its picture,Selesaikan teka-teki untuk membuka gambar
+ALBUM_REWARD,Reward · %s,Hadiah · %s
+ALBUM_REQUIREMENT,Collect all 20 pictures,Kumpulkan semua 20 gambar
+COSTUME_SLOT_HELMET,Helmet,Helm
+COSTUME_SLOT_SUIT,Suit,Baju
+COSTUME_SLOT_JETPACK,Jetpack,Jetpack
+COSTUME_SLOT_ACCESSORY,Accessory,Aksesori
+COSTUME_DEFAULT,Standard,Standar
+COSTUME_PREVIEW,Preview · %s,Pratinjau · %s
+COSTUME_EQUIPPED,Equipped,Dipakai
+COSTUME_EQUIP,Equip,Pakai
+COSTUME_BUY,Buy · %d coins,Beli · %d koin
+COSTUME_LOCKED,Locked,Terkunci
+COSTUME_FROM_ALBUM,Album · %s,Album · %s
+COSTUME_FROM_ACHIEVEMENT,Achievement · %s,Pencapaian · %s
+COSTUME_MINT_VISOR,Mint helmet,Helm Mint
+COSTUME_VIOLET_VISOR,Violet helmet,Helm Ungu
+COSTUME_SOLAR_VISOR,Solar helmet,Helm Surya
+COSTUME_NEBULA_SUIT,Nebula suit,Baju Nebula
+COSTUME_COPPER_PACK,Copper jetpack,Jetpack Tembaga
+COSTUME_PRISM_PACK,Prism jetpack,Jetpack Prisma
+COSTUME_CORAL_SIGNAL,Coral antenna,Antena Koral
+COSTUME_MOONLIGHT,Moonlight helmet,Helm Cahaya Bulan
+COSTUME_RED_DUST,Red Dust suit,Baju Debu Merah
+COSTUME_RING_RUNNER,Ring Runner jetpack,Jetpack Cincin Saturnus
+COSTUME_PATHFINDER,Pathfinder suit,Baju Penjelajah
+COSTUME_PERFECT_SIGNAL,Perfect Signal antenna,Antena Sinyal Sempurna
+COSTUME_STAR_CHART,Star Chart helmet,Helm Peta Bintang
+COSTUME_BONUS_BOOSTER,Bonus Booster jetpack,Jetpack Ronde Bonus
+ACHIEVEMENT_EXPLORER,Explorer,Penjelajah
+ACHIEVEMENT_FLAWLESS,Perfect Signal,Sinyal Sempurna
+ACHIEVEMENT_STARGAZER,Stargazer,Pengamat Bintang
+ACHIEVEMENT_BONUS_PILOT,Bonus Pilot,Pilot Bonus
+ACHIEVEMENT_PROGRESS,%d/%d,%d/%d
+ACHIEVEMENT_GOAL_EXPLORER,%s Nonograms cleared,%s Nonogram selesai
+ACHIEVEMENT_GOAL_FLAWLESS,%s flawless badges,%s lencana sempurna
+ACHIEVEMENT_GOAL_STARGAZER,%s daily puzzles cleared,%s teka-teki harian selesai
+ACHIEVEMENT_GOAL_BONUS_PILOT,%s bonus puzzles cleared,%s teka-teki bonus selesai
+LOGIN_COLLECTED,Claimed,Diambil
+LOGIN_READY,Available,Tersedia
+LOGIN_CLAIM,Claim %d coins,Klaim %d koin
+LOGIN_TOMORROW,Next reward tomorrow,Hadiah berikutnya besok
+LOGIN_CLOCK,Wait for the next claim date,Tunggu tanggal klaim berikutnya
+BONUS_TOTAL,Round total · %d coins,Total ronde · %d koin
