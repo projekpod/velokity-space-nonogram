@@ -73,6 +73,7 @@ func _run() -> void:
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
+	await _test_audio_smoke()
 	var locale := TranslationServer.get_locale()
 	TranslationServer.set_locale("id")
 	check(TranslationServer.translate("MENU_PLAY") == "Main nonogram", "Indonesian translation")
@@ -1275,3 +1276,74 @@ func _test_banner_clearance() -> void:
 	main.queue_free()
 	await process_frame
 	ads.set_provider(prior_provider)
+
+
+func _test_audio_smoke() -> void:
+	var audio := root.get_node("Audio")
+	var ads := root.get_node("Ads")
+	var save := root.get_node("Save")
+	var events := root.get_node("Events")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-audio-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	events.settings_changed.emit()
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var music: AudioStreamPlayer = audio._music
+	var music_bus := AudioServer.get_bus_index("Music")
+	var sfx_bus := AudioServer.get_bus_index("SFX")
+	check(audio._effects.size() == 9, "Import all nine procedural effects")
+	for player: AudioStreamPlayer in audio._effects.values():
+		check(player.stream is AudioStreamWAV and player.stream.get_length() > 0 and player.stream.get_length() <= 1.05 and player.stream.loop_mode == AudioStreamWAV.LOOP_DISABLED, "A short effect imports as a nonlooping WAV")
+	for track: AudioStreamWAV in [audio._menu_music, audio._puzzle_music]:
+		check(track.loop_mode == AudioStreamWAV.LOOP_FORWARD and track.loop_begin == 0 and track.loop_end >= track.data.size() / 2.0 - 1.0, "A music WAV loops over its complete sample range")
+		check(track.get_length() >= 9.0 and track.get_length() <= 12.0, "Music loops are short")
+	check(music.playback_type == AudioServer.PLAYBACK_TYPE_STREAM, "Music loops in the mixer without browser callback gaps")
+	check(not music.playing, "Music is silent before the first real input")
+	audio._input(InputEventMouseMotion.new())
+	audio._input(InputEventMouseButton.new())
+	check(not music.playing, "Mouse motion and release do not start music")
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	audio._input(click)
+	check(music.playing and music.stream == audio._menu_music, "A pressed input starts the menu loop")
+	var screen = main._play(0)
+	check(music.playing and music.stream == audio._puzzle_music, "Opening a puzzle switches to the puzzle loop")
+	screen._puzzle.mark(Vector2i(0, 0), true)
+	check(audio._effects[&"cross"].playing, "Manually crossing a cell triggers the cross effect")
+	var before := AudioServer.get_bus_volume_db(music_bus)
+	save.data.settings.calm_mode = true
+	events.settings_changed.emit()
+	check(AudioServer.get_bus_volume_db(music_bus) < before, "Calm Mode lowers the music gain")
+	save.data.settings.sound = false
+	events.settings_changed.emit()
+	check(AudioServer.is_bus_mute(sfx_bus) and music.playing, "Sound off mutes only effects")
+	save.data.settings.music = false
+	events.settings_changed.emit()
+	check(AudioServer.is_bus_mute(music_bus) and not music.playing, "Music off stops the current loop")
+	save.data.settings.music = true
+	save.data.settings.sound = true
+	events.settings_changed.emit()
+	check(music.playing and not AudioServer.is_bus_mute(sfx_bus), "Settings can reenable each audio bus")
+	check(ads.request_rewarded(&"hint") and paused and AudioServer.is_bus_mute(0) and music.stream_paused, "Ads mute Master and halt music")
+	await ads.rewarded_finished
+	check(music.playing and not music.stream_paused and not AudioServer.is_bus_mute(0), "Ad completion resumes the loop and restores Master")
+	main.show_menu()
+	check(music.stream == audio._menu_music, "Returning to the menu switches tracks")
+	root.get_node("Economy").earn(1)
+	check(audio._effects[&"coin"].playing, "Saving an earned coin plays its cue")
+	audio._input_received = false
+	audio.set_process_input(true)
+	for player: AudioStreamPlayer in audio._effects.values():
+		player.stop()
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+	events.settings_changed.emit()
+	# Allow the audio mixer to release stopped WAV playback objects.
+	await create_timer(0.12).timeout

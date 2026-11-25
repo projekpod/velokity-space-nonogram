@@ -14,6 +14,7 @@ const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 @onready var _economy := get_node("/root/Economy")
 @onready var _settings := get_node("/root/Settings")
 @onready var _ads := get_node("/root/Ads")
+@onready var _audio := get_node("/root/Audio")
 
 @onready var _levels: Array[Dictionary] = _economy.levels
 var _column: VBoxContainer
@@ -22,6 +23,7 @@ var _support_button: Button
 
 func _ready() -> void:
 	center.resized.connect(_layout_content)
+	get_viewport().size_changed.connect(_layout_content)
 	_ads.banner_space_changed.connect(_layout_content)
 	if OS.has_feature("web") and OS.has_feature("qa"):
 		if load("res://scripts/qa/web_preview.gd").open(self):
@@ -194,7 +196,7 @@ func _is_level_unlocked(index: int) -> bool:
 func _play(level_index: int) -> NonogramScreen:
 	if not _is_level_unlocked(level_index):
 		return null
-	_reset_column(NonogramScreen.BOARD_WIDTH, 0)
+	_reset_column(NonogramScreen.BOARD_WIDTH, 0, true)
 	var screen := NonogramScreen.new()
 	screen.level = _levels[level_index]
 	screen.can_play_next = _is_level_unlocked.bind(level_index + 1)
@@ -225,7 +227,7 @@ func _open_bonus() -> NonogramScreen:
 	var level := Bonus.puzzle_for(index)
 	if level.is_empty():
 		return null
-	_reset_column(NonogramScreen.BOARD_WIDTH, 0)
+	_reset_column(NonogramScreen.BOARD_WIDTH, 0, true)
 	var screen := NonogramScreen.new()
 	screen.level = level
 	screen.bonus_index = index
@@ -242,7 +244,7 @@ func _leave_bonus(action: StringName, _result_closed: bool) -> void:
 
 
 func _open_daily() -> DailyScreen:
-	_reset_column(608, 0)
+	_reset_column(608, 0, true)
 	var screen := DailyScreen.new()
 	screen.back_requested.connect(show_menu)
 	_column.add_child(screen)
@@ -263,6 +265,7 @@ func _show_settings() -> void:
 		toggle.button_pressed = _settings.get_value(key)
 		toggle.toggled.connect(_change_toggle.bind(key, toggle, status))
 		_column.add_child(toggle)
+		UI.wire_button_sound(toggle)
 	UI.label(_column, "SETTING_LANGUAGE", 26, UI.MUTED)
 	var language := OptionButton.new()
 	language.add_theme_font_size_override("font_size", 25)
@@ -283,6 +286,7 @@ func _show_settings() -> void:
 				language.set_item_text(item, tr(language_labels[item]))
 	)
 	_column.add_child(language)
+	UI.wire_button_sound(language)
 	status.text = "SAVE_FAILED"
 	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	status.add_theme_color_override("font_color", UI.ERROR_COLOR)
@@ -296,7 +300,8 @@ func _change_toggle(enabled: bool, key: String, toggle: CheckButton, status: Lab
 		toggle.set_pressed_no_signal(_settings.get_value(key))
 
 
-func _reset_column(width := 568.0, gap := 14) -> void:
+func _reset_column(width := 568.0, gap := 14, gameplay := false) -> void:
+	_audio.set_gameplay(gameplay)
 	if is_instance_valid(_support_button):
 		center.remove_child(_support_button)
 		_support_button.queue_free()

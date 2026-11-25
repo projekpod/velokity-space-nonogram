@@ -3,6 +3,7 @@ extends RefCounted
 signal cell_changed(cell: Vector2i)
 signal line_completed(is_row: bool, index: int)
 signal correct_fill(cell: Vector2i, completed_lines: int)
+signal correct_cross
 signal mistake(cell: Vector2i)
 signal finished(won: bool)
 
@@ -87,6 +88,8 @@ func mark(cell: Vector2i, crossed: bool) -> void:
 		mistake.emit(cell)
 	elif filled:
 		correct_fill.emit(cell, completed_lines)
+	else:
+		correct_cross.emit()
 	if state == State.LOST:
 		finished.emit(false)
 	elif _remaining == 0:
