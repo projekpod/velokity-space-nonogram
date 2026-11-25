@@ -1,0 +1,68 @@
+name: Quality gates
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    env:
+      GODOT_VERSION: 4.7.2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: godot
+        with:
+          path: |
+            ~/.local/bin/godot
+            ~/.local/share/godot/export_templates
+          key: godot-linux-x86_64-${{ env.GODOT_VERSION }}-stable
+      - name: Install Godot and export templates
+        if: steps.godot.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP"
+          tag="$GODOT_VERSION-stable"
+          base="https://github.com/godotengine/godot/releases/download/$tag"
+          editor="Godot_v${tag}_linux.x86_64"
+          curl -fsSL --retry 3 "$base/$editor.zip" -o godot.zip
+          curl -fsSL --retry 3 "$base/Godot_v${tag}_export_templates.tpz" -o templates.tpz
+          sha256sum -c <<'CHECKSUMS'
+          cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4  godot.zip
+          f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011  templates.tpz
+          CHECKSUMS
+          unzip -q godot.zip
+          unzip -q templates.tpz
+          install -Dm755 "$editor" "$HOME/.local/bin/godot"
+          mkdir -p "$HOME/.local/share/godot/export_templates"
+          mv templates "$HOME/.local/share/godot/export_templates/$GODOT_VERSION.stable"
+      - name: Add Godot to PATH
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Import
+        shell: bash
+        run: godot --headless --import 2>&1 | tee /tmp/velokity-import.log
+      - name: Tests
+        shell: bash
+        run: godot --headless -s res://tests/run_tests.gd 2>&1 | tee /tmp/velokity-tests.log
+      - name: Check puzzle uniqueness
+        run: python3 tools/check_levels.py
+      - name: Export Web
+        shell: bash
+        run: |
+          mkdir -p build/web
+          godot --headless --export-release Web build/web/index.html 2>&1 | tee /tmp/velokity-export.log
+      - name: Reject Godot errors and warnings
+        run: |
+          if grep -E '(^|[[:space:]])(ERROR|WARNING):' /tmp/velokity-{import,tests,export}.log; then
+            exit 1
+          fi
+      - name: Report Web build size
+        shell: bash
+        run: python3 tools/report_web_size.py build/web | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: velokity-web
+          path: build/web/
+          if-no-files-found: error
