@@ -3,24 +3,48 @@ GAME_NAME,Velokity,Velokity
 GAME_SUBTITLE,Space Nonogram,Nonogram Antariksa
 MENU_PLAY,Play nonogram,Main nonogram
 MENU_DAILY,Rasi Bintang · Daily puzzle,Rasi Bintang · Teka-teki harian
-MENU_TAGLINE,Discover a picture one clue at a time.,Temukan gambar dari petunjuk angka.
-MENU_PLANET,Planet,Planet
-MENU_LEVEL,Puzzle,Teka-teki
+MENU_SETTINGS,Settings,Pengaturan
+PLANETS_TITLE,Choose a planet,Pilih planet
 PLANET_MOON,Moon,Bulan
 PLANET_MARS,Mars,Mars
 PLANET_SATURN,Saturn,Saturnus
+PLANET_JUPITER,Jupiter,Jupiter
+PLANET_NEPTUNE,Neptune,Neptunus
+PLANET_PROGRESS,%s · %d/%d cleared,%s · %d/%d selesai
+PLANET_LOCKED,%s · Locked,%s · Terkunci
+LEVELS_TITLE,Choose a puzzle,Pilih teka-teki
+LEVEL_BACK,Planets,Daftar planet
+LEVEL_CLEARED,✓ %s,✓ %s
+COIN_BALANCE,%d coins,%d koin
 GAME_BACK,Menu,Menu
+GAME_BACK_LEVELS,Puzzles,Daftar teka-teki
 GAME_LIVES,Lives %s / 3,Nyawa %s / 3
 GAME_FILL,Fill,Isi
 GAME_CROSS,Mark X,Tandai X
-GAME_HINT,Hint,Petunjuk
+GAME_HINT_COINS,Hint · %d coins,Petunjuk · %d koin
+GAME_HINT_AD,Hint via ad,Petunjuk via iklan
+GAME_CONTINUE_COINS,Continue · %d coins,Lanjut · %d koin
+GAME_CONTINUE_AD,Continue via ad,Lanjut via iklan
 GAME_RETRY,Try again,Coba lagi
 GAME_NEXT,Next puzzle,Teka-teki berikutnya
 GAME_READY,Use the clues to reveal the picture.,Gunakan petunjuk angka untuk membuka gambar.
 GAME_MISTAKE,That mark costs one life.,Tanda itu mengurangi satu nyawa.
 GAME_WON,Picture revealed!,Gambar terbuka!
 GAME_LOST,Out of lives.,Nyawa habis.
-GAME_FINAL,Last puzzle in this catalog.,Teka-teki terakhir dalam katalog ini.
+GAME_EARNED,+%d coins earned,Dapat +%d koin
+GAME_ALREADY_CLEARED,First-clear reward already collected.,Hadiah penyelesaian pertama sudah diambil.
+GAME_DOUBLE_AD,Double coins via ad,Gandakan koin via iklan
+SAVE_FAILED,Could not save. Please try again.,Gagal menyimpan. Coba lagi.
+SAVE_RETRY,Retry saving,Coba simpan lagi
+AD_UNAVAILABLE,Ad unavailable. Please try again.,Iklan belum tersedia. Coba lagi.
+SETTING_SOUND,Sound effects,Efek suara
+SETTING_MUSIC,Music,Musik
+SETTING_VIBRATION,Vibration,Getaran
+SETTING_CALM_MODE,Calm Mode,Mode Tenang
+SETTING_LANGUAGE,Language,Bahasa
+LANGUAGE_DEVICE,Device language,Bahasa perangkat
+LANGUAGE_ENGLISH,English,English
+LANGUAGE_INDONESIAN,Bahasa Indonesia,Bahasa Indonesia
 GAME_CONTROLS,Drag in one direction to mark a line.,Seret dalam satu arah untuk menandai garis.
 DAILY_TITLE,Rasi Bintang,Rasi Bintang
 DAILY_DATE,%s · %02d/%02d/%04d · Difficulty %d/7,%s · %02d/%02d/%04d · Kesulitan %d/7

@@ -4,6 +4,8 @@ extends RefCounted
 signal rewarded_finished(request_id: int, granted: bool)
 @warning_ignore("unused_signal")
 signal interstitial_closed(request_id: int)
+@warning_ignore("unused_signal")
+signal request_failed(request_id: int)
 
 
 func request_rewarded(_placement: StringName, request_id: int) -> void:

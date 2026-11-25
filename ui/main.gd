@@ -1,29 +1,18 @@
 extends Control
 
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
-const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
-const Board := preload("res://ui/board.gd")
 const MissionArt := preload("res://ui/mission_art.gd")
-
 const UI := preload("res://ui/controls.gd")
 const DailyScreen := preload("res://ui/daily_screen.gd")
+const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 @onready var center: CenterContainer = $Center
-@onready var analytics := get_node("/root/Analytics")
+@onready var _economy := get_node("/root/Economy")
+@onready var _settings := get_node("/root/Settings")
+@onready var _ads := get_node("/root/Ads")
 
 var _levels := Catalog.read()
-var _level_index := 0
-var _planet_picker: OptionButton
-var _level_picker: OptionButton
 var _column: VBoxContainer
-var _board: Board
-var _puzzle: Puzzle
-var _lives: Label
-var _status: Label
-var _hint: Button
-var _next: Button
-var _fill: Button
-var _cross: Button
 
 
 func _ready() -> void:
@@ -31,33 +20,100 @@ func _ready() -> void:
 
 
 func show_menu() -> void:
-	_reset_column(536, 14)
-	var art := MissionArt.new()
-	_column.add_child(art)
+	_reset_column()
+	_column.add_child(MissionArt.new())
 	UI.label(_column, "GAME_NAME", 98, UI.MINT)
 	UI.label(_column, "GAME_SUBTITLE", 38)
-	UI.label(_column, "MENU_TAGLINE", 25, UI.MUTED)
-	var previous_gap := Control.new()
-	previous_gap.custom_minimum_size.y = 18
-	_column.add_child(previous_gap)
-	var pickers := HBoxContainer.new()
-	pickers.add_theme_constant_override("separation", 14)
-	_column.add_child(pickers)
-	_planet_picker = _picker(pickers, "MENU_PLANET")
-	_level_picker = _picker(pickers, "MENU_LEVEL")
-	for planet in Catalog.PLANETS:
-		_planet_picker.add_item(tr("PLANET_" + planet.to_upper()))
-	if not _levels.is_empty():
-		_planet_picker.select(Catalog.PLANETS.find(_levels[_level_index].planet))
-	_select_planet(_planet_picker.selected)
-	_planet_picker.item_selected.connect(_select_planet)
-	_level_picker.item_selected.connect(_select_level)
+	UI.label(_column, tr("COIN_BALANCE") % _economy.balance(), 25, UI.GOLD)
 	var play := UI.button(_column, "MENU_PLAY", true)
-	play.disabled = _levels.is_empty()
-	play.pressed.connect(_play)
+	play.pressed.connect(_show_planets)
 	UI.button(_column, "MENU_DAILY").pressed.connect(_open_daily)
-	if not play.disabled:
-		play.grab_focus()
+	UI.button(_column, "MENU_SETTINGS").pressed.connect(_show_settings)
+	play.grab_focus()
+
+
+func _show_planets() -> void:
+	_reset_column()
+	UI.button(_column, "GAME_BACK").pressed.connect(show_menu)
+	UI.label(_column, "PLANETS_TITLE", 44, UI.MINT)
+	var first: Button
+	for planet: String in Catalog.PLANETS:
+		var indices := _planet_levels(planet)
+		var cleared := 0
+		for index in indices:
+			cleared += int(_economy.is_nonogram_cleared(_levels[index].id))
+		var card := UI.button(_column, tr("PLANET_PROGRESS") % [_planet_title(planet), cleared, indices.size()])
+		card.disabled = indices.is_empty()
+		card.pressed.connect(_show_levels.bind(planet))
+		if first == null and not card.disabled:
+			first = card
+	for planet: String in ["jupiter", "neptune"]:
+		UI.button(_column, tr("PLANET_LOCKED") % _planet_title(planet)).disabled = true
+	if first != null:
+		first.grab_focus()
+
+
+func _show_levels(planet: String) -> void:
+	_reset_column()
+	UI.button(_column, "LEVEL_BACK").pressed.connect(_show_planets)
+	UI.label(_column, _planet_title(planet), 44, UI.MINT)
+	UI.label(_column, "LEVELS_TITLE", 26, UI.MUTED)
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.add_theme_constant_override("h_separation", 9)
+	grid.add_theme_constant_override("v_separation", 9)
+	_column.add_child(grid)
+	var indices := _planet_levels(planet)
+	var first_uncleared: Button
+	for position in range(indices.size()):
+		var index := indices[position]
+		var cleared: bool = _economy.is_nonogram_cleared(_levels[index].id)
+		var caption := "%02d" % (position + 1)
+		if cleared:
+			caption = tr("LEVEL_CLEARED") % caption
+		var button := UI.button(grid, caption, cleared)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.tooltip_text = UI.level_title(_levels[index])
+		button.pressed.connect(_play.bind(index))
+		if first_uncleared == null and not cleared:
+			first_uncleared = button
+	if first_uncleared != null:
+		first_uncleared.grab_focus()
+	elif grid.get_child_count() > 0:
+		grid.get_child(0).grab_focus()
+
+
+func _planet_levels(planet: String) -> Array[int]:
+	var indices: Array[int] = []
+	for index in range(_levels.size()):
+		if _levels[index].planet == planet:
+			indices.append(index)
+	return indices
+
+
+func _planet_title(planet: String) -> String:
+	return tr("PLANET_" + planet.to_upper())
+
+
+func _play(level_index: int) -> void:
+	_reset_column(NonogramScreen.BOARD_WIDTH, 0)
+	var screen := NonogramScreen.new()
+	screen.level = _levels[level_index]
+	screen.has_next = level_index + 1 < _levels.size()
+	screen.exit_requested.connect(_leave_game.bind(level_index))
+	_column.add_child(screen)
+
+
+func _leave_game(action: StringName, result_closed: bool, level_index: int) -> void:
+	match action:
+		&"next":
+			_play(level_index + 1)
+		&"retry":
+			_play(level_index)
+		_:
+			_show_levels(_levels[level_index].planet)
+	if result_closed:
+		_ads.request_interstitial_after_result(level_index + 1)
 
 
 func _open_daily() -> void:
@@ -67,117 +123,54 @@ func _open_daily() -> void:
 	_column.add_child(screen)
 
 
-func _select_planet(index: int) -> void:
-	var current := _level_index
-	_level_picker.clear()
-	if index < 0:
-		return
-	for level_index in range(_levels.size()):
-		if _levels[level_index].planet == Catalog.PLANETS[index]:
-			_level_picker.add_item(_localized_title(_levels[level_index]), level_index)
-			if level_index == current:
-				_level_picker.select(_level_picker.item_count - 1)
-	if _level_picker.item_count > 0:
-		_select_level(_level_picker.selected)
+func _show_settings() -> void:
+	_reset_column()
+	UI.button(_column, "GAME_BACK").pressed.connect(show_menu)
+	UI.label(_column, "MENU_SETTINGS", 44, UI.MINT)
+	var status := Label.new()
+	for key: String in ["sound", "music", "vibration", "calm_mode"]:
+		var toggle := CheckButton.new()
+		toggle.text = "SETTING_" + key.to_upper()
+		toggle.custom_minimum_size.y = 60
+		toggle.add_theme_font_size_override("font_size", 26)
+		UI.style_button(toggle, false)
+		toggle.button_pressed = _settings.get_value(key)
+		toggle.toggled.connect(_change_toggle.bind(key, toggle, status))
+		_column.add_child(toggle)
+	UI.label(_column, "SETTING_LANGUAGE", 26, UI.MUTED)
+	var language := OptionButton.new()
+	language.add_theme_font_size_override("font_size", 25)
+	language.get_popup().add_theme_font_size_override("font_size", 25)
+	language.custom_minimum_size.y = 65
+	UI.style_button(language, false)
+	var locales := ["", "en", "id"]
+	var language_labels := ["LANGUAGE_DEVICE", "LANGUAGE_ENGLISH", "LANGUAGE_INDONESIAN"]
+	for key: String in language_labels:
+		language.add_item(tr(key))
+	language.select(locales.find(_settings.get_value("language")))
+	language.item_selected.connect(func(index: int) -> void:
+		status.visible = not _settings.set_value("language", locales[index])
+		if status.visible:
+			language.select(locales.find(_settings.get_value("language")))
+		else:
+			for item in range(language_labels.size()):
+				language.set_item_text(item, tr(language_labels[item]))
+	)
+	_column.add_child(language)
+	status.text = "SAVE_FAILED"
+	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	status.add_theme_color_override("font_color", UI.ERROR_COLOR)
+	status.hide()
+	_column.add_child(status)
 
 
-func _select_level(index: int) -> void:
-	_level_index = _level_picker.get_item_id(index)
+func _change_toggle(enabled: bool, key: String, toggle: CheckButton, status: Label) -> void:
+	status.visible = not _settings.set_value(key, enabled)
+	if status.visible:
+		toggle.set_pressed_no_signal(_settings.get_value(key))
 
 
-func _localized_title(level: Dictionary) -> String:
-	return level.title.id if TranslationServer.get_locale().get_slice("_", 0) == "id" else level.title.en
-
-
-func _play() -> void:
-	_reset_column(Board.WIDTH, 14)
-	_puzzle = Puzzle.new(_levels[_level_index])
-	analytics.record(&"puzzle_started")
-
-	var header := HBoxContainer.new()
-	_column.add_child(header)
-	UI.button(header, "GAME_BACK").pressed.connect(show_menu)
-	_lives = UI.label(header, "", 28, UI.GOLD)
-	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_update_lives()
-
-	var title := UI.label(_column, "", 42)
-	title.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-	title.text = _localized_title(_levels[_level_index])
-	_status = UI.label(_column, "GAME_READY", 24, UI.MUTED)
-	_board = Board.new()
-	_board.puzzle = _puzzle
-	_column.add_child(_board)
-	UI.label(_column, "GAME_CONTROLS", 21, UI.MUTED)
-
-	var marks := HBoxContainer.new()
-	marks.add_theme_constant_override("separation", 12)
-	_column.add_child(marks)
-	_fill = UI.button(marks, "GAME_FILL", true)
-	_cross = UI.button(marks, "GAME_CROSS")
-	var modes := ButtonGroup.new()
-	for button in [_fill, _cross]:
-		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.toggle_mode = true
-		button.button_group = modes
-	_fill.button_pressed = true
-	_fill.pressed.connect(_choose_mark.bind(false))
-	_cross.pressed.connect(_choose_mark.bind(true))
-	_hint = UI.button(marks, "GAME_HINT")
-	_hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_hint.pressed.connect(_use_hint)
-
-	var retry := UI.button(_column, "GAME_RETRY")
-	retry.pressed.connect(_play)
-	_next = UI.button(_column, "GAME_NEXT", true)
-	_next.pressed.connect(_next_puzzle)
-	_next.hide()
-	_puzzle.mistake.connect(_on_mistake)
-	_puzzle.finished.connect(_on_finished)
-	_board.grab_focus()
-
-
-func _choose_mark(crossed: bool) -> void:
-	_board.cross_mode = crossed
-	UI.style_button(_fill, not crossed)
-	UI.style_button(_cross, crossed)
-	_board.grab_focus()
-
-
-func _use_hint() -> void:
-	if _puzzle.hint() and _puzzle.state == Puzzle.State.PLAYING:
-		_status.text = "GAME_READY"
-	_board.grab_focus()
-
-
-func _on_mistake(_cell: Vector2i) -> void:
-	_update_lives()
-	_status.text = "GAME_MISTAKE"
-
-
-func _on_finished(won: bool) -> void:
-	_status.text = "GAME_WON" if won else "GAME_LOST"
-	_status.add_theme_color_override("font_color", UI.MINT if won else Color("#ff8f99"))
-	analytics.record(&"puzzle_won" if won else &"puzzle_lost")
-	_hint.disabled = true
-	_fill.disabled = true
-	_cross.disabled = true
-	if won and _level_index + 1 < _levels.size():
-		_next.show()
-	elif won:
-		UI.label(_column, "GAME_FINAL", 22, UI.MUTED)
-
-
-func _next_puzzle() -> void:
-	_level_index += 1
-	_play()
-
-
-func _update_lives() -> void:
-	_lives.text = tr("GAME_LIVES") % _puzzle.lives
-
-
-func _reset_column(width: float, gap: int) -> void:
+func _reset_column(width := 568.0, gap := 14) -> void:
 	if is_instance_valid(_column):
 		center.remove_child(_column)
 		_column.queue_free()
@@ -185,18 +178,3 @@ func _reset_column(width: float, gap: int) -> void:
 	_column.custom_minimum_size.x = width
 	_column.add_theme_constant_override("separation", gap)
 	center.add_child(_column)
-
-
-func _picker(parent: Control, caption: String) -> OptionButton:
-	var stack := VBoxContainer.new()
-	stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	parent.add_child(stack)
-	UI.label(stack, caption, 21, UI.MUTED)
-	var picker := OptionButton.new()
-	picker.add_theme_font_size_override("font_size", 24)
-	picker.get_popup().add_theme_font_size_override("font_size", 24)
-	picker.fit_to_longest_item = false
-	picker.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	picker.custom_minimum_size.y = 60
-	stack.add_child(picker)
-	return picker

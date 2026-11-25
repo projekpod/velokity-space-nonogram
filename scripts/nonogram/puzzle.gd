@@ -21,6 +21,7 @@ var palette: Dictionary
 var _solution: Array
 var _cells := PackedByteArray()
 var _remaining := 0
+var _continued := false
 
 
 func _init(level: Dictionary) -> void:
@@ -101,9 +102,17 @@ func _apply_mark(cell: Vector2i, filled: bool) -> void:
 
 
 func hint() -> bool:
-	if state != State.PLAYING:
+	var cell := hint_cell()
+	if cell.x < 0:
 		return false
-	var nearest: Array[Vector2i] = []
+	mark(cell, false)
+	return true
+
+
+func hint_cell() -> Vector2i:
+	var next_cell := Vector2i(-1, -1)
+	if state != State.PLAYING:
+		return next_cell
 	var fewest := size + 1
 	for is_row: bool in [true, false]:
 		var completed := rows_done if is_row else columns_done
@@ -119,15 +128,24 @@ func hint() -> bool:
 				unknown += 1
 				if first_fill.x < 0 and _solution[cell.y][cell.x] != ".":
 					first_fill = cell
-			if first_fill.x < 0 or unknown > fewest:
-				continue
-			if unknown < fewest:
-				nearest.clear()
+			if first_fill.x >= 0 and unknown < fewest:
 				fewest = unknown
-			nearest.append(first_fill)
-	if nearest.is_empty():
+				next_cell = first_fill
+	return next_cell
+
+
+func can_continue() -> bool:
+	return state == State.LOST and not _continued
+
+
+func continue_game() -> bool:
+	if not can_continue():
 		return false
-	mark(nearest.pick_random(), false)
+	_continued = true
+	lives = 1
+	state = State.PLAYING if _remaining > 0 else State.WON
+	if state == State.WON:
+		finished.emit(true)
 	return true
 
 
