@@ -38,7 +38,7 @@ async function captureBalance(page, screenshot) {
   }, screenshot.toString("base64"));
 }
 
-async function capture(path, screen = null) {
+async function capture(path, screen = null, withoutBridge = false) {
   const page = await browser.newPage({
     viewport: screen === "reactions" ? { width: 1280, height: 800 } : { width: 720, height: 1280 },
     deviceScaleFactor: 1,
@@ -52,6 +52,12 @@ async function capture(path, screen = null) {
   });
 
   try {
+    if (withoutBridge) {
+      await page.route("**/playgama-bridge.js", route => route.fulfill({
+        contentType: "application/javascript",
+        body: "",
+      }));
+    }
     await page.clock.setFixedTime(new Date("2026-11-25T05:00:00Z"));
     const [, response] = await Promise.all([
       page.waitForEvent("console", {
@@ -101,6 +107,8 @@ async function capture(path, screen = null) {
 try {
   await mkdir(output, { recursive: true });
   const release = await capture("web/index.html");
+  const fallback = await capture("web/index.html", null, true);
+  assert.deepEqual(fallback.menu, release.menu, "A missing SDK should still open the normal menu");
   const unknown = await capture("web-qa/index.html?qa=unknown");
   assert.deepEqual(unknown.menu, release.menu, "Unknown QA routes should open the normal menu");
 
