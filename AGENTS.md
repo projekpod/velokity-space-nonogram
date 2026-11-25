@@ -42,6 +42,7 @@
 ## Workflow
 - Start every task by reading AGENTS.md, ROADMAP.md and HANDOFF.md. Read other files selectively; do not re-read the whole repo.
 - Do ROADMAP tasks in order and tick a checkbox only when its acceptance criteria are met.
-- Small, clear commits. One task session = one PR. PR description in Indonesian: summary, checks run + results, web build size, known issues, next task.
+- Small, clear commits.
+- Do not try to open pull requests through the GitHub API. Push the work to a branch named codex/<task-id>-<short-name> and end your reply with the exact branch name; Oz opens and merges the PR after Claude's review.
 - Before finishing, or when close to your limits, update HANDOFF.md: state, what works, what is broken, exact commands, next 3 steps.
 - Never weaken CI checks or delete tests to make them pass.

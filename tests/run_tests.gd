@@ -3,6 +3,7 @@ extends SceneTree
 const SaveScript := preload("res://scripts/autoload/save.gd")
 const AdsScript := preload("res://scripts/autoload/ads.gd")
 const FakeAds := preload("res://scripts/ads/fake_ads.gd")
+const AdsProvider := preload("res://scripts/ads/ads_provider.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Board := preload("res://ui/board.gd")
@@ -11,6 +12,14 @@ const DailyPuzzle := preload("res://scripts/daily/puzzle.gd")
 
 var checks := 0
 var failures := 0
+
+
+class SilentAds extends AdsProvider:
+	func request_rewarded(_placement: StringName, _request_id: int) -> void:
+		pass
+
+	func request_interstitial(_request_id: int) -> void:
+		pass
 
 
 func _initialize() -> void:
@@ -27,6 +36,7 @@ func _run() -> void:
 	_test_board_size()
 	_test_drag()
 	await _test_fake_ads()
+	await _test_ads_recovery()
 	_test_daily_selection()
 	_test_daily_puzzle()
 	_test_daily_rewards()
@@ -145,6 +155,42 @@ func check(result: bool, description: String) -> void:
 	if not result:
 		failures += 1
 		printerr("FAIL: " + description)
+
+
+func _test_ads_recovery() -> void:
+	var ads := AdsScript.new()
+	var provider := SilentAds.new()
+	ads.set_provider(provider)
+	root.add_child(ads)
+	var rewards: Array = []
+	var interstitials: Array = []
+	ads.rewarded_finished.connect(func(placement: StringName, granted: bool) -> void:
+		rewards.append([placement, granted])
+	)
+	ads.interstitial_closed.connect(func() -> void: interstitials.append(true))
+	check(ads.request_rewarded(&"hint") and paused, "Silent rewarded request pauses the game")
+	check(ads._timeout.wait_time == 45.0 and ads._timeout.time_left > 0, "The watchdog starts with a 45-second deadline")
+	ads._timeout.start(0.02)
+	await create_timer(0.10).timeout
+	check(not paused and rewards == [[&"hint", false]], "Rewarded timeout resumes the game without a grant")
+	ads._session_started = Time.get_ticks_msec() - 120000
+	check(ads.request_interstitial_after_result(10) and paused, "Accept a new ad after the timeout")
+	provider.rewarded_finished.emit(1, true)
+	await process_frame
+	check(paused and rewards.size() == 1, "Ignore a late result from the timed-out request")
+	await create_timer(0.10).timeout
+	check(not paused and interstitials.size() == 1, "Silent interstitial closes on timeout")
+	check(ads.request_rewarded(&"continue"), "Accept another ad after the interstitial timeout")
+	provider.request_failed.emit(ads._request_id)
+	await process_frame
+	check(not paused and rewards == [[&"hint", false], [&"continue", false]], "Provider errors deny rewards and resume the game")
+	ads._last_interstitial = Time.get_ticks_msec() - 90000
+	check(ads.request_interstitial_after_result(10), "Accept an eligible interstitial after recovery")
+	provider.request_failed.emit(ads._request_id)
+	await process_frame
+	check(not paused and interstitials.size() == 2, "Provider errors close interstitials")
+	ads.queue_free()
+	await process_frame
 
 
 func _test_economy() -> void:
@@ -314,8 +360,12 @@ func _test_daily_puzzle() -> void:
 	check(puzzle.has_note(first_star) and puzzle.lives == 3, "Daily notes are reversible and free")
 	puzzle.place(first_star, true)
 	check(not puzzle.has_note(first_star), "Tap again removes a note")
+	puzzle.place(wrong, true)
 	puzzle.place(wrong, false)
-	check(puzzle.lives == 2 and not puzzle.is_star(wrong), "An incorrect daily star costs one life")
+	puzzle.place(wrong, false)
+	puzzle.place(wrong, true)
+	check(puzzle.lives == 2 and puzzle.is_eliminated(wrong), "The same wrong daily star costs exactly one life")
+	check(not puzzle.has_note(wrong) and not puzzle.is_star(wrong), "An eliminated cell stays blocked in both modes")
 	var used_columns := {}
 	var used_regions := {}
 	var no_touch := true
@@ -330,8 +380,8 @@ func _test_daily_puzzle() -> void:
 	check(used_columns.size() == puzzle.size and used_regions.size() == puzzle.size, "Every column and region has one star")
 	check(no_touch, "Winning stars do not touch")
 	var losing := DailyPuzzle.new(level)
-	for attempt in range(3):
-		losing.place(wrong, false)
+	for offset in range(1, 4):
+		losing.place(Vector2i((first_star.x + offset) % puzzle.size, 0), false)
 	losing.place(first_star, false)
 	check(losing.lives == 0 and losing.state == DailyPuzzle.State.LOST and not losing.is_star(first_star), "Loss locks daily board after three strikes")
 

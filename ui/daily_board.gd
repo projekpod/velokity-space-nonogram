@@ -86,12 +86,10 @@ func _draw() -> void:
 				draw_rect(tile.grow(-4), UI.GOLD, false, 2.0)
 			if puzzle.is_star(cell):
 				_draw_star(tile.get_center(), edge * 0.30)
+			elif puzzle.is_eliminated(cell):
+				_draw_cross(tile.get_center(), edge * 0.23, MISTAKE, 4.0)
 			elif puzzle.has_note(cell):
-				var arm := Vector2.ONE * edge * 0.15
-				var midpoint := tile.get_center()
-				draw_line(midpoint - arm, midpoint + arm, BORDER, 2.0, true)
-				arm.x = -arm.x
-				draw_line(midpoint - arm, midpoint + arm, BORDER, 2.0, true)
+				_draw_cross(tile.get_center(), edge * 0.15, BORDER, 2.0)
 	for index in range(1, puzzle.size):
 		var offset := edge * index
 		draw_line(board.position + Vector2(offset, 0), Vector2(board.position.x + offset, board.end.y), Color("#19263b"), 2.0)
@@ -106,6 +104,13 @@ func _draw() -> void:
 			if y + 1 < puzzle.size and region != puzzle.region_at(cell + Vector2i.DOWN):
 				draw_line(origin + Vector2(0, edge), origin + Vector2.ONE * edge, BORDER, 3.0)
 	draw_rect(board, BORDER, false, 3.0)
+
+
+func _draw_cross(midpoint: Vector2, radius: float, color: Color, width: float) -> void:
+	var arm := Vector2.ONE * radius
+	draw_line(midpoint - arm, midpoint + arm, color, width, true)
+	arm.x = -arm.x
+	draw_line(midpoint - arm, midpoint + arm, color, width, true)
 
 
 func _draw_star(midpoint: Vector2, radius: float) -> void:
