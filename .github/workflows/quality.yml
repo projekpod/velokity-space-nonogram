@@ -58,9 +58,14 @@ jobs:
         run: |
           mkdir -p build/web
           godot --headless --export-release Web build/web/index.html 2>&1 | tee /tmp/velokity-export.log
+      - name: Export Web QA
+        shell: bash
+        run: |
+          mkdir -p build/web-qa
+          godot --headless --export-release 'Web QA' build/web-qa/index.html 2>&1 | tee /tmp/velokity-export-qa.log
       - name: Reject Godot errors and warnings
         run: |
-          if grep -E '(^|[[:space:]])(ERROR|WARNING):' /tmp/velokity-{import,tests,export}.log; then
+          if grep -E '(^|[[:space:]])(ERROR|WARNING):' /tmp/velokity-{import,tests,export,export-qa}.log; then
             exit 1
           fi
       - name: Report Web build size
@@ -70,4 +75,49 @@ jobs:
         with:
           name: velokity-web
           path: build/web/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        with:
+          name: velokity-web-qa
+          path: build/web-qa/
+          if-no-files-found: error
+
+  qa-screenshots:
+    needs: web
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@v8
+        with:
+          name: velokity-web
+          path: build/web/
+      - uses: actions/download-artifact@v8
+        with:
+          name: velokity-web-qa
+          path: build/web-qa/
+      - name: Install Playwright and Chromium
+        working-directory: .github/qa
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Capture the QA screens and verify release routing
+        shell: bash
+        run: |
+          python3 -m http.server --bind 127.0.0.1 8765 --directory build &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          if ! curl --retry 10 --retry-connrefused --fail --silent \
+            http://127.0.0.1:8765/web-qa/index.html --output /dev/null; then
+            echo "Web QA server did not start"
+            exit 1
+          fi
+          node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
+      - uses: actions/upload-artifact@v6
+        with:
+          name: velokity-qa-screenshots
+          path: build/qa-screenshots/
           if-no-files-found: error

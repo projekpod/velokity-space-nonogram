@@ -11,6 +11,8 @@ var _corrupt_saves: Dictionary = {}
 
 
 func _ready() -> void:
+	if OS.has_feature("web") and OS.has_feature("qa"):
+		storage_path = "user://qa-save.json"
 	load_game()
 
 

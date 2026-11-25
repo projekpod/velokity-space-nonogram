@@ -2,6 +2,12 @@ extends RefCounted
 
 const DIRECTORY := "res://data/levels"
 const PLANETS := ["moon", "mars", "saturn"]
+const PLANET_CLEAR_REQUIREMENT := 15
+
+
+static func previous_planet(planet: String) -> String:
+	var index := PLANETS.find(planet)
+	return PLANETS[index - 1] if index > 0 else ""
 
 
 static func read() -> Array[Dictionary]:
