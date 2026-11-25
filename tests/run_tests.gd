@@ -52,6 +52,7 @@ func _run() -> void:
 	await _test_meta_menu()
 	_test_catalog()
 	await _test_level_progression()
+	await _test_first_puzzle()
 	await _test_bonus_flow()
 	_test_puzzle()
 	_test_continue()
@@ -173,6 +174,7 @@ func _test_fake_ads() -> void:
 	await ads.interstitial_closed
 	check(not paused and fake.interstitial_count == 1, "Interstitial close resumes gameplay exactly once")
 	check(not ads.request_interstitial_after_result(10), "Interstitial close begins a ninety-second cooldown")
+	ads.notify_game_ready()
 	ads.set_gameplay_active(true)
 	check(fake.banner_visible, "Banner visibility reaches the provider")
 	# Let the resumed sample finish so the audio mixer can release its playback.
@@ -273,8 +275,8 @@ func _test_combo_rewards_and_migration() -> void:
 		"daily": {"last_day": 22000, "streak": 2},
 		"nonogram": {"legacy": {"reward": 25, "doubled": true}},
 	}
-	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into V6")
-	check(save.data.version == 6 and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
+	check(save.write_game(legacy) == OK and save.load_game() == OK, "Load a V3 save from disk into the current schema")
+	check(save.data.version == SaveScript.VERSION and save.data.bonus_clears == 0 and economy.badge_count() == 0, "V3 initializes badge and bonus progress without granting badges")
 	check(economy.player_level() == 2 and save.data.daily.clears == 2 and save.data.settings.language == "id", "Legacy daily history starts at the known streak and contributes to the player level")
 	check(economy.award_nonogram("legacy", 2, 6) == 0 and not economy.has_flawless_badge("legacy") and save.data.meta.xp == 300, "An imperfect replay grants zero coins and no badge")
 	check(economy.award_nonogram("legacy", 3, 6) == 0 and economy.has_flawless_badge("legacy") and save.data.meta.xp == 320, "A flawless replay earns its badge with zero coins")
@@ -372,6 +374,42 @@ func _test_nonogram_flow() -> void:
 	save.storage_path = previous_path
 
 
+func _test_first_puzzle() -> void:
+	var save := root.get_node("Save")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-onboarding-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	save.load_game()
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	var screen := main._column.get_child(0) as NonogramScreen
+	check(screen != null and screen.first_puzzle and screen.level == main._levels[0], "Fresh save lands in the first Moon puzzle")
+	var step_text := screen._tutorial_text.text
+	check(screen.tutorial_step == 0 and _press_button(screen._tutorial, "TUTORIAL_NEXT") and screen._tutorial_text.text != step_text, "First tutorial step advances to X mode")
+	check(_press_button(screen._tutorial, "TUTORIAL_NEXT") and screen.tutorial_step == 2, "Third tutorial step explains clues")
+	check(_press_button(screen._tutorial, "TUTORIAL_SKIP") and not screen._tutorial.visible, "Skip leaves the puzzle playable")
+	screen._leave(&"retry")
+	screen = main._column.get_child(0) as NonogramScreen
+	check(screen.first_puzzle and screen._tutorial == null and not save.data.onboarding_complete, "Retry preserves an in-session skip without completing onboarding")
+	_solve_nonogram(screen)
+	screen._celebration.dismiss()
+	check(save.data.onboarding_complete and _press_button(screen._result, "GAME_BACK"), "The saved first win opens the main menu")
+	check(_press_button(main._column, "MENU_PLAY"), "Main menu is available after onboarding")
+	main.free()
+	check(save.load_game() == OK and save.data.onboarding_complete, "The first clear and onboarding completion survive reload")
+	for snapshot: Dictionary in [save.data, SaveScript.migrate({"version": 6})]:
+		save.data = snapshot
+		main = preload("res://scenes/main.tscn").instantiate()
+		root.add_child(main)
+		check(_press_button(main._column, "MENU_PLAY"), "Returning saves still start in the menu")
+		main.free()
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+	await process_frame
+
+
 func _test_mascot_reactions() -> void:
 	var save := root.get_node("Save")
 	var previous_data: Dictionary = save.data
@@ -447,6 +485,7 @@ func _test_calm_visuals() -> void:
 func _test_settings_menu() -> void:
 	var screen := preload("res://scenes/main.tscn").instantiate()
 	root.add_child(screen)
+	screen.show_menu()
 	for child in screen._column.get_children():
 		if child is Button and child.text == "MENU_SETTINGS":
 			child.pressed.emit()
@@ -727,10 +766,10 @@ func _test_daily_puzzle() -> void:
 
 func _test_daily_rewards() -> void:
 	var previous := SaveScript.migrate({"version": 1, "coins": 80, "settings": {"language": "id"}})
-	check(previous.version == 6 and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
+	check(previous.version == SaveScript.VERSION and previous.coins == 80 and previous.settings.language == "id", "Migrate V1 without losing balance or settings")
 	check(previous.daily == Daily.empty_progress(), "V1 starts with an empty daily streak")
 	var v2 := SaveScript.migrate({"version": 2, "coins": 14, "daily": {"last_day": 20780, "streak": 5}})
-	check(v2.version == 6 and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
+	check(v2.version == SaveScript.VERSION and v2.nonogram.is_empty() and v2.coins == 14 and v2.daily.streak == 5, "Migrate V2 while preserving daily progress and coins")
 	check(SaveScript.migrate({"daily": {"last_day": 1.25, "streak": 2}}).daily.streak == 0, "Reject fractional saved dates")
 	var save := root.get_node("Save")
 	var economy := root.get_node("Economy")
@@ -1030,6 +1069,7 @@ func _test_meta_menu() -> void:
 	var main := preload("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	economy.award_nonogram(main._levels[0].id, 2)
+	main.show_menu()
 	check(_press_button(main._column, "META_ALBUM"), "The menu opens the planet albums")
 	var screen := main._column.get_child(0) as MetaScreen
 	var pictures := screen.find_children("*", "Control", true, false).filter(func(node: Node) -> bool: return node.get_script() == AlbumPicture)
@@ -1100,8 +1140,8 @@ func _test_bridge_ads() -> void:
 	ads.set_provider(provider)
 	root.add_child(ads)
 	check(root.get_node("Ads")._provider is FakeAds, "Godot headless uses FakeAds")
-	ads.notify_menu_shown()
-	ads.notify_menu_shown()
+	ads.notify_game_ready()
+	ads.notify_game_ready()
 	ads.set_gameplay_active(true)
 	check(platform.messages == ["game_ready", "gameplay_started"] and portal_ads.banners == ["bottom"], "Report readiness once and start gameplay with a bottom banner")
 	var results: Array[Array] = []
@@ -1251,21 +1291,24 @@ func _test_banner_clearance() -> void:
 	var portal_ads := TestPortalAds.new()
 	var platform := TestPortal.new()
 	portal_ads.hide_immediately = false
-	ads.set_provider(BridgeAds.new(portal_ads, platform))
+	var measured := [132.0]
+	ads.set_provider(BridgeAds.new(portal_ads, platform, func() -> float: return measured[0]))
 	var main := preload("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await process_frame
+	main.show_menu()
 	check(main.find_children("*", "Button", true, false).any(func(button: Button) -> bool: return button.text == "MENU_SUPPORT"), "A standalone Bridge menu shows the configured support button")
 	platform.id = "playgama"
 	main.show_menu()
 	check(not main.find_children("*", "Button", true, false).any(func(button: Button) -> bool: return button.text == "MENU_SUPPORT"), "A portal menu hides the support button")
 	main._play(0)
-	for viewport_size: Vector2 in [Vector2(720, 1280), Vector2(1800, 1280)]:
-		main.center.size = viewport_size
+	for height: float in [132.0, 210.0]:
+		measured[0] = height
+		main.center.size = Vector2(1800, 1280)
 		main._layout_content()
 		await process_frame
 		var column: VBoxContainer = main._column
-		var clearance: float = BridgeAds.BANNER_CLEARANCE * main.center.size.y / root.size.y
+		var clearance: float = height * main.center.size.y / root.size.y
 		var bottom := column.position.y + column.size.y * column.scale.y
 		check(bottom <= maxf(1.0, main.center.size.y - clearance) + 0.01, "Banner reserve keeps all controls above the bottom strip after resize")
 		check(absf(column.position.x + column.size.x * column.scale.x * 0.5 - main.center.size.x * 0.5) <= 1.0, "The adjusted board remains horizontally centered")
@@ -1291,6 +1334,7 @@ func _test_audio_smoke() -> void:
 	events.settings_changed.emit()
 	var main := preload("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.show_menu()
 	var music: AudioStreamPlayer = audio._music
 	var music_bus := AudioServer.get_bus_index("Music")
 	var sfx_bus := AudioServer.get_bus_index("SFX")

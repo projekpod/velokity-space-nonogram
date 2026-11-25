@@ -167,3 +167,10 @@ IAP_NO_ADS,No Ads,Bebas Iklan
 IAP_COINS_500,500 coins,500 koin
 IAP_COINS_2000,2000 coins,2.000 koin
 IAP_UNAVAILABLE,Purchases are unavailable,Pembelian belum tersedia
+TUTORIAL_STEP,%d/3  %s,%d/3  %s
+TUTORIAL_FILL,Tap a square to fill it.,Ketuk kotak untuk mengisinya.
+TUTORIAL_CROSS,Switch to X mode to mark empty squares.,Pakai mode X untuk menandai kotak kosong.
+TUTORIAL_CLUES,"Numbers show the lengths of filled groups in each row and column. Leave at least one empty square between groups.","Angka menunjukkan panjang kelompok isian di tiap baris dan kolom. Sisakan minimal satu kotak kosong di antara kelompok."
+TUTORIAL_SKIP,Skip tutorial,Lewati panduan
+TUTORIAL_NEXT,Next,Lanjut
+TUTORIAL_DONE,Got it,Mengerti

@@ -1,8 +1,5 @@
 extends "res://scripts/ads/ads_provider.gd"
 
-# Bridge's largest standard banner is 300×250 CSS pixels.
-const BANNER_CLEARANCE := 258.0
-
 enum Kind { NONE, REWARDED, INTERSTITIAL }
 
 var _advertisement: Object
@@ -13,11 +10,13 @@ var _rewarded := false
 var _abandoned := false
 var _banner_requested := false
 var _banner_state := "hidden"
+var _measure_banner: Callable
 
 
-func _init(advertisement: Object, platform: Object) -> void:
+func _init(advertisement: Object, platform: Object, measure_banner := Callable()) -> void:
 	_advertisement = advertisement
 	_platform = platform
+	_measure_banner = measure_banner if measure_banner.is_valid() else _web_banner_height
 	_advertisement.banner_state_changed.connect(_on_banner_state)
 	_advertisement.rewarded_state_changed.connect(_on_rewarded)
 	_advertisement.interstitial_state_changed.connect(_on_interstitial)
@@ -49,24 +48,34 @@ func request_interstitial(request_id: int) -> void:
 
 func set_banner_visible(visible: bool) -> void:
 	_banner_requested = visible and _advertisement.is_banner_supported
-	if _banner_requested:
-		_on_banner_state("loading")
-		_advertisement.show_banner("bottom")
-	elif banner_clearance() > 0.0:
+	if _banner_requested and _banner_state in ["hidden", "failed"]:
+		_show_banner()
+	elif not _banner_requested and _banner_state == "shown":
 		_advertisement.hide_banner()
+
+
+func _show_banner() -> void:
+	_on_banner_state("loading")
+	_advertisement.show_banner("bottom")
 
 
 func banner_clearance() -> float:
-	return BANNER_CLEARANCE if _banner_state in ["loading", "shown"] else 0.0
+	return float(_measure_banner.call()) if _banner_state in ["loading", "shown"] else 0.0
+
+
+static func _web_banner_height() -> float:
+	if not OS.has_feature("web"):
+		return 0.0
+	return float(JavaScriptBridge.eval("window.velokityBannerHeight?.() ?? 0", true))
 
 
 func _on_banner_state(state: String) -> void:
-	var previous := banner_clearance()
 	_banner_state = state
-	if banner_clearance() != previous:
-		banner_space_changed.emit()
+	banner_space_changed.emit()
 	if state == "shown" and not _banner_requested:
 		_advertisement.hide_banner()
+	elif state == "hidden" and _banner_requested:
+		_show_banner()
 
 
 func game_ready() -> void:
