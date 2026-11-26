@@ -1,0 +1,47 @@
+name: Autopilot
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autopilot
+  cancel-in-progress: false
+
+jobs:
+  autopilot:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check whether Autopilot is configured
+        id: credential
+        shell: bash
+        env:
+          CODEX_AUTOPILOT_TOKEN: ${{ secrets.CODEX_AUTOPILOT_TOKEN }}
+        run: |
+          if [[ -z "$CODEX_AUTOPILOT_TOKEN" ]]; then
+            echo '::notice::CODEX_AUTOPILOT_TOKEN is missing. Autopilot is inactive.'
+            exit 0
+          fi
+          echo 'enabled=true' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v6
+        if: steps.credential.outputs.enabled == 'true'
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check branch and resume or hand off the task
+        if: steps.credential.outputs.enabled == 'true'
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.CODEX_AUTOPILOT_TOKEN }}
+          script: |
+            const { pathToFileURL } = require('node:url');
+            const { join } = require('node:path');
+            const moduleUrl = pathToFileURL(join(process.env.GITHUB_WORKSPACE, '.github/autopilot/run.mjs'));
+            const { runAutopilot } = await import(moduleUrl.href);
+            await runAutopilot({ github, context, core });

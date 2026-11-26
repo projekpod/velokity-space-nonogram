@@ -8,13 +8,24 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  # A unique group for each main run also preserves runs that are still queued.
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref == 'refs/heads/main' && github.run_id || 'latest' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   web:
+    if: ${{ github.event_name != 'pull_request' || !startsWith(github.head_ref, 'codex/') }}
     runs-on: ubuntu-latest
     env:
       GODOT_VERSION: 4.7.2
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Test Autopilot
+        run: node --test .github/autopilot/*.test.mjs
       - uses: actions/cache@v5
         id: godot
         with:
