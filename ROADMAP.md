@@ -18,7 +18,7 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
 - [ ] T12 Feel & Shop v1.1
   - [x] 1. Queue saves in order so rapid actions persist the latest snapshot. Test with slow storage.
   - [x] 2. Raise procedural audio levels and add saved Music and Effects volume sliders.
-  - [ ] 3. Add visual-only fill streak escalation, persistent peak state, and a win recovery animation.
+  - [x] 3. Add visual-only fill streak escalation, persistent peak state, and a win recovery animation.
   - [ ] 4. Add an animated space backdrop, Calm Mode support, and automatic reduction under sustained load.
   - [ ] 5. Expand the direct-purchase shop with cats, skins, and costumes in four rarity tiers. Migrate existing saves.
   - [ ] Capture the four new QA routes in CI and commit screenshots under 300 KB each.

@@ -3,6 +3,7 @@ extends VBoxContainer
 signal exit_requested(action: StringName, result_closed: bool)
 
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
+const StreakEffect := preload("res://ui/streak_effect.gd")
 const Board := preload("res://ui/board.gd")
 const UI := preload("res://ui/controls.gd")
 const EconomyRules := preload("res://scripts/autoload/economy.gd")
@@ -41,6 +42,8 @@ var _tools: VBoxContainer
 var _result: VBoxContainer
 var _portrait: Portrait
 var _celebration: Celebration
+var _streak: StreakEffect
+var _queued_combo_lines := 0
 var _correct_lines := 0
 var _peak_lines := 0
 var _combo_theme := -1
@@ -88,6 +91,15 @@ func _ready() -> void:
 	_board = Board.new()
 	_board.puzzle = _puzzle
 	add_child(_board)
+	var hold_space := Control.new()
+	hold_space.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hold_space.custom_minimum_size.y = 70.0
+	hold_space.hide()
+	add_child(hold_space)
+	_streak = StreakEffect.new()
+	add_child(_streak)
+	move_child(_streak, 0)
+	_streak.attach(_board, _portrait, hold_space)
 	_feedback = UI.label(self, "", 23, UI.ERROR_COLOR)
 	_feedback.hide()
 	_build_tools()
@@ -254,6 +266,8 @@ func _on_rewarded_finished(placement: StringName, granted: bool) -> void:
 func _on_mistake(_cell: Vector2i) -> void:
 	_audio.play_effect(&"mistake")
 	_correct_lines = 0
+	_queued_combo_lines = 0
+	_streak.mistake()
 	_combo_theme = -1
 	_celebration.dismiss()
 	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
@@ -263,18 +277,37 @@ func _on_mistake(_cell: Vector2i) -> void:
 
 
 func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
+	_streak.fill()
 	var previous_multiplier := Combo.multiplier(_correct_lines)
 	_correct_lines += completed_lines
 	_peak_lines = maxi(_peak_lines, _correct_lines)
 	var multiplier := Combo.multiplier(_correct_lines)
 	if bonus_index < 0 and multiplier > previous_multiplier:
-		if _combo_theme < 0:
-			_combo_theme = randi_range(0, Combo.theme_count(_economy.player_level()) - 1)
-		_celebration.play_combo(_combo_theme, _correct_lines)
-		_portrait.mascot.react(Mascot.Reaction.COMBO)
+		if _streak.last_effect_frame == Engine.get_process_frames():
+			_queued_combo_lines = _correct_lines
+			_streak.last_combo_frame = Engine.get_process_frames() + 1
+			_play_queued_combo()
+		else:
+			_play_combo(_correct_lines)
 	else:
 		_audio.play_effect(&"line" if completed_lines > 0 else &"fill")
 		_portrait.mascot.react(Mascot.Reaction.FILL)
+
+
+func _play_queued_combo() -> void:
+	await get_tree().process_frame
+	if _queued_combo_lines > 0:
+		var lines := _queued_combo_lines
+		_queued_combo_lines = 0
+		_play_combo(lines)
+
+
+func _play_combo(lines: int) -> void:
+	_streak.last_combo_frame = Engine.get_process_frames()
+	if _combo_theme < 0:
+		_combo_theme = randi_range(0, Combo.theme_count(_economy.player_level()) - 1)
+	_celebration.play_combo(_combo_theme, lines)
+	_portrait.mascot.react(Mascot.Reaction.COMBO)
 
 
 func _on_finished(won: bool) -> void:
@@ -284,6 +317,11 @@ func _on_finished(won: bool) -> void:
 	_ads.set_gameplay_active(false)
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
 	if won:
+		_queued_combo_lines = 0
+		if _streak.peak >= StreakEffect.FIRST_CRACK:
+			_saving = true
+			await _streak.finish()
+			_saving = false
 		_audio.play_effect(&"win")
 		_portrait.mascot.set_idle(Mascot.Face.PROUD)
 		_portrait.mascot.react(Mascot.Reaction.WIN)

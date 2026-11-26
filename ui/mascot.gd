@@ -25,6 +25,7 @@ const REACTION_SECONDS := [0.0, 0.38, 0.62, 1.0, 1.35]
 
 var idle_expression := Face.HAPPY
 var preview_outfit: Variant = null
+var _streak_pose := 0
 var _reaction := Reaction.NONE
 var _expression := Face.HAPPY
 var _preview := false
@@ -172,6 +173,12 @@ func hold_pose(expression: Art.Face, reaction := Reaction.NONE) -> void:
 	set_process(false)
 
 
+func set_streak_pose(pose: int) -> void:
+	_streak_pose = pose
+	_apply_pose()
+	_face.queue_redraw()
+
+
 func _stop_tween() -> void:
 	if _reaction_tween != null:
 		_reaction_tween.kill()
@@ -260,8 +267,8 @@ func _apply_pose() -> void:
 	_head.rotation = pose.w + _spring.y - bounce * 0.045
 	_left_arm.rotation = pose.x + breath * 0.05 + bounce * 0.22 + dance * 0.24
 	_right_arm.rotation = -pose.y - breath * 0.04 - bounce * 0.21 + dance * 0.24
-	_left_arm.position.x = -43.0 - maxf(0.0, pose.x - 0.48) * 11.0
-	_right_arm.position.x = 43.0 + maxf(0.0, pose.y - 0.48) * 11.0
+	_left_arm.position = Vector2(-43.0 - maxf(0.0, pose.x - 0.48) * 11.0, 48)
+	_right_arm.position = Vector2(43.0 + maxf(0.0, pose.y - 0.48) * 11.0, 48)
 	_left_boot.rotation = pose.z * 1.5 - bounce * 0.11
 	_right_boot.rotation = -pose.z + bounce * 0.13
 	_tail.rotation = _spring.x - pose.z * 1.5
@@ -269,9 +276,26 @@ func _apply_pose() -> void:
 	_right_ear.rotation = -_spring.y * 1.7
 	_antenna.rotation = _spring.z
 
+	if _streak_pose == 1 and not _calm:
+		_body.position.x += sin(_time * 25.0) * 1.5
+	if _streak_pose == 2:
+		_body.position = Vector2.ZERO
+		_body.rotation = 0.0
+		_body.scale = Vector2.ONE
+		_head.rotation = 0.0
+		_left_arm.position = Vector2(-70, -22)
+		_right_arm.position = Vector2(70, -22)
+		_left_arm.rotation = 2.46
+		_right_arm.rotation = -2.46
+
 
 func _draw_face(part: CanvasItem) -> void:
-	Art.face(part, _expression, _gaze, _eyelid)
+	var expression := Face.SURPRISED if _streak_pose != 0 and not _calm else _expression
+	if _streak_pose == 2 and _calm:
+		expression = Face.THINKING
+	Art.face(part, expression, _gaze, _eyelid if _streak_pose == 0 else 1.0)
+	if _streak_pose != 0 and not _calm:
+		Art.sweat(part)
 
 
 func _draw_accents(part: CanvasItem) -> void:

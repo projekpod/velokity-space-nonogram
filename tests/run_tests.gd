@@ -87,6 +87,7 @@ func _run() -> void:
 	await _test_nonogram_flow()
 	await _test_mascot_reactions()
 	await _test_calm_visuals()
+	await _test_fill_streak()
 	await _test_celebrations()
 	await _test_milestone_celebrations()
 	_test_daily_selection()
@@ -434,6 +435,8 @@ func _test_nonogram_flow() -> void:
 	check(puzzle.at(next_hint) == Puzzle.Cell.FILLED and save.data.coins == 0, "A rewarded ad only applies its hint after the grant")
 	for cell in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(0, 2)]:
 		puzzle.mark(cell, false)
+	while screen._saving:
+		await process_frame
 	check(puzzle.state == Puzzle.State.WON and screen._result.visible and save.data.coins == 60, "A win opens a result and saves its capped first-clear coins")
 	screen._request_ad(&"double_coins")
 	await ads.rewarded_finished
@@ -464,7 +467,7 @@ func _test_first_puzzle() -> void:
 	screen._leave(&"retry")
 	screen = main._column.get_child(0) as NonogramScreen
 	check(screen.first_puzzle and screen._tutorial == null and not save.data.onboarding_complete, "Retry preserves an in-session skip without completing onboarding")
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	screen._celebration.dismiss()
 	check(save.data.onboarding_complete and _press_button(screen._result, "GAME_BACK"), "The saved first win opens the main menu")
 	check(_press_button(main._column, "MENU_PLAY"), "Main menu is available after onboarding")
@@ -515,6 +518,51 @@ func _test_mascot_reactions() -> void:
 	DirAccess.remove_absolute(save.storage_path)
 	save.data = previous_data
 	save.storage_path = previous_path
+
+
+func _test_fill_streak() -> void:
+	var save := root.get_node("Save")
+	var events := root.get_node("Events")
+	var original: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	save.data.settings.vibration = false
+	var screen := NonogramScreen.new()
+	screen.level = {
+		"id": "streak-test", "size": 5, "solution": ["aaaa.", "aaaa.", "aaaa.", "aaaa.", "aaaaa"],
+		"palette": {}, "title": {"en": "Test", "id": "Tes"},
+	}
+	root.add_child(screen)
+	var streak := screen._streak
+	screen._puzzle.mark(Vector2i(0, 0), false)
+	screen._puzzle.mark(Vector2i(4, 0), true)
+	check(streak.current == 1, "Correct X marks neither count nor break the fill streak")
+	for index in range(1, 7):
+		screen._puzzle.mark(Vector2i(index % 4, floori(index / 4.0)), false)
+	check(streak.peak == 7 and streak.shown == 0, "Seven fills establish a record and queue the effect")
+	for frame_index in range(6):
+		await process_frame
+	check(streak.shown == 7 and streak._holding and screen._portrait.mascot._streak_pose == 2, "The seventh fill puts both paws beneath the board")
+	var frame := streak.last_effect_frame
+	screen._puzzle.mark(Vector2i(4, 2), false)
+	check(streak.current == 0 and streak.peak == 7 and streak._holding, "A mistake resets the run and keeps its peak pose")
+	for index in range(7, 14):
+		screen._puzzle.mark(Vector2i(index % 4, floori(index / 4.0)), false)
+	await process_frame
+	await process_frame
+	check(streak.current == 7 and streak.last_effect_frame == frame, "Matching the prior run does not replay the effect")
+	save.data.settings.calm_mode = true
+	events.settings_changed.emit()
+	screen._puzzle.mark(Vector2i(2, 3), false)
+	await process_frame
+	await process_frame
+	check(streak.shown == 8 and streak.last_effect_frame != streak.last_combo_frame, "A new record escalates on a different frame from the combo")
+	check(screen._board._shake_time == 0.0 and streak._holding, "Calm Mode keeps the pose and skips the shake")
+	var before: int = save.data.coins
+	screen.queue_free()
+	await process_frame
+	check(save.data.coins == before, "Streak effects never grant coins during play")
+	save.data = original
+	events.settings_changed.emit()
 
 
 func _test_calm_visuals() -> void:
@@ -610,11 +658,7 @@ func _test_level_progression() -> void:
 	check(main._column == moon_list and main._play(20) == null, "A locked level cannot start through selection or direct play")
 
 	var screen: NonogramScreen = main._play(0)
-	var solution: Array = levels[0].solution
-	for y in range(solution.size()):
-		for x in range(solution.size()):
-			if solution[y][x] != ".":
-				screen._puzzle.mark(Vector2i(x, y), false)
+	await _solve_nonogram(screen)
 	var buttons := screen._result.find_children("*", "Button", true, false)
 	check(not main._is_level_unlocked(1) and not buttons.any(func(button: Node) -> bool: return button.text == "GAME_NEXT"), "An unsaved win cannot expose a locked Next")
 	save.storage_path = path
@@ -879,6 +923,9 @@ func _solve_nonogram(screen: NonogramScreen) -> void:
 			if screen.level.solution[y][x] != ".":
 				screen._puzzle.mark(Vector2i(x, y), false)
 
+	while screen._saving:
+		await process_frame
+
 
 func _press_button(parent: Node, key: String) -> bool:
 	for button: Button in parent.find_children("*", "Button", true, false):
@@ -903,16 +950,17 @@ func _test_bonus_flow() -> void:
 		economy.award_nonogram(main._levels[i].id, 3)
 	check(main._open_bonus() == null and economy.award_bonus(0) == -1, "Three badges cannot open a round or claim its rewards")
 	var normal: NonogramScreen = main._play(0)
-	_solve_nonogram(normal)
+	await _solve_nonogram(normal)
 	check(economy.badge_count() == 4 and normal._celebration._detail.text == tr("BONUS_UNLOCKED"), "A flawless fourth clear saves the badge and announces the unlock")
 	normal._celebration.dismiss()
 	var balance: int = economy.balance()
 	var xp: int = save.data.meta.xp
 	check(_press_button(normal._result, "BONUS_TITLE"), "The fourth win offers the Bonus Round")
 	var first := main._column.get_child(0) as NonogramScreen
+	var first_id: String = first.level.id
 	check(first.bonus_index == 0 and first._puzzle.size == 5 and first._hint == null, "The round opens the first dedicated 5x5 without paid hints")
 	save.storage_path = path + "/missing-dir/save.json"
-	_solve_nonogram(first)
+	await _solve_nonogram(first)
 	check(economy.balance() == balance and economy.next_bonus_index() == 0, "Failed Bonus Round save keeps the current stage and coins")
 	save.storage_path = path
 	check(_press_button(first._result, "SAVE_RETRY") and economy.balance() == balance + 10, "Retrying the bonus save awards x1 once")
@@ -920,25 +968,26 @@ func _test_bonus_flow() -> void:
 	first._leave(&"levels")
 	check(save.load_game() == OK and _press_button(main._column, "BONUS_TITLE"), "Reloading keeps the round accessible from the planet list")
 	var second := main._column.get_child(0) as NonogramScreen
-	check(second.bonus_index == 1 and second.level.id != first.level.id, "Resuming opens the next separate puzzle")
+	var second_id: String = second.level.id
+	check(second.bonus_index == 1 and second_id != first_id, "Resuming opens the next separate puzzle")
 	for y in range(second._puzzle.size):
 		for x in range(second._puzzle.size):
 			second._puzzle.mark(Vector2i(x, y), second.level.solution[y][x] != ".")
 	check(second._puzzle.state == Puzzle.State.LOST and economy.next_bonus_index() == 1 and economy.balance() == balance + 10, "Losing leaves the current bonus stage available with no coins")
 	check(_press_button(second._result, "GAME_RETRY"), "A lost bonus puzzle can be retried")
 	var retry := main._column.get_child(0) as NonogramScreen
-	_solve_nonogram(retry)
-	check(retry.level.id == second.level.id and economy.balance() == balance + 30, "The second stage awards x2 on retry")
+	await _solve_nonogram(retry)
+	check(retry.level.id == second_id and economy.balance() == balance + 30, "The second stage awards x2 on retry")
 	check(_press_button(retry._result, "GAME_NEXT"), "The second win advances in the same round")
 	var third := main._column.get_child(0) as NonogramScreen
-	_solve_nonogram(third)
+	await _solve_nonogram(third)
 	check(third.bonus_index == 2 and economy.balance() == balance + 60, "The final stage awards x3 for a total of 60")
 	check(save.data.meta.xp == xp + 120 and economy.owns_costume("bonus_booster"), "Three bonus stages grant 40 XP each and unlock their achievement costume")
 	check(third._celebration.tier == 4 and third._celebration._title.text == "CELEBRATION_BONUS", "Completing the round shows the max celebration")
 	check(save.load_game() == OK and economy.next_bonus_index() == -1 and economy.badge_count() == 4, "Finishing exhausts one round and preserves badges across reload")
 	for i in range(4, 8):
 		economy.award_nonogram(main._levels[i].id, 3)
-	check(economy.next_bonus_index() == 3 and Bonus.puzzle_for(3).id != first.level.id, "Four additional badges open a new set of puzzles")
+	check(economy.next_bonus_index() == 3 and Bonus.puzzle_for(3).id != first_id, "Four additional badges open a new set of puzzles")
 	main.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(path)
@@ -996,12 +1045,12 @@ func _test_milestone_celebrations() -> void:
 	root.add_child(main)
 	var level: Dictionary = main._levels[0]
 	var screen: NonogramScreen = main._play(0)
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	check(screen._celebration.tier == 3, "The first flawless clear triggers the big celebration")
 	for i in range(1, 19):
 		save.data.nonogram[main._levels[i].id] = {"reward": 25, "doubled": false}
 	screen = main._play(19)
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	check(screen._celebration.tier == 4 and screen._celebration._title.text == "CELEBRATION_ALBUM", "The final planet clear celebrates the completed album")
 	check(save.data.nonogram.has(level.id), "Album completion retains the first clear")
 
@@ -1418,7 +1467,7 @@ func _test_audio_smoke() -> void:
 	var music: AudioStreamPlayer = audio._music
 	var music_bus := AudioServer.get_bus_index("Music")
 	var sfx_bus := AudioServer.get_bus_index("SFX")
-	check(audio._effects.size() == 9, "Import all nine procedural effects")
+	check(audio._effects.size() == 11, "Import all procedural effects including streak cues")
 	for player: AudioStreamPlayer in audio._effects.values():
 		check(player.stream is AudioStreamWAV and player.stream.get_length() > 0 and player.stream.get_length() <= 1.05 and player.stream.loop_mode == AudioStreamWAV.LOOP_DISABLED, "A short effect imports as a nonlooping WAV")
 	for track: AudioStreamWAV in [audio._menu_music, audio._puzzle_music]:

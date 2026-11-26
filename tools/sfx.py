@@ -4,6 +4,7 @@ from array import array
 from io import BytesIO
 from math import copysign, exp, pi, sin, sqrt, tau
 from pathlib import Path
+import random
 import struct
 import sys
 import wave
@@ -16,6 +17,8 @@ OUTPUT = Path(__file__).resolve().parents[1] / "audio"
 
 # Cue = start time, length, MIDI note, gain, and ending pitch shift in semitones.
 EFFECTS = {
+    "crackle": [(0, .1, 90, .055, -7), (.08, .13, 80, .03, -4)],
+    "rumble": [(0, .38, 29, .24, -3), (.04, .34, 41, .13, -6)],
     "fill": [(0, .105, 72, .30, 4)],
     "cross": [(0, .095, 65, .24, -3)],
     "mistake": [(0, .19, 57, .26, -4), (.063, .15, 52, .13, -2)],
@@ -63,11 +66,18 @@ def add_note(buffer, start, length, midi, gain, glide=0, *, pad=False):
         buffer[(first_sample + index) % len(buffer)] += gain * fade_in * fade_out * decay * tone
 
 
-def render_effect(notes):
+def render_effect(notes, name=""):
     duration = max(start + length for start, length, *_ in notes) + .02
     output = [0.0] * round(duration * RATE)
     for note in notes:
         add_note(output, *note)
+    if name == "crackle":
+        rng = random.Random(749)
+        for index in range(len(output)):
+            time = index / RATE
+            envelope = sum(exp(-abs(time - hit) * 120) for hit in (.023, .057, .112, .153))
+            edge = min(1, index / 120, (len(output) - 1 - index) / 120)
+            output[index] += rng.uniform(-.11, .11) * envelope * edge
     return output
 
 
@@ -135,7 +145,7 @@ def wave_bytes(samples, loop=False):
 def main():
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for name, notes in EFFECTS.items():
-        (OUTPUT / f"{name}.wav").write_bytes(wave_bytes(render_effect(notes)))
+        (OUTPUT / f"{name}.wav").write_bytes(wave_bytes(render_effect(notes, name)))
     for name, score in MUSIC.items():
         (OUTPUT / f"music_{name}.wav").write_bytes(wave_bytes(render_music(score), loop=True))
     size = sum(path.stat().st_size for path in OUTPUT.glob("*.wav"))

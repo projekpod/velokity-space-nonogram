@@ -17,7 +17,7 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak"]:
 		return false
 	if route not in ["playthrough", "preview"]:
 		_seed_progress(main)
@@ -52,6 +52,14 @@ static func open(main: Main) -> bool:
 			screen._puzzle.place(Vector2i((x + 1) % screen._puzzle.size, 0), true)
 		"mascot", "reactions":
 			Gallery.open(main, route == "reactions")
+		"streak":
+			var screen := main._play(main._planet_levels("saturn")[0])
+			if screen == null:
+				return false
+			screen._streak.set_process(false)
+			_fill_rows(screen, 2)
+			screen._celebration.dismiss()
+			screen._streak.freeze_at(maxi(9, screen._streak.peak))
 		"combo":
 			if not _open_combo(main):
 				push_error("The QA puzzle could not reach a combo")

@@ -7,6 +7,7 @@ var _fills: Dictionary = {}
 var _rows: Dictionary = {}
 var _columns: Dictionary = {}
 var _shake_time := 0.0
+var _shake_strength := 5.0
 
 const FILL_SECONDS := 0.24
 const GLOW_SECONDS := 0.30
@@ -57,15 +58,23 @@ func _glow(is_row: bool, index: int) -> void:
 
 func _shake() -> void:
 	if not _calm:
+		_shake_strength = 5.0
 		_rows.clear()
 		_columns.clear()
 		_shake_time = SHAKE_SECONDS
 		set_process(true)
 
 
+func streak_shake(strength: float) -> void:
+	if not _calm:
+		_shake_strength = strength
+		_shake_time = SHAKE_SECONDS
+		set_process(true)
+
+
 func _shake_offset() -> Vector2:
 	var fraction := _shake_time / SHAKE_SECONDS
-	return Vector2(sin(fraction * TAU * 2.0) * fraction * 5.0, 0.0)
+	return Vector2(sin(fraction * TAU * 2.0) * fraction * _shake_strength, 0.0)
 
 
 func _bounced(tile: Rect2, cell: Vector2i) -> Rect2:

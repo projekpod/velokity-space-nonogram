@@ -2,7 +2,7 @@ extends Node
 
 const EFFECTS := &"SFX"
 const MUSIC := &"Music"
-const CUES := [&"fill", &"cross", &"mistake", &"line", &"combo", &"win", &"coin", &"button", &"celebration"]
+const CUES := [&"fill", &"cross", &"mistake", &"line", &"combo", &"win", &"coin", &"button", &"celebration", &"crackle", &"rumble"]
 
 @onready var _settings := get_node("/root/Settings")
 @onready var _events := get_node("/root/Events")
@@ -25,6 +25,8 @@ func _ready() -> void:
 		player.bus = EFFECTS
 		player.stream = load("res://audio/%s.wav" % effect)
 		player.max_polyphony = 2 if effect in [&"fill", &"cross"] else 1
+		if effect in [&"crackle", &"rumble"]:
+			player.volume_db = -12.0 if effect == &"crackle" else -9.0
 		_effects[effect] = player
 		add_child(player)
 	_music = AudioStreamPlayer.new()

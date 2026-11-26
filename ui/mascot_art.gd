@@ -244,6 +244,14 @@ static func _mouth(part: CanvasItem, expression: Face) -> void:
 			_stroke(part, [Vector2(-9, 31), Vector2(0, 32), Vector2(9, 31)], CREAM, 2.5)
 
 
+static func sweat(part: CanvasItem) -> void:
+	part.draw_colored_polygon(PackedVector2Array([
+		Vector2(50, -27), Vector2(57, -11), Vector2(55, -5),
+		Vector2(49, -3), Vector2(44, -8), Vector2(44, -13),
+	]), Color("#78d9f7"))
+	part.draw_circle(Vector2(49, -10), 2.0, WHITE, true)
+
+
 static func visor(part: CanvasItem) -> void:
 	_arc(part, Vector2(0, -7), Vector2(75, 60), 3.63, 4.18, Color("#b7f2f2a6"), 4)
 	_arc(part, Vector2(0, -7), Vector2(75, 60), 4.31, 4.48, Color("#e6fbffb3"), 3)

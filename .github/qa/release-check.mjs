@@ -14,8 +14,11 @@ const bonus = await levels("bonus/", "bonus-", 3);
 const browser = await launch();
 
 async function solve(page, level) {
-  const start = await waitState(page, snapshot => snapshot.grid && snapshot.state === 0 && snapshot.lives === 3);
-  for (const [x, y] of fills(level)) await cell(page, start.grid, level.size, x, y);
+  await waitState(page, snapshot => snapshot.grid && snapshot.state === 0 && snapshot.lives === 3);
+  for (const [x, y] of fills(level)) {
+    const { grid } = await waitState(page, snapshot => snapshot.grid && snapshot.state === 0);
+    await cell(page, grid, level.size, x, y);
+  }
   const result = await waitState(page, snapshot => snapshot.state === 1);
   assert.equal(result.scene, level.id);
   assert.equal(result.lives, 3);
@@ -244,7 +247,7 @@ async function measurePhone() {
     const errors = watchErrors(page);
     const performanceUrl = new URL("web-qa/index.html?qa=preview", baseUrl);
     await openGame(page, performanceUrl, "preview");
-    const initial = await waitState(page, s => s.grid && s.state === 0);
+    await waitState(page, s => s.grid && s.state === 0);
     const throttle = Number(process.env.VELOKITY_CPU_THROTTLE ?? 1);
     if (throttle > 1) {
       const cdp = await page.context().newCDPSession(page);
@@ -263,7 +266,7 @@ async function measurePhone() {
       requestAnimationFrame(tick);
     }));
     for (const [x, y] of fills(moon[0])) {
-      await cell(page, initial.grid, moon[0].size, x, y);
+      await cell(page, (await state(page)).grid, moon[0].size, x, y);
       await page.waitForTimeout(170);
     }
     const { frames, elapsed } = await animation;
