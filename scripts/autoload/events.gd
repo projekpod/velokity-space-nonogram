@@ -7,3 +7,6 @@ signal coins_changed(balance: int)
 
 @warning_ignore("unused_signal")
 signal coins_earned
+
+@warning_ignore("unused_signal")
+signal reduced_effects_enabled

@@ -41,9 +41,16 @@ func attach(board: Board, intro: Portrait, room: Control) -> void:
 	_room = room
 	_mascot = intro.mascot
 	_refresh_motion()
-	get_node("/root/Events").settings_changed.connect(_refresh_motion)
+	var events := get_node("/root/Events")
+	events.settings_changed.connect(_refresh_motion)
+	events.reduced_effects_enabled.connect(_redraw_layout_after_reduction)
 	_board.item_rect_changed.connect(_redraw_layout)
 	set_process(false)
+
+
+func _redraw_layout_after_reduction() -> void:
+	_refresh_motion()
+	_redraw_layout()
 
 
 func _redraw_layout() -> void:

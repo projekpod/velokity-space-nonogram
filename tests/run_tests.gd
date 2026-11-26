@@ -591,7 +591,17 @@ func _test_calm_visuals() -> void:
 	mascot._apply_pose()
 	board.puzzle.mark(Vector2i.ZERO, false)
 	board.puzzle.mark(Vector2i(2, 1), false)
-	check(not backdrop.is_processing() and backdrop._layers[2].position == Vector2.ZERO, "Calm Mode holds the star layers still")
+	var twinkle: float = backdrop._twinkles[0].modulate.a
+	backdrop._process(0.25)
+	check(backdrop._layers[2].position == Vector2.ZERO and backdrop._twinkles[0].modulate.a != twinkle, "Calm Mode keeps slow twinkling over still layers")
+	check(backdrop._active.all(func(event: Dictionary) -> bool: return event.is_empty()), "Calm Mode suppresses space events")
+	for frame in range(60):
+		backdrop._watch_frame_time(0.01)
+	check(not backdrop._reduced, "Fast frames keep full effects")
+	for frame in range(120):
+		backdrop._watch_frame_time(0.027)
+	check(backdrop._reduced and root.get_meta(&"reduced_effects", false), "Sustained slow frames enable reduced effects")
+	root.remove_meta(&"reduced_effects")
 	check(absf(mascot._body.position.y) < 1.5 and not mascot._sparks.emitting, "Calm Mode shortens the reaction and limits mascot motion")
 	check(board._fills.is_empty() and board._rows.is_empty() and board._columns.is_empty() and board._shake_time == 0.0, "Calm Mode skips board animations")
 	check(board.puzzle.lives == 2 and board.puzzle.at(Vector2i.ZERO) == Puzzle.Cell.FILLED, "Calm Mode preserves play and mistake correction")
