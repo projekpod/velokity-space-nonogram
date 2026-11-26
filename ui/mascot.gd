@@ -1,5 +1,7 @@
 extends Control
 
+const CatArt := preload("res://ui/cat_art.gd")
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
 const Art := preload("res://ui/mascot_art.gd")
 const Face := Art.Face
 const Meta := preload("res://scripts/meta/progression.gd")
@@ -25,6 +27,16 @@ const REACTION_SECONDS := [0.0, 0.38, 0.62, 1.0, 1.35]
 
 var idle_expression := Face.HAPPY
 var preview_outfit: Variant = null
+var preview_cat := ""
+var preview_skin := ""
+var _cat_id: String
+var _skin_id: String
+var _aura: Node2D
+var _legendary := false
+var _reduced := false
+var _coat: Node2D
+var _coat_frame := 0
+static var _aura_texture: GradientTexture2D
 var _streak_pose := 0
 var _reaction := Reaction.NONE
 var _expression := Face.HAPPY
@@ -58,13 +70,22 @@ var _sparks: CPUParticles2D
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var outfit: Dictionary = get_node("/root/Economy").equipped_costumes() if preview_outfit == null else preview_outfit
+	var economy := get_node("/root/Economy")
+	var outfit: Dictionary = economy.equipped_costumes() if preview_outfit == null else preview_outfit
+	_cat_id = economy.equipped_cosmetic("cat") if preview_cat.is_empty() else preview_cat
+	_skin_id = economy.equipped_cosmetic("skin") if preview_skin.is_empty() else preview_skin
+	var breed: Dictionary = CatArt.BREEDS[_cat_id]
+	_legendary = Cosmetics.CATS[_cat_id].rarity == Cosmetics.Rarity.LEGENDARY or _skin_id == "gold"
+	for id: String in outfit.values():
+		_legendary = _legendary or Meta.COSTUMES.get(id, {}).get("rarity") == Cosmetics.Rarity.LEGENDARY
 	var suit_color := _outfit_color(outfit, "suit")
 	_rig = Node2D.new()
 	add_child(_rig)
+	if _legendary:
+		_aura = _part(_rig, Vector2.ZERO, _draw_aura)
 	_body = Node2D.new()
 	_rig.add_child(_body)
-	_tail = _part(_body, Vector2(45, 75), Art.tail)
+	_tail = _part(_body, Vector2(45, 75), _draw_tail)
 	_part(_body, Vector2.ZERO, Art.backpack, false, _outfit_color(outfit, "jetpack"))
 	_left_boot = _part(_body, Vector2(-26, 97), Art.boot, true, suit_color)
 	_right_boot = _part(_body, Vector2(23, 97), Art.boot, false, suit_color)
@@ -72,16 +93,19 @@ func _ready() -> void:
 	_right_arm = _part(_body, Vector2(43, 48), Art.arm, false, suit_color)
 	_part(_body, Vector2.ZERO, Art.suit, false, suit_color)
 	_head = _part(_body, Vector2(0, -20), Art.helmet, false, _outfit_color(outfit, "helmet"))
-	_left_ear = _part(_head, Vector2(-37, -33), Art.ear)
-	_right_ear = _part(_head, Vector2(37, -33), Art.ear, true)
-	_part(_head, Vector2.ZERO, Art.fur)
+	var ear_pivot: Vector2 = breed.pivot
+	_left_ear = _part(_head, Vector2(-ear_pivot.x, ear_pivot.y), _draw_ear)
+	_right_ear = _part(_head, ear_pivot, _draw_ear, true)
+	_coat = _part(_head, Vector2.ZERO, _draw_coat)
 	_face = _part(_head, Vector2.ZERO, _draw_face)
 	_part(_head, Vector2.ZERO, Art.visor)
 	_antenna = _part(_head, Vector2(-55, -82), Art.antenna, false, _outfit_color(outfit, "accessory"))
 	_accents = _part(_rig, Vector2.ZERO, _draw_accents)
 	_create_sparks()
 	resized.connect(_fit)
-	get_node("/root/Events").settings_changed.connect(_refresh_motion)
+	var events := get_node("/root/Events")
+	events.settings_changed.connect(_refresh_motion)
+	events.reduced_effects_enabled.connect(_refresh_motion)
 	_refresh_motion()
 	_fit()
 	set_idle(idle_expression)
@@ -203,6 +227,9 @@ func _set_progress(progress: float) -> void:
 
 
 func _refresh_motion() -> void:
+	if not is_inside_tree():
+		return
+	_reduced = get_viewport().get_meta(&"reduced_effects", false)
 	_calm = _settings.get_value("calm_mode")
 	_sparks.visible = not _calm
 	if _calm:
@@ -219,6 +246,13 @@ func _refresh_motion() -> void:
 
 func _process(delta: float) -> void:
 	_time += delta
+	if not _calm and not _reduced:
+		var coat_frame := int(_time * 8.0)
+		if _skin_id == "galaxy" and _coat_frame != coat_frame:
+			_coat_frame = coat_frame
+			_coat.queue_redraw()
+		if _legendary:
+			_aura.modulate.a = 0.76 + sin(_time * 1.45) * 0.22
 	if not _calm:
 		_animate_blink(delta)
 		var aim := (_rig.get_local_mouse_position() - _head.position).limit_length(160.0) * 0.027
@@ -289,11 +323,41 @@ func _apply_pose() -> void:
 		_right_arm.rotation = -2.46
 
 
+func _draw_tail(part: CanvasItem) -> void:
+	CatArt.tail(part, _cat_id, _skin_id)
+
+
+func _draw_ear(part: CanvasItem) -> void:
+	CatArt.ear(part, _cat_id, _skin_id)
+
+
+func _draw_coat(part: CanvasItem) -> void:
+	CatArt.fur(part, _cat_id, _skin_id, _coat_frame / 8.0)
+
+
+func _draw_aura(part: CanvasItem) -> void:
+	if _aura_texture == null:
+		_aura_texture = GradientTexture2D.new()
+		_aura_texture.width = 128
+		_aura_texture.height = 128
+		_aura_texture.fill = GradientTexture2D.FILL_RADIAL
+		_aura_texture.fill_from = Vector2.ONE * 0.5
+		_aura_texture.fill_to = Vector2(1, 0.5)
+		var gradient := Gradient.new()
+		gradient.offsets = PackedFloat32Array([0.0, 0.60, 0.85, 1.0])
+		gradient.colors = PackedColorArray([Color("#ffda7540"), Color("#f1af5270"), Color("#e0a45425"), Color("#ffd88b00")])
+		_aura_texture.gradient = gradient
+	part.draw_texture_rect(_aura_texture, Rect2(-145, -143, 290, 290), false)
+	Art.spark(part, Vector2(-111, -62), 9.0, Art.GOLD)
+	Art.spark(part, Vector2(120, 28), 7.0, Art.GOLD)
+	Art.spark(part, Vector2(89, 91), 5.0, Art.GOLD)
+
+
 func _draw_face(part: CanvasItem) -> void:
 	var expression := Face.SURPRISED if _streak_pose != 0 and not _calm else _expression
 	if _streak_pose == 2 and _calm:
 		expression = Face.THINKING
-	Art.face(part, expression, _gaze, _eyelid if _streak_pose == 0 else 1.0)
+	Art.face(part, expression, _gaze, _eyelid if _streak_pose == 0 else 1.0, CatArt.BREEDS[_cat_id].eyes)
 	if _streak_pose != 0 and not _calm:
 		Art.sweat(part)
 

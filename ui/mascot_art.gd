@@ -182,9 +182,9 @@ static func fur(part: CanvasItem) -> void:
 		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), Color("#f6af9c"))
 
 
-static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float) -> void:
+static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float, eye_spacing := 25.0) -> void:
 	for side in [-1, 1]:
-		var eye := Vector2(side * 25.0, 1)
+		var eye := Vector2(side * eye_spacing, 1)
 		_draw_eye(part, eye, side, expression, gaze, eyelid)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-7, 21), Vector2(-4, 18), Vector2(4, 18), Vector2(7, 21), Vector2(0, 27),

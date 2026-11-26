@@ -19,6 +19,7 @@ const Backdrop := preload("res://ui/space_backdrop.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Celebration := preload("res://ui/celebration.gd")
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
 const AlbumPicture := preload("res://ui/album_picture.gd")
@@ -66,6 +67,7 @@ func _run() -> void:
 	_test_combo_rewards_and_migration()
 	_test_xp_migration()
 	_test_costume_economy()
+	_test_cosmetic_migration()
 	_test_login_calendar()
 	await _test_meta_menu()
 	_test_catalog()
@@ -1126,17 +1128,17 @@ func _test_costume_economy() -> void:
 		if item.has("price"):
 			min_price = mini(min_price, item.price)
 			max_price = maxi(max_price, item.price)
-	check(min_price == 400 and max_price == 2000, "Shop prices span the requested range")
+	check(min_price == 425 and max_price == 15000, "Shop prices span the requested range")
 	check(not economy.buy_costume("moonlight") and not economy.buy_costume("pathfinder"), "Album and achievement rewards cannot be purchased")
 	check(not economy.buy_costume("prism_pack") and not economy.equip_costume("helmet", "mint_visor"), "Reject an unaffordable purchase and an unowned equipment request")
 	save.storage_path = path + "/missing-dir/save.json"
 	check(not economy.buy_costume("mint_visor") and economy.balance() == 1600 and not economy.owns_costume("mint_visor"), "A failed purchase changes neither balance nor ownership")
 	save.storage_path = path
-	check(economy.buy_costume("mint_visor") and economy.balance() == 1200 and economy.owns_costume("mint_visor"), "Purchase saves ownership and debits the set price")
-	check(not economy.buy_costume("mint_visor") and economy.balance() == 1200, "Owning an item prevents duplicate charges")
+	check(economy.buy_costume("mint_visor") and economy.balance() == 1175 and economy.owns_costume("mint_visor"), "Purchase saves ownership and debits the set price")
+	check(not economy.buy_costume("mint_visor") and economy.balance() == 1175, "Owning an item prevents duplicate charges")
 	check(not economy.equip_costume("suit", "mint_visor") and economy.equip_costume("helmet", "mint_visor"), "Only the matching slot can equip the purchased item")
 	check(economy.buy_costume("nebula_suit") and economy.equip_costume("suit", "nebula_suit"), "Unlock and equip a second slot independently")
-	check(save.load_game() == OK and economy.equipped_costumes() == {"helmet": "mint_visor", "suit": "nebula_suit"} and economy.balance() == 550, "Reload two equipped slots and the balance")
+	check(save.load_game() == OK and economy.equipped_costumes() == {"helmet": "mint_visor", "suit": "nebula_suit"} and economy.balance() == 425, "Reload two equipped slots and the balance")
 	check(economy.equip_costume("helmet", "") and economy.equipped_costumes() == {"suit": "nebula_suit"}, "Resetting one slot preserves the other")
 	check(not economy.owns_costume("pathfinder") and not economy.owns_costume("perfect_signal"), "Achievements start locked")
 
@@ -1151,6 +1153,48 @@ func _test_costume_economy() -> void:
 	check(economy.owns_costume("pathfinder") and economy.owns_costume("perfect_signal"), "First clears and flawless badges unlock their achievement costumes")
 	check(save.load_game() == OK and economy.owns_costume("moonlight") and economy.equip_costume("helmet", "moonlight"), "Reloading preserves eligibility for album-exclusive equipment")
 
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+func _test_cosmetic_migration() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-cosmetics-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	var old := {"version": 7, "coins": 32000, "meta": {"purchased": {"mint_visor": true, "prism_pack": true}, "equipped": {"helmet": "mint_visor"}}}
+	check(save.write_game(old) == OK and save.load_game() == OK and save.data.version == 8, "Load version seven and bump the save schema")
+	check(economy.owns_costume("mint_visor") and economy.owns_costume("prism_pack") and economy.equipped_costumes().helmet == "mint_visor", "Repriced costumes retain ownership and equipment after migration")
+	check(economy.equipped_cosmetic("cat") == "velokity" and economy.equipped_cosmetic("skin") == "natural", "Migration equips the free default cat and coat")
+	check(not economy.equip_cosmetic("cat", "savannah") and not economy.buy_cosmetic("cat", "velokity"), "Reject an unowned equip or a purchase of the free cat")
+	check(economy.buy_cosmetic("cat", "savannah") and economy.balance() == 7000, "Savannah purchases directly for 25000")
+	check(not economy.buy_cosmetic("cat", "savannah") and not economy.buy_cosmetic("skin", "gold"), "Reject duplicate and unaffordable cosmetic purchases")
+	check(economy.equip_cosmetic("cat", "savannah") and economy.buy_cosmetic("skin", "galaxy") and economy.equip_cosmetic("skin", "galaxy"), "Equip cat and skin independently")
+	check(save.load_game() == OK and economy.balance() == 1000 and economy.equipped_cosmetic("cat") == "savannah" and economy.equipped_cosmetic("skin") == "galaxy", "Round-trip ownership, equipment and coins")
+	check(economy.owns_cosmetic("cat", "savannah") and economy.owns_cosmetic("skin", "galaxy"), "Reload both purchased categories")
+	var malformed: Dictionary = save.data.duplicate(true)
+	malformed.meta.skins.fake = true
+	malformed.meta.cat = "maine_coon"
+	var cleaned := SaveScript.migrate(malformed)
+	check(not cleaned.meta.skins.has("fake") and cleaned.meta.cat == "velokity" and cleaned.meta.skin == "galaxy", "Reject unknown skin IDs and unowned equipped cats")
+	var rarity := Cosmetics.Rarity
+	check(Cosmetics.CATS.size() == 10 and Cosmetics.SKINS.size() == 10, "Catalog includes every requested breed and coat plus the natural coat")
+	var tiers := [0, 0, 0, 0]
+	for item: Dictionary in Meta.COSTUMES.values():
+		if item.has("price"):
+			tiers[item.rarity] += 1
+			if item.rarity == rarity.EPIC:
+				check(item.price >= 5000 and item.price <= 8000, "Epic costume price is in range")
+			if item.rarity == rarity.LEGENDARY:
+				check(item.price >= 12000 and item.price <= 15000, "Legendary costume price is in range")
+	check(tiers == [4, 3, 3, 2], "All seven legacy shop costumes remain and five luxury costumes are available")
+	var cat := Mascot.new()
+	root.add_child(cat)
+	check(cat._cat_id == "savannah" and cat._skin_id == "galaxy" and cat._aura != null, "The equipped cat, coat and legendary aura appear in the normal mascot")
+	cat.free()
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path
@@ -1210,8 +1254,9 @@ func _test_meta_menu() -> void:
 	main.show_menu()
 	check(_press_button(main._column, "META_SHOP"), "The menu opens the wardrobe and shop")
 	screen = main._column.get_child(0) as MetaScreen
+	check(_press_button(screen, "SHOP_TAB_COSTUME"), "The shop opens the Costumes tab")
 	check(_press_button(screen, "COSTUME_MINT_VISOR") and screen._portrait.preview_outfit.helmet == "mint_visor" and economy.equipped_costumes().is_empty(), "Previewing a shop item leaves the saved outfit unchanged")
-	check(_press_button(screen, tr("COSTUME_BUY") % 400) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
+	check(_press_button(screen, tr("COSTUME_BUY") % 425) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
 	check(_press_button(screen, "COSTUME_EQUIP") and economy.equipped_costumes().helmet == "mint_visor", "The shop action equips a purchased costume")
 	main.show_menu()
 	check(_press_button(main._column, "META_LOGIN"), "The menu opens the separate login calendar")
@@ -1412,6 +1457,7 @@ func _test_shop_monetization() -> void:
 	check(not _press_button(screen, "IAP_TITLE") and screen.page == MetaScreen.Page.SHOP, "Hide the IAP entry when no product is available")
 	screen._open_purchases()
 	check(screen.page == MetaScreen.Page.SHOP, "An unavailable purchase page cannot be opened directly")
+	check(_press_button(screen, "SHOP_TAB_COSTUME"), "Costume slots remain accessible after a rewarded transaction")
 	var preview := screen.find_children("*", "Button", true, false).filter(func(button: Button) -> bool: return button.text == "COSTUME_MINT_VISOR")
 	check(preview.size() == 1 and preview[0].get_theme_stylebox("normal") is StyleBoxEmpty, "Costume names have no input-like background")
 	check(not Purchases.new().request_purchase(&"no_ads"), "The IAP stub cannot start a purchase")

@@ -8,7 +8,8 @@ signal _queue_drained
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
-const VERSION := 7
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
+const VERSION := 8
 const VOLUME_SETTINGS := ["music_volume", "effects_volume"]
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
@@ -190,6 +191,9 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	var stored_meta: Variant = raw.get("meta")
 	if version >= 5 and stored_meta is Dictionary:
 		_restore_meta(result.meta, stored_meta)
+		if version >= 8:
+			_restore_cosmetics(result.meta, stored_meta, "cat", "cats", Cosmetics.DEFAULT_CAT)
+			_restore_cosmetics(result.meta, stored_meta, "skin", "skins", Cosmetics.DEFAULT_SKIN)
 	var ad_claims: Variant = raw.get("free_coin_ads")
 	if version >= 6 and ad_claims is Dictionary:
 		var day: Variant = ad_claims.get("last_day")
@@ -212,6 +216,16 @@ static func _restore_meta(meta: Dictionary, stored: Dictionary) -> void:
 			meta.purchased[id] = true
 		if equipped is Dictionary and equipped.get(costume.slot) == id:
 			meta.equipped[costume.slot] = id
+
+
+static func _restore_cosmetics(meta: Dictionary, stored: Dictionary, category: String, ownership: String, default_id: String) -> void:
+	var purchased: Variant = stored.get(ownership)
+	for id: String in Cosmetics.items(category):
+		if id != default_id and purchased is Dictionary and purchased.get(id) == true:
+			meta[ownership][id] = true
+	var selected: Variant = stored.get(category)
+	if selected is String and meta[ownership].has(selected):
+		meta[category] = selected
 
 
 static func _is_version(version: Variant) -> bool:

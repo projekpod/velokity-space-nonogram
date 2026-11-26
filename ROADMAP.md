@@ -20,7 +20,7 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
   - [x] 2. Raise procedural audio levels and add saved Music and Effects volume sliders.
   - [x] 3. Add visual-only fill streak escalation, persistent peak state, and a win recovery animation.
   - [x] 4. Add an animated space backdrop, Calm Mode support, and automatic reduction under sustained load.
-  - [ ] 5. Expand the direct-purchase shop with cats, skins, and costumes in four rarity tiers. Migrate existing saves.
+  - [x] 5. Expand the direct-purchase shop with cats, skins, and costumes in four rarity tiers. Migrate existing saves.
   - [ ] Capture the four new QA routes in CI and commit screenshots under 300 KB each.
 - [ ] T13 Content v1.1: grow to 300 nonograms and 365 daily puzzles. Add 12x12 and 15x15 boards with zoom/pan and tune the difficulty curve.
 - [ ] T14 Small twists: add a new small mechanic every 10–15 levels.

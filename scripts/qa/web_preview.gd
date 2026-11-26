@@ -1,5 +1,8 @@
 extends RefCounted
 
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
+const ShopCard := preload("res://ui/shop_card.gd")
+const UI := preload("res://ui/controls.gd")
 const Main := preload("res://ui/main.gd")
 const SaveScript := preload("res://scripts/autoload/save.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
@@ -17,7 +20,7 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary"]:
 		return false
 	if route not in ["playthrough", "preview"]:
 		_seed_progress(main)
@@ -82,7 +85,18 @@ static func open(main: Main) -> bool:
 			save.data.meta.purchased.mint_visor = true
 			save.data.meta.equipped.helmet = "mint_visor"
 			var screen := main._open_meta(MetaScreen.Page.SHOP)
-			screen._preview_costume("violet_visor")
+			screen._select_shop_tab("costume")
+			screen._preview_item("violet_visor")
+		"cats":
+			_open_cat_gallery(main)
+		"shop-legendary":
+			main._save.data.coins = 27500
+			var screen := main._open_meta(MetaScreen.Page.SHOP)
+			screen._preview_item("savannah")
+			await main.get_tree().process_frame
+			await main.get_tree().process_frame
+			screen._reveal_shop_card("savannah")
+			screen._portrait.mascot.hold_pose(Mascot.Face.PROUD)
 		"celebration":
 			if not await _open_celebration(main):
 				push_error("The QA album could not reach a tier four celebration")
@@ -90,6 +104,32 @@ static func open(main: Main) -> bool:
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
+
+
+static func _open_cat_gallery(main: Main) -> void:
+	main._reset_column(632)
+	UI.label(main._column, "SHOP_TAB_CAT", 43, UI.MINT)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 12)
+	grid.add_theme_constant_override("v_separation", 11)
+	main._column.add_child(grid)
+	for id: String in Cosmetics.CATS:
+		var card := ShopCard.new()
+		card.rarity = Cosmetics.CATS[id].rarity
+		card.padding = 7.0
+		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_child(card)
+		var group := VBoxContainer.new()
+		card.add_child(group)
+		var cat := Mascot.new()
+		cat.preview_cat = id
+		cat.preview_skin = Cosmetics.DEFAULT_SKIN
+		cat.preview_outfit = {}
+		cat.custom_minimum_size.y = 152
+		group.add_child(cat)
+		cat.hold_pose(Mascot.Face.HAPPY)
+		UI.label(group, Cosmetics.title("cat", id), 23)
 
 
 static func _seed_progress(main: Main) -> void:

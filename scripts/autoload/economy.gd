@@ -4,6 +4,7 @@ const Daily := preload("res://scripts/daily/calendar.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const SaveSchema := preload("res://scripts/autoload/save.gd")
 const FREE_COIN_AMOUNT := 25
@@ -113,6 +114,37 @@ func equip_costume(slot: String, id: String) -> bool:
 		snapshot.meta.equipped.erase(slot)
 	else:
 		snapshot.meta.equipped[slot] = id
+	return await _commit(snapshot)
+
+
+func equipped_cosmetic(category: String) -> String:
+	return _save.data.meta[category] if not Cosmetics.items(category).is_empty() else ""
+
+
+func owns_cosmetic(category: String, id: String) -> bool:
+	var item: Dictionary = Cosmetics.items(category).get(id, {})
+	return not item.is_empty() and (item.price == 0 or _save.data.meta[category + "s"].has(id))
+
+
+func buy_cosmetic(category: String, id: String) -> bool:
+	await _save.wait_for_pending_writes()
+	var price: int = Cosmetics.items(category).get(id, {}).get("price", 0)
+	if price <= 0 or price > balance() or owns_cosmetic(category, id):
+		return false
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	snapshot.meta[category + "s"][id] = true
+	snapshot.coins -= price
+	return await _commit(snapshot)
+
+
+func equip_cosmetic(category: String, id: String) -> bool:
+	await _save.wait_for_pending_writes()
+	if not owns_cosmetic(category, id):
+		return false
+	if equipped_cosmetic(category) == id:
+		return true
+	var snapshot: Dictionary = _save.data.duplicate(true)
+	snapshot.meta[category] = id
 	return await _commit(snapshot)
 
 

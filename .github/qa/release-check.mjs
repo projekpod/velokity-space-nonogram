@@ -147,9 +147,10 @@ async function runFullPlaythrough(page) {
   await button(page, "LEVEL_BACK");
   await button(page, "GAME_BACK");
   await button(page, "META_SHOP");
+  await button(page, "SHOP_TAB_COSTUME");
   await button(page, "COSTUME_MINT_VISOR");
   await waitState(page, s => s.scene === "shop" && s.preview === "mint_visor" && !s.owned.mint_visor);
-  for (let remaining = 5; (await state(page)).coins < 400 && remaining > 0; remaining--) {
+  for (let remaining = 5; (await state(page)).coins < 425 && remaining > 0; remaining--) {
     const before = (await state(page)).coins;
     await button(page, `Free coins · +25 (${remaining} left)`);
     await page.waitForFunction(previous => {
@@ -157,7 +158,7 @@ async function runFullPlaythrough(page) {
       return data.coins === previous + 25;
     }, before);
   }
-  await button(page, "Buy · 400 coins");
+  await button(page, "Buy · 425 coins");
   await waitState(page, s => s.owned.mint_visor);
   await button(page, "COSTUME_EQUIP");
   await waitState(page, s => s.equipped.helmet === "mint_visor");
