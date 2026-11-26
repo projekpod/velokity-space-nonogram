@@ -1,6 +1,26 @@
-# Handoff — Velokity Feel & Shop v1.1
+# Handoff — Velokity Autopilot & CI hygiene
 
-Branch `codex/t12-feel-shop` berangkat dari `origin/main` setelah merge T11b. Oz membuka PR setelah review Claude. Katalog puzzle saat ini berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang.
+Branch `codex/t12b-autopilot` berangkat dari `origin/main` setelah merge T12. Oz membuka atau meninjau PR dan merge setelah review Claude. Katalog puzzle saat ini berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang.
+
+## T12b · Autopilot & CI hygiene
+
+- Bus Master membatasi puncak campuran di −1 dB. SFX dan musik Web lewat mixer Godot agar limiter memproses keduanya. Kartu Savannah memakai label “Legendary · Most expensive breed” atau “Legendaris · Ras termahal”.
+- Push baru membatalkan run lama pada branch Codex yang sama. Run `main` punya grup tersendiri per run. Job PR untuk head `codex/` dilewati karena pemeriksaan commit dijalankan saat push. AGENTS.md mewajibkan gate lokal sebelum push dan run branch terbaru hijau sebelum membalas.
+- Autopilot mencari branch Codex terbaru yang punya commit di depan `main` dan belum di-merge. Ia membuat draft bila belum ada PR, melanjutkan tugas yang sudah diam lebih dari dua jam, atau menyiapkan PR untuk review jika tugasnya ditandai selesai. Komentar dibatasi satu kali per PR dalam dua jam dan pemberitahuan selesai dikirim sekali setelah jeda komentar habis. Batas waktu berakhir pada 9 Desember 2026 pukul 23.59 WIB.
+
+## Mengaktifkan Autopilot dari ponsel
+
+1. Di GitHub, buka **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**. Pilih pemilik `projekpod`, **Only select repositories**, lalu pilih `velokity-space-nonogram`. Set masa berlaku **30 days**. [Formulir token GitHub](https://github.com/settings/personal-access-tokens/new)
+2. Di **Repository permissions**, set **Contents: Read-only**, **Issues: Read and write**, dan **Pull requests: Read and write**. Buat token, lalu salin.
+3. Di repo, buka **Settings → Secrets and variables → Actions → New repository secret**. Isi nama `CODEX_AUTOPILOT_TOKEN` dan tempel token pada kolom nilai. [Secret Actions repo](https://github.com/projekpod/velokity-space-nonogram/settings/secrets/actions)
+4. Setelah workflow masuk `main`, buka **Actions → Autopilot → Run workflow**, pilih `main`, dan lihat log. Bisa dicoba sebelum langkah 3 untuk memeriksa bahwa secret yang kosong menghasilkan notice dan run hijau. Dengan token aktif, run manual dapat membuka draft PR atau berkomentar sesuai kondisi branch. [Workflow Autopilot](https://github.com/projekpod/velokity-space-nonogram/actions/workflows/autopilot.yml)
+5. Untuk menghentikan jadwal dan run manual, buka **Actions → Autopilot → ⋯ → Disable workflow**.
+
+Efek ke PR GitHub diuji dengan API tiruan di CI. Uji dengan token repo menunggu Oz setelah workflow tersedia di `main`.
+
+## Pemeriksaan T12b
+
+Impor Godot 4.7.2, 519 pemeriksaan Godot, 10 tes Python, 12 tes Node.js, dan validator solusi puzzle lulus. Ekspor Web dan Web QA selesai tanpa error atau warning. Web rilis **41.150.630 byte (41,15 MB)** dan ZIP itch.io **11.130.188 byte**. Uji langkah secret kosong menghasilkan notice dan keluar dengan kode 0. Playthrough dan migrasi Bridge lulus di Chromium. Profil sentuh SwiftShader lokal mencapai 4,3 FPS dengan p95 383 ms. Pengujian perangkat fisik masih terbuka.
 
 ## T12 · Feel & Shop
 
@@ -62,6 +82,7 @@ godot --headless --import
 godot --headless -s res://tests/run_tests.gd
 python3 -m unittest discover -s tools
 python3 tools/check_levels.py
+node --test .github/autopilot/*.test.mjs
 mkdir -p build/web build/web-qa
 godot --headless --export-release Web build/web/index.html
 godot --headless --export-release 'Web QA' build/web-qa/index.html
@@ -85,6 +106,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR T12 setelah review Claude. Cek job **Quality gates**, empat screenshot di artefak `velokity-qa-screenshots`, dan deployment Pages dari `main`.
-2. Ukur volume dan performa di ponsel kelas menengah, lalu jalankan QA Playgama dan portal lain sesuai `docs/RELEASE.md` untuk menutup T11 dan T11b.
-3. T13 — Tambahkan papan 12×12 dan 15×15 dengan zoom/pan, naikkan katalog ke 300 Nonogram dan 365 puzzle harian, lalu sesuaikan kurva kesulitan. T14 menyusul dengan mekanik kecil tiap 10–15 level.
+1. Oz buka PR T12b, cek **Quality gates**, dan merge setelah review Claude. Jalankan Autopilot dari `main` untuk menguji secret dan aksesnya.
+2. T13 — Tambahkan papan 12×12 dan 15×15 dengan zoom/pan, naikkan katalog ke 300 Nonogram dan 365 puzzle harian, lalu sesuaikan kurva kesulitan. Mekanik kecil menyusul di T14.
+3. Ukur volume dan performa di ponsel kelas menengah, lalu jalankan QA Playgama dan portal lain sesuai `docs/RELEASE.md` untuk menutup T11 dan T11b.
