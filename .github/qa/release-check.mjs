@@ -247,7 +247,7 @@ async function measurePhone() {
     const errors = watchErrors(page);
     const performanceUrl = new URL("web-qa/index.html?qa=preview", baseUrl);
     await openGame(page, performanceUrl, "preview");
-    await waitState(page, s => s.grid && s.state === 0);
+    const initial = await waitState(page, s => s.grid && s.state === 0);
     const throttle = Number(process.env.VELOKITY_CPU_THROTTLE ?? 1);
     if (throttle > 1) {
       const cdp = await page.context().newCDPSession(page);

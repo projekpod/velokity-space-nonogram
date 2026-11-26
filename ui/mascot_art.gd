@@ -95,16 +95,16 @@ static func backpack(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 			_lit(part, Vector2(x + side * 16.0, 92), Vector2(6, 15), palette)
 
 
-static func tail(part: CanvasItem) -> void:
+static func tail(part: CanvasItem, fur_color := FUR, markings := CARAMEL, tip := CREAM) -> void:
 	var curve := [
 		Vector2.ZERO, Vector2(27, 15), Vector2(48, 11), Vector2(64, -1),
 		Vector2(70, -19), Vector2(65, -33), Vector2(54, -34), Vector2(48, -25),
 	]
 	_stroke(part, curve, INK, 23)
-	_stroke(part, curve, FUR, 16)
-	_stroke(part, [Vector2(35, 14), Vector2(44, 12)], CARAMEL, 16)
-	_stroke(part, [Vector2(64, -3), Vector2(67, -10)], CARAMEL, 16)
-	_stroke(part, [Vector2(63, -33), Vector2(55, -34), Vector2(48, -25)], CREAM, 14)
+	_stroke(part, curve, fur_color, 16)
+	_stroke(part, [Vector2(35, 14), Vector2(44, 12)], markings, 16)
+	_stroke(part, [Vector2(64, -3), Vector2(67, -10)], markings, 16)
+	_stroke(part, [Vector2(63, -33), Vector2(55, -34), Vector2(48, -25)], tip, 14)
 
 
 static func arm(part: CanvasItem, color := Color.TRANSPARENT) -> void:
@@ -170,16 +170,16 @@ static func helmet(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	_arc(part, Vector2(0, -6), Vector2(82, 66), 0.62, 2.20, MINT, 2)
 
 
-static func ear(part: CanvasItem) -> void:
+static func ear(part: CanvasItem, fur_color := FUR, outline := CARAMEL) -> void:
 	var shape := [
 		Vector2(-21, 27), Vector2(-16, -4), Vector2(-9, -24),
 		Vector2(-3, -27), Vector2(6, -24), Vector2(28, 0), Vector2(30, 23),
 	]
-	part.draw_colored_polygon(PackedVector2Array(shape), CARAMEL)
+	part.draw_colored_polygon(PackedVector2Array(shape), outline)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-15, 24), Vector2(-11, -2), Vector2(-4, -21),
 		Vector2(3, -21), Vector2(23, 2), Vector2(27, 22),
-	]), FUR)
+	]), fur_color)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-9, 19), Vector2(-5, -4), Vector2(0, -14), Vector2(14, 4), Vector2(21, 19),
 	]), Color("#ef9a9b"))
@@ -188,15 +188,23 @@ static func ear(part: CanvasItem) -> void:
 static func fur(part: CanvasItem) -> void:
 	ellipse(part, Vector2(0, 5), Vector2(65, 49), CARAMEL)
 	_lit(part, Vector2(0, 4), Vector2(63, 47), COAT)
-	ellipse(part, Vector2(0, 29), Vector2(50, 18), CREAM)
-	ellipse(part, Vector2(-26, 24), Vector2(24, 15), CREAM)
-	ellipse(part, Vector2(26, 24), Vector2(24, 15), CREAM)
+	tabby_muzzle(part, CREAM)
+	tabby_markings(part, CARAMEL, Color("#f6af9c"))
+
+
+static func tabby_muzzle(part: CanvasItem, color: Color) -> void:
+	ellipse(part, Vector2(0, 29), Vector2(50, 18), color)
+	ellipse(part, Vector2(-26, 24), Vector2(24, 15), color)
+	ellipse(part, Vector2(26, 24), Vector2(24, 15), color)
+
+
+static func tabby_markings(part: CanvasItem, color: Color, blush: Color) -> void:
 	for side in [-1, 1]:
-		_stroke(part, [Vector2(side * 9, -40), Vector2(side * 5, -29)], CARAMEL, 4)
-		_stroke(part, [Vector2(side * 22, -38), Vector2(side * 17, -32)], CARAMEL, 3)
-		_stroke(part, [Vector2(side * 59, 13), Vector2(side * 50, 16)], CARAMEL, 3)
-		_stroke(part, [Vector2(side * 53, 28), Vector2(side * 45, 27)], CARAMEL, 2)
-		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), Color("#f6af9c"))
+		_stroke(part, [Vector2(side * 9, -40), Vector2(side * 5, -29)], color, 4)
+		_stroke(part, [Vector2(side * 22, -38), Vector2(side * 17, -32)], color, 3)
+		_stroke(part, [Vector2(side * 59, 13), Vector2(side * 50, 16)], color, 3)
+		_stroke(part, [Vector2(side * 53, 28), Vector2(side * 45, 27)], color, 2)
+		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), blush)
 
 
 static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float, eye_spacing := 25.0, straining := false) -> void:

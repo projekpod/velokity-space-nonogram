@@ -600,7 +600,12 @@ func _test_calm_visuals() -> void:
 	for frame in range(60):
 		backdrop._watch_frame_time(0.01)
 	check(not backdrop._reduced, "Fast frames keep full effects")
-	for frame in range(120):
+	for frame in range(45):
+		backdrop._watch_frame_time(0.025)
+	for frame in range(100):
+		backdrop._watch_frame_time(0.01)
+	check(not backdrop._reduced and backdrop._slow_time == 0.0, "A recovered slowdown clears the sustained-load timer")
+	for frame in range(140):
 		backdrop._watch_frame_time(0.027)
 	check(backdrop._reduced and root.get_meta(&"reduced_effects", false), "Sustained slow frames enable reduced effects")
 	root.remove_meta(&"reduced_effects")
@@ -1578,5 +1583,5 @@ func _test_audio_smoke() -> void:
 	save.data = original
 	save.storage_path = original_path
 	events.settings_changed.emit()
-	# Allow the audio mixer to release stopped WAV playback objects.
-	await create_timer(0.12).timeout
+	# Allow the audio mixer to release stopped WAV playbacks during teardown.
+	await create_timer(0.35).timeout

@@ -31,6 +31,7 @@ var _aim := Vector2.ZERO
 var _calm := false
 var _reduced := false
 var _frozen := false
+var _last_frame_usec := 0
 var _frame_samples := 0
 var _sample_time := 0.0
 var _slow_time := 0.0
@@ -105,10 +106,22 @@ func _clear_events() -> void:
 	_effects.queue_redraw()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PAUSED:
+		_last_frame_usec = 0
+		_frame_samples = 0
+		_sample_time = 0.0
+		_slow_time = 0.0
+
+
 func _process(delta: float) -> void:
 	if _frozen:
 		return
-	_watch_frame_time(delta)
+	if not _reduced:
+		var now := Time.get_ticks_usec()
+		if _last_frame_usec > 0:
+			_watch_frame_time(float(now - _last_frame_usec) / 1000000.0)
+		_last_frame_usec = now
 	_time += delta
 	for group in range(_twinkles.size()):
 		var rate := 0.56 + group * 0.10 if _calm or _reduced else 1.1 + group * 0.22

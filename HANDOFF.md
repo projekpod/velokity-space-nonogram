@@ -13,7 +13,7 @@ Branch `codex/t12-feel-shop` berangkat dari `origin/main` setelah merge T11b. Oz
 
 ## Pemeriksaan T12
 
-Godot 4.7.2 lulus impor, 513 pemeriksaan, serta ekspor Web dan Web QA tanpa error atau warning. Sepuluh tes Python dan validator solusi lulus. Ekspor Web **41.148.430 byte (41,15 MB)**, Web QA **41.165.410 byte**, dan ZIP itch.io **11.128.611 byte**. Web memenuhi batas unduhan mentah 50 MB. Verifikasi audio dan performa pada ponsel fisik masih terbuka.
+Godot 4.7.2 lulus impor, 514 pemeriksaan, serta ekspor Web dan Web QA tanpa error atau warning. Sepuluh tes Python dan validator solusi lulus. Ekspor Web **41.149.406 byte (41,15 MB)**, Web QA **41.166.386 byte**, dan ZIP itch.io **11.129.676 byte**. Web memenuhi batas unduhan mentah 50 MB. Verifikasi audio dan performa pada ponsel fisik masih terbuka.
 
 ## Yang berjalan
 

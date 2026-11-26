@@ -48,10 +48,10 @@ static func palette(breed: String, skin: String) -> Array[Color]:
 
 
 static func ear(part: CanvasItem, breed: String, skin: String) -> void:
-	if breed == Cosmetics.DEFAULT_CAT and skin == Cosmetics.DEFAULT_SKIN:
-		Art.ear(part)
-		return
 	var coat := palette(breed, skin)
+	if breed == Cosmetics.DEFAULT_CAT:
+		Art.ear(part, coat[0], coat[1])
+		return
 	var shape := POINTED_EAR
 	if breed in ["british_shorthair", "persian", "bengal", "savannah"]:
 		shape = ROUND_EAR
@@ -70,10 +70,10 @@ static func ear(part: CanvasItem, breed: String, skin: String) -> void:
 
 
 static func tail(part: CanvasItem, breed: String, skin: String) -> void:
-	if breed == Cosmetics.DEFAULT_CAT and skin == Cosmetics.DEFAULT_SKIN:
-		Art.tail(part)
-		return
 	var coat := palette(breed, skin)
+	if breed == Cosmetics.DEFAULT_CAT:
+		Art.tail(part, coat[0], coat[1], coat[2])
+		return
 	var shape := PackedVector2Array([
 		Vector2.ZERO, Vector2(25, 13), Vector2(41, 11), Vector2(56, 3),
 		Vector2(62, -12), Vector2(58, -27), Vector2(48, -32),
@@ -88,7 +88,7 @@ static func tail(part: CanvasItem, breed: String, skin: String) -> void:
 	var width: float = BREEDS[breed].thickness
 	Art._stroke(part, Array(shape), Art.INK, width + 5.0)
 	Art._stroke(part, Array(shape), coat[0], width)
-	if breed in ["velokity", "bengal", "savannah", "maine_coon"]:
+	if breed in ["bengal", "savannah", "maine_coon"]:
 		Art._stroke(part, Array(shape.slice(2, 3)) + [shape[2].lerp(shape[3], 0.5)], coat[1], width * 0.95)
 	Art._stroke(part, Array(shape.slice(5)), coat[1], width * (0.7 if width > 22.0 else 1.0))
 
@@ -109,6 +109,16 @@ static func fur(part: CanvasItem, breed: String, skin: String, time: float) -> v
 	if skin == "calico":
 		Art.ellipse(part, Vector2(-radii.x * 0.56, -10), Vector2(18, 16), Color("#bd764d"))
 		Art.ellipse(part, Vector2(radii.x * 0.70, 9), Vector2(12, 16), Color("#584755"))
+	if skin == "tuxedo":
+		var blaze := PackedVector2Array([
+			Vector2(-8, -20), Vector2(5, -18), Vector2(11, 8),
+			Vector2(22, 19), Vector2(-22, 20), Vector2(-7, 7),
+		])
+		part.draw_colored_polygon(blaze, coat[2])
+	if breed == Cosmetics.DEFAULT_CAT:
+		Art.tabby_muzzle(part, coat[2])
+		Art.tabby_markings(part, coat[1], coat[2].lerp(Art.PINK, 0.24))
+		return
 	var muzzle := Vector2(32, 13) if breed in ["siamese", "sphynx", "savannah"] else Vector2(43, 14)
 	Art.ellipse(part, Vector2(0, 28), muzzle, coat[2])
 	_markings(part, breed, coat[1], radii)
@@ -158,12 +168,11 @@ static func _markings(part: CanvasItem, breed: String, ink: Color, radii: Vector
 			for side in [-1, 1]:
 				for index in range(3):
 					part.draw_circle(Vector2(side * (32.0 + index * 4.2), 20 + (index % 2) * 4), 1.6, ink)
-		_:
+		"maine_coon":
 			for side in [-1, 1]:
 				Art._stroke(part, [Vector2(side * 12.0, -39), Vector2(side * 5.0, -27)], ink, 4)
 				Art._stroke(part, [Vector2(side * (radii.x - 4), 10), Vector2(side * (radii.x - 16), 15)], ink, 3)
-				if breed == "maine_coon":
-					Art._stroke(part, [Vector2(side * 49.0, 24), Vector2(side * 39.0, 26)], ink, 3)
+				Art._stroke(part, [Vector2(side * 49.0, 24), Vector2(side * 39.0, 26)], ink, 3)
 
 
 static func _galaxy_fur(part: CanvasItem, center: Vector2, radii: Vector2, time: float) -> void:
