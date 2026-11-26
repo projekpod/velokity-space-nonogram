@@ -10,7 +10,19 @@ func _ready() -> void:
 		var path := "res://i18n/strings.%s.translation" % language
 		if ResourceLoader.exists(path):
 			TranslationServer.add_translation(load(path))
+	if OS.has_feature("web"):
+		var platform: Object = get_node("/root/Bridge").platform
+		if platform != null and platform.language is String and not platform.language.is_empty():
+			_device_locale = platform.language
+	if _save.startup_complete:
+		_apply_locale()
+	else:
+		_save.startup_finished.connect(_apply_loaded_settings)
+
+
+func _apply_loaded_settings() -> void:
 	_apply_locale()
+	_events.settings_changed.emit()
 
 
 func get_value(key: String) -> Variant:
@@ -25,7 +37,7 @@ func set_value(key: String, value: Variant) -> bool:
 		return false
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.settings[key] = value
-	if _save.write_game(snapshot) != OK:
+	if await _save.commit(snapshot) != OK:
 		return false
 	_apply_locale()
 	_events.settings_changed.emit()

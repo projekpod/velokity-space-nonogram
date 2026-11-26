@@ -1,22 +1,101 @@
 extends Node
 
+signal startup_finished
+signal _bridge_read(ok: bool, value: Variant)
+signal _bridge_written(ok: bool)
+
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const VERSION := 7
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
+const BRIDGE_KEY := "velokity-save"
 
 var data := defaults()
 var storage_path := PATH
 var _future_saves: Dictionary = {}
 var _corrupt_saves: Dictionary = {}
+var startup_complete := false
+var _bridge_storage
+var _bridge_key := BRIDGE_KEY
+var _bridge_writable := true
+var _bridge_write_busy := false
 
 
 func _ready() -> void:
-	if OS.has_feature("web") and OS.has_feature("qa"):
-		storage_path = "user://qa-save.json"
-	load_game()
+	if OS.has_feature("web"):
+		if OS.has_feature("qa"):
+			storage_path = "user://qa-save.json"
+			_bridge_key += "-qa"
+		_bridge_storage = get_node("/root/Bridge").storage
+	if _bridge_storage == null:
+		load_game()
+	else:
+		await _load_bridge()
+	startup_complete = true
+	startup_finished.emit()
+
+
+func _load_bridge() -> void:
+	_bridge_storage.get([_bridge_key], _on_bridge_read)
+	var response: Array = await _bridge_read
+	if not response[0] or not response[1] is Array or response[1].size() != 1:
+		_bridge_writable = false
+		return
+	var raw: Variant = response[1][0]
+	if raw == null:
+		if not FileAccess.file_exists(storage_path):
+			return
+		_bridge_writable = load_game() == OK
+		if _bridge_writable:
+			_bridge_writable = await _write_bridge(_bridge_key, JSON.stringify(data))
+			if _bridge_writable and FileAccess.file_exists(storage_path):
+				DirAccess.remove_absolute(storage_path)
+		return
+
+	var json := JSON.new()
+	if raw is String and json.parse(raw) == OK and json.data is Dictionary:
+		var version: Variant = json.data.get("version", 0)
+		if _is_version(version):
+			if version > VERSION:
+				_future_saves[storage_path] = true
+			else:
+				data = migrate(json.data)
+			return
+	var archive := "%s-corrupt-%d" % [_bridge_key, int(Time.get_unix_time_from_system() * 1000000.0)]
+	_bridge_writable = await _write_bridge(archive, raw if raw is String else JSON.stringify(raw))
+	if _bridge_writable:
+		_bridge_writable = await _write_bridge(_bridge_key, JSON.stringify(data))
+
+
+func _on_bridge_read(ok: bool, value: Variant) -> void:
+	_bridge_read.emit(ok, value)
+
+
+func _on_bridge_written(ok: bool) -> void:
+	_bridge_written.emit(ok)
+
+
+func _write_bridge(key: String, value: String) -> bool:
+	_bridge_storage.set(key, value, _on_bridge_written)
+	return await _bridge_written
+
+
+func commit(snapshot: Dictionary) -> Error:
+	if _bridge_storage == null:
+		return write_game(snapshot)
+	if not startup_complete or _bridge_write_busy:
+		return ERR_BUSY
+	if not _bridge_writable or _future_saves.has(storage_path):
+		return ERR_FILE_CANT_WRITE
+	_bridge_write_busy = true
+	var saved := await _write_bridge(_bridge_key, JSON.stringify(snapshot))
+	_bridge_write_busy = false
+	if not saved:
+		return ERR_FILE_CANT_WRITE
+	data = snapshot
+	return OK
 
 
 func needs_onboarding() -> bool:

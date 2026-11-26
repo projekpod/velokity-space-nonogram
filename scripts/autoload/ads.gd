@@ -28,6 +28,13 @@ var _banner_space := 0.0
 var _banner_fits_viewport := true
 var _browser: JavaScriptObject
 var _resize_callback: JavaScriptObject
+var _document: JavaScriptObject
+var _visibility_callback: JavaScriptObject
+var _tab_hidden := false
+var _portal_paused := false
+var _portal_audio_enabled := true
+var _pause_applied := false
+var _mute_applied := false
 
 
 func _ready() -> void:
@@ -42,6 +49,7 @@ func _ready() -> void:
 		var bridge := get_node("/root/Bridge")
 		if bridge.advertisement != null:
 			_provider = BridgeAds.new(bridge.advertisement, bridge.platform)
+			_bind_platform(bridge.platform)
 		else:
 			var unavailable := FakeAds.new()
 			unavailable.available = false
@@ -53,11 +61,17 @@ func _ready() -> void:
 		_resize_callback = JavaScriptBridge.create_callback(_on_browser_resize)
 		_browser.addEventListener("resize", _resize_callback)
 		_on_browser_resize([])
+		_document = JavaScriptBridge.get_interface("document")
+		_visibility_callback = JavaScriptBridge.create_callback(_on_visibility_changed)
+		_document.addEventListener("visibilitychange", _visibility_callback)
+		_on_visibility_changed([])
+
 
 
 func _exit_tree() -> void:
 	if _browser != null:
 		_browser.removeEventListener("resize", _resize_callback)
+		_document.removeEventListener("visibilitychange", _visibility_callback)
 
 
 func _process(_delta: float) -> void:
@@ -67,6 +81,43 @@ func _process(_delta: float) -> void:
 func _on_browser_resize(_args: Array) -> void:
 	var width := float(_browser.innerWidth)
 	_banner_fits_viewport = width >= 600.0 and width > float(_browser.innerHeight)
+	_sync_platform()
+
+
+func _bind_platform(platform: Object) -> void:
+	platform.pause_state_changed.connect(_on_platform_pause)
+	platform.audio_state_changed.connect(_on_platform_audio)
+	_on_platform_audio(platform.is_audio_enabled)
+
+
+func _on_platform_pause(value: bool) -> void:
+	_portal_paused = value
+	_apply_suspension()
+
+
+func _on_platform_audio(value: bool) -> void:
+	_portal_audio_enabled = value
+	_apply_suspension()
+
+
+func _on_visibility_changed(_args: Array) -> void:
+	_tab_hidden = bool(_document.hidden)
+	_apply_suspension()
+
+
+func _apply_suspension() -> void:
+	var pause := _tab_hidden or _portal_paused or _placement != &""
+	if pause != _pause_applied:
+		if pause:
+			_previously_paused = get_tree().paused
+		_pause_applied = pause
+		get_tree().paused = pause or _previously_paused
+	var mute := pause or not _portal_audio_enabled
+	if mute != _mute_applied:
+		if mute:
+			_previously_muted = AudioServer.is_bus_mute(0)
+		_mute_applied = mute
+		AudioServer.set_bus_mute(0, mute or _previously_muted)
 	_sync_platform()
 
 
@@ -112,6 +163,10 @@ func banner_clearance() -> float:
 	return _provider.banner_clearance()
 
 
+func supports_rewarded() -> bool:
+	return _provider.supports_rewarded()
+
+
 func can_request_rewarded() -> bool:
 	return _placement == &"" and _provider.can_request_rewarded()
 
@@ -126,7 +181,9 @@ func request_rewarded(placement: StringName) -> bool:
 
 func request_interstitial_after_result(level: int) -> bool:
 	var now := Time.get_ticks_msec()
-	if _placement != &"" or not _provider.can_request_interstitial() or level < 10 or now - _session_started < 120000 or now - _last_interstitial < 90000:
+	if _placement != &"" or not _provider.can_request_interstitial():
+		return false
+	if not _provider is BridgeAds and (level < 10 or now - _session_started < 120000 or now - _last_interstitial < 90000):
 		return false
 	_begin(INTERSTITIAL)
 	_provider.request_interstitial(_request_id)
@@ -137,6 +194,8 @@ func notify_game_ready() -> void:
 	if _game_ready:
 		return
 	_game_ready = true
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("window.velokityFirstScreenReady?.()", true)
 	_provider.game_ready()
 	_sync_platform()
 
@@ -156,8 +215,7 @@ func allows_support_link() -> bool:
 
 
 func _sync_platform() -> void:
-	var without_ad := _placement == &""
-	var active := _game_ready and _gameplay_active and without_ad
+	var active := _game_ready and _gameplay_active and not _pause_applied
 	if active != _reported_gameplay:
 		_reported_gameplay = active
 		_provider.set_gameplay_active(active)
@@ -170,20 +228,14 @@ func _sync_platform() -> void:
 func _begin(placement: StringName) -> void:
 	_placement = placement
 	_request_id += 1
-	_previously_paused = get_tree().paused
-	_previously_muted = AudioServer.is_bus_mute(0)
-	get_tree().paused = true
-	AudioServer.set_bus_mute(0, true)
-	_sync_platform()
+	_apply_suspension()
 	_timeout.start()
 
 
 func _end() -> void:
 	_placement = &""
 	_timeout.stop()
-	get_tree().paused = _previously_paused
-	AudioServer.set_bus_mute(0, _previously_muted)
-	_sync_platform()
+	_apply_suspension()
 
 
 func _on_timeout() -> void:

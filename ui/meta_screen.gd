@@ -190,12 +190,15 @@ func _render_shop_actions() -> void:
 	var label := tr("FREE_COINS_BUTTON") % [EconomyRules.FREE_COIN_AMOUNT, remaining]
 	if _coin_reward_day >= 0:
 		UI.action(actions, "SAVE_RETRY", true).pressed.connect(_save_coin_reward)
-	else:
+	elif _ads.supports_rewarded():
 		var free_coins := UI.action(actions, label, true)
 		free_coins.disabled = remaining == 0 or not _ads.can_request_rewarded()
 		free_coins.pressed.connect(_request_coin_ad)
 	if _purchases.has_available_products():
 		UI.button(actions, "IAP_TITLE").pressed.connect(_open_purchases)
+	if actions.get_child_count() == 0:
+		remove_child(actions)
+		actions.queue_free()
 	_watch_local_day(today)
 
 
@@ -221,7 +224,7 @@ func _on_coin_ad_finished(placement: StringName, granted: bool) -> void:
 func _save_coin_reward() -> void:
 	if _coin_reward_day < 0:
 		return
-	var amount: int = _economy.award_free_ad_coins(_coin_reward_day)
+	var amount: int = await _economy.award_free_ad_coins(_coin_reward_day)
 	if amount < 0:
 		_fail()
 	else:
@@ -349,7 +352,7 @@ func _costume_title(id: String) -> String:
 
 func _buy(id: String) -> void:
 	_message = ""
-	if _economy.buy_costume(id):
+	if await _economy.buy_costume(id):
 		_preview_id = id
 	else:
 		_fail()
@@ -358,7 +361,7 @@ func _buy(id: String) -> void:
 
 func _equip(id: String) -> void:
 	_message = ""
-	if _economy.equip_costume(_slot, id):
+	if await _economy.equip_costume(_slot, id):
 		_preview_id = id
 	else:
 		_fail()
@@ -406,7 +409,7 @@ func _watch_local_day(today: int) -> void:
 
 func _claim_login() -> void:
 	_message = ""
-	var reward: int = _economy.claim_login(Daily.today())
+	var reward: int = await _economy.claim_login(Daily.today())
 	if reward > 0:
 		_message = tr("GAME_EARNED") % reward
 		_message_color = UI.MINT

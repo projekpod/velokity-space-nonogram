@@ -53,6 +53,7 @@ var _pending_ad: StringName
 var _win_coins := 0
 var _bonus_coins := 0
 var _bonus_granted := false
+var _saving := false
 
 
 func _ready() -> void:
@@ -156,7 +157,8 @@ func _build_tools() -> void:
 	var hints := UI.row(_tools)
 	_hint = UI.action(hints, tr("GAME_HINT_COINS") % EconomyRules.HINT_COST)
 	_hint.pressed.connect(_use_paid_hint)
-	UI.action(hints, "GAME_HINT_AD").pressed.connect(_request_ad.bind(&"hint"))
+	if _ads.supports_rewarded():
+		UI.action(hints, "GAME_HINT_AD").pressed.connect(_request_ad.bind(&"hint"))
 
 
 func _choose_mark(crossed: bool) -> void:
@@ -168,9 +170,15 @@ func _choose_mark(crossed: bool) -> void:
 
 func _use_paid_hint() -> void:
 	var cell := _puzzle.hint_cell()
-	if cell.x < 0:
+	if cell.x < 0 or _saving:
 		return
-	if _economy.spend(EconomyRules.HINT_COST):
+	_saving = true
+	_board.cancel_drag()
+	_board.process_mode = Node.PROCESS_MODE_DISABLED
+	var paid: bool = await _economy.spend(EconomyRules.HINT_COST)
+	_board.process_mode = Node.PROCESS_MODE_INHERIT
+	_saving = false
+	if paid:
 		_apply_hint(cell)
 	else:
 		_show_feedback("SAVE_FAILED")
@@ -185,9 +193,12 @@ func _apply_hint(cell: Vector2i) -> void:
 
 
 func _use_paid_continue() -> void:
-	if not _puzzle.can_continue():
+	if _saving or not _puzzle.can_continue():
 		return
-	if _economy.spend(EconomyRules.CONTINUE_COST):
+	_saving = true
+	var paid: bool = await _economy.spend(EconomyRules.CONTINUE_COST)
+	_saving = false
+	if paid:
 		_resume_game()
 	else:
 		_show_feedback("SAVE_FAILED")
@@ -199,6 +210,7 @@ func _resume_game() -> void:
 	_feedback.hide()
 	_result.hide()
 	_tools.show()
+	_ads.request_interstitial_after_result(0)
 	if is_instance_valid(_tutorial) and tutorial_step < TUTORIAL_STEPS.size():
 		_tutorial.show()
 	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
@@ -211,6 +223,8 @@ func _resume_game() -> void:
 
 
 func _request_ad(placement: StringName) -> void:
+	if _saving:
+		return
 	if not _ads.request_rewarded(placement):
 		_show_feedback("AD_UNAVAILABLE")
 		return
@@ -280,9 +294,13 @@ func _on_finished(won: bool) -> void:
 
 
 func _record_win() -> void:
+	if _saving:
+		return
+	_saving = true
 	var previous_level: int = _economy.player_level()
 	if bonus_index >= 0:
-		_win_coins = _economy.award_bonus(bonus_index)
+		_win_coins = await _economy.award_bonus(bonus_index)
+		_saving = false
 		_show_result(true)
 		if _win_coins > 0:
 			var player_level: int = _economy.player_level()
@@ -294,7 +312,8 @@ func _record_win() -> void:
 
 	var had_badge: bool = _economy.has_flawless_badge(level.id)
 	var was_album_complete := album_complete.is_valid() and bool(album_complete.call())
-	_win_coins = _economy.award_nonogram(level.id, _puzzle.lives, _peak_lines)
+	_win_coins = await _economy.award_nonogram(level.id, _puzzle.lives, _peak_lines)
+	_saving = false
 	_new_badge = not had_badge and _economy.has_flawless_badge(level.id)
 	_show_result(true)
 	if _win_coins < 0:
@@ -331,7 +350,8 @@ func _show_result(won: bool) -> void:
 		_continue = UI.action(choices, tr("GAME_CONTINUE_COINS") % EconomyRules.CONTINUE_COST)
 		_continue.disabled = _economy.balance() < EconomyRules.CONTINUE_COST
 		_continue.pressed.connect(_use_paid_continue)
-		UI.action(choices, "GAME_CONTINUE_AD", _continue.disabled).pressed.connect(_request_ad.bind(&"continue"))
+		if _ads.supports_rewarded():
+			UI.action(choices, "GAME_CONTINUE_AD", _continue.disabled).pressed.connect(_request_ad.bind(&"continue"))
 	var nav := UI.row(_result)
 	var show_next := won and can_play_next.is_valid() and bool(can_play_next.call())
 	var focus: Button
@@ -368,7 +388,7 @@ func _show_win_reward() -> void:
 		if _bonus_granted and _bonus_coins < 0:
 			_show_feedback("SAVE_FAILED")
 			UI.button(_result, "SAVE_RETRY").pressed.connect(_save_bonus)
-		elif not _bonus_granted:
+		elif not _bonus_granted and _ads.supports_rewarded():
 			UI.button(_result, "GAME_DOUBLE_AD").pressed.connect(_request_ad.bind(&"double_coins"))
 	if _new_badge:
 		UI.label(_result, "BADGE_EARNED", 23, UI.MINT)
@@ -379,7 +399,11 @@ func _retry_win() -> void:
 
 
 func _save_bonus() -> void:
-	_bonus_coins = _economy.double_nonogram_reward(level.id)
+	if _saving:
+		return
+	_saving = true
+	_bonus_coins = await _economy.double_nonogram_reward(level.id)
+	_saving = false
 	_show_result(true)
 
 
@@ -401,4 +425,6 @@ func _update_balance(balance: int) -> void:
 
 
 func _leave(action: StringName) -> void:
-	exit_requested.emit(action, _puzzle.state != Puzzle.State.PLAYING)
+	if _saving:
+		return
+	exit_requested.emit(action, _result.visible and _puzzle.state != Puzzle.State.PLAYING)

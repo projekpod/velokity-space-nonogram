@@ -123,6 +123,11 @@
                 return Math.max(0, Math.min(window.innerHeight, window.innerHeight - top));
             };
 
+            window.velokityFirstScreenReady = () => {
+                loadingStatus.remove();
+                canvas.focus();
+            };
+
             async function start() {
                 loadingStatus.style.visibility = 'visible';
                 const sdk = window.bridge;
@@ -156,8 +161,6 @@
                             }
                         },
                     });
-                    loadingStatus.remove();
-                    canvas.focus();
                 } catch (error) {
                     document.getElementById('status-splash').style.display = 'none';
                     progress.style.display = 'none';

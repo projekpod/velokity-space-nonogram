@@ -1104,9 +1104,13 @@ class TestPortalAds extends RefCounted:
 	var requests: Array[String] = []
 	var banners: Array[String] = []
 	var hide_immediately := true
+	var minimum_delay := 0
 
 	func show_rewarded(placement: String) -> void:
 		requests.append(placement)
+
+	func set_minimum_delay_between_interstitial(seconds: int) -> void:
+		minimum_delay = seconds
 
 	func show_interstitial() -> void:
 		requests.append("interstitial")
@@ -1180,14 +1184,18 @@ func _test_bridge_ads() -> void:
 	check(results.size() == count + 1 and results.back() == [&"hint", false], "Bridge failure recovers without a payout")
 
 	ads.set_gameplay_active(false)
+	check(ads.request_rewarded(&"hint"), "A supported placement can open without earning the reward")
+	portal_ads.rewarded_state_changed.emit("opened")
+	portal_ads.rewarded_state_changed.emit("closed")
+	await process_frame
+	check(results.back() == [&"hint", false], "Closing before rewarded never grants the prize")
 	portal_ads.is_banner_supported = false
 	portal_ads.is_rewarded_supported = false
 	var banner_count := portal_ads.banners.size()
 	ads.set_gameplay_active(true)
 	check(portal_ads.banners.size() == banner_count and not ads.request_rewarded(&"hint"), "Platforms without banner or rewarded support never call those APIs")
 	ads.set_gameplay_active(false)
-	ads._session_started = Time.get_ticks_msec() - 120000
-	check(ads.request_interstitial_after_result(10) and paused, "Eligible results also use the Bridge interstitial")
+	check(portal_ads.minimum_delay == 90 and ads.request_interstitial_after_result(1) and paused, "Bridge receives the first result and owns the 90-second pacing")
 	portal_ads.interstitial_state_changed.emit("closed")
 	await process_frame
 	check(not paused and platform.messages.back() == "gameplay_stopped", "An interstitial outside a puzzle restores input without starting gameplay")

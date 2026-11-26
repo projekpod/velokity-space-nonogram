@@ -12,6 +12,7 @@ var _elapsed := 0.0
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_document = JavaScriptBridge.get_interface("document")
 
 
@@ -23,6 +24,8 @@ func _process(delta: float) -> void:
 	var save: Dictionary = main._save.data
 	var state := {
 		"scene": "navigation", "buttons": {}, "frames": Engine.get_process_frames(),
+		"locale": TranslationServer.get_locale(), "paused": get_tree().paused, "muted": AudioServer.is_bus_mute(0),
+		"visibleButtons": [],
 		"coins": save.coins, "clears": save.nonogram.size(), "bonusClears": save.bonus_clears,
 		"dailyClears": save.daily.clears, "owned": save.meta.purchased, "equipped": save.meta.equipped,
 		"bottom": _normalized_rect(main._column).end.y,
@@ -57,6 +60,8 @@ func _process(delta: float) -> void:
 			_add_button(state.buttons, grid_nodes[0].get_child(index), "level%d" % (index + 1))
 	for button: Button in main._column.find_children("*", "Button", true, false):
 		_add_button(state.buttons, button, button.text)
+		if button.is_visible_in_tree():
+			state.visibleButtons.append(button.text)
 	_document.documentElement.setAttribute("data-velokity-playthrough", JSON.stringify(state))
 
 

@@ -24,11 +24,11 @@ func balance() -> int:
 
 
 func earn(amount: int) -> bool:
-	return amount > 0 and amount <= MAX_COINS - balance() and _set_balance(balance() + amount)
+	return amount > 0 and amount <= MAX_COINS - balance() and await _set_balance(balance() + amount)
 
 
 func spend(amount: int) -> bool:
-	return amount > 0 and amount <= balance() and _set_balance(balance() - amount)
+	return amount > 0 and amount <= balance() and await _set_balance(balance() - amount)
 
 
 func is_nonogram_cleared(level_id: String) -> bool:
@@ -85,7 +85,7 @@ func buy_costume(id: String) -> bool:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.meta.purchased[id] = true
 	snapshot.coins -= price
-	return _commit(snapshot)
+	return await _commit(snapshot)
 
 
 func equipped_costumes() -> Dictionary:
@@ -109,7 +109,7 @@ func equip_costume(slot: String, id: String) -> bool:
 		snapshot.meta.equipped.erase(slot)
 	else:
 		snapshot.meta.equipped[slot] = id
-	return _commit(snapshot)
+	return await _commit(snapshot)
 
 
 func login_status(day: int) -> Dictionary:
@@ -133,7 +133,7 @@ func claim_login(day: int) -> int:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.meta.login = next
 	snapshot.coins += amount
-	return amount if _commit(snapshot) else -1
+	return amount if await _commit(snapshot) else -1
 
 
 func free_coin_ads_remaining(day: int) -> int:
@@ -153,7 +153,7 @@ func award_free_ad_coins(day: int) -> int:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.free_coin_ads = {"last_day": day, "count": FREE_COIN_LIMIT - remaining + 1}
 	snapshot.coins += FREE_COIN_AMOUNT
-	return FREE_COIN_AMOUNT if _commit(snapshot) else -1
+	return FREE_COIN_AMOUNT if await _commit(snapshot) else -1
 
 
 static func _login_reward(streak: int) -> int:
@@ -192,7 +192,7 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 		snapshot.nonogram[level_id].flawless = true
 		_add_xp(snapshot, Meta.BADGE_XP)
 	snapshot.coins += amount
-	return amount if _commit(snapshot) else -1
+	return amount if await _commit(snapshot) else -1
 
 
 func next_bonus_index() -> int:
@@ -210,7 +210,7 @@ func award_bonus(index: int) -> int:
 	snapshot.bonus_clears += 1
 	_add_xp(snapshot, Meta.BONUS_XP)
 	snapshot.coins += amount
-	return amount if _commit(snapshot) else -1
+	return amount if await _commit(snapshot) else -1
 
 
 func double_nonogram_reward(level_id: String) -> int:
@@ -223,7 +223,7 @@ func double_nonogram_reward(level_id: String) -> int:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.nonogram[level_id].doubled = true
 	snapshot.coins += amount
-	return amount if _commit(snapshot) else -1
+	return amount if await _commit(snapshot) else -1
 
 
 # Positive values are coins collected. Zero is an already recorded date, -1 a failed write.
@@ -238,7 +238,7 @@ func award_daily(day: int) -> int:
 	snapshot.daily = progress
 	_add_xp(snapshot, Meta.CLEAR_XP)
 	snapshot.coins += amount
-	return amount if _commit(snapshot) else -1
+	return amount if await _commit(snapshot) else -1
 
 
 static func _add_xp(snapshot: Dictionary, amount: int) -> void:
@@ -248,12 +248,12 @@ static func _add_xp(snapshot: Dictionary, amount: int) -> void:
 func _set_balance(value: int) -> bool:
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.coins = value
-	return _commit(snapshot)
+	return await _commit(snapshot)
 
 
 func _commit(snapshot: Dictionary) -> bool:
 	var earned: bool = snapshot.coins > balance()
-	if _save.write_game(snapshot) != OK:
+	if await _save.commit(snapshot) != OK:
 		return false
 	_events.coins_changed.emit(snapshot.coins)
 	if earned:
