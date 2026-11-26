@@ -13,18 +13,24 @@ Branch `codex/t11b-portal-compliance` berangkat dari `origin/main` yang sudah me
 
 ## T11b · Perbaikan CI
 
-Run #25 gagal saat reload terakhir. Predikat asinkron `waitForFunction` dianggap berhasil saat mengembalikan Promise, bahkan jika isinya `false`. QA kini menunggu hasil setiap baca IndexedDB dan hanya reload setelah snapshot sesuai. Semua pemeriksaan playthrough tetap dijalankan.
+Run #25 gagal saat reload terakhir. Predikat asinkron `waitForFunction` dianggap berhasil saat mengembalikan Promise, bahkan jika isinya `false`. QA kini menunggu hasil setiap baca IndexedDB dan hanya reload setelah snapshot sesuai. Semua pemeriksaan playthrough tetap dijalankan dan job browser lulus kembali pada run #26.
 
 ## T11b · Playgama
 
 - Web menunggu SDK selesai diinisialisasi, lalu membaca satu snapshot dari Bridge Storage sebelum menampilkan layar pertama. Save lama dikopi sekali dan file lokal dihapus sesudah SDK mengonfirmasi penulisan. Build tanpa SDK memakai file lokal. Data korup diarsipkan dan versi yang lebih baru dilindungi dari penulisan.
 - Bahasa tersimpan mengalahkan bahasa portal. Satu event `game_ready` dikirim setelah menu atau Moon 01 tersedia. Sinyal pause dan tab tersembunyi menjeda game serta membisukan audio. Sinyal audio portal mengatur mute sambil menghormati alasan jeda lain. Tombol rewarded tersembunyi di portal yang tidak mendukungnya.
 
+## URL uji GitHub Pages
+
+https://projekpod.github.io/velokity-space-nonogram/
+
+Job `publish-pages` mengunduh artefak Web rilis dari run yang sama dan menerbitkannya setelah job `web` dan `qa-screenshots` lulus pada push ke `main`. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Cek status job dan buka URL di atas setelah merge pertama. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
+
 ## Pemeriksaan
 
-Impor Godot 4.7.2, kedua ekspor Web, 464 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.091.751 byte (41,09 MB)** untuk 12 file. Web QA 41.106.651 byte. ZIP rilis `velokity-itch.zip` **11.070.880 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.
+Impor Godot 4.7.2, kedua ekspor Web, 466 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.096.414 byte (41,10 MB)** untuk 12 file. Web QA 41.111.778 byte. ZIP rilis `velokity-itch.zip` **11.075.453 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.
 
-Playwright menyelesaikan Moon 01–05, Rasi Bintang, album dan pencapaian, tiga tahap Ronde Bonus, serta pratinjau, beli, dan pasang kostum. Muat ulang diuji setelah progres dan kostum persisten di IndexedDB. Sinkronisasi browser berlangsung asinkron, jadi muat ulang sebelum transaksi IndexedDB selesai dapat memuat snapshot sebelumnya. Uji banner melalui SDK simulasi mencakup lebar 599/600 CSS px, rotasi, dan pengukuran ulang tinggi 78/213 px. Build Web rilis mengabaikan rute QA.
+Playwright menyelesaikan Moon 01–05, Rasi Bintang, album dan pencapaian, tiga tahap Ronde Bonus, serta pratinjau, beli, dan pasang kostum. Dengan Bridge simulasi, reload memulihkan progres dan kostum yang sudah dikonfirmasi SDK. Uji migrasi juga membuktikan fallback tanpa SDK memulihkan save setelah transaksi IndexedDB selesai, lalu memindahkannya sekali ke Bridge. Uji banner melalui SDK simulasi mencakup lebar 599/600 CSS px, rotasi, dan pengukuran ulang tinggi 78/213 px. Build Web rilis mengabaikan rute QA.
 
 Pengukuran profil sentuh 393×851 CSS @2× dengan SwiftShader menghasilkan **4,7 FPS, p95 417 ms** pada runner ini. Uji stres dengan CPU 4× lebih lambat menghasilkan 2,8 FPS dan p95 800 ms. Uji pembanding dengan batching bintang tidak meningkatkan hasil. CI melaporkan FPS dan p95 di ringkasan run. Gate performa T11 masih terbuka sampai pengujian pada ponsel kelas menengah dengan GPU perangkat.
 
@@ -66,6 +72,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR dan cek artefak dari commit rilis. Di ponsel kelas menengah, rekam 10–15 detik saat mengisi Moon 01 sampai menang lewat panel Performance di Chrome DevTools dengan remote debugging. Targetnya minimal 30 FPS dengan p95 durasi frame maksimal 50 ms. Setelah lulus, uji dan terbitkan draf itch.io dengan tautan Traktir.
-2. Jalankan QA portal berikutnya sesuai urutan di `docs/RELEASE.md`. Selesaikan syarat Playgama dan GameDistribution sebelum menekan Submit di masing-masing portal.
+1. Oz buka PR setelah review Claude. Aktifkan **GitHub Actions** sebagai sumber Pages jika belum aktif, lalu verifikasi deployment pertama dari `main` dan uji URL di atas.
+2. Jalankan QA portal sesuai urutan di `docs/RELEASE.md` dan ukur performa di ponsel kelas menengah sebelum menerbitkan.
 3. T12 — Tambahkan konten v1.1, termasuk 300 Nonogram hingga 15×15, zoom/pan, 365 puzzle harian, dan kurva kesulitan.
