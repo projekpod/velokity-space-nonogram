@@ -7,14 +7,14 @@ export async function state(page) {
   return JSON.parse(await page.locator("html").getAttribute(stateAttribute) ?? "{}");
 }
 
-export async function waitState(page, check) {
+export async function waitState(page, check, timeout = 12_000) {
   const match = await page.waitForFunction(
     ([attribute, expression]) => {
       const snapshot = JSON.parse(document.documentElement.getAttribute(attribute) ?? "{}");
       return Object.keys(snapshot).length && Function("s", `return (${expression})(s)`)(snapshot) && snapshot;
     },
     [stateAttribute, check.toString()],
-    { timeout: 12_000 },
+    { timeout },
   );
   return match.jsonValue();
 }

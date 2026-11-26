@@ -3,6 +3,8 @@ extends VBoxContainer
 signal back_requested
 
 const UI := preload("res://ui/controls.gd")
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
+const ShopCard := preload("res://ui/shop_card.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
@@ -24,6 +26,12 @@ const LINE := Color("#304768")
 var page := Page.ALBUM
 var planet := "moon"
 var _slot := "helmet"
+var _shop_tab := "cat"
+var _shop_list: VBoxContainer
+var _shop_scroll: ScrollContainer
+var _shop_cards: Dictionary = {}
+var _stage: ShopCard
+var _preview_rarity: Label
 var _preview_id := ""
 var _preview_panel: VBoxContainer
 var _preview_title: Label
@@ -37,7 +45,7 @@ var _purchases := Purchases.new()
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 12)
-	_preview_id = _economy.equipped_costumes().get(_slot, "")
+	_preview_id = _economy.equipped_cosmetic("cat")
 	_ads.rewarded_finished.connect(_on_coin_ad_finished)
 	_render()
 
@@ -161,26 +169,78 @@ func _render_achievements() -> void:
 
 func _render_shop(focus: String) -> void:
 	UI.label(self, "META_SHOP", 47)
-	var stage := _panel(self, Color("#132239"), Color("#40607c"), 9)
-	_preview_panel = VBoxContainer.new()
-	stage.add_child(_preview_panel)
-	_preview_title = UI.label(_preview_panel, "", 24, UI.MINT)
-	_preview_costume(_preview_id)
-
 	var tabs := UI.row(self)
-	for slot: String in Meta.SLOTS:
-		var tab := UI.action(tabs, "COSTUME_SLOT_" + slot.to_upper(), slot == _slot)
-		tab.add_theme_font_size_override("font_size", 22)
-		tab.pressed.connect(_select_slot.bind(slot))
+	for category in ["cat", "skin", "costume"]:
+		var tab := UI.action(tabs, "SHOP_TAB_" + category.to_upper(), category == _shop_tab)
+		tab.pressed.connect(_select_shop_tab.bind(category))
 
-	var equipped: Dictionary = _economy.equipped_costumes()
-	_shop_row("", {}, equipped.get(_slot, ""), focus)
-	for id: String in Meta.COSTUMES:
-		var item: Dictionary = Meta.COSTUMES[id]
-		if item.slot == _slot:
-			_shop_row(id, item, equipped.get(_slot, ""), focus)
+	_stage = ShopCard.new()
+	_stage.rarity = _item(_preview_id).get("rarity", Cosmetics.Rarity.COMMON)
+	_stage.padding = 8
+	add_child(_stage)
+	_preview_panel = VBoxContainer.new()
+	_preview_panel.add_theme_constant_override("separation", 2)
+	_stage.add_child(_preview_panel)
+	_preview_title = UI.label(_preview_panel, "", 29, UI.INK)
+	_preview_rarity = UI.label(_preview_panel, "", 20, UI.MINT)
+	_update_shop_preview()
+	if _shop_tab == "costume":
+		var slots := UI.row(self)
+		for slot: String in Meta.SLOTS:
+			var tab := UI.action(slots, "COSTUME_SLOT_" + slot.to_upper(), slot == _slot)
+			tab.add_theme_font_size_override("font_size", 20)
+			tab.custom_minimum_size.y = 50
+			tab.pressed.connect(_select_slot.bind(slot))
+
+	_shop_scroll = ScrollContainer.new()
+	_shop_scroll.custom_minimum_size.y = 410
+	_shop_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_shop_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_RESERVE
+	_shop_scroll.follow_focus = true
+	add_child(_shop_scroll)
+	_shop_list = VBoxContainer.new()
+	_shop_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_shop_list.add_theme_constant_override("separation", 9)
+	_shop_scroll.add_child(_shop_list)
+	_shop_cards.clear()
+	var equipped := _equipped_item()
+	if _shop_tab == "costume":
+		_shop_row("", {}, equipped, focus)
+		for id: String in Meta.COSTUMES:
+			var item: Dictionary = Meta.COSTUMES[id]
+			if item.slot == _slot:
+				_shop_row(id, item, equipped, focus)
+	else:
+		var items := Cosmetics.items(_shop_tab)
+		for id: String in items:
+			_shop_row(id, items[id], equipped, focus)
 	_render_shop_actions()
 	_show_message()
+	if not focus.is_empty() and _shop_cards.has(focus):
+		_reveal_shop_card.call_deferred(focus)
+
+
+func _reveal_shop_card(id: String) -> void:
+	if is_instance_valid(_shop_scroll) and _shop_cards.has(id):
+		_shop_scroll.ensure_control_visible(_shop_cards[id])
+
+
+func _equipped_item() -> String:
+	return _economy.equipped_costumes().get(_slot, "") if _shop_tab == "costume" else _economy.equipped_cosmetic(_shop_tab)
+
+
+func _item(id: String) -> Dictionary:
+	var items := Meta.COSTUMES if _shop_tab == "costume" else Cosmetics.items(_shop_tab)
+	return items.get(id, {})
+
+
+func _select_shop_tab(category: String) -> void:
+	if _shop_tab == category:
+		return
+	_shop_tab = category
+	_preview_id = _equipped_item()
+	_message = ""
+	_render()
 
 
 func _render_shop_actions() -> void:
@@ -264,63 +324,95 @@ func _request_purchase(id: StringName) -> void:
 
 
 func _select_slot(slot: String) -> void:
+	_shop_tab = "costume"
 	_slot = slot
 	_preview_id = _economy.equipped_costumes().get(slot, "")
 	_message = ""
 	_render()
 
 
-func _preview_costume(id: String) -> void:
+func _preview_item(id: String) -> void:
 	_preview_id = id
+	var rarity: int = _item(id).get("rarity", Cosmetics.Rarity.COMMON)
+	if rarity != _stage.rarity:
+		var old_stage := _stage
+		_stage = ShopCard.new()
+		_stage.rarity = rarity
+		_stage.padding = old_stage.padding
+		add_child(_stage)
+		move_child(_stage, old_stage.get_index())
+		_preview_panel.reparent(_stage)
+		remove_child(old_stage)
+		old_stage.queue_free()
+	_update_shop_preview()
+
+
+func _update_shop_preview() -> void:
 	var outfit: Dictionary = _economy.equipped_costumes()
-	outfit[_slot] = id
+	if _shop_tab == "costume":
+		outfit[_slot] = _preview_id
 	if is_instance_valid(_portrait) and _portrait.get_parent() == _preview_panel:
 		_preview_panel.remove_child(_portrait)
 		_portrait.queue_free()
 	_portrait = Portrait.new()
-	_portrait.display_height = 278
+	_portrait.display_height = 234
 	_portrait.preview_outfit = outfit
+	_portrait.preview_cat = _preview_id if _shop_tab == "cat" else ""
+	_portrait.preview_skin = _preview_id if _shop_tab == "skin" else ""
 	_preview_panel.add_child(_portrait)
 	_preview_panel.move_child(_portrait, 0)
-	_preview_title.text = tr("COSTUME_PREVIEW") % tr(_costume_title(id))
+	_preview_title.text = Cosmetics.title(_shop_tab, _preview_id)
+	_preview_rarity.text = Cosmetics.rarity_title(_stage.rarity)
+	_preview_rarity.add_theme_color_override("font_color", Cosmetics.FRAME_COLORS[_stage.rarity].lightened(0.3))
 
 
 func _shop_row(id: String, item: Dictionary, equipped: String, focus: String) -> void:
-	var card := _panel(self, PANEL, LINE, 6)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 10)
-	card.add_child(row)
-
+	var card := ShopCard.new()
+	card.rarity = item.get("rarity", Cosmetics.Rarity.COMMON)
+	card.padding = 9
+	_shop_list.add_child(card)
+	_shop_cards[id] = card
+	var row := UI.row(card)
 	var swatch := ColorRect.new()
 	swatch.color = item.get("color", UI.INK)
-	swatch.custom_minimum_size = Vector2(12, 30)
+	swatch.custom_minimum_size = Vector2(10, 34)
 	swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	row.add_child(swatch)
 
 	var copy := VBoxContainer.new()
 	copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	copy.add_theme_constant_override("separation", 1)
+	copy.add_theme_constant_override("separation", 2)
 	row.add_child(copy)
-	var preview := UI.button(copy, _costume_title(id))
+	var preview := UI.button(copy, Cosmetics.title(_shop_tab, id))
 	preview.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	for state in ["normal", "hover", "pressed", "hover_pressed"]:
 		preview.add_theme_stylebox_override(state, StyleBoxEmpty.new())
 	preview.add_theme_color_override("font_hover_color", UI.MINT)
-	preview.custom_minimum_size.y = 32
-	preview.add_theme_font_size_override("font_size", 21)
-	preview.pressed.connect(_preview_costume.bind(id))
+	preview.custom_minimum_size.y = 36
+	preview.add_theme_font_size_override("font_size", 25)
+	preview.pressed.connect(_preview_item.bind(id))
 
+	var source := Cosmetics.rarity_title(card.rarity)
 	if item.has("album"):
-		_source_label(copy, tr("COSTUME_FROM_ALBUM") % _planet_title(item.album))
+		source = tr("COSTUME_FROM_ALBUM") % _planet_title(item.album)
 	elif item.has("achievement"):
-		_source_label(copy, tr("COSTUME_FROM_ACHIEVEMENT") % tr(Meta.achievement_title(item.achievement)))
+		source = tr("COSTUME_FROM_ACHIEVEMENT") % tr(Meta.achievement_title(item.achievement))
+	elif id == "maine_coon":
+		source = tr(source) + " · " + tr("CAT_POPULAR")
+	var color: Color = Cosmetics.FRAME_COLORS[card.rarity].lightened(0.39)
+	var caption := UI.label(copy, source, 18, color)
+	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	caption.clip_text = true
 
+	var owned: bool = id.is_empty()
+	if not owned:
+		owned = _economy.owns_costume(id) if _shop_tab == "costume" else _economy.owns_cosmetic(_shop_tab, id)
 	var action: Button
 	if equipped == id:
 		action = UI.button(row, "COSTUME_EQUIPPED")
 		action.disabled = true
-	elif id.is_empty() or _economy.owns_costume(id):
+	elif owned:
 		action = UI.button(row, "COSTUME_EQUIP", true)
 		action.pressed.connect(_equip.bind(id))
 	elif item.has("price"):
@@ -330,7 +422,7 @@ func _shop_row(id: String, item: Dictionary, equipped: String, focus: String) ->
 	else:
 		action = UI.button(row, "COSTUME_LOCKED")
 		action.disabled = true
-	action.custom_minimum_size = Vector2(190, 50)
+	action.custom_minimum_size = Vector2(192, 50)
 	action.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	action.add_theme_font_size_override("font_size", 20)
 	if not focus.is_empty() and focus == id:
@@ -340,32 +432,38 @@ func _shop_row(id: String, item: Dictionary, equipped: String, focus: String) ->
 			action.grab_focus()
 
 
-func _source_label(parent: Control, text: String) -> void:
-	var source := UI.label(parent, text, 17, UI.MUTED)
-	source.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	source.clip_text = true
-
-
-func _costume_title(id: String) -> String:
-	return "COSTUME_DEFAULT" if id.is_empty() else Meta.costume_title(id)
-
-
 func _buy(id: String) -> void:
-	_message = ""
-	if await _economy.buy_costume(id):
-		_preview_id = id
+	var category := _shop_tab
+	var bought: bool
+	if category == "costume":
+		bought = await _economy.buy_costume(id)
 	else:
-		_fail()
-	_render(id)
+		bought = await _economy.buy_cosmetic(category, id)
+	_finish_shop_action(id, category, bought)
 
 
 func _equip(id: String) -> void:
-	_message = ""
-	if await _economy.equip_costume(_slot, id):
-		_preview_id = id
+	var category := _shop_tab
+	var slot := _slot
+	var equipped: bool
+	if category == "costume":
+		equipped = await _economy.equip_costume(slot, id)
 	else:
+		equipped = await _economy.equip_cosmetic(category, id)
+	_finish_shop_action(id, category, equipped)
+
+
+func _finish_shop_action(id: String, category: String, saved: bool) -> void:
+	if not is_inside_tree() or page != Page.SHOP:
+		return
+	_message = ""
+	if not saved:
 		_fail()
-	_render(id)
+	if saved and category == _shop_tab and (category != "costume" or id.is_empty() or Meta.COSTUMES[id].slot == _slot):
+		_preview_id = id
+		_render(id)
+	else:
+		_render()
 
 
 func _render_login() -> void:

@@ -1,6 +1,19 @@
-# Handoff — Velokity v1.0
+# Handoff — Velokity Feel & Shop v1.1
 
-Branch `codex/t11b-portal-compliance` berangkat dari `origin/main` yang sudah memuat T11. v1.0 berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang. Oz membuka PR setelah review Claude.
+Branch `codex/t12-feel-shop` berangkat dari `origin/main` setelah merge T11b. Oz membuka PR setelah review Claude. Katalog puzzle saat ini berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang.
+
+## T12 · Feel & Shop
+
+- Bridge Storage menulis snapshot dalam urutan commit. Saldo dan pengaturan dibaca ulang sebelum transaksi berikutnya. Stub Bridge lambat memverifikasi dua commit beruntun, transaksi yang saling menunggu, dan kelanjutan antrean setelah satu write gagal.
+- Sebelas efek WAV mencapai −1 dBFS peak dan kedua loop musik sekitar −16 dBFS RMS dengan peak di bawah −1 dBFS. Bus efek 0 dB dan musik −3 dB saat normal. Mode Tenang memakai −6 dB untuk keduanya. Slider efek dan musik disimpan masing-masing dari 0 sampai 100%.
+- Streak Nonogram memuncak pada pose menahan papan dan menambah denyut retakan untuk rekor berikutnya. Kesalahan memutus streak aktif sambil mempertahankan rekor. Efek streak dan toast kombo mulai pada frame berbeda. Setelah menang, retakan menutup dan Velokity mendorong papan naik sebelum panel hasil.
+- Latar antariksa memuat bintang berkelip, meteor, komet, tabrakan bintang berpartikel, nebula, dan planet. Mode Tenang menyisakan kelip lambat. Setelah tiga detik dengan rata-rata frame di atas 20 ms, game beralih ke efek ringan sampai sesi berakhir.
+- Toko memakai tab Kucing, Warna Bulu, dan Kostum dalam EN/ID, dengan pembelian langsung memakai koin. Save v8 menyimpan kepemilikan dan pilihan kucing dan warna bulu. Migrasi mempertahankan kostum lama beserta slotnya dan memberi pemain lama Velokity serta bulu alami.
+- Web QA menambahkan `?qa=streak`, `?qa=space`, `?qa=cats`, dan `?qa=shop-legendary`. Job `qa-screenshots` menangkap rute dan mengecek batas ukuran 300 KB serta memastikan build rilis mengabaikan query QA. Empat PNG di `docs/qa/` berukuran 177.407 byte (streak), 132.302 byte (space), 196.234 byte (cats), dan 163.554 byte (shop-legendary).
+
+## Pemeriksaan T12
+
+Godot 4.7.2 lulus impor, 514 pemeriksaan, serta ekspor Web dan Web QA tanpa error atau warning. Sepuluh tes Python dan validator solusi lulus. Ekspor Web **41.149.406 byte (41,15 MB)**, Web QA **41.166.386 byte**, dan ZIP itch.io **11.129.676 byte**. Web memenuhi batas unduhan mentah 50 MB. Verifikasi audio dan performa pada ponsel fisik masih terbuka.
 
 ## Yang berjalan
 
@@ -26,7 +39,7 @@ https://projekpod.github.io/velokity-space-nonogram/
 
 Job `publish-pages` mengunduh artefak Web rilis dari run yang sama dan menerbitkannya setelah job `web` dan `qa-screenshots` lulus pada push ke `main`. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Cek status job dan buka URL di atas setelah merge pertama. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
 
-## Pemeriksaan
+## Pemeriksaan T11b
 
 Impor Godot 4.7.2, kedua ekspor Web, 466 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.096.414 byte (41,10 MB)** untuk 12 file. Web QA 41.111.778 byte. ZIP rilis `velokity-itch.zip` **11.075.453 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.
 
@@ -72,6 +85,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR setelah review Claude. Aktifkan **GitHub Actions** sebagai sumber Pages jika belum aktif, lalu verifikasi deployment pertama dari `main` dan uji URL di atas.
-2. Jalankan QA portal sesuai urutan di `docs/RELEASE.md` dan ukur performa di ponsel kelas menengah sebelum menerbitkan.
-3. T12 — Tambahkan konten v1.1, termasuk 300 Nonogram hingga 15×15, zoom/pan, 365 puzzle harian, dan kurva kesulitan.
+1. Oz buka PR T12 setelah review Claude. Cek job **Quality gates**, empat screenshot di artefak `velokity-qa-screenshots`, dan deployment Pages dari `main`.
+2. Ukur volume dan performa di ponsel kelas menengah, lalu jalankan QA Playgama dan portal lain sesuai `docs/RELEASE.md` untuk menutup T11 dan T11b.
+3. T13 — Tambahkan papan 12×12 dan 15×15 dengan zoom/pan, naikkan katalog ke 300 Nonogram dan 365 puzzle harian, lalu sesuaikan kurva kesulitan. T14 menyusul dengan mekanik kecil tiap 10–15 level.

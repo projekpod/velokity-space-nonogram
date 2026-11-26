@@ -1,3 +1,4 @@
+from math import log10, sqrt
 import struct
 import unittest
 import wave
@@ -17,11 +18,15 @@ class AudioAssetsTest(unittest.TestCase):
                 frames = wav.getnframes()
                 pcm = struct.unpack(f"<{frames}h", wav.readframes(frames))
                 peak = max(map(abs, pcm))
-                self.assertGreater(peak, 2000)
-                self.assertLess(peak, 23000)
+                peak_db = 20 * log10(peak / 32767)
+                self.assertLessEqual(peak_db, -1.0)
                 if name in EFFECTS:
+                    self.assertAlmostEqual(peak_db, -1.0, delta=0.01)
                     self.assertLessEqual(frames, RATE)
                     self.assertEqual((pcm[0], pcm[-1]), (0, 0))
+                else:
+                    rms = sqrt(sum(sample ** 2 for sample in pcm) / frames)
+                    self.assertAlmostEqual(20 * log10(rms / 32767), -16.0, delta=0.1)
 
     def test_music_seams_and_sampler_loops(self):
         for name in MUSIC:

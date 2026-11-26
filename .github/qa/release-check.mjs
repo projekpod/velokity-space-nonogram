@@ -14,12 +14,14 @@ const bonus = await levels("bonus/", "bonus-", 3);
 const browser = await launch();
 
 async function solve(page, level) {
-  const start = await waitState(page, snapshot => snapshot.grid && snapshot.state === 0 && snapshot.lives === 3);
-  for (const [x, y] of fills(level)) await cell(page, start.grid, level.size, x, y);
-  const result = await waitState(page, snapshot => snapshot.state === 1);
+  await waitState(page, snapshot => snapshot.grid && snapshot.state === 0 && snapshot.lives === 3);
+  for (const [x, y] of fills(level)) {
+    const { grid } = await waitState(page, snapshot => snapshot.grid && snapshot.state === 0);
+    await cell(page, grid, level.size, x, y);
+  }
+  const result = await waitState(page, snapshot => snapshot.state === 1 && snapshot.result && snapshot.tier === 0, 25_000);
   assert.equal(result.scene, level.id);
   assert.equal(result.lives, 3);
-  await waitState(page, snapshot => snapshot.tier === 0);
   return result;
 }
 
@@ -144,9 +146,10 @@ async function runFullPlaythrough(page) {
   await button(page, "LEVEL_BACK");
   await button(page, "GAME_BACK");
   await button(page, "META_SHOP");
+  await button(page, "SHOP_TAB_COSTUME");
   await button(page, "COSTUME_MINT_VISOR");
   await waitState(page, s => s.scene === "shop" && s.preview === "mint_visor" && !s.owned.mint_visor);
-  for (let remaining = 5; (await state(page)).coins < 400 && remaining > 0; remaining--) {
+  for (let remaining = 5; (await state(page)).coins < 425 && remaining > 0; remaining--) {
     const before = (await state(page)).coins;
     await button(page, `Free coins · +25 (${remaining} left)`);
     await page.waitForFunction(previous => {
@@ -154,7 +157,7 @@ async function runFullPlaythrough(page) {
       return data.coins === previous + 25;
     }, before);
   }
-  await button(page, "Buy · 400 coins");
+  await button(page, "Buy · 425 coins");
   await waitState(page, s => s.owned.mint_visor);
   await button(page, "COSTUME_EQUIP");
   await waitState(page, s => s.equipped.helmet === "mint_visor");
@@ -263,7 +266,7 @@ async function measurePhone() {
       requestAnimationFrame(tick);
     }));
     for (const [x, y] of fills(moon[0])) {
-      await cell(page, initial.grid, moon[0].size, x, y);
+      await cell(page, (await state(page)).grid, moon[0].size, x, y);
       await page.waitForTimeout(170);
     }
     const { frames, elapsed } = await animation;

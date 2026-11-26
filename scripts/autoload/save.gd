@@ -3,11 +3,14 @@ extends Node
 signal startup_finished
 signal _bridge_read(ok: bool, value: Variant)
 signal _bridge_written(ok: bool)
+signal _queue_drained
 
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
-const VERSION := 7
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
+const VERSION := 8
+const VOLUME_SETTINGS := ["music_volume", "effects_volume"]
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
 const BRIDGE_KEY := "velokity-save"
@@ -18,9 +21,19 @@ var _future_saves: Dictionary = {}
 var _corrupt_saves: Dictionary = {}
 var startup_complete := false
 var _bridge_storage
+var _bridge_set: Callable
 var _bridge_key := BRIDGE_KEY
 var _bridge_writable := true
 var _bridge_write_busy := false
+var _pending_writes: Array[WriteRequest] = []
+
+
+class WriteRequest extends RefCounted:
+	signal finished(error: Error)
+	var snapshot: Dictionary
+
+	func _init(value: Dictionary) -> void:
+		snapshot = value.duplicate(true)
 
 
 func _ready() -> void:
@@ -29,6 +42,9 @@ func _ready() -> void:
 			storage_path = "user://qa-save.json"
 			_bridge_key += "-qa"
 		_bridge_storage = get_node("/root/Bridge").storage
+		if _bridge_storage != null:
+			_bridge_set = func(key: String, value: String, callback: Callable) -> void:
+				_bridge_storage.set(key, value, callback)
 	if _bridge_storage == null:
 		load_game()
 	else:
@@ -70,32 +86,48 @@ func _load_bridge() -> void:
 
 
 func _on_bridge_read(ok: bool, value: Variant) -> void:
-	_bridge_read.emit(ok, value)
+	_bridge_read.emit.call_deferred(ok, value)
 
 
 func _on_bridge_written(ok: bool) -> void:
-	_bridge_written.emit(ok)
+	_bridge_written.emit.call_deferred(ok)
 
 
 func _write_bridge(key: String, value: String) -> bool:
-	_bridge_storage.set(key, value, _on_bridge_written)
+	_bridge_set.call(key, value, _on_bridge_written)
 	return await _bridge_written
 
 
+# Transactions that read the saved state wait before validating or taking their snapshot.
+func wait_for_pending_writes() -> void:
+	while _bridge_write_busy:
+		await _queue_drained
+
+
 func commit(snapshot: Dictionary) -> Error:
-	if _bridge_storage == null:
+	if not _bridge_set.is_valid():
 		return write_game(snapshot)
-	if not startup_complete or _bridge_write_busy:
+	if not startup_complete:
 		return ERR_BUSY
 	if not _bridge_writable or _future_saves.has(storage_path):
 		return ERR_FILE_CANT_WRITE
-	_bridge_write_busy = true
-	var saved := await _write_bridge(_bridge_key, JSON.stringify(snapshot))
+	var request := WriteRequest.new(snapshot)
+	_pending_writes.push_back(request)
+	if not _bridge_write_busy:
+		_bridge_write_busy = true
+		_drain_writes()
+	return await request.finished
+
+
+func _drain_writes() -> void:
+	while not _pending_writes.is_empty():
+		var request: WriteRequest = _pending_writes.pop_front()
+		var saved := await _write_bridge(_bridge_key, JSON.stringify(request.snapshot))
+		if saved:
+			data = request.snapshot
+		request.finished.emit(OK if saved else ERR_FILE_CANT_WRITE)
 	_bridge_write_busy = false
-	if not saved:
-		return ERR_FILE_CANT_WRITE
-	data = snapshot
-	return OK
+	_queue_drained.emit.call_deferred()
 
 
 func needs_onboarding() -> bool:
@@ -112,7 +144,7 @@ static func defaults() -> Dictionary:
 		"bonus_clears": 0,
 		"free_coin_ads": {"last_day": -1, "count": 0},
 		"meta": Meta.defaults(),
-		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
+		"settings": {"sound": true, "music": true, "music_volume": 100, "effects_volume": 100, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
 
@@ -129,7 +161,10 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	if stored_settings is Dictionary:
 		for key: String in result.settings:
 			var value: Variant = stored_settings.get(key)
-			if typeof(value) == typeof(result.settings[key]):
+			if key in VOLUME_SETTINGS:
+				if _is_version(value) and value <= 100:
+					result.settings[key] = int(value)
+			elif typeof(value) == typeof(result.settings[key]):
 				result.settings[key] = value
 		if result.settings.language not in ["", "en", "id"]:
 			result.settings.language = ""
@@ -156,6 +191,9 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	var stored_meta: Variant = raw.get("meta")
 	if version >= 5 and stored_meta is Dictionary:
 		_restore_meta(result.meta, stored_meta)
+		if version >= 8:
+			_restore_cosmetics(result.meta, stored_meta, "cat", "cats", Cosmetics.DEFAULT_CAT)
+			_restore_cosmetics(result.meta, stored_meta, "skin", "skins", Cosmetics.DEFAULT_SKIN)
 	var ad_claims: Variant = raw.get("free_coin_ads")
 	if version >= 6 and ad_claims is Dictionary:
 		var day: Variant = ad_claims.get("last_day")
@@ -178,6 +216,16 @@ static func _restore_meta(meta: Dictionary, stored: Dictionary) -> void:
 			meta.purchased[id] = true
 		if equipped is Dictionary and equipped.get(costume.slot) == id:
 			meta.equipped[costume.slot] = id
+
+
+static func _restore_cosmetics(meta: Dictionary, stored: Dictionary, category: String, ownership: String, default_id: String) -> void:
+	var purchased: Variant = stored.get(ownership)
+	for id: String in Cosmetics.items(category):
+		if id != default_id and purchased is Dictionary and purchased.get(id) == true:
+			meta[ownership][id] = true
+	var selected: Variant = stored.get(category)
+	if selected is String and meta[ownership].has(selected):
+		meta[category] = selected
 
 
 static func _is_version(version: Variant) -> bool:

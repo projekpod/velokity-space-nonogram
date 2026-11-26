@@ -15,4 +15,12 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
   - Applied the T10 QC follow-up and implemented the release kit, browser playthrough, and CI capture for store videos. Raw Web export 41.09 MB. The 393×851 touch profile on software rendering still misses the frame-time target. Verify a physical mid-range phone before closing T11.
 - [ ] T11b Portal compliance: make Web QA deterministic, implement Playgama required SDK steps, and deploy green main Web builds to GitHub Pages.
   - Fixed run #25, added browser and SDK regression checks, and wired Pages deployment. Verify the first green main deployment after merge.
-- [ ] T12 Content v1.1: 300 nonogram levels up to 15x15 with zoom/pan, 365 daily puzzles, difficulty curve, a new small mechanic every 10–15 levels.
+- [x] T12 Feel & Shop v1.1
+  - [x] 1. Queue saves in order so rapid actions persist the latest snapshot. Test with slow storage.
+  - [x] 2. Raise procedural audio levels and add saved Music and Effects volume sliders.
+  - [x] 3. Add visual-only fill streak escalation, persistent peak state, and a win recovery animation.
+  - [x] 4. Add an animated space backdrop, Calm Mode support, and automatic reduction under sustained load.
+  - [x] 5. Expand the direct-purchase shop with cats, skins, and costumes in four rarity tiers. Migrate existing saves.
+  - [x] Capture the four new QA routes in CI and commit screenshots under 300 KB each.
+- [ ] T13 Content v1.1: grow to 300 nonograms and 365 daily puzzles. Add 12x12 and 15x15 boards with zoom/pan and tune the difficulty curve.
+- [ ] T14 Small twists: add a new small mechanic every 10–15 levels.

@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { launch, openGame, watchErrors } from "./browser.mjs";
-import { cell, fills, levels, waitState } from "./gameplay.mjs";
+import { cell, fills, levels, state, waitState } from "./gameplay.mjs";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/preview-video.mjs <base-url> <output-dir>");
@@ -36,10 +36,10 @@ async function record(page, directory, name, width, height) {
   const combo = waitState(page, s => s.tier === 2 && s.combo >= 3 && s.state === 0);
   for (const [index, [x, y]] of moves.entries()) {
     await waitUntil(850 + index * 690);
-    await cell(page, initial.grid, moon.size, x, y);
+    await cell(page, (await state(page)).grid, moon.size, x, y);
   }
   const comboState = await combo;
-  const result = await waitState(page, s => s.state === 1 && s.tier === 0);
+  const result = await waitState(page, s => s.state === 1 && s.result && s.tier === 0);
   assert(result.combo >= comboState.combo && result.clears === 1);
   await waitUntil((duration + 0.35) * 1000);
   await cdp.send("Page.stopScreencast");

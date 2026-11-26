@@ -19,6 +19,7 @@ const Backdrop := preload("res://ui/space_backdrop.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Celebration := preload("res://ui/celebration.gd")
+const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
 const AlbumPicture := preload("res://ui/album_picture.gd")
@@ -35,6 +36,23 @@ class SilentAds extends AdsProvider:
 		pass
 
 
+class SlowStorage extends RefCounted:
+	var writes: Array[Dictionary] = []
+	var pending: Callable
+	var persisted: Dictionary
+
+	func write(_key: String, value: String, callback: Callable) -> void:
+		writes.append(JSON.parse_string(value))
+		pending = callback
+
+	func finish(ok := true) -> void:
+		if ok:
+			persisted = writes.back()
+		var callback := pending
+		pending = Callable()
+		callback.call(ok)
+
+
 func _initialize() -> void:
 	call_deferred("_run")
 
@@ -42,12 +60,14 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_save()
 	_test_save_recovery()
+	await _test_save_queue()
 	_test_settings()
 	await _test_settings_menu()
 	_test_economy()
 	_test_combo_rewards_and_migration()
 	_test_xp_migration()
 	_test_costume_economy()
+	_test_cosmetic_migration()
 	_test_login_calendar()
 	await _test_meta_menu()
 	_test_catalog()
@@ -69,6 +89,7 @@ func _run() -> void:
 	await _test_nonogram_flow()
 	await _test_mascot_reactions()
 	await _test_calm_visuals()
+	await _test_fill_streak()
 	await _test_celebrations()
 	await _test_milestone_celebrations()
 	_test_daily_selection()
@@ -99,6 +120,56 @@ func _test_save() -> void:
 	check(save.load_game(path) == OK and save.data.coins == 17, "Read back the persisted balance")
 	DirAccess.remove_absolute(path)
 	save.free()
+
+
+func _record_commit(save: Node, snapshot: Dictionary, results: Array[Error]) -> void:
+	results.append(await save.commit(snapshot))
+
+
+func _test_save_queue() -> void:
+	var save := root.get_node("Save")
+	var original: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	var storage := SlowStorage.new()
+	save._bridge_set = storage.write
+	var results: Array[Error] = []
+	var first := SaveScript.defaults()
+	first.coins = 12
+	var second := SaveScript.defaults()
+	second.coins = 24
+	_record_commit(save, first, results)
+	_record_commit(save, second, results)
+	second.coins = 99
+	check(storage.writes.size() == 1 and results.is_empty(), "Keep one Bridge write in flight")
+	storage.finish()
+	await process_frame
+	check(storage.writes.size() == 2 and save.data.coins == 12 and results == [OK], "Start the next snapshot only after the first completes")
+	storage.finish()
+	await process_frame
+	check(results == [OK, OK] and storage.persisted.coins == 24 and save.data.coins == 24, "The newest queued snapshot wins even if its caller changes the input")
+
+	var economy := root.get_node("Economy")
+	economy.spend(20)
+	economy.spend(20)
+	root.get_node("Settings").set_value("calm_mode", true)
+	storage.finish()
+	await process_frame
+	check(storage.writes.size() == 4 and storage.writes.back().coins == 4, "Revalidate the second spend on the committed balance")
+	storage.finish()
+	await process_frame
+	check(storage.persisted.settings.calm_mode and save.data.coins == 4, "A queued setting also preserves the prior spend")
+
+	_record_commit(save, first, results)
+	_record_commit(save, second, results)
+	storage.finish(false)
+	await process_frame
+	check(results.back() == ERR_FILE_CANT_WRITE and save.data.coins == 4, "A failed write does not publish its snapshot")
+	storage.finish()
+	await process_frame
+	check(results.back() == OK and storage.persisted.coins == 99, "A failed write does not stall the queue")
+	save._bridge_set = Callable()
+	save.data = original
+	root.get_node("Events").settings_changed.emit()
 
 
 func _test_save_recovery() -> void:
@@ -309,11 +380,15 @@ func _test_settings() -> void:
 	check(settings.set_value("sound", false) and settings.set_value("music", false), "Save sound and music separately")
 	check(AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")) and AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")), "Mute existing audio buses when settings change")
 	check(settings.set_value("sound", true) and not AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")) and AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")), "Sound toggle does not change music")
+	check(settings.set_value("music_volume", 50) and settings.set_value("effects_volume", 0), "Save independent volume levels including silence")
+	check(not settings.set_value("music_volume", 101) and not settings.set_value("effects_volume", -1), "Reject out-of-range volume settings")
+	check(SaveScript.migrate({"version": 7, "settings": {"music": false}}).settings.music_volume == 100, "Old saves retain their sound toggle and receive full volume by default")
 	check(settings.set_value("vibration", false) and settings.set_value("calm_mode", true), "Save vibration and Calm Mode")
 	check(settings.set_value("language", "id") and TranslationServer.get_locale() == "id", "Apply the saved language immediately")
 	check(not settings.set_value("language", "es") and not settings.set_value("sound", "false"), "Reject unsupported language and setting types")
 	save.data = SaveScript.defaults()
 	check(save.load_game() == OK and settings.get_value("language") == "id" and settings.get_value("calm_mode"), "Read back language and Calm Mode")
+	check(settings.get_value("music_volume") == 50 and settings.get_value("effects_volume") == 0, "Restore JSON volume values as integers")
 	check(not settings.get_value("vibration") and not settings.get_value("music") and settings.get_value("sound"), "Read back audio and vibration")
 	check(settings.set_value("language", "") and TranslationServer.get_locale() == settings._device_locale, "Device language can be restored")
 	DirAccess.remove_absolute(save.storage_path)
@@ -362,6 +437,8 @@ func _test_nonogram_flow() -> void:
 	check(puzzle.at(next_hint) == Puzzle.Cell.FILLED and save.data.coins == 0, "A rewarded ad only applies its hint after the grant")
 	for cell in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(0, 1), Vector2i(0, 2)]:
 		puzzle.mark(cell, false)
+	while screen._saving:
+		await process_frame
 	check(puzzle.state == Puzzle.State.WON and screen._result.visible and save.data.coins == 60, "A win opens a result and saves its capped first-clear coins")
 	screen._request_ad(&"double_coins")
 	await ads.rewarded_finished
@@ -392,7 +469,7 @@ func _test_first_puzzle() -> void:
 	screen._leave(&"retry")
 	screen = main._column.get_child(0) as NonogramScreen
 	check(screen.first_puzzle and screen._tutorial == null and not save.data.onboarding_complete, "Retry preserves an in-session skip without completing onboarding")
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	screen._celebration.dismiss()
 	check(save.data.onboarding_complete and _press_button(screen._result, "GAME_BACK"), "The saved first win opens the main menu")
 	check(_press_button(main._column, "MENU_PLAY"), "Main menu is available after onboarding")
@@ -445,6 +522,51 @@ func _test_mascot_reactions() -> void:
 	save.storage_path = previous_path
 
 
+func _test_fill_streak() -> void:
+	var save := root.get_node("Save")
+	var events := root.get_node("Events")
+	var original: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	save.data.settings.vibration = false
+	var screen := NonogramScreen.new()
+	screen.level = {
+		"id": "streak-test", "size": 5, "solution": ["aaaa.", "aaaa.", "aaaa.", "aaaa.", "aaaaa"],
+		"palette": {}, "title": {"en": "Test", "id": "Tes"},
+	}
+	root.add_child(screen)
+	var streak := screen._streak
+	screen._puzzle.mark(Vector2i(0, 0), false)
+	screen._puzzle.mark(Vector2i(4, 0), true)
+	check(streak.current == 1, "Correct X marks neither count nor break the fill streak")
+	for index in range(1, 7):
+		screen._puzzle.mark(Vector2i(index % 4, floori(index / 4.0)), false)
+	check(streak.peak == 7 and streak.shown == 0, "Seven fills establish a record and queue the effect")
+	for frame_index in range(6):
+		await process_frame
+	check(streak.shown == 7 and streak._holding and screen._portrait.mascot._streak_pose == 2, "The seventh fill puts both paws beneath the board")
+	var frame := streak.last_effect_frame
+	screen._puzzle.mark(Vector2i(4, 2), false)
+	check(streak.current == 0 and streak.peak == 7 and streak._holding, "A mistake resets the run and keeps its peak pose")
+	for index in range(7, 14):
+		screen._puzzle.mark(Vector2i(index % 4, floori(index / 4.0)), false)
+	await process_frame
+	await process_frame
+	check(streak.current == 7 and streak.last_effect_frame == frame, "Matching the prior run does not replay the effect")
+	save.data.settings.calm_mode = true
+	events.settings_changed.emit()
+	screen._puzzle.mark(Vector2i(2, 3), false)
+	await process_frame
+	await process_frame
+	check(streak.shown == 8 and streak.last_effect_frame != streak.last_combo_frame, "A new record escalates on a different frame from the combo")
+	check(screen._board._shake_time == 0.0 and streak._holding, "Calm Mode keeps the pose and skips the shake")
+	var before: int = save.data.coins
+	screen.queue_free()
+	await process_frame
+	check(save.data.coins == before, "Streak effects never grant coins during play")
+	save.data = original
+	events.settings_changed.emit()
+
+
 func _test_calm_visuals() -> void:
 	var save := root.get_node("Save")
 	var events := root.get_node("Events")
@@ -471,7 +593,22 @@ func _test_calm_visuals() -> void:
 	mascot._apply_pose()
 	board.puzzle.mark(Vector2i.ZERO, false)
 	board.puzzle.mark(Vector2i(2, 1), false)
-	check(not backdrop.is_processing() and backdrop._layers[2].position == Vector2.ZERO, "Calm Mode holds the star layers still")
+	var twinkle: float = backdrop._twinkles[0].modulate.a
+	backdrop._process(0.25)
+	check(backdrop._layers[2].position == Vector2.ZERO and backdrop._twinkles[0].modulate.a != twinkle, "Calm Mode keeps slow twinkling over still layers")
+	check(backdrop._active.all(func(event: Dictionary) -> bool: return event.is_empty()), "Calm Mode suppresses space events")
+	for frame in range(60):
+		backdrop._watch_frame_time(0.01)
+	check(not backdrop._reduced, "Fast frames keep full effects")
+	for frame in range(45):
+		backdrop._watch_frame_time(0.025)
+	for frame in range(100):
+		backdrop._watch_frame_time(0.01)
+	check(not backdrop._reduced and backdrop._slow_time == 0.0, "A recovered slowdown clears the sustained-load timer")
+	for frame in range(140):
+		backdrop._watch_frame_time(0.027)
+	check(backdrop._reduced and root.get_meta(&"reduced_effects", false), "Sustained slow frames enable reduced effects")
+	root.remove_meta(&"reduced_effects")
 	check(absf(mascot._body.position.y) < 1.5 and not mascot._sparks.emitting, "Calm Mode shortens the reaction and limits mascot motion")
 	check(board._fills.is_empty() and board._rows.is_empty() and board._columns.is_empty() and board._shake_time == 0.0, "Calm Mode skips board animations")
 	check(board.puzzle.lives == 2 and board.puzzle.at(Vector2i.ZERO) == Puzzle.Cell.FILLED, "Calm Mode preserves play and mistake correction")
@@ -538,11 +675,7 @@ func _test_level_progression() -> void:
 	check(main._column == moon_list and main._play(20) == null, "A locked level cannot start through selection or direct play")
 
 	var screen: NonogramScreen = main._play(0)
-	var solution: Array = levels[0].solution
-	for y in range(solution.size()):
-		for x in range(solution.size()):
-			if solution[y][x] != ".":
-				screen._puzzle.mark(Vector2i(x, y), false)
+	await _solve_nonogram(screen)
 	var buttons := screen._result.find_children("*", "Button", true, false)
 	check(not main._is_level_unlocked(1) and not buttons.any(func(button: Node) -> bool: return button.text == "GAME_NEXT"), "An unsaved win cannot expose a locked Next")
 	save.storage_path = path
@@ -807,6 +940,9 @@ func _solve_nonogram(screen: NonogramScreen) -> void:
 			if screen.level.solution[y][x] != ".":
 				screen._puzzle.mark(Vector2i(x, y), false)
 
+	while screen._saving:
+		await process_frame
+
 
 func _press_button(parent: Node, key: String) -> bool:
 	for button: Button in parent.find_children("*", "Button", true, false):
@@ -831,16 +967,17 @@ func _test_bonus_flow() -> void:
 		economy.award_nonogram(main._levels[i].id, 3)
 	check(main._open_bonus() == null and economy.award_bonus(0) == -1, "Three badges cannot open a round or claim its rewards")
 	var normal: NonogramScreen = main._play(0)
-	_solve_nonogram(normal)
+	await _solve_nonogram(normal)
 	check(economy.badge_count() == 4 and normal._celebration._detail.text == tr("BONUS_UNLOCKED"), "A flawless fourth clear saves the badge and announces the unlock")
 	normal._celebration.dismiss()
 	var balance: int = economy.balance()
 	var xp: int = save.data.meta.xp
 	check(_press_button(normal._result, "BONUS_TITLE"), "The fourth win offers the Bonus Round")
 	var first := main._column.get_child(0) as NonogramScreen
+	var first_id: String = first.level.id
 	check(first.bonus_index == 0 and first._puzzle.size == 5 and first._hint == null, "The round opens the first dedicated 5x5 without paid hints")
 	save.storage_path = path + "/missing-dir/save.json"
-	_solve_nonogram(first)
+	await _solve_nonogram(first)
 	check(economy.balance() == balance and economy.next_bonus_index() == 0, "Failed Bonus Round save keeps the current stage and coins")
 	save.storage_path = path
 	check(_press_button(first._result, "SAVE_RETRY") and economy.balance() == balance + 10, "Retrying the bonus save awards x1 once")
@@ -848,25 +985,26 @@ func _test_bonus_flow() -> void:
 	first._leave(&"levels")
 	check(save.load_game() == OK and _press_button(main._column, "BONUS_TITLE"), "Reloading keeps the round accessible from the planet list")
 	var second := main._column.get_child(0) as NonogramScreen
-	check(second.bonus_index == 1 and second.level.id != first.level.id, "Resuming opens the next separate puzzle")
+	var second_id: String = second.level.id
+	check(second.bonus_index == 1 and second_id != first_id, "Resuming opens the next separate puzzle")
 	for y in range(second._puzzle.size):
 		for x in range(second._puzzle.size):
 			second._puzzle.mark(Vector2i(x, y), second.level.solution[y][x] != ".")
 	check(second._puzzle.state == Puzzle.State.LOST and economy.next_bonus_index() == 1 and economy.balance() == balance + 10, "Losing leaves the current bonus stage available with no coins")
 	check(_press_button(second._result, "GAME_RETRY"), "A lost bonus puzzle can be retried")
 	var retry := main._column.get_child(0) as NonogramScreen
-	_solve_nonogram(retry)
-	check(retry.level.id == second.level.id and economy.balance() == balance + 30, "The second stage awards x2 on retry")
+	await _solve_nonogram(retry)
+	check(retry.level.id == second_id and economy.balance() == balance + 30, "The second stage awards x2 on retry")
 	check(_press_button(retry._result, "GAME_NEXT"), "The second win advances in the same round")
 	var third := main._column.get_child(0) as NonogramScreen
-	_solve_nonogram(third)
+	await _solve_nonogram(third)
 	check(third.bonus_index == 2 and economy.balance() == balance + 60, "The final stage awards x3 for a total of 60")
 	check(save.data.meta.xp == xp + 120 and economy.owns_costume("bonus_booster"), "Three bonus stages grant 40 XP each and unlock their achievement costume")
 	check(third._celebration.tier == 4 and third._celebration._title.text == "CELEBRATION_BONUS", "Completing the round shows the max celebration")
 	check(save.load_game() == OK and economy.next_bonus_index() == -1 and economy.badge_count() == 4, "Finishing exhausts one round and preserves badges across reload")
 	for i in range(4, 8):
 		economy.award_nonogram(main._levels[i].id, 3)
-	check(economy.next_bonus_index() == 3 and Bonus.puzzle_for(3).id != first.level.id, "Four additional badges open a new set of puzzles")
+	check(economy.next_bonus_index() == 3 and Bonus.puzzle_for(3).id != first_id, "Four additional badges open a new set of puzzles")
 	main.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(path)
@@ -924,12 +1062,12 @@ func _test_milestone_celebrations() -> void:
 	root.add_child(main)
 	var level: Dictionary = main._levels[0]
 	var screen: NonogramScreen = main._play(0)
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	check(screen._celebration.tier == 3, "The first flawless clear triggers the big celebration")
 	for i in range(1, 19):
 		save.data.nonogram[main._levels[i].id] = {"reward": 25, "doubled": false}
 	screen = main._play(19)
-	_solve_nonogram(screen)
+	await _solve_nonogram(screen)
 	check(screen._celebration.tier == 4 and screen._celebration._title.text == "CELEBRATION_ALBUM", "The final planet clear celebrates the completed album")
 	check(save.data.nonogram.has(level.id), "Album completion retains the first clear")
 
@@ -995,17 +1133,17 @@ func _test_costume_economy() -> void:
 		if item.has("price"):
 			min_price = mini(min_price, item.price)
 			max_price = maxi(max_price, item.price)
-	check(min_price == 400 and max_price == 2000, "Shop prices span the requested range")
+	check(min_price == 425 and max_price == 15000, "Shop prices span the requested range")
 	check(not economy.buy_costume("moonlight") and not economy.buy_costume("pathfinder"), "Album and achievement rewards cannot be purchased")
 	check(not economy.buy_costume("prism_pack") and not economy.equip_costume("helmet", "mint_visor"), "Reject an unaffordable purchase and an unowned equipment request")
 	save.storage_path = path + "/missing-dir/save.json"
 	check(not economy.buy_costume("mint_visor") and economy.balance() == 1600 and not economy.owns_costume("mint_visor"), "A failed purchase changes neither balance nor ownership")
 	save.storage_path = path
-	check(economy.buy_costume("mint_visor") and economy.balance() == 1200 and economy.owns_costume("mint_visor"), "Purchase saves ownership and debits the set price")
-	check(not economy.buy_costume("mint_visor") and economy.balance() == 1200, "Owning an item prevents duplicate charges")
+	check(economy.buy_costume("mint_visor") and economy.balance() == 1175 and economy.owns_costume("mint_visor"), "Purchase saves ownership and debits the set price")
+	check(not economy.buy_costume("mint_visor") and economy.balance() == 1175, "Owning an item prevents duplicate charges")
 	check(not economy.equip_costume("suit", "mint_visor") and economy.equip_costume("helmet", "mint_visor"), "Only the matching slot can equip the purchased item")
 	check(economy.buy_costume("nebula_suit") and economy.equip_costume("suit", "nebula_suit"), "Unlock and equip a second slot independently")
-	check(save.load_game() == OK and economy.equipped_costumes() == {"helmet": "mint_visor", "suit": "nebula_suit"} and economy.balance() == 550, "Reload two equipped slots and the balance")
+	check(save.load_game() == OK and economy.equipped_costumes() == {"helmet": "mint_visor", "suit": "nebula_suit"} and economy.balance() == 425, "Reload two equipped slots and the balance")
 	check(economy.equip_costume("helmet", "") and economy.equipped_costumes() == {"suit": "nebula_suit"}, "Resetting one slot preserves the other")
 	check(not economy.owns_costume("pathfinder") and not economy.owns_costume("perfect_signal"), "Achievements start locked")
 
@@ -1020,6 +1158,48 @@ func _test_costume_economy() -> void:
 	check(economy.owns_costume("pathfinder") and economy.owns_costume("perfect_signal"), "First clears and flawless badges unlock their achievement costumes")
 	check(save.load_game() == OK and economy.owns_costume("moonlight") and economy.equip_costume("helmet", "moonlight"), "Reloading preserves eligibility for album-exclusive equipment")
 
+	DirAccess.remove_absolute(path)
+	save.data = original
+	save.storage_path = original_path
+
+
+func _test_cosmetic_migration() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var original: Dictionary = save.data
+	var original_path: String = save.storage_path
+	var path := "user://test-cosmetics-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	var old := {"version": 7, "coins": 32000, "meta": {"purchased": {"mint_visor": true, "prism_pack": true}, "equipped": {"helmet": "mint_visor"}}}
+	check(save.write_game(old) == OK and save.load_game() == OK and save.data.version == 8, "Load version seven and bump the save schema")
+	check(economy.owns_costume("mint_visor") and economy.owns_costume("prism_pack") and economy.equipped_costumes().helmet == "mint_visor", "Repriced costumes retain ownership and equipment after migration")
+	check(economy.equipped_cosmetic("cat") == "velokity" and economy.equipped_cosmetic("skin") == "natural", "Migration equips the free default cat and coat")
+	check(not economy.equip_cosmetic("cat", "savannah") and not economy.buy_cosmetic("cat", "velokity"), "Reject an unowned equip or a purchase of the free cat")
+	check(economy.buy_cosmetic("cat", "savannah") and economy.balance() == 7000, "Savannah purchases directly for 25000")
+	check(not economy.buy_cosmetic("cat", "savannah") and not economy.buy_cosmetic("skin", "gold"), "Reject duplicate and unaffordable cosmetic purchases")
+	check(economy.equip_cosmetic("cat", "savannah") and economy.buy_cosmetic("skin", "galaxy") and economy.equip_cosmetic("skin", "galaxy"), "Equip cat and skin independently")
+	check(save.load_game() == OK and economy.balance() == 1000 and economy.equipped_cosmetic("cat") == "savannah" and economy.equipped_cosmetic("skin") == "galaxy", "Round-trip ownership, equipment and coins")
+	check(economy.owns_cosmetic("cat", "savannah") and economy.owns_cosmetic("skin", "galaxy"), "Reload both purchased categories")
+	var malformed: Dictionary = save.data.duplicate(true)
+	malformed.meta.skins.fake = true
+	malformed.meta.cat = "maine_coon"
+	var cleaned := SaveScript.migrate(malformed)
+	check(not cleaned.meta.skins.has("fake") and cleaned.meta.cat == "velokity" and cleaned.meta.skin == "galaxy", "Reject unknown skin IDs and unowned equipped cats")
+	var rarity := Cosmetics.Rarity
+	check(Cosmetics.CATS.size() == 10 and Cosmetics.SKINS.size() == 10, "Catalog includes every requested breed and coat plus the natural coat")
+	var tiers := [0, 0, 0, 0]
+	for item: Dictionary in Meta.COSTUMES.values():
+		if item.has("price"):
+			tiers[item.rarity] += 1
+			if item.rarity == rarity.EPIC:
+				check(item.price >= 5000 and item.price <= 8000, "Epic costume price is in range")
+			if item.rarity == rarity.LEGENDARY:
+				check(item.price >= 12000 and item.price <= 15000, "Legendary costume price is in range")
+	check(tiers == [4, 3, 3, 2], "All seven legacy shop costumes remain and five luxury costumes are available")
+	var cat := Mascot.new()
+	root.add_child(cat)
+	check(cat._cat_id == "savannah" and cat._skin_id == "galaxy" and cat._aura != null, "The equipped cat, coat and legendary aura appear in the normal mascot")
+	cat.free()
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path
@@ -1079,8 +1259,9 @@ func _test_meta_menu() -> void:
 	main.show_menu()
 	check(_press_button(main._column, "META_SHOP"), "The menu opens the wardrobe and shop")
 	screen = main._column.get_child(0) as MetaScreen
+	check(_press_button(screen, "SHOP_TAB_COSTUME"), "The shop opens the Costumes tab")
 	check(_press_button(screen, "COSTUME_MINT_VISOR") and screen._portrait.preview_outfit.helmet == "mint_visor" and economy.equipped_costumes().is_empty(), "Previewing a shop item leaves the saved outfit unchanged")
-	check(_press_button(screen, tr("COSTUME_BUY") % 400) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
+	check(_press_button(screen, tr("COSTUME_BUY") % 425) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
 	check(_press_button(screen, "COSTUME_EQUIP") and economy.equipped_costumes().helmet == "mint_visor", "The shop action equips a purchased costume")
 	main.show_menu()
 	check(_press_button(main._column, "META_LOGIN"), "The menu opens the separate login calendar")
@@ -1281,6 +1462,7 @@ func _test_shop_monetization() -> void:
 	check(not _press_button(screen, "IAP_TITLE") and screen.page == MetaScreen.Page.SHOP, "Hide the IAP entry when no product is available")
 	screen._open_purchases()
 	check(screen.page == MetaScreen.Page.SHOP, "An unavailable purchase page cannot be opened directly")
+	check(_press_button(screen, "SHOP_TAB_COSTUME"), "Costume slots remain accessible after a rewarded transaction")
 	var preview := screen.find_children("*", "Button", true, false).filter(func(button: Button) -> bool: return button.text == "COSTUME_MINT_VISOR")
 	check(preview.size() == 1 and preview[0].get_theme_stylebox("normal") is StyleBoxEmpty, "Costume names have no input-like background")
 	check(not Purchases.new().request_purchase(&"no_ads"), "The IAP stub cannot start a purchase")
@@ -1346,7 +1528,7 @@ func _test_audio_smoke() -> void:
 	var music: AudioStreamPlayer = audio._music
 	var music_bus := AudioServer.get_bus_index("Music")
 	var sfx_bus := AudioServer.get_bus_index("SFX")
-	check(audio._effects.size() == 9, "Import all nine procedural effects")
+	check(audio._effects.size() == 11, "Import all procedural effects including streak cues")
 	for player: AudioStreamPlayer in audio._effects.values():
 		check(player.stream is AudioStreamWAV and player.stream.get_length() > 0 and player.stream.get_length() <= 1.05 and player.stream.loop_mode == AudioStreamWAV.LOOP_DISABLED, "A short effect imports as a nonlooping WAV")
 	for track: AudioStreamWAV in [audio._menu_music, audio._puzzle_music]:
@@ -1366,10 +1548,14 @@ func _test_audio_smoke() -> void:
 	check(music.playing and music.stream == audio._puzzle_music, "Opening a puzzle switches to the puzzle loop")
 	screen._puzzle.mark(Vector2i(0, 0), true)
 	check(audio._effects[&"cross"].playing, "Manually crossing a cell triggers the cross effect")
-	var before := AudioServer.get_bus_volume_db(music_bus)
+	check(is_equal_approx(AudioServer.get_bus_volume_db(sfx_bus), 0.0) and is_equal_approx(AudioServer.get_bus_volume_db(music_bus), -3.0), "Set the normal effects and music headroom")
 	save.data.settings.calm_mode = true
 	events.settings_changed.emit()
-	check(AudioServer.get_bus_volume_db(music_bus) < before, "Calm Mode lowers the music gain")
+	check(is_equal_approx(AudioServer.get_bus_volume_db(sfx_bus), -6.0) and is_equal_approx(AudioServer.get_bus_volume_db(music_bus), -6.0), "Calm Mode uses -6 dB for both buses")
+	var settings := root.get_node("Settings")
+	check(settings.set_value("music_volume", 50) and is_equal_approx(AudioServer.get_bus_volume_db(music_bus), -6.0 + linear_to_db(0.5)), "Music volume scales the Calm Mode bus")
+	check(settings.set_value("effects_volume", 0) and AudioServer.is_bus_mute(sfx_bus), "Zero effects volume mutes its bus")
+	settings.set_value("effects_volume", 100)
 	save.data.settings.sound = false
 	events.settings_changed.emit()
 	check(AudioServer.is_bus_mute(sfx_bus) and music.playing, "Sound off mutes only effects")
@@ -1397,5 +1583,5 @@ func _test_audio_smoke() -> void:
 	save.data = original
 	save.storage_path = original_path
 	events.settings_changed.emit()
-	# Allow the audio mixer to release stopped WAV playback objects.
-	await create_timer(0.12).timeout
+	# Allow the audio mixer to release stopped WAV playbacks during teardown.
+	await create_timer(0.35).timeout

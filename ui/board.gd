@@ -15,6 +15,7 @@ const MARK_COLOR := Color("#8ee8db")
 
 var puzzle: Puzzle
 var cross_mode := false
+var _streak_dip := 0.0
 var _anchor := OUTSIDE
 var _last := OUTSIDE
 var _axis := Vector2i.ZERO
@@ -103,7 +104,14 @@ func _handle_key(event: InputEventKey) -> void:
 		accept_event()
 
 
+func set_streak_dip(dip: float) -> void:
+	if not is_equal_approx(_streak_dip, dip):
+		_streak_dip = dip
+		queue_redraw()
+
+
 func cell_at(position_in_board: Vector2) -> Vector2i:
+	position_in_board -= _shake_offset() + Vector2(0, _streak_dip)
 	var grid := _grid()
 	if not grid.has_point(position_in_board):
 		return OUTSIDE
@@ -170,7 +178,7 @@ func _draw() -> void:
 	var grid := _grid()
 	var edge := grid.size.x / puzzle.size
 	var block := Vector2.ONE * (edge - 2.0)
-	draw_set_transform(_shake_offset())
+	draw_set_transform(_shake_offset() + Vector2(0, _streak_dip))
 	for y in range(puzzle.size):
 		for x in range(puzzle.size):
 			var cell := Vector2i(x, y)

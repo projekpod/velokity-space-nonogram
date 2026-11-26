@@ -2,7 +2,7 @@ extends Node
 
 const EFFECTS := &"SFX"
 const MUSIC := &"Music"
-const CUES := [&"fill", &"cross", &"mistake", &"line", &"combo", &"win", &"coin", &"button", &"celebration"]
+const CUES := [&"fill", &"cross", &"mistake", &"line", &"combo", &"win", &"coin", &"button", &"celebration", &"crackle", &"rumble"]
 
 @onready var _settings := get_node("/root/Settings")
 @onready var _events := get_node("/root/Events")
@@ -25,6 +25,8 @@ func _ready() -> void:
 		player.bus = EFFECTS
 		player.stream = load("res://audio/%s.wav" % effect)
 		player.max_polyphony = 2 if effect in [&"fill", &"cross"] else 1
+		if effect in [&"crackle", &"rumble"]:
+			player.volume_db = -12.0 if effect == &"crackle" else -9.0
 		_effects[effect] = player
 		add_child(player)
 	_music = AudioStreamPlayer.new()
@@ -84,8 +86,10 @@ func _apply_settings() -> void:
 	var calm: bool = _settings.get_value("calm_mode")
 	var effects := AudioServer.get_bus_index(EFFECTS)
 	var music := AudioServer.get_bus_index(MUSIC)
-	AudioServer.set_bus_mute(effects, not _settings.get_value("sound"))
-	AudioServer.set_bus_mute(music, not _settings.get_value("music"))
-	AudioServer.set_bus_volume_db(effects, -14.0 if calm else -5.0)
-	AudioServer.set_bus_volume_db(music, -22.0 if calm else -13.0)
+	var effects_volume: int = _settings.get_value("effects_volume")
+	var music_volume: int = _settings.get_value("music_volume")
+	AudioServer.set_bus_mute(effects, effects_volume == 0 or not _settings.get_value("sound"))
+	AudioServer.set_bus_mute(music, music_volume == 0 or not _settings.get_value("music"))
+	AudioServer.set_bus_volume_db(effects, (-6.0 if calm else 0.0) + linear_to_db(maxi(1, effects_volume) / 100.0))
+	AudioServer.set_bus_volume_db(music, (-6.0 if calm else -3.0) + linear_to_db(maxi(1, music_volume) / 100.0))
 	_sync_music()

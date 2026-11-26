@@ -45,6 +45,8 @@ SAVE_RETRY,Retry saving,Coba simpan lagi
 AD_UNAVAILABLE,Ad unavailable. Please try again.,Iklan belum tersedia. Coba lagi.
 SETTING_SOUND,Sound effects,Efek suara
 SETTING_MUSIC,Music,Musik
+SETTING_MUSIC_VOLUME,Music volume,Volume musik
+SETTING_EFFECTS_VOLUME,Effects volume,Volume efek
 SETTING_VIBRATION,Vibration,Getaran
 SETTING_CALM_MODE,Calm Mode,Mode Tenang
 SETTING_LANGUAGE,Language,Bahasa
@@ -110,7 +112,7 @@ MENU_DAILY_SHORT,Rasi Bintang,Rasi Bintang
 META_LEVEL_XP,Level %d · %d/%d XP,Level %d · %d/%d XP
 META_ALBUM,Planet albums,Album planet
 META_BACK_ALBUM,Albums,Album
-META_SHOP,Costume shop,Toko kostum
+META_SHOP,Shop,Toko
 META_LOGIN,Daily login,Login harian
 META_ACHIEVEMENTS,Achievements,Pencapaian
 META_UNLOCKED,Unlocked,Terbuka
@@ -174,3 +176,36 @@ TUTORIAL_CLUES,"Numbers show the lengths of filled groups in each row and column
 TUTORIAL_SKIP,Skip tutorial,Lewati panduan
 TUTORIAL_NEXT,Next,Lanjut
 TUTORIAL_DONE,Got it,Mengerti
+SHOP_TAB_CAT,Cats,Kucing
+SHOP_TAB_SKIN,Skins,Warna Bulu
+SHOP_TAB_COSTUME,Costumes,Kostum
+SHOP_RARITY_COMMON,Common,Umum
+SHOP_RARITY_RARE,Rare,Langka
+SHOP_RARITY_EPIC,Epic,Epik
+SHOP_RARITY_LEGENDARY,Legendary,Legendaris
+CAT_VELOKITY,Velokity,Velokity
+CAT_BRITISH_SHORTHAIR,British Shorthair,British Shorthair
+CAT_SIAMESE,Siamese,Kucing Siam
+CAT_SPHYNX,Sphynx,Sphynx
+CAT_DEVON_REX,Devon Rex,Devon Rex
+CAT_PERSIAN,Persian,Kucing Persia
+CAT_RAGDOLL,Ragdoll,Ragdoll
+CAT_BENGAL,Bengal,Bengal
+CAT_MAINE_COON,Maine Coon,Maine Coon
+CAT_SAVANNAH,Savannah,Savannah
+CAT_POPULAR,Most popular breed,Ras terpopuler
+SKIN_NATURAL,Natural coat,Bulu alami
+SKIN_BLACK,Black,Hitam
+SKIN_WHITE,White,Putih
+SKIN_GREY,Grey,Abu-abu
+SKIN_CALICO,Calico,Belang tiga
+SKIN_TUXEDO,Tuxedo,Tuksedo
+SKIN_CREAM,Cream,Krem
+SKIN_CHOCOLATE,Chocolate,Cokelat
+SKIN_GALAXY,Galaxy,Galaksi
+SKIN_GOLD,Gold,Emas
+COSTUME_ION_VISOR,Ion helmet,Helm Ion
+COSTUME_AURORA_SUIT,Aurora suit,Baju Aurora
+COSTUME_PULSAR_PACK,Pulsar jetpack,Jetpack Pulsar
+COSTUME_HALO_SIGNAL,Halo antenna,Antena Halo
+COSTUME_ROYAL_SUIT,Royal suit,Baju Kerajaan

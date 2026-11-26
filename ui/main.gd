@@ -295,6 +295,8 @@ func _show_settings() -> void:
 		toggle.toggled.connect(_change_toggle.bind(key, toggle, status))
 		_column.add_child(toggle)
 		UI.wire_button_sound(toggle)
+	_add_volume_slider("music_volume", status)
+	_add_volume_slider("effects_volume", status)
 	UI.label(_column, "SETTING_LANGUAGE", 26, UI.MUTED)
 	var language := OptionButton.new()
 	language.add_theme_font_size_override("font_size", 25)
@@ -307,7 +309,10 @@ func _show_settings() -> void:
 		language.add_item(tr(key))
 	language.select(locales.find(_settings.get_value("language")))
 	language.item_selected.connect(func(index: int) -> void:
-		status.visible = not await _settings.set_value("language", locales[index])
+		var saved: bool = await _settings.set_value("language", locales[index])
+		if not is_instance_valid(language):
+			return
+		status.visible = not saved
 		if status.visible:
 			language.select(locales.find(_settings.get_value("language")))
 		else:
@@ -323,8 +328,46 @@ func _show_settings() -> void:
 	_column.add_child(status)
 
 
+func _add_volume_slider(key: String, status: Label) -> void:
+	var row := UI.row(_column)
+	UI.label(row, "SETTING_" + key.to_upper(), 23).custom_minimum_size.x = 190
+	var slider := HSlider.new()
+	slider.name = key
+	slider.custom_minimum_size.y = 48
+	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	slider.scrollable = false
+	slider.value = _settings.get_value(key)
+	row.add_child(slider)
+	var amount := UI.label(row, "%d%%" % int(slider.value), 23, UI.MINT)
+	amount.custom_minimum_size.x = 70
+	slider.drag_started.connect(slider.set_meta.bind(&"dragging", true))
+	slider.value_changed.connect(func(value: float) -> void:
+		amount.text = "%d%%" % int(value)
+		if not slider.get_meta(&"dragging", false):
+			_change_volume(int(value), key, slider, amount, status)
+	)
+	slider.drag_ended.connect(func(changed: bool) -> void:
+		slider.set_meta(&"dragging", false)
+		if changed:
+			_change_volume(int(slider.value), key, slider, amount, status)
+	)
+
+
+func _change_volume(value: int, key: String, slider: HSlider, amount: Label, status: Label) -> void:
+	var saved: bool = await _settings.set_value(key, value)
+	if not is_instance_valid(slider) or int(slider.value) != value:
+		return
+	status.visible = not saved
+	if not saved:
+		slider.set_value_no_signal(_settings.get_value(key))
+		amount.text = "%d%%" % int(slider.value)
+
+
 func _change_toggle(enabled: bool, key: String, toggle: CheckButton, status: Label) -> void:
-	status.visible = not await _settings.set_value(key, enabled)
+	var saved: bool = await _settings.set_value(key, enabled)
+	if not is_instance_valid(toggle):
+		return
+	status.visible = not saved
 	if status.visible:
 		toggle.set_pressed_no_signal(_settings.get_value(key))
 

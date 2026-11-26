@@ -95,16 +95,16 @@ static func backpack(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 			_lit(part, Vector2(x + side * 16.0, 92), Vector2(6, 15), palette)
 
 
-static func tail(part: CanvasItem) -> void:
+static func tail(part: CanvasItem, fur_color := FUR, markings := CARAMEL, tip := CREAM) -> void:
 	var curve := [
 		Vector2.ZERO, Vector2(27, 15), Vector2(48, 11), Vector2(64, -1),
 		Vector2(70, -19), Vector2(65, -33), Vector2(54, -34), Vector2(48, -25),
 	]
 	_stroke(part, curve, INK, 23)
-	_stroke(part, curve, FUR, 16)
-	_stroke(part, [Vector2(35, 14), Vector2(44, 12)], CARAMEL, 16)
-	_stroke(part, [Vector2(64, -3), Vector2(67, -10)], CARAMEL, 16)
-	_stroke(part, [Vector2(63, -33), Vector2(55, -34), Vector2(48, -25)], CREAM, 14)
+	_stroke(part, curve, fur_color, 16)
+	_stroke(part, [Vector2(35, 14), Vector2(44, 12)], markings, 16)
+	_stroke(part, [Vector2(64, -3), Vector2(67, -10)], markings, 16)
+	_stroke(part, [Vector2(63, -33), Vector2(55, -34), Vector2(48, -25)], tip, 14)
 
 
 static func arm(part: CanvasItem, color := Color.TRANSPARENT) -> void:
@@ -115,6 +115,23 @@ static func arm(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(27, 38), Vector2(17, 15), INK)
 	_lit(part, Vector2(27, 36), Vector2(14, 12), _costume_palette(color, ENAMEL))
 	ellipse(part, Vector2(16, 31), Vector2(7, 8), Color("#d7eaf3"))
+
+
+static func holding_arms(part: CanvasItem, color := Color.TRANSPARENT) -> void:
+	var palette := _costume_palette(color, ENAMEL)
+	for side in [-1, 1]:
+		var shoulder := Vector2(side * 43.0, 50)
+		var elbow := Vector2(side * 105.0, 29)
+		var cuff := Vector2(side * 123.0, -42)
+		var paw := Vector2(side * 123.0, -65)
+		_stroke(part, [shoulder, elbow, cuff], INK, 29)
+		_stroke(part, [shoulder, elbow, cuff], palette[1], 22)
+		_stroke(part, [elbow, Vector2(side * 119.0, -33)], palette[0], 9)
+		ellipse(part, cuff, Vector2(15, 11), TEAL)
+		ellipse(part, paw, Vector2(20, 15), INK)
+		_lit(part, paw, Vector2(17, 13), palette)
+		for offset in [-7, 0, 7]:
+			_stroke(part, [paw + Vector2(offset, -9), paw + Vector2(offset, -4)], Color("#7794ab"), 1.6)
 
 
 static func boot(part: CanvasItem, color := Color.TRANSPARENT) -> void:
@@ -153,16 +170,16 @@ static func helmet(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	_arc(part, Vector2(0, -6), Vector2(82, 66), 0.62, 2.20, MINT, 2)
 
 
-static func ear(part: CanvasItem) -> void:
+static func ear(part: CanvasItem, fur_color := FUR, outline := CARAMEL) -> void:
 	var shape := [
 		Vector2(-21, 27), Vector2(-16, -4), Vector2(-9, -24),
 		Vector2(-3, -27), Vector2(6, -24), Vector2(28, 0), Vector2(30, 23),
 	]
-	part.draw_colored_polygon(PackedVector2Array(shape), CARAMEL)
+	part.draw_colored_polygon(PackedVector2Array(shape), outline)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-15, 24), Vector2(-11, -2), Vector2(-4, -21),
 		Vector2(3, -21), Vector2(23, 2), Vector2(27, 22),
-	]), FUR)
+	]), fur_color)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-9, 19), Vector2(-5, -4), Vector2(0, -14), Vector2(14, 4), Vector2(21, 19),
 	]), Color("#ef9a9b"))
@@ -171,26 +188,38 @@ static func ear(part: CanvasItem) -> void:
 static func fur(part: CanvasItem) -> void:
 	ellipse(part, Vector2(0, 5), Vector2(65, 49), CARAMEL)
 	_lit(part, Vector2(0, 4), Vector2(63, 47), COAT)
-	ellipse(part, Vector2(0, 29), Vector2(50, 18), CREAM)
-	ellipse(part, Vector2(-26, 24), Vector2(24, 15), CREAM)
-	ellipse(part, Vector2(26, 24), Vector2(24, 15), CREAM)
-	for side in [-1, 1]:
-		_stroke(part, [Vector2(side * 9, -40), Vector2(side * 5, -29)], CARAMEL, 4)
-		_stroke(part, [Vector2(side * 22, -38), Vector2(side * 17, -32)], CARAMEL, 3)
-		_stroke(part, [Vector2(side * 59, 13), Vector2(side * 50, 16)], CARAMEL, 3)
-		_stroke(part, [Vector2(side * 53, 28), Vector2(side * 45, 27)], CARAMEL, 2)
-		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), Color("#f6af9c"))
+	tabby_muzzle(part, CREAM)
+	tabby_markings(part, CARAMEL, Color("#f6af9c"))
 
 
-static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float) -> void:
+static func tabby_muzzle(part: CanvasItem, color: Color) -> void:
+	ellipse(part, Vector2(0, 29), Vector2(50, 18), color)
+	ellipse(part, Vector2(-26, 24), Vector2(24, 15), color)
+	ellipse(part, Vector2(26, 24), Vector2(24, 15), color)
+
+
+static func tabby_markings(part: CanvasItem, color: Color, blush: Color) -> void:
 	for side in [-1, 1]:
-		var eye := Vector2(side * 25.0, 1)
+		_stroke(part, [Vector2(side * 9, -40), Vector2(side * 5, -29)], color, 4)
+		_stroke(part, [Vector2(side * 22, -38), Vector2(side * 17, -32)], color, 3)
+		_stroke(part, [Vector2(side * 59, 13), Vector2(side * 50, 16)], color, 3)
+		_stroke(part, [Vector2(side * 53, 28), Vector2(side * 45, 27)], color, 2)
+		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), blush)
+
+
+static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float, eye_spacing := 25.0, straining := false) -> void:
+	for side in [-1, 1]:
+		var eye := Vector2(side * eye_spacing, 1)
 		_draw_eye(part, eye, side, expression, gaze, eyelid)
 	part.draw_colored_polygon(PackedVector2Array([
 		Vector2(-7, 21), Vector2(-4, 18), Vector2(4, 18), Vector2(7, 21), Vector2(0, 27),
 	]), CARAMEL)
 	_stroke(part, [Vector2(-2, 20), Vector2(2, 20)], Color("#f09088"), 2)
-	_mouth(part, expression)
+	if straining:
+		ellipse(part, Vector2(0, 34), Vector2(12, 6), CARAMEL)
+		_stroke(part, [Vector2(-7, 33), Vector2(7, 33)], CREAM, 3)
+	else:
+		_mouth(part, expression)
 
 
 static func _draw_eye(part: CanvasItem, eye: Vector2, side: int, expression: Face, gaze: Vector2, eyelid: float) -> void:
@@ -242,6 +271,14 @@ static func _mouth(part: CanvasItem, expression: Face) -> void:
 			]), CARAMEL)
 			ellipse(part, Vector2(0, 38), Vector2(9, 3.6), PINK)
 			_stroke(part, [Vector2(-9, 31), Vector2(0, 32), Vector2(9, 31)], CREAM, 2.5)
+
+
+static func sweat(part: CanvasItem) -> void:
+	part.draw_colored_polygon(PackedVector2Array([
+		Vector2(50, -27), Vector2(57, -11), Vector2(55, -5),
+		Vector2(49, -3), Vector2(44, -8), Vector2(44, -13),
+	]), Color("#78d9f7"))
+	part.draw_circle(Vector2(49, -10), 2.0, WHITE, true)
 
 
 static func visor(part: CanvasItem) -> void:

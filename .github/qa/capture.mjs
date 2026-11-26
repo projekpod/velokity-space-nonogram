@@ -6,7 +6,7 @@ import { fixedDate, launch, openGame, watchErrors } from "./browser.mjs";
 
 const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
-const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration"];
+const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "streak", "space", "cats", "shop-legendary"];
 const browser = await launch();
 
 async function captureBalance(page, screenshot) {

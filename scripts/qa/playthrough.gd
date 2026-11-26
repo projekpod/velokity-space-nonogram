@@ -34,6 +34,7 @@ func _process(delta: float) -> void:
 	if screen is NonogramScreen:
 		state.scene = screen.level.id
 		state.state = screen._puzzle.state
+		state.result = screen._result.is_visible_in_tree()
 		state.lives = screen._puzzle.lives
 		state.marks = screen._puzzle._remaining
 		state.first = screen.first_puzzle
@@ -41,7 +42,9 @@ func _process(delta: float) -> void:
 		state.combo = screen._peak_lines
 		state.tier = screen._celebration.tier
 		state.bonus = screen.bonus_index
-		var grid: Rect2 = screen._board.get_global_transform() * screen._board._grid()
+		var board_rect: Rect2 = screen._board._grid()
+		board_rect.position.y += screen._board._streak_dip
+		var grid: Rect2 = screen._board.get_global_transform() * board_rect
 		state.grid = _pack_rect(grid)
 	elif screen is DailyScreen:
 		state.scene = "daily"
