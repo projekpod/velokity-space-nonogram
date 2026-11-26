@@ -16,12 +16,10 @@ var _input_received := false
 
 
 func _ready() -> void:
-	for bus: StringName in [EFFECTS, MUSIC]:
-		if AudioServer.get_bus_index(bus) < 0:
-			AudioServer.add_bus()
-			AudioServer.set_bus_name(AudioServer.bus_count - 1, bus)
 	for effect: StringName in CUES:
 		var player := AudioStreamPlayer.new()
+		# Web sample playback bypasses mixer effects, including the Master limiter.
+		player.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 		player.bus = EFFECTS
 		player.stream = load("res://audio/%s.wav" % effect)
 		player.max_polyphony = 2 if effect in [&"fill", &"cross"] else 1

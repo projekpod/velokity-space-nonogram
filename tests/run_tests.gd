@@ -1259,6 +1259,15 @@ func _test_meta_menu() -> void:
 	main.show_menu()
 	check(_press_button(main._column, "META_SHOP"), "The menu opens the wardrobe and shop")
 	screen = main._column.get_child(0) as MetaScreen
+	var previous_locale := TranslationServer.get_locale()
+	for locale in ["en", "id"]:
+		TranslationServer.set_locale(locale)
+		screen._render()
+		var labels: Array[Node] = screen._shop_cards.savannah.find_children("*", "Label", true, false)
+		var captions := labels.map(func(label: Label) -> String: return label.text)
+		var expected := "Legendary · Most expensive breed" if locale == "en" else "Legendaris · Ras termahal"
+		check(expected in captions, "Savannah shows its descriptive rarity in %s" % locale)
+	TranslationServer.set_locale(previous_locale)
 	check(_press_button(screen, "SHOP_TAB_COSTUME"), "The shop opens the Costumes tab")
 	check(_press_button(screen, "COSTUME_MINT_VISOR") and screen._portrait.preview_outfit.helmet == "mint_visor" and economy.equipped_costumes().is_empty(), "Previewing a shop item leaves the saved outfit unchanged")
 	check(_press_button(screen, tr("COSTUME_BUY") % 425) and economy.owns_costume("mint_visor"), "The shop action buys an available costume")
@@ -1528,7 +1537,12 @@ func _test_audio_smoke() -> void:
 	var music: AudioStreamPlayer = audio._music
 	var music_bus := AudioServer.get_bus_index("Music")
 	var sfx_bus := AudioServer.get_bus_index("SFX")
+	var master := AudioServer.get_bus_index("Master")
+	var limiter := AudioServer.get_bus_effect(master, 0) as AudioEffectHardLimiter
+	check(limiter != null and AudioServer.is_bus_effect_enabled(master, 0) and is_equal_approx(limiter.ceiling_db, -1.0), "The Master bus layout enables a hard limiter at -1 dB")
+	check(AudioServer.get_bus_send(sfx_bus) == &"Master" and AudioServer.get_bus_send(music_bus) == &"Master", "Both audio buses feed the Master limiter")
 	check(audio._effects.size() == 11, "Import all procedural effects including streak cues")
+	check(audio._effects.values().all(func(player: AudioStreamPlayer) -> bool: return player.playback_type == AudioServer.PLAYBACK_TYPE_STREAM), "Play Web effects through the mixer so the Master limiter can process them")
 	for player: AudioStreamPlayer in audio._effects.values():
 		check(player.stream is AudioStreamWAV and player.stream.get_length() > 0 and player.stream.get_length() <= 1.05 and player.stream.loop_mode == AudioStreamWAV.LOOP_DISABLED, "A short effect imports as a nonlooping WAV")
 	for track: AudioStreamWAV in [audio._menu_music, audio._puzzle_music]:

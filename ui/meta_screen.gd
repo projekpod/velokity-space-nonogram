@@ -398,8 +398,8 @@ func _shop_row(id: String, item: Dictionary, equipped: String, focus: String) ->
 		source = tr("COSTUME_FROM_ALBUM") % _planet_title(item.album)
 	elif item.has("achievement"):
 		source = tr("COSTUME_FROM_ACHIEVEMENT") % tr(Meta.achievement_title(item.achievement))
-	elif id == "maine_coon":
-		source = tr(source) + " · " + tr("CAT_POPULAR")
+	elif item.has("caption"):
+		source = tr(source) + " · " + tr(item.caption)
 	var color: Color = Cosmetics.FRAME_COLORS[card.rarity].lightened(0.39)
 	var caption := UI.label(copy, source, 18, color)
 	caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT

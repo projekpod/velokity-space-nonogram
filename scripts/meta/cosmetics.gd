@@ -13,8 +13,8 @@ const CATS := {
 	"persian": {"price": 6000, "rarity": Rarity.EPIC, "color": Color("#e9e0d8")},
 	"ragdoll": {"price": 7500, "rarity": Rarity.EPIC, "color": Color("#ecdac3")},
 	"bengal": {"price": 9000, "rarity": Rarity.EPIC, "color": Color("#d89655")},
-	"maine_coon": {"price": 18000, "rarity": Rarity.LEGENDARY, "color": Color("#af7459")},
-	"savannah": {"price": 25000, "rarity": Rarity.LEGENDARY, "color": Color("#ddba79")},
+	"maine_coon": {"price": 18000, "caption": "CAT_POPULAR", "rarity": Rarity.LEGENDARY, "color": Color("#af7459")},
+	"savannah": {"price": 25000, "caption": "CAT_MOST_EXPENSIVE", "rarity": Rarity.LEGENDARY, "color": Color("#ddba79")},
 }
 const SKINS := {
 	"natural": {"price": 0, "rarity": Rarity.COMMON, "color": Color("#ed9960")},
