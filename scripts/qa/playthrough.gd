@@ -34,6 +34,7 @@ func _process(delta: float) -> void:
 	if screen is NonogramScreen:
 		state.scene = screen.level.id
 		state.state = screen._puzzle.state
+		state.result = screen._result.is_visible_in_tree()
 		state.lives = screen._puzzle.lives
 		state.marks = screen._puzzle._remaining
 		state.first = screen.first_puzzle

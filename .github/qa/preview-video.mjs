@@ -39,7 +39,7 @@ async function record(page, directory, name, width, height) {
     await cell(page, (await state(page)).grid, moon.size, x, y);
   }
   const comboState = await combo;
-  const result = await waitState(page, s => s.state === 1 && s.tier === 0);
+  const result = await waitState(page, s => s.state === 1 && s.result && s.tier === 0);
   assert(result.combo >= comboState.combo && result.clears === 1);
   await waitUntil((duration + 0.35) * 1000);
   await cdp.send("Page.stopScreencast");
