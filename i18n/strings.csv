@@ -45,6 +45,8 @@ SAVE_RETRY,Retry saving,Coba simpan lagi
 AD_UNAVAILABLE,Ad unavailable. Please try again.,Iklan belum tersedia. Coba lagi.
 SETTING_SOUND,Sound effects,Efek suara
 SETTING_MUSIC,Music,Musik
+SETTING_MUSIC_VOLUME,Music volume,Volume musik
+SETTING_EFFECTS_VOLUME,Effects volume,Volume efek
 SETTING_VIBRATION,Vibration,Getaran
 SETTING_CALM_MODE,Calm Mode,Mode Tenang
 SETTING_LANGUAGE,Language,Bahasa

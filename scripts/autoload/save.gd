@@ -9,6 +9,7 @@ const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const VERSION := 7
+const VOLUME_SETTINGS := ["music_volume", "effects_volume"]
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
 const BRIDGE_KEY := "velokity-save"
@@ -142,7 +143,7 @@ static func defaults() -> Dictionary:
 		"bonus_clears": 0,
 		"free_coin_ads": {"last_day": -1, "count": 0},
 		"meta": Meta.defaults(),
-		"settings": {"sound": true, "music": true, "vibration": true, "calm_mode": false, "language": ""},
+		"settings": {"sound": true, "music": true, "music_volume": 100, "effects_volume": 100, "vibration": true, "calm_mode": false, "language": ""},
 	}
 
 
@@ -159,7 +160,10 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	if stored_settings is Dictionary:
 		for key: String in result.settings:
 			var value: Variant = stored_settings.get(key)
-			if typeof(value) == typeof(result.settings[key]):
+			if key in VOLUME_SETTINGS:
+				if _is_version(value) and value <= 100:
+					result.settings[key] = int(value)
+			elif typeof(value) == typeof(result.settings[key]):
 				result.settings[key] = value
 		if result.settings.language not in ["", "en", "id"]:
 			result.settings.language = ""

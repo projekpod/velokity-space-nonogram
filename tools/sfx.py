@@ -2,13 +2,16 @@
 
 from array import array
 from io import BytesIO
-from math import exp, pi, sin, tau
+from math import copysign, exp, pi, sin, sqrt, tau
 from pathlib import Path
 import struct
 import sys
 import wave
 
 RATE = 24_000
+PEAK = 10 ** (-1 / 20)
+MUSIC_RMS = 10 ** (-16 / 20)
+LIMITER_KNEE = 0.65
 OUTPUT = Path(__file__).resolve().parents[1] / "audio"
 
 # Cue = start time, length, MIDI note, gain, and ending pitch shift in semitones.
@@ -81,10 +84,38 @@ def render_music(score):
     return output
 
 
+def soft_limit(value):
+    magnitude = abs(value)
+    if magnitude <= LIMITER_KNEE:
+        return value
+    headroom = PEAK - LIMITER_KNEE
+    limited = PEAK - headroom * exp(-(magnitude - LIMITER_KNEE) / headroom)
+    return copysign(limited, value)
+
+
+def rms(samples):
+    return sqrt(sum(sample ** 2 for sample in samples) / len(samples))
+
+
+def loud_music(samples):
+    gain = MUSIC_RMS / rms(samples)
+    for _ in range(6):
+        limited = [soft_limit(sample * gain) for sample in samples]
+        measured = rms(limited)
+        if abs(measured - MUSIC_RMS) < 0.00001:
+            return limited
+        gain *= MUSIC_RMS / measured
+    return limited
+
+
 def wave_bytes(samples, loop=False):
-    peak = max(abs(x) for x in samples)
-    scale = min(1, .70 / peak) * 32767
-    pcm = array("h", (round(value * scale) for value in samples))
+    if loop:
+        samples = loud_music(samples)
+    else:
+        gain = PEAK / max(map(abs, samples))
+        samples = (sample * gain for sample in samples)
+    ceiling = int(PEAK * 32767)
+    pcm = array("h", (max(-ceiling, min(ceiling, round(value * 32767))) for value in samples))
     if sys.byteorder != "little":
         pcm.byteswap()
     stream = BytesIO()
@@ -95,7 +126,7 @@ def wave_bytes(samples, loop=False):
     if loop:
         # RIFF sampler chunk. One forward loop spans the PCM data.
         fields = struct.pack("<15I", 0, 0, round(1e9 / RATE), 60, 0, 0, 0, 1, 0,
-                             0, 0, 0, len(samples) - 1, 0, 0)
+                             0, 0, 0, len(pcm) - 1, 0, 0)
         body = content[8:36] + b"smpl" + struct.pack("<I", len(fields)) + fields + content[36:]
         content = b"RIFF" + struct.pack("<I", len(body)) + body
     return content

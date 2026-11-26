@@ -1,5 +1,7 @@
 extends Node
 
+const SaveSchema := preload("res://scripts/autoload/save.gd")
+
 @onready var _save := get_node("/root/Save")
 @onready var _events := get_node("/root/Events")
 var _device_locale := TranslationServer.get_locale()
@@ -36,6 +38,10 @@ func set_value(key: String, value: Variant) -> bool:
 		return false
 	if key == "language" and value not in ["", "en", "id"]:
 		return false
+	if key in SaveSchema.VOLUME_SETTINGS and (value < 0 or value > 100):
+		return false
+	if previous == value:
+		return true
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	snapshot.settings[key] = value
 	if await _save.commit(snapshot) != OK:
