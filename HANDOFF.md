@@ -11,6 +11,10 @@ Branch `codex/t11-release-kit` berangkat dari `origin/main` yang sudah memuat T1
 - Panduan rilis `docs/RELEASE.md` memuat file dan kolom unggahan serta cek per portal, berurutan dari itch.io hingga GameDistribution. `docs/privacy.md` menjelaskan save browser dan penggunaan SDK portal.
 - Preset Android menargetkan API 36 dan AAB arm64 dengan package `com.projekpod.velokity`. AAB bertanda tangan menunggu Android SDK dan signing key lokal. Repo tidak berisi keystore.
 
+## T11b · Perbaikan CI
+
+Run #25 gagal saat reload terakhir. Predikat asinkron `waitForFunction` dianggap berhasil saat mengembalikan Promise, bahkan jika isinya `false`. QA kini menunggu hasil setiap baca IndexedDB dan hanya reload setelah snapshot sesuai. Semua pemeriksaan playthrough tetap dijalankan.
+
 ## Pemeriksaan
 
 Impor Godot 4.7.2, kedua ekspor Web, 464 pemeriksaan Godot, 10 tes Python, dan validator keunikan lulus. Validator membuktikan satu solusi untuk setiap Nonogram utama, puzzle bonus, dan Rasi Bintang. Ukuran Web mentah **41.091.751 byte (41,09 MB)** untuk 12 file. Web QA 41.106.651 byte. ZIP rilis `velokity-itch.zip` **11.070.880 byte (11,07 MB)**. Batas 50 MB terpenuhi tanpa mengandalkan kompresi HTTP. Transfer aktual di portal bergantung pada kompresi hosting.

@@ -25,33 +25,38 @@ async function solve(page, level) {
 
 async function waitForBrowserSave(page, { clears, helmet = null }) {
   // Godot writes to its in-memory filesystem first, then flushes to IndexedDB.
-  await page.waitForFunction(async ({ clears, helmet }) => {
-    const database = await new Promise((resolve, reject) => {
-      const open = indexedDB.open("/userfs");
-      open.onupgradeneeded = () => open.transaction.abort();
-      open.onsuccess = () => resolve(open.result);
-      open.onerror = () => reject(open.error);
-    });
-    try {
-      const snapshot = await new Promise((resolve, reject) => {
-        const store = database.transaction("FILE_DATA", "readonly").objectStore("FILE_DATA");
-        const request = store.openCursor();
-        request.onsuccess = () => {
-          const file = request.result;
-          if (!file) resolve(null);
-          else if (file.key.endsWith("/qa-save.json")) {
-            resolve(JSON.parse(new TextDecoder().decode(file.value.contents)));
-          } else file.continue();
-        };
-        request.onerror = () => reject(request.error);
+  const deadline = performance.now() + 12_000;
+  do {
+    if (await page.evaluate(async ({ clears, helmet }) => {
+      const database = await new Promise((resolve, reject) => {
+        const open = indexedDB.open("/userfs");
+        open.onupgradeneeded = () => open.transaction.abort();
+        open.onsuccess = () => resolve(open.result);
+        open.onerror = () => reject(open.error);
       });
-      return snapshot?.onboarding_complete &&
-        Object.keys(snapshot.nonogram).length === clears &&
-        (helmet === null || snapshot.meta.equipped.helmet === helmet);
-    } finally {
-      database.close();
-    }
-  }, { clears, helmet }, { polling: 100, timeout: 12_000 });
+      try {
+        const snapshot = await new Promise((resolve, reject) => {
+          const store = database.transaction("FILE_DATA", "readonly").objectStore("FILE_DATA");
+          const request = store.openCursor();
+          request.onsuccess = () => {
+            const file = request.result;
+            if (!file) resolve(null);
+            else if (file.key.endsWith("/qa-save.json")) {
+              resolve(JSON.parse(new TextDecoder().decode(file.value.contents)));
+            } else file.continue();
+          };
+          request.onerror = () => reject(request.error);
+        });
+        return snapshot?.onboarding_complete &&
+          Object.keys(snapshot.nonogram).length === clears &&
+          (helmet === null || snapshot.meta.equipped.helmet === helmet);
+      } finally {
+        database.close();
+      }
+    }, { clears, helmet })) return;
+    await page.waitForTimeout(100);
+  } while (performance.now() < deadline);
+  assert.fail(`Browser save did not persist ${JSON.stringify({ clears, helmet })}`);
 }
 
 async function runFullPlaythrough(page) {
