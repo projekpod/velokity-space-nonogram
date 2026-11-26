@@ -93,7 +93,7 @@ func _ready() -> void:
 	add_child(_board)
 	var hold_space := Control.new()
 	hold_space.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hold_space.custom_minimum_size.y = 70.0
+	hold_space.custom_minimum_size.y = 99.0
 	hold_space.hide()
 	add_child(hold_space)
 	_streak = StreakEffect.new()

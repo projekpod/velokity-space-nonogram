@@ -61,8 +61,7 @@ static func open(main: Main) -> bool:
 			var screen := main._play(main._planet_levels("saturn")[0])
 			if screen == null:
 				return false
-			screen._streak.set_process(false)
-			_fill_rows(screen, 2)
+			_fill_rows(screen, 4)
 			screen._celebration.dismiss()
 			screen._streak.freeze_at(maxi(9, screen._streak.peak))
 		"combo":

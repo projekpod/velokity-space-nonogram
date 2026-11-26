@@ -58,6 +58,7 @@ var _head: Node2D
 var _tail: Node2D
 var _left_arm: Node2D
 var _right_arm: Node2D
+var _holding_arms: Node2D
 var _left_boot: Node2D
 var _right_boot: Node2D
 var _left_ear: Node2D
@@ -100,6 +101,8 @@ func _ready() -> void:
 	_face = _part(_head, Vector2.ZERO, _draw_face)
 	_part(_head, Vector2.ZERO, Art.visor)
 	_antenna = _part(_head, Vector2(-55, -82), Art.antenna, false, _outfit_color(outfit, "accessory"))
+	_holding_arms = _part(_body, Vector2.ZERO, Art.holding_arms, false, suit_color)
+	_holding_arms.hide()
 	_accents = _part(_rig, Vector2.ZERO, _draw_accents)
 	_create_sparks()
 	resized.connect(_fit)
@@ -199,6 +202,9 @@ func hold_pose(expression: Art.Face, reaction := Reaction.NONE) -> void:
 
 func set_streak_pose(pose: int) -> void:
 	_streak_pose = pose
+	_holding_arms.visible = pose == 2
+	_left_arm.visible = pose != 2
+	_right_arm.visible = pose != 2
 	_apply_pose()
 	_face.queue_redraw()
 
@@ -317,10 +323,7 @@ func _apply_pose() -> void:
 		_body.rotation = 0.0
 		_body.scale = Vector2.ONE
 		_head.rotation = 0.0
-		_left_arm.position = Vector2(-70, -22)
-		_right_arm.position = Vector2(70, -22)
-		_left_arm.rotation = 2.46
-		_right_arm.rotation = -2.46
+
 
 
 func _draw_tail(part: CanvasItem) -> void:
@@ -357,7 +360,7 @@ func _draw_face(part: CanvasItem) -> void:
 	var expression := Face.SURPRISED if _streak_pose != 0 and not _calm else _expression
 	if _streak_pose == 2 and _calm:
 		expression = Face.THINKING
-	Art.face(part, expression, _gaze, _eyelid if _streak_pose == 0 else 1.0, CatArt.BREEDS[_cat_id].eyes)
+	Art.face(part, expression, _gaze, _eyelid if _streak_pose == 0 else 1.0, CatArt.BREEDS[_cat_id].eyes, _streak_pose == 2 and not _calm)
 	if _streak_pose != 0 and not _calm:
 		Art.sweat(part)
 

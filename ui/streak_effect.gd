@@ -121,6 +121,7 @@ func _start_hold(animate: bool) -> void:
 	_holding = true
 	_room.show()
 	_mascot.reparent(self, false)
+	_intro.queue_redraw()
 	_mascot.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	_mascot.size = HOLD_SIZE
 	_mascot.set_streak_pose(2)
@@ -163,6 +164,7 @@ func finish() -> void:
 		_mascot.react(Mascot.Reaction.WIN)
 		await get_tree().create_timer(0.18 if _calm or _reduced else 0.28, false).timeout
 		_mascot.reparent(_intro, false)
+		_intro.queue_redraw()
 		_mascot.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		_room.hide()
 		_holding = false

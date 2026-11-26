@@ -117,6 +117,23 @@ static func arm(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(16, 31), Vector2(7, 8), Color("#d7eaf3"))
 
 
+static func holding_arms(part: CanvasItem, color := Color.TRANSPARENT) -> void:
+	var palette := _costume_palette(color, ENAMEL)
+	for side in [-1, 1]:
+		var shoulder := Vector2(side * 43.0, 50)
+		var elbow := Vector2(side * 105.0, 29)
+		var cuff := Vector2(side * 123.0, -42)
+		var paw := Vector2(side * 123.0, -65)
+		_stroke(part, [shoulder, elbow, cuff], INK, 29)
+		_stroke(part, [shoulder, elbow, cuff], palette[1], 22)
+		_stroke(part, [elbow, Vector2(side * 119.0, -33)], palette[0], 9)
+		ellipse(part, cuff, Vector2(15, 11), TEAL)
+		ellipse(part, paw, Vector2(20, 15), INK)
+		_lit(part, paw, Vector2(17, 13), palette)
+		for offset in [-7, 0, 7]:
+			_stroke(part, [paw + Vector2(offset, -9), paw + Vector2(offset, -4)], Color("#7794ab"), 1.6)
+
+
 static func boot(part: CanvasItem, color := Color.TRANSPARENT) -> void:
 	ellipse(part, Vector2(4, 13), Vector2(27, 23), INK)
 	ellipse(part, Vector2(4, 16), Vector2(24, 17), TEAL)
@@ -182,7 +199,7 @@ static func fur(part: CanvasItem) -> void:
 		ellipse(part, Vector2(side * 42, 22), Vector2(10, 4), Color("#f6af9c"))
 
 
-static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float, eye_spacing := 25.0) -> void:
+static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: float, eye_spacing := 25.0, straining := false) -> void:
 	for side in [-1, 1]:
 		var eye := Vector2(side * eye_spacing, 1)
 		_draw_eye(part, eye, side, expression, gaze, eyelid)
@@ -190,7 +207,11 @@ static func face(part: CanvasItem, expression: Face, gaze: Vector2, eyelid: floa
 		Vector2(-7, 21), Vector2(-4, 18), Vector2(4, 18), Vector2(7, 21), Vector2(0, 27),
 	]), CARAMEL)
 	_stroke(part, [Vector2(-2, 20), Vector2(2, 20)], Color("#f09088"), 2)
-	_mouth(part, expression)
+	if straining:
+		ellipse(part, Vector2(0, 34), Vector2(12, 6), CARAMEL)
+		_stroke(part, [Vector2(-7, 33), Vector2(7, 33)], CREAM, 3)
+	else:
+		_mouth(part, expression)
 
 
 static func _draw_eye(part: CanvasItem, eye: Vector2, side: int, expression: Face, gaze: Vector2, eyelid: float) -> void:

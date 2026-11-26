@@ -31,18 +31,21 @@ func _ready() -> void:
 func _draw() -> void:
 	var middle := size * 0.5
 	if compact:
+		if mascot != null and mascot.get_parent() != self:
+			return
 		draw_circle(middle, minf(size.x, size.y) * 0.47, Color("#182941"), true)
 		draw_arc(middle, minf(size.x, size.y) * 0.47, 0, TAU, 48, Color("#43647e"), 1.0, true)
 		return
 	var accent := Color("#527398")
-	draw_set_transform(middle, -0.25, Vector2(1.0, 0.75))
+	var orbit := minf(1.0, size.y / 300.0)
+	draw_set_transform(middle, -0.25, Vector2(1.0, 0.75) * orbit)
 	draw_circle(Vector2.ZERO, 153.0, Color("#182746"), true)
 	draw_arc(Vector2.ZERO, 154, 0, TAU, 90, Color("#588da0"), 1.5, true)
 	draw_arc(Vector2.ZERO, 179, 0, TAU, 100, accent, 1.0, true)
 	draw_arc(Vector2.ZERO, 198, 0.19, 2.71, 60, Color("#385373"), 1.0, true)
 	draw_arc(Vector2.ZERO, 198, 3.46, 5.70, 60, Color("#385373"), 1.0, true)
 	draw_set_transform(Vector2.ZERO)
-	Art.spark(self, middle + Vector2(-153, -69), 13.0, Art.GOLD)
-	Art.spark(self, middle + Vector2(167, 44), 9.0, Art.MINT)
-	draw_circle(middle + Vector2(142, -112), 4.0, Art.MINT, true)
-	draw_circle(middle + Vector2(-170, 77), 3.0, Art.GOLD, true)
+	Art.spark(self, middle + Vector2(-153, -69) * orbit, 13.0, Art.GOLD)
+	Art.spark(self, middle + Vector2(167, 44) * orbit, 9.0, Art.MINT)
+	draw_circle(middle + Vector2(142, -112) * orbit, 4.0, Art.MINT, true)
+	draw_circle(middle + Vector2(-170, 77) * orbit, 3.0, Art.GOLD, true)

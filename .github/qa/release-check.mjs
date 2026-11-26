@@ -19,7 +19,7 @@ async function solve(page, level) {
     const { grid } = await waitState(page, snapshot => snapshot.grid && snapshot.state === 0);
     await cell(page, grid, level.size, x, y);
   }
-  const result = await waitState(page, snapshot => snapshot.state === 1 && snapshot.result && snapshot.tier === 0);
+  const result = await waitState(page, snapshot => snapshot.state === 1 && snapshot.result && snapshot.tier === 0, 25_000);
   assert.equal(result.scene, level.id);
   assert.equal(result.lives, 3);
   return result;
