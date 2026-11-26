@@ -38,7 +38,7 @@ static func open(main: Main) -> bool:
 		"menu":
 			main.show_menu()
 		"game", "win":
-			if not _open_nonogram(main, route == "win"):
+			if not await _open_nonogram(main, route == "win"):
 				push_error("The QA Nonogram could not reach the requested state")
 				return false
 		"daily":
@@ -74,7 +74,7 @@ static func open(main: Main) -> bool:
 			var screen := main._open_meta(MetaScreen.Page.SHOP)
 			screen._preview_costume("violet_visor")
 		"celebration":
-			if not _open_celebration(main):
+			if not await _open_celebration(main):
 				push_error("The QA album could not reach a tier four celebration")
 				return false
 	var document := JavaScriptBridge.get_interface("document")
@@ -103,6 +103,7 @@ static func _open_nonogram(main: Main, won: bool) -> bool:
 		return false
 	var rows := screen._puzzle.size if won else mini(4, screen._puzzle.size)
 	_fill_rows(screen, rows)
+	await _wait_for_result(screen)
 	screen._celebration.dismiss()
 	return screen._puzzle.state == (Puzzle.State.WON if won else Puzzle.State.PLAYING)
 
@@ -141,7 +142,13 @@ static func _open_celebration(main: Main) -> bool:
 	if screen == null:
 		return false
 	_fill_rows(screen, screen._puzzle.size)
+	await _wait_for_result(screen)
 	if screen._celebration.tier != 4:
 		return false
 	screen._celebration.freeze_at(0.62)
 	return true
+
+
+static func _wait_for_result(screen: NonogramScreen) -> void:
+	while screen._saving:
+		await screen.get_tree().process_frame

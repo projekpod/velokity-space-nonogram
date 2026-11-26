@@ -29,7 +29,7 @@ func _ready() -> void:
 	if not _save.startup_complete:
 		await _save.startup_finished
 	if OS.has_feature("web") and OS.has_feature("qa"):
-		if load("res://scripts/qa/web_preview.gd").open(self):
+		if await load("res://scripts/qa/web_preview.gd").open(self):
 			_ads.notify_game_ready()
 			return
 	_open_start_screen()
