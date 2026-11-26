@@ -22,6 +22,10 @@
                 display: block;
             }
 
+            @media (max-width: 599px), (orientation: portrait) {
+                #banner-container { display: none !important; }
+            }
+
             #canvas:focus {
                 outline: none;
             }
@@ -77,6 +81,7 @@
             }
 
         </style>
+        <script src="./playgama-bridge.js"></script>
         $GODOT_HEAD_INCLUDE
     </head>
     <body>
@@ -94,7 +99,6 @@
             <div id="status-notice"></div>
         </div>
 
-        <script src="./playgama-bridge.js"></script>
         <script src="$GODOT_URL"></script>
         <script>
             const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
@@ -102,6 +106,22 @@
             const canvas = document.getElementById('canvas');
             const loadingStatus = document.getElementById('status');
             const progress = document.getElementById('status-progress');
+
+            // Bridge v2.4.4 mounts in-frame sticky ads in this container.
+            window.velokityBannerHeight = () => {
+                const banner = document.getElementById('banner-container');
+                if (!banner?.getClientRects().length || getComputedStyle(banner).visibility === 'hidden') return 0;
+                const bounds = banner.getBoundingClientRect();
+                if (!bounds.width || !bounds.height) return 0;
+                let top = bounds.top;
+                for (const frame of banner.querySelectorAll('iframe')) {
+                    const rect = frame.getBoundingClientRect();
+                    if (rect.width && rect.height && getComputedStyle(frame).visibility !== 'hidden') {
+                        top = Math.min(top, rect.top);
+                    }
+                }
+                return Math.max(0, Math.min(window.innerHeight, window.innerHeight - top));
+            };
 
             async function start() {
                 loadingStatus.style.visibility = 'visible';

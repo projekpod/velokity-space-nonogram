@@ -3,7 +3,7 @@ extends Node
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
-const VERSION := 6
+const VERSION := 7
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
 
@@ -19,10 +19,15 @@ func _ready() -> void:
 	load_game()
 
 
+func needs_onboarding() -> bool:
+	return not data.onboarding_complete and not _future_saves.has(storage_path)
+
+
 static func defaults() -> Dictionary:
 	return {
 		"version": VERSION,
 		"coins": 0,
+		"onboarding_complete": false,
 		"daily": Daily.empty_progress(),
 		"nonogram": {},
 		"bonus_clears": 0,
@@ -37,6 +42,7 @@ static func migrate(raw: Dictionary) -> Dictionary:
 	if not _is_version(version) or version > VERSION:
 		return {}
 	var result := defaults()
+	result.onboarding_complete = version < 7 or raw.get("onboarding_complete") == true
 	var coins: Variant = raw.get("coins", 0)
 	if (coins is int or coins is float) and coins >= 0 and coins <= 2147483647 and coins == floor(coins):
 		result.coins = int(coins)

@@ -183,6 +183,8 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 	if amount > MAX_COINS - balance():
 		return -1
 	var snapshot: Dictionary = _save.data.duplicate(true)
+	if not levels.is_empty() and level_id == levels[0].id:
+		snapshot.onboarding_complete = true
 	if first_clear:
 		snapshot.nonogram[level_id] = {"reward": amount, "doubled": false}
 		_add_xp(snapshot, Meta.CLEAR_XP)

@@ -15,6 +15,7 @@ const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 @onready var _settings := get_node("/root/Settings")
 @onready var _ads := get_node("/root/Ads")
 @onready var _audio := get_node("/root/Audio")
+@onready var _save := get_node("/root/Save")
 
 @onready var _levels: Array[Dictionary] = _economy.levels
 var _column: VBoxContainer
@@ -27,8 +28,15 @@ func _ready() -> void:
 	_ads.banner_space_changed.connect(_layout_content)
 	if OS.has_feature("web") and OS.has_feature("qa"):
 		if load("res://scripts/qa/web_preview.gd").open(self):
+			_ads.notify_game_ready()
 			return
-	show_menu()
+	_open_start_screen()
+	_ads.notify_game_ready()
+
+
+func _open_start_screen() -> void:
+	if not _save.needs_onboarding() or _play(0, true) == null:
+		show_menu()
 
 
 func show_menu() -> void:
@@ -58,7 +66,6 @@ func show_menu() -> void:
 		_support_button.pressed.connect(_open_support.bind(support))
 		_layout_content()
 	play.grab_focus()
-	_ads.notify_menu_shown()
 
 
 func _open_support(url: String) -> void:
@@ -193,17 +200,29 @@ func _is_level_unlocked(index: int) -> bool:
 	return index == 0 or level.planet != _levels[index - 1].planet or _economy.is_nonogram_cleared(_levels[index - 1].id)
 
 
-func _play(level_index: int) -> NonogramScreen:
+func _play(level_index: int, first_puzzle := false, tutorial_step := 0) -> NonogramScreen:
 	if not _is_level_unlocked(level_index):
 		return null
 	_reset_column(NonogramScreen.BOARD_WIDTH, 0, true)
 	var screen := NonogramScreen.new()
 	screen.level = _levels[level_index]
+	screen.first_puzzle = first_puzzle
+	screen.tutorial_step = tutorial_step
 	screen.can_play_next = _is_level_unlocked.bind(level_index + 1)
 	screen.album_complete = _album_complete.bind(screen.level.planet)
-	screen.exit_requested.connect(_leave_game.bind(level_index))
+	if first_puzzle:
+		screen.exit_requested.connect(_leave_first_puzzle.bind(screen))
+	else:
+		screen.exit_requested.connect(_leave_game.bind(level_index))
 	_column.add_child(screen)
 	return screen
+
+
+func _leave_first_puzzle(action: StringName, _result_closed: bool, screen: NonogramScreen) -> void:
+	if action == &"menu" and _save.data.onboarding_complete:
+		show_menu()
+	elif action == &"retry":
+		_play(0, true, screen.tutorial_step)
 
 
 func _leave_game(action: StringName, result_closed: bool, level_index: int) -> void:

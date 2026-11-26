@@ -18,12 +18,16 @@ var _placement: StringName
 var _request_id := 0
 var _previously_paused := false
 var _previously_muted := false
-var _menu_shown := false
+var _game_ready := false
 var _gameplay_active := false
 var _banner_wanted := false
 var _reported_gameplay := false
 var _banner_shown := false
 var _timeout: Timer
+var _banner_space := 0.0
+var _banner_fits_viewport := true
+var _browser: JavaScriptObject
+var _resize_callback: JavaScriptObject
 
 
 func _ready() -> void:
@@ -43,6 +47,27 @@ func _ready() -> void:
 			unavailable.available = false
 			_provider = unavailable
 	_connect_provider()
+	set_process(OS.has_feature("web"))
+	if OS.has_feature("web"):
+		_browser = JavaScriptBridge.get_interface("window")
+		_resize_callback = JavaScriptBridge.create_callback(_on_browser_resize)
+		_browser.addEventListener("resize", _resize_callback)
+		_on_browser_resize([])
+
+
+func _exit_tree() -> void:
+	if _browser != null:
+		_browser.removeEventListener("resize", _resize_callback)
+
+
+func _process(_delta: float) -> void:
+	_on_banner_space_changed()
+
+
+func _on_browser_resize(_args: Array) -> void:
+	var width := float(_browser.innerWidth)
+	_banner_fits_viewport = width >= 600.0 and width > float(_browser.innerHeight)
+	_sync_platform()
 
 
 func set_provider(provider: AdsProvider) -> bool:
@@ -62,10 +87,10 @@ func set_provider(provider: AdsProvider) -> bool:
 	_provider = provider
 	if is_node_ready():
 		_connect_provider()
-		if _menu_shown:
+		if _game_ready:
 			_provider.game_ready()
 		_sync_platform()
-		banner_space_changed.emit()
+		_on_banner_space_changed()
 	return true
 
 
@@ -77,7 +102,10 @@ func _connect_provider() -> void:
 
 
 func _on_banner_space_changed() -> void:
-	banner_space_changed.emit()
+	var next := banner_clearance()
+	if not is_equal_approx(_banner_space, next):
+		_banner_space = next
+		banner_space_changed.emit()
 
 
 func banner_clearance() -> float:
@@ -105,10 +133,10 @@ func request_interstitial_after_result(level: int) -> bool:
 	return true
 
 
-func notify_menu_shown() -> void:
-	if _menu_shown:
+func notify_game_ready() -> void:
+	if _game_ready:
 		return
-	_menu_shown = true
+	_game_ready = true
 	_provider.game_ready()
 	_sync_platform()
 
@@ -129,11 +157,11 @@ func allows_support_link() -> bool:
 
 func _sync_platform() -> void:
 	var without_ad := _placement == &""
-	var active := _menu_shown and _gameplay_active and without_ad
+	var active := _game_ready and _gameplay_active and without_ad
 	if active != _reported_gameplay:
 		_reported_gameplay = active
 		_provider.set_gameplay_active(active)
-	var banner := _gameplay_active and _banner_wanted and without_ad
+	var banner := active and _banner_wanted and _banner_fits_viewport
 	if banner != _banner_shown:
 		_banner_shown = banner
 		_provider.set_banner_visible(banner)

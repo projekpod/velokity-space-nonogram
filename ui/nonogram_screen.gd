@@ -13,6 +13,7 @@ const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const BOARD_WIDTH := Board.WIDTH
+const TUTORIAL_STEPS := ["TUTORIAL_FILL", "TUTORIAL_CROSS", "TUTORIAL_CLUES"]
 
 @onready var _economy := get_node("/root/Economy")
 @onready var _events := get_node("/root/Events")
@@ -25,6 +26,11 @@ var level: Dictionary
 var can_play_next: Callable
 var album_complete: Callable
 var bonus_index := -1
+var first_puzzle := false
+var tutorial_step := 0
+var _tutorial: VBoxContainer
+var _tutorial_text: Label
+var _tutorial_next: Button
 var _puzzle: Puzzle
 var _board: Board
 var _lives: Label
@@ -55,7 +61,8 @@ func _ready() -> void:
 	_analytics.record(&"puzzle_started")
 
 	var header := UI.row(self)
-	UI.button(header, "LEVEL_BACK" if bonus_index >= 0 else "GAME_BACK_LEVELS").pressed.connect(_leave.bind(&"levels"))
+	if not first_puzzle:
+		UI.button(header, "LEVEL_BACK" if bonus_index >= 0 else "GAME_BACK_LEVELS").pressed.connect(_leave.bind(&"levels"))
 	_lives = UI.label(header, "", 25, UI.GOLD)
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_coins = UI.label(header, "", 25, UI.GOLD)
@@ -75,6 +82,8 @@ func _ready() -> void:
 	_portrait.compact = true
 	_portrait.idle_expression = Mascot.Face.THINKING
 	intro.add_child(_portrait)
+	if first_puzzle and tutorial_step < TUTORIAL_STEPS.size():
+		_build_tutorial()
 	_board = Board.new()
 	_board.puzzle = _puzzle
 	add_child(_board)
@@ -92,7 +101,7 @@ func _ready() -> void:
 	_update_balance(_economy.balance())
 	_events.coins_changed.connect(_update_balance)
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
-	_ads.set_gameplay_active(true, bonus_index < 0)
+	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
 	_puzzle.correct_fill.connect(_on_correct_fill)
 	_puzzle.correct_cross.connect(_audio.play_effect.bind(&"cross"))
 	_puzzle.mistake.connect(_on_mistake)
@@ -102,6 +111,28 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_ads.set_gameplay_active(false)
+
+
+func _build_tutorial() -> void:
+	_tutorial = VBoxContainer.new()
+	add_child(_tutorial)
+	_tutorial_text = UI.label(_tutorial, "", 23, UI.MINT)
+	_tutorial_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var actions := UI.row(_tutorial)
+	UI.action(actions, "TUTORIAL_SKIP").pressed.connect(_show_tutorial_step.bind(TUTORIAL_STEPS.size()))
+	_tutorial_next = UI.action(actions, "TUTORIAL_NEXT", true)
+	_tutorial_next.pressed.connect(func() -> void: _show_tutorial_step(tutorial_step + 1))
+	_show_tutorial_step(tutorial_step)
+
+
+func _show_tutorial_step(step: int) -> void:
+	tutorial_step = step
+	if step >= TUTORIAL_STEPS.size():
+		_tutorial.hide()
+		_board.grab_focus()
+		return
+	_tutorial_text.text = tr("TUTORIAL_STEP") % [step + 1, tr(TUTORIAL_STEPS[step])]
+	_tutorial_next.text = "TUTORIAL_DONE" if step == TUTORIAL_STEPS.size() - 1 else "TUTORIAL_NEXT"
 
 
 func _build_tools() -> void:
@@ -168,7 +199,9 @@ func _resume_game() -> void:
 	_feedback.hide()
 	_result.hide()
 	_tools.show()
-	_ads.set_gameplay_active(true)
+	if is_instance_valid(_tutorial) and tutorial_step < TUTORIAL_STEPS.size():
+		_tutorial.show()
+	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
 	_portrait.mascot.set_idle(Mascot.Face.THINKING)
 	_puzzle.continue_game()
 	_update_lives()
@@ -231,6 +264,8 @@ func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
 
 
 func _on_finished(won: bool) -> void:
+	if is_instance_valid(_tutorial):
+		_tutorial.hide()
 	_tools.hide()
 	_ads.set_gameplay_active(false)
 	_analytics.record(&"puzzle_won" if won else &"puzzle_lost")
@@ -300,19 +335,24 @@ func _show_result(won: bool) -> void:
 	var nav := UI.row(_result)
 	var show_next := won and can_play_next.is_valid() and bool(can_play_next.call())
 	var focus: Button
-	if won and bonus_index >= 0:
+	if won and first_puzzle:
+		if _win_coins >= 0:
+			focus = UI.action(nav, "GAME_BACK", true)
+			focus.pressed.connect(_leave.bind(&"menu"))
+	elif won and bonus_index >= 0:
 		focus = UI.action(nav, "LEVEL_BACK", not show_next)
 		focus.pressed.connect(_leave.bind(&"levels"))
 	else:
 		focus = UI.action(nav, "GAME_RETRY", not show_next)
 		focus.pressed.connect(_leave.bind(&"retry"))
-	if show_next:
+	if show_next and not first_puzzle:
 		focus = UI.action(nav, "GAME_NEXT", true)
 		focus.pressed.connect(_leave.bind(&"next"))
-	if won and bonus_index < 0 and _economy.next_bonus_index() >= 0:
+	if won and not first_puzzle and bonus_index < 0 and _economy.next_bonus_index() >= 0:
 		UI.button(_result, "BONUS_TITLE", true).pressed.connect(_leave.bind(&"bonus"))
 	_result.show()
-	focus.grab_focus()
+	if focus != null:
+		focus.grab_focus()
 
 
 func _show_win_reward() -> void:
