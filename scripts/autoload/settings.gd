@@ -30,6 +30,7 @@ func get_value(key: String) -> Variant:
 
 
 func set_value(key: String, value: Variant) -> bool:
+	await _save.wait_for_pending_writes()
 	var previous: Variant = get_value(key)
 	if previous == null or typeof(previous) != typeof(value):
 		return false

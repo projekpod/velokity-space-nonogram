@@ -35,6 +35,23 @@ class SilentAds extends AdsProvider:
 		pass
 
 
+class SlowStorage extends RefCounted:
+	var writes: Array[Dictionary] = []
+	var pending: Callable
+	var persisted: Dictionary
+
+	func write(_key: String, value: String, callback: Callable) -> void:
+		writes.append(JSON.parse_string(value))
+		pending = callback
+
+	func finish(ok := true) -> void:
+		if ok:
+			persisted = writes.back()
+		var callback := pending
+		pending = Callable()
+		callback.call(ok)
+
+
 func _initialize() -> void:
 	call_deferred("_run")
 
@@ -42,6 +59,7 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_save()
 	_test_save_recovery()
+	await _test_save_queue()
 	_test_settings()
 	await _test_settings_menu()
 	_test_economy()
@@ -99,6 +117,56 @@ func _test_save() -> void:
 	check(save.load_game(path) == OK and save.data.coins == 17, "Read back the persisted balance")
 	DirAccess.remove_absolute(path)
 	save.free()
+
+
+func _record_commit(save: Node, snapshot: Dictionary, results: Array[Error]) -> void:
+	results.append(await save.commit(snapshot))
+
+
+func _test_save_queue() -> void:
+	var save := root.get_node("Save")
+	var original: Dictionary = save.data
+	save.data = SaveScript.defaults()
+	var storage := SlowStorage.new()
+	save._bridge_set = storage.write
+	var results: Array[Error] = []
+	var first := SaveScript.defaults()
+	first.coins = 12
+	var second := SaveScript.defaults()
+	second.coins = 24
+	_record_commit(save, first, results)
+	_record_commit(save, second, results)
+	second.coins = 99
+	check(storage.writes.size() == 1 and results.is_empty(), "Keep one Bridge write in flight")
+	storage.finish()
+	await process_frame
+	check(storage.writes.size() == 2 and save.data.coins == 12 and results == [OK], "Start the next snapshot only after the first completes")
+	storage.finish()
+	await process_frame
+	check(results == [OK, OK] and storage.persisted.coins == 24 and save.data.coins == 24, "The newest queued snapshot wins even if its caller changes the input")
+
+	var economy := root.get_node("Economy")
+	economy.spend(20)
+	economy.spend(20)
+	root.get_node("Settings").set_value("calm_mode", true)
+	storage.finish()
+	await process_frame
+	check(storage.writes.size() == 4 and storage.writes.back().coins == 4, "Revalidate the second spend on the committed balance")
+	storage.finish()
+	await process_frame
+	check(storage.persisted.settings.calm_mode and save.data.coins == 4, "A queued setting also preserves the prior spend")
+
+	_record_commit(save, first, results)
+	_record_commit(save, second, results)
+	storage.finish(false)
+	await process_frame
+	check(results.back() == ERR_FILE_CANT_WRITE and save.data.coins == 4, "A failed write does not publish its snapshot")
+	storage.finish()
+	await process_frame
+	check(results.back() == OK and storage.persisted.coins == 99, "A failed write does not stall the queue")
+	save._bridge_set = Callable()
+	save.data = original
+	root.get_node("Events").settings_changed.emit()
 
 
 func _test_save_recovery() -> void:

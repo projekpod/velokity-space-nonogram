@@ -3,6 +3,7 @@ extends Node
 signal startup_finished
 signal _bridge_read(ok: bool, value: Variant)
 signal _bridge_written(ok: bool)
+signal _queue_drained
 
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
@@ -18,9 +19,19 @@ var _future_saves: Dictionary = {}
 var _corrupt_saves: Dictionary = {}
 var startup_complete := false
 var _bridge_storage
+var _bridge_set: Callable
 var _bridge_key := BRIDGE_KEY
 var _bridge_writable := true
 var _bridge_write_busy := false
+var _pending_writes: Array[WriteRequest] = []
+
+
+class WriteRequest extends RefCounted:
+	signal finished(error: Error)
+	var snapshot: Dictionary
+
+	func _init(value: Dictionary) -> void:
+		snapshot = value.duplicate(true)
 
 
 func _ready() -> void:
@@ -29,6 +40,9 @@ func _ready() -> void:
 			storage_path = "user://qa-save.json"
 			_bridge_key += "-qa"
 		_bridge_storage = get_node("/root/Bridge").storage
+		if _bridge_storage != null:
+			_bridge_set = func(key: String, value: String, callback: Callable) -> void:
+				_bridge_storage.set(key, value, callback)
 	if _bridge_storage == null:
 		load_game()
 	else:
@@ -70,32 +84,48 @@ func _load_bridge() -> void:
 
 
 func _on_bridge_read(ok: bool, value: Variant) -> void:
-	_bridge_read.emit(ok, value)
+	_bridge_read.emit.call_deferred(ok, value)
 
 
 func _on_bridge_written(ok: bool) -> void:
-	_bridge_written.emit(ok)
+	_bridge_written.emit.call_deferred(ok)
 
 
 func _write_bridge(key: String, value: String) -> bool:
-	_bridge_storage.set(key, value, _on_bridge_written)
+	_bridge_set.call(key, value, _on_bridge_written)
 	return await _bridge_written
 
 
+# Transactions that read the saved state wait before validating or taking their snapshot.
+func wait_for_pending_writes() -> void:
+	while _bridge_write_busy:
+		await _queue_drained
+
+
 func commit(snapshot: Dictionary) -> Error:
-	if _bridge_storage == null:
+	if not _bridge_set.is_valid():
 		return write_game(snapshot)
-	if not startup_complete or _bridge_write_busy:
+	if not startup_complete:
 		return ERR_BUSY
 	if not _bridge_writable or _future_saves.has(storage_path):
 		return ERR_FILE_CANT_WRITE
-	_bridge_write_busy = true
-	var saved := await _write_bridge(_bridge_key, JSON.stringify(snapshot))
+	var request := WriteRequest.new(snapshot)
+	_pending_writes.push_back(request)
+	if not _bridge_write_busy:
+		_bridge_write_busy = true
+		_drain_writes()
+	return await request.finished
+
+
+func _drain_writes() -> void:
+	while not _pending_writes.is_empty():
+		var request: WriteRequest = _pending_writes.pop_front()
+		var saved := await _write_bridge(_bridge_key, JSON.stringify(request.snapshot))
+		if saved:
+			data = request.snapshot
+		request.finished.emit(OK if saved else ERR_FILE_CANT_WRITE)
 	_bridge_write_busy = false
-	if not saved:
-		return ERR_FILE_CANT_WRITE
-	data = snapshot
-	return OK
+	_queue_drained.emit.call_deferred()
 
 
 func needs_onboarding() -> bool:

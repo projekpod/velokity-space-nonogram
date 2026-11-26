@@ -24,10 +24,12 @@ func balance() -> int:
 
 
 func earn(amount: int) -> bool:
+	await _save.wait_for_pending_writes()
 	return amount > 0 and amount <= MAX_COINS - balance() and await _set_balance(balance() + amount)
 
 
 func spend(amount: int) -> bool:
+	await _save.wait_for_pending_writes()
 	return amount > 0 and amount <= balance() and await _set_balance(balance() - amount)
 
 
@@ -79,6 +81,7 @@ func owns_costume(id: String) -> bool:
 
 
 func buy_costume(id: String) -> bool:
+	await _save.wait_for_pending_writes()
 	var price: int = Meta.COSTUMES.get(id, {}).get("price", 0)
 	if price <= 0 or price > balance() or owns_costume(id):
 		return false
@@ -98,6 +101,7 @@ func equipped_costumes() -> Dictionary:
 
 
 func equip_costume(slot: String, id: String) -> bool:
+	await _save.wait_for_pending_writes()
 	if slot not in Meta.SLOTS:
 		return false
 	if not id.is_empty() and (Meta.COSTUMES.get(id, {}).get("slot") != slot or not owns_costume(id)):
@@ -124,6 +128,7 @@ func login_status(day: int) -> Dictionary:
 
 
 func claim_login(day: int) -> int:
+	await _save.wait_for_pending_writes()
 	var next := Daily.advance(_save.data.meta.login, day)
 	if next.is_empty():
 		return 0
@@ -145,6 +150,7 @@ func free_coin_ads_remaining(day: int) -> int:
 
 # Called after a rewarded ad closes with a grant. Save the quota and coins together.
 func award_free_ad_coins(day: int) -> int:
+	await _save.wait_for_pending_writes()
 	var remaining := free_coin_ads_remaining(day)
 	if remaining == 0:
 		return 0
@@ -173,6 +179,7 @@ func badge_count() -> int:
 
 # Save the first-clear reward and any new badge in the same transaction.
 func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
+	await _save.wait_for_pending_writes()
 	if level_id.is_empty() or lives < 1 or lives > 3 or combo_lines < 0:
 		return -1
 	var first_clear := not is_nonogram_cleared(level_id)
@@ -201,6 +208,7 @@ func next_bonus_index() -> int:
 
 
 func award_bonus(index: int) -> int:
+	await _save.wait_for_pending_writes()
 	if index < 0 or index != next_bonus_index():
 		return -1
 	var amount := Bonus.BASE_COINS * Bonus.multiplier(index)
@@ -214,6 +222,7 @@ func award_bonus(index: int) -> int:
 
 
 func double_nonogram_reward(level_id: String) -> int:
+	await _save.wait_for_pending_writes()
 	var progress: Dictionary = _save.data.nonogram
 	if not progress.has(level_id) or progress[level_id].doubled:
 		return 0
@@ -228,6 +237,7 @@ func double_nonogram_reward(level_id: String) -> int:
 
 # Positive values are coins collected. Zero is an already recorded date, -1 a failed write.
 func award_daily(day: int) -> int:
+	await _save.wait_for_pending_writes()
 	var progress := Daily.advance(_save.data.daily, day)
 	if progress.is_empty():
 		return 0

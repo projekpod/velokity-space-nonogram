@@ -16,7 +16,7 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
 - [ ] T11b Portal compliance: make Web QA deterministic, implement Playgama required SDK steps, and deploy green main Web builds to GitHub Pages.
   - Fixed run #25, added browser and SDK regression checks, and wired Pages deployment. Verify the first green main deployment after merge.
 - [ ] T12 Feel & Shop v1.1
-  - [ ] 1. Queue saves in order so rapid actions persist the latest snapshot. Test with slow storage.
+  - [x] 1. Queue saves in order so rapid actions persist the latest snapshot. Test with slow storage.
   - [ ] 2. Raise procedural audio levels and add saved Music and Effects volume sliders.
   - [ ] 3. Add visual-only fill streak escalation, persistent peak state, and a win recovery animation.
   - [ ] 4. Add an animated space backdrop, Calm Mode support, and automatic reduction under sustained load.
