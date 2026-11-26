@@ -26,8 +26,12 @@ func banner_clearance() -> float:
 	return 0.0
 
 
-func can_request_rewarded() -> bool:
+func supports_rewarded() -> bool:
 	return true
+
+
+func can_request_rewarded() -> bool:
+	return supports_rewarded()
 
 
 func can_request_interstitial() -> bool:

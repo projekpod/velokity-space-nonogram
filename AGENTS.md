@@ -11,8 +11,8 @@
 - Base resolution 720x1280 portrait, stretch mode canvas_items, aspect expand. On wide desktop screens keep the board centered with decorative space background on the sides (portals require the game to be playable on desktop landscape).
 - Web export: single-threaded (thread support off). Initial download must stay <= 50 MB; aim <= 20 MB.
 - Android later: target API 36.
-- Autoloads: Events (signal bus), Save (user://save.json, versioned with migrations), Settings, Audio, Economy, Ads (interface + FakeAds), Analytics (local stub only, no personal data).
-- All UI text through translations: res://i18n/strings.csv (key,en,id). Language follows the device, fallback en.
+- Autoloads: Events (signal bus), Save (Bridge Storage when available, otherwise user://save.json, versioned with migrations), Settings, Audio, Economy, Ads (interface + FakeAds), Analytics (local stub only, no personal data).
+- All UI text through translations: res://i18n/strings.csv (key,en,id). A saved language choice takes priority, then the Bridge platform language when available, then the device language. Fallback en.
 - Folders: scenes/, scripts/, ui/, art/ (generated), audio/ (generated), data/levels/, data/daily/, i18n/, tests/, tools/ (Python 3 stdlib only), docs/.
 
 ## Assets & legal
@@ -28,9 +28,9 @@
 
 ## Monetization rules (behind Ads/Economy interfaces)
 - Rewarded: continue after all 3 lives are lost (once per puzzle), hint, 2x coins after a level.
-- Interstitial: only from level 10, cooldown >= 90 s, never in the first 2 minutes of a session, only after the win/lose flow has closed.
+- Interstitial: request once when the player leaves a win/lose result. Bridge owns pacing with a minimum delay of 90 s. FakeAds keeps level 10+, the first two minutes free of interstitials, and a 90 s cooldown.
 - Banner: bottom of the gameplay screen only. Hide it when the browser is under 600 CSS px wide or in portrait. Otherwise keep controls clear of the banner using its measured height. No-Ads/payers (later): no interstitial or banner.
-- Web SDK later via the Playgama Bridge Godot 4 plugin. Until then use FakeAds.
+- Web uses the Playgama Bridge Godot 4 plugin after initialization. Respect platform pause, audio, and tab visibility. Native development and tests use FakeAds. Hide rewarded controls on unsupported hosts. Grant a reward only if Bridge reported the rewarded state.
 
 ## Quality gates (every PR; run them yourself)
 1. `godot --headless --import` finishes without errors.

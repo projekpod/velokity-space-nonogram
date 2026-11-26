@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-signal back_requested
+signal back_requested(result_closed: bool)
 
 const Daily := preload("res://scripts/daily/calendar.gd")
 const Puzzle := preload("res://scripts/daily/puzzle.gd")
@@ -32,6 +32,7 @@ var _slots: Array[PanelContainer] = []
 var _place: Button
 var _note: Button
 var _retry: Button
+var _saving := false
 
 
 func _ready() -> void:
@@ -55,7 +56,7 @@ func _start() -> void:
 
 	var top := HBoxContainer.new()
 	add_child(top)
-	UI.button(top, "GAME_BACK").pressed.connect(back_requested.emit)
+	UI.button(top, "GAME_BACK").pressed.connect(_go_back)
 	_lives = UI.label(top, "", 26, UI.GOLD)
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var intro := UI.row(self)
@@ -119,7 +120,7 @@ func _start() -> void:
 	_update_calendar()
 
 	_retry = UI.button(self, "GAME_RETRY")
-	_retry.pressed.connect(_start)
+	_retry.pressed.connect(_retry_daily)
 	_celebration = Celebration.new()
 	_celebration.attach(self)
 	_puzzle.mistake.connect(_on_mistake)
@@ -127,6 +128,23 @@ func _start() -> void:
 	_puzzle.note_changed.connect(_audio.play_effect.bind(&"cross"))
 	_puzzle.finished.connect(_on_finished)
 	_board.grab_focus()
+
+
+func _go_back() -> void:
+	if not _saving:
+		back_requested.emit(_has_result())
+
+
+func _has_result() -> bool:
+	return _puzzle != null and _puzzle.state != Puzzle.State.PLAYING
+
+
+func _retry_daily() -> void:
+	if _saving:
+		return
+	if _has_result():
+		_ads.request_interstitial_after_result(0)
+	_start()
 
 
 func _choose_mode(note: bool) -> void:
@@ -167,7 +185,9 @@ func _on_finished(won: bool) -> void:
 		_status.text = "DAILY_ROLLOVER"
 		_retry.text = "DAILY_OPEN_TODAY"
 	else:
-		var coins: int = _economy.award_daily(_day)
+		_saving = true
+		var coins: int = await _economy.award_daily(_day)
+		_saving = false
 		if coins > 0:
 			_status.text = tr("DAILY_WON") % coins
 			_update_calendar()

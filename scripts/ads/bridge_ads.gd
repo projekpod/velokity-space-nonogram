@@ -20,10 +20,15 @@ func _init(advertisement: Object, platform: Object, measure_banner := Callable()
 	_advertisement.banner_state_changed.connect(_on_banner_state)
 	_advertisement.rewarded_state_changed.connect(_on_rewarded)
 	_advertisement.interstitial_state_changed.connect(_on_interstitial)
+	_advertisement.set_minimum_delay_between_interstitial(90)
+
+
+func supports_rewarded() -> bool:
+	return _advertisement.is_rewarded_supported
 
 
 func can_request_rewarded() -> bool:
-	return _kind == Kind.NONE and _advertisement.is_rewarded_supported
+	return _kind == Kind.NONE and supports_rewarded()
 
 
 func can_request_interstitial() -> bool:

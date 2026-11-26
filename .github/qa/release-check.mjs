@@ -25,39 +25,44 @@ async function solve(page, level) {
 
 async function waitForBrowserSave(page, { clears, helmet = null }) {
   // Godot writes to its in-memory filesystem first, then flushes to IndexedDB.
-  await page.waitForFunction(async ({ clears, helmet }) => {
-    const database = await new Promise((resolve, reject) => {
-      const open = indexedDB.open("/userfs");
-      open.onupgradeneeded = () => open.transaction.abort();
-      open.onsuccess = () => resolve(open.result);
-      open.onerror = () => reject(open.error);
-    });
-    try {
-      const snapshot = await new Promise((resolve, reject) => {
-        const store = database.transaction("FILE_DATA", "readonly").objectStore("FILE_DATA");
-        const request = store.openCursor();
-        request.onsuccess = () => {
-          const file = request.result;
-          if (!file) resolve(null);
-          else if (file.key.endsWith("/qa-save.json")) {
-            resolve(JSON.parse(new TextDecoder().decode(file.value.contents)));
-          } else file.continue();
-        };
-        request.onerror = () => reject(request.error);
+  const deadline = performance.now() + 12_000;
+  do {
+    if (await page.evaluate(async ({ clears, helmet }) => {
+      const database = await new Promise((resolve, reject) => {
+        const open = indexedDB.open("/userfs");
+        open.onupgradeneeded = () => open.transaction.abort();
+        open.onsuccess = () => resolve(open.result);
+        open.onerror = () => reject(open.error);
       });
-      return snapshot?.onboarding_complete &&
-        Object.keys(snapshot.nonogram).length === clears &&
-        (helmet === null || snapshot.meta.equipped.helmet === helmet);
-    } finally {
-      database.close();
-    }
-  }, { clears, helmet }, { polling: 100, timeout: 12_000 });
+      try {
+        const snapshot = await new Promise((resolve, reject) => {
+          const store = database.transaction("FILE_DATA", "readonly").objectStore("FILE_DATA");
+          const request = store.openCursor();
+          request.onsuccess = () => {
+            const file = request.result;
+            if (!file) resolve(null);
+            else if (file.key.endsWith("/qa-save.json")) {
+              resolve(JSON.parse(new TextDecoder().decode(file.value.contents)));
+            } else file.continue();
+          };
+          request.onerror = () => reject(request.error);
+        });
+        return snapshot?.onboarding_complete &&
+          Object.keys(snapshot.nonogram).length === clears &&
+          (helmet === null || snapshot.meta.equipped.helmet === helmet);
+      } finally {
+        database.close();
+      }
+    }, { clears, helmet })) return;
+    await page.waitForTimeout(100);
+  } while (performance.now() < deadline);
+  assert.fail(`Browser save did not persist ${JSON.stringify({ clears, helmet })}`);
 }
 
 async function runFullPlaythrough(page) {
   let snapshot = await waitState(page, s => s.first && s.step === 0 && s.grid);
   assert.equal(snapshot.scene, moon[0].id);
-  assert.deepEqual(await page.evaluate(() => window.velokityPortalFixture.calls), ["game_ready", "gameplay_started"]);
+  assert.deepEqual(await page.evaluate(() => window.velokityPortalFixture.calls), ["storage:get", "game_ready", "gameplay_started"]);
   await button(page, "TUTORIAL_NEXT");
   await waitState(page, s => s.step === 1);
   await button(page, "TUTORIAL_NEXT");
@@ -74,8 +79,10 @@ async function runFullPlaythrough(page) {
   await button(page, "GAME_DOUBLE_AD");
   await waitState(page, s => s.coins >= 120);
   await button(page, "GAME_BACK");
-  await waitState(page, s => s.buttons.MENU_PLAY);
-  await waitForBrowserSave(page, { clears: 1 });
+  await waitState(page, s => s.buttons.MENU_PLAY && !s.paused);
+  assert.equal(await page.evaluate(() => window.velokityPortalFixture.minimumDelay), 90);
+  assert((await page.evaluate(() => window.velokityPortalFixture.calls)).includes("interstitial"), "Bridge receives the first result");
+  assert.equal(await page.evaluate(() => Object.keys(window.velokityPortalFixture.saved().nonogram).length), 1);
   await openGame(page, url, route);
   await waitState(page, s => s.buttons.MENU_PLAY && s.clears === 1);
   await button(page, "MENU_PLAY");
@@ -152,10 +159,83 @@ async function runFullPlaythrough(page) {
   await button(page, "COSTUME_EQUIP");
   await waitState(page, s => s.equipped.helmet === "mint_visor");
   await button(page, "GAME_BACK");
-  await waitForBrowserSave(page, { clears: 5, helmet: "mint_visor" });
+  assert.equal(await page.evaluate(() => window.velokityPortalFixture.saved().meta.equipped.helmet), "mint_visor");
   await openGame(page, url, route);
   await waitState(page, s => s.buttons.MENU_PLAY && s.clears === 5 && s.dailyClears === 1 && s.bonusClears === 3 && s.equipped.helmet === "mint_visor");
   console.log("Playthrough passed: tutorial, resizing, Moon 01–05, daily, album, Bonus Round x3, shop purchase/equip and reload.");
+}
+
+async function checkBridgeMigration() {
+  const page = await browser.newPage({ viewport: { width: 720, height: 1280 }, locale: "en-US" });
+  let bridgeEnabled = false;
+  try {
+    const errors = watchErrors(page);
+    await page.addInitScript(() => {
+      window.velokityPortalOptions = { language: "id", audio: false, rewarded: false };
+    });
+    await page.route("**/playgama-bridge.js", request => bridgeEnabled
+      ? request.fulfill({ path: fixture, contentType: "application/javascript" })
+      : request.fulfill({ body: "", contentType: "application/javascript" }));
+    await openGame(page, url, route);
+    await button(page, "TUTORIAL_SKIP");
+    await solve(page, moon[0]);
+    await button(page, "GAME_BACK");
+    await waitForBrowserSave(page, { clears: 1 });
+    await openGame(page, url, route);
+    await waitState(page, s => s.buttons.MENU_PLAY && s.clears === 1);
+
+    bridgeEnabled = true;
+    await openGame(page, url, route);
+    await waitState(page, s => s.buttons.MENU_PLAY && s.clears === 1 && s.locale.startsWith("id") && s.muted);
+    assert.equal(await page.evaluate(() => window.velokityPortalFixture.saved().coins), 60);
+    const migrationWrites = await page.evaluate(() => window.velokityPortalFixture.calls.filter(call => call.startsWith("storage:set:")));
+    assert.deepEqual(migrationWrites, ["storage:set:velokity-save-qa"]);
+    await openGame(page, url, route);
+    await waitState(page, s => s.buttons.MENU_PLAY && s.clears === 1 && s.muted);
+    assert.equal(await page.evaluate(() => window.velokityPortalFixture.calls.filter(call => call.startsWith("storage:set:")).length), 0);
+    await page.evaluate(() => window.velokityPortalFixture.setAudio(true));
+    await waitState(page, s => !s.muted);
+    await page.evaluate(() => window.velokityPortalFixture.setPaused(true));
+    await waitState(page, s => s.paused && s.muted);
+    await page.evaluate(() => {
+      Object.defineProperty(document, "hidden", { configurable: true, value: true });
+      document.dispatchEvent(new Event("visibilitychange"));
+      window.velokityPortalFixture.setPaused(false);
+    });
+    await waitState(page, s => s.paused && s.muted);
+    await page.evaluate(() => {
+      delete document.hidden;
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await waitState(page, s => !s.paused && !s.muted);
+    await button(page, "META_SHOP");
+    await waitState(page, s => s.scene === "shop");
+    assert(!(await state(page)).visibleButtons.some(key => key.includes("Koin gratis")));
+    await page.evaluate(() => {
+      const fixture = window.velokityPortalFixture;
+      const saved = fixture.saved();
+      saved.settings.language = "en";
+      fixture.seed(JSON.stringify(saved));
+    });
+    await openGame(page, url, route);
+    await waitState(page, s => s.buttons.MENU_PLAY && s.locale.startsWith("en"));
+
+    await page.evaluate(() => window.velokityPortalFixture.seed("{broken"));
+    await openGame(page, url, route);
+    await waitState(page, s => s.first);
+    assert.deepEqual(await page.evaluate(() => window.velokityPortalFixture.archives()), ["{broken"]);
+    assert(!(await state(page)).visibleButtons.includes("GAME_HINT_AD"));
+
+    await page.evaluate(() => window.velokityPortalFixture.seed('{"version":999}'));
+    await openGame(page, url, route);
+    await waitState(page, s => s.buttons.MENU_PLAY);
+    assert.equal(await page.evaluate(() => window.velokityPortalFixture.saved().version), 999);
+    assert.equal(await page.evaluate(() => window.velokityPortalFixture.calls.filter(call => call.startsWith("storage:set:")).length), 0);
+    assert.deepEqual(errors, []);
+    console.log("Bridge passed: file migration, SDK saves, corrupt and future saves, language, audio, nested pause and unsupported rewarded UI.");
+  } finally {
+    await page.close();
+  }
 }
 
 async function measurePhone() {
@@ -218,6 +298,7 @@ try {
   } finally {
     await page.close();
   }
+  await checkBridgeMigration();
   await measurePhone();
 } finally {
   await browser.close();

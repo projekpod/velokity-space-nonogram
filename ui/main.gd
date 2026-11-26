@@ -26,8 +26,10 @@ func _ready() -> void:
 	center.resized.connect(_layout_content)
 	get_viewport().size_changed.connect(_layout_content)
 	_ads.banner_space_changed.connect(_layout_content)
+	if not _save.startup_complete:
+		await _save.startup_finished
 	if OS.has_feature("web") and OS.has_feature("qa"):
-		if load("res://scripts/qa/web_preview.gd").open(self):
+		if await load("res://scripts/qa/web_preview.gd").open(self):
 			_ads.notify_game_ready()
 			return
 	_open_start_screen()
@@ -218,7 +220,9 @@ func _play(level_index: int, first_puzzle := false, tutorial_step := 0) -> Nonog
 	return screen
 
 
-func _leave_first_puzzle(action: StringName, _result_closed: bool, screen: NonogramScreen) -> void:
+func _leave_first_puzzle(action: StringName, result_closed: bool, screen: NonogramScreen) -> void:
+	if result_closed:
+		_ads.request_interstitial_after_result(1)
 	if action == &"menu" and _save.data.onboarding_complete:
 		show_menu()
 	elif action == &"retry":
@@ -226,19 +230,17 @@ func _leave_first_puzzle(action: StringName, _result_closed: bool, screen: Nonog
 
 
 func _leave_game(action: StringName, result_closed: bool, level_index: int) -> void:
+	if result_closed:
+		_ads.request_interstitial_after_result(level_index + 1)
 	match action:
 		&"bonus":
 			_open_bonus()
-			return
 		&"next":
-			if _play(level_index + 1) == null:
-				return
+			_play(level_index + 1)
 		&"retry":
 			_play(level_index)
 		_:
 			_show_levels(_levels[level_index].planet)
-	if result_closed:
-		_ads.request_interstitial_after_result(level_index + 1)
 
 
 func _open_bonus() -> NonogramScreen:
@@ -257,7 +259,9 @@ func _open_bonus() -> NonogramScreen:
 	return screen
 
 
-func _leave_bonus(action: StringName, _result_closed: bool) -> void:
+func _leave_bonus(action: StringName, result_closed: bool) -> void:
+	if result_closed:
+		_ads.request_interstitial_after_result(0)
 	if action == &"levels" or _open_bonus() == null:
 		_show_planets()
 
@@ -265,9 +269,15 @@ func _leave_bonus(action: StringName, _result_closed: bool) -> void:
 func _open_daily() -> DailyScreen:
 	_reset_column(608, 0, true)
 	var screen := DailyScreen.new()
-	screen.back_requested.connect(show_menu)
+	screen.back_requested.connect(_leave_daily)
 	_column.add_child(screen)
 	return screen
+
+
+func _leave_daily(result_closed: bool) -> void:
+	if result_closed:
+		_ads.request_interstitial_after_result(0)
+	show_menu()
 
 
 func _show_settings() -> void:
@@ -297,7 +307,7 @@ func _show_settings() -> void:
 		language.add_item(tr(key))
 	language.select(locales.find(_settings.get_value("language")))
 	language.item_selected.connect(func(index: int) -> void:
-		status.visible = not _settings.set_value("language", locales[index])
+		status.visible = not await _settings.set_value("language", locales[index])
 		if status.visible:
 			language.select(locales.find(_settings.get_value("language")))
 		else:
@@ -314,7 +324,7 @@ func _show_settings() -> void:
 
 
 func _change_toggle(enabled: bool, key: String, toggle: CheckButton, status: Label) -> void:
-	status.visible = not _settings.set_value(key, enabled)
+	status.visible = not await _settings.set_value(key, enabled)
 	if status.visible:
 		toggle.set_pressed_no_signal(_settings.get_value(key))
 

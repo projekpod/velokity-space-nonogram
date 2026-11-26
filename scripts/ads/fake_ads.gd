@@ -19,7 +19,7 @@ func set_banner_visible(visible: bool) -> void:
 	banner_visible = visible
 
 
-func can_request_rewarded() -> bool:
+func supports_rewarded() -> bool:
 	return available
 
 

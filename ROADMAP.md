@@ -13,4 +13,6 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
 - [x] T10 Audio & polish: ship v1.0 with the current 60 levels. Apply T09 review fixes, generate procedural SFX and two short seamless music loops (menu and puzzle), stay under 3 MB of audio, honor first input, audio settings and ad mute, update docs/CREDITS.md, and add an audio smoke test.
 - [ ] T11 Release kit: performance and size pass, bug bash, icon, portal thumbnails, store texts en/id (title, short + long description), docs/privacy.md, docs/RELEASE.md (steps for Oz per portal), Android export preset ready for later, final HANDOFF.md.
   - Applied the T10 QC follow-up and implemented the release kit, browser playthrough, and CI capture for store videos. Raw Web export 41.09 MB. The 393×851 touch profile on software rendering still misses the frame-time target. Verify a physical mid-range phone before closing T11.
+- [ ] T11b Portal compliance: make Web QA deterministic, implement Playgama required SDK steps, and deploy green main Web builds to GitHub Pages.
+  - Fixed run #25, added browser and SDK regression checks, and wired Pages deployment. Verify the first green main deployment after merge.
 - [ ] T12 Content v1.1: 300 nonogram levels up to 15x15 with zoom/pan, 365 daily puzzles, difficulty curve, a new small mechanic every 10–15 levels.

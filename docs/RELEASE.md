@@ -37,7 +37,7 @@ Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → 
 
 - [ ] Moon 01 terbuka langsung di sesi baru. Muat ulang setelah menang memperlihatkan menu dan progres yang sama. Ulang di potret, lanskap, dan jendela persegi.
 - [ ] Cek sinyal `game_ready` dan gameplay, pilihan bahasa, suara saat pindah tab, serta kasus iklan berhasil, gagal, dan ditutup. Banner harus hilang di potret dan di bawah 600 CSS px.
-- [ ] Konfirmasi persyaratan moderasi dengan Playgama. Build ini menyimpan progres di browser melalui Godot. Dokumentasi Playgama saat diperiksa mewajibkan Bridge Storage, bahasa dan state audio/pause dari Bridge, serta pengaturan jeda iklan melalui Bridge. Aturan proyek tetap memakai save browser dan batas iklan yang tercatat di AGENTS.md. Jika Playgama mewajibkan perubahan, simpan sebagai draf dan teruskan hasil QA ke Oz sebelum submit.
+- [ ] Cek bahwa Bridge Storage memulihkan progres setelah reload dan memilih bahasa portal hanya jika pemain belum memilih bahasa. Cek status mute/pause portal, pindah tab, dan jeda interstitial 90 detik di Bridge.
 - [ ] Setelah QA Tool dan persyaratan di atas beres, pilih **Submit Game**.
 
 [Panduan unggah Playgama](https://wiki.playgama.com/playgama/submitting-a-game) · [Langkah wajib Bridge](https://wiki.playgama.com/playgama/bridge-sdk/api#required-steps) · [Self-check Playgama](https://wiki.playgama.com/playgama/game-requirements/game-self-check)
@@ -66,7 +66,7 @@ Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → 
 
 **Cek sebelum submit**
 
-- [ ] Dapatkan konfirmasi dari GameDistribution bahwa build boleh berjalan tanpa preroll. Adapter Bridge v2.4.4 memanggil interstitial pada `SDK_READY` saat Game ID diisi. Tahan pengajuan sampai QA portal membuktikan tidak ada interstitial sebelum level 10 dan sebelum dua menit sesi.
+- [ ] Dapatkan konfirmasi dari GameDistribution bahwa build boleh berjalan tanpa preroll. Adapter Bridge v2.4.4 memanggil interstitial pada `SDK_READY` saat Game ID diisi. Tahan pengajuan sampai QA portal mengonfirmasi interstitial diajukan pada jeda hasil, dengan pacing yang dikelola Bridge.
 - [ ] SDK terhubung dengan Game ID yang benar. Banner hilang di potret dan di viewport sempit. Rewarded memberi hadiah sekali setelah selesai. Audio dan input pulih saat iklan tutup.
 - [ ] Uji sesi baru, muat ulang save, potret serta lanskap, bahasa Inggris, dan tiadanya tautan keluar yang dilarang. Semua thumbnail sesuai ukuran. Kirim ke QA setelah cek lulus.
 

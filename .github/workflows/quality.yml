@@ -143,3 +143,29 @@ jobs:
           name: velokity-store-videos
           path: build/store-videos/*.mp4
           if-no-files-found: error
+
+  publish-pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [web, qa-screenshots]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      queue: max
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: velokity-web
+          path: build/web/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/web/
+      - uses: actions/deploy-pages@v5
+        id: deployment
