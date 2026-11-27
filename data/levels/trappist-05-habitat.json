@@ -1,0 +1,30 @@
+{
+  "id": "trappist-05-habitat",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "........aaa..",
+    "...aaa..aaa..",
+    "..addaccddaa.",
+    "..addaddadaa.",
+    "..aaaaddaaaa.",
+    "......ccaaa..",
+    ".........a...",
+    ".............",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Habitat Modules",
+    "id": "Modul Hunian"
+  }
+}

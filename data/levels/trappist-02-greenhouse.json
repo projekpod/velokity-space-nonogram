@@ -1,0 +1,30 @@
+{
+  "id": "trappist-02-greenhouse",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "....aaaa.....",
+    "...aaaaaa....",
+    "..aaaaaaaa...",
+    "..aaaaaaaa...",
+    ".bbdaaaadb...",
+    ".bbddddddb...",
+    ".bbddddddb...",
+    ".bbbbbbbbb...",
+    ".cccccccccc..",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Moon Greenhouse",
+    "id": "Rumah Kaca Bulan"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "trappist-17-aurora",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "....c........",
+    "...cccc.cc...",
+    ".cc..cccc....",
+    "........a....",
+    "...aa..aaa...",
+    ".aadddaaaaa..",
+    ".aaaadddaaa..",
+    ".abbbbbbbba..",
+    "....aaaaaaa..",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Aurora Horizon",
+    "id": "Cakrawala Aurora"
+  }
+}

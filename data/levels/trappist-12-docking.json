@@ -1,0 +1,30 @@
+{
+  "id": "trappist-12-docking",
+  "size": 13,
+  "solution": [
+    ".............",
+    "....bbb......",
+    ".....d.......",
+    "...aaaaa.....",
+    "cccaaaaa.....",
+    "cccadddabdd..",
+    "cccaddda.dd..",
+    "...aaaaa.cc..",
+    ".............",
+    ".............",
+    ".............",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Docking Craft",
+    "id": "Wahana Sandar"
+  }
+}

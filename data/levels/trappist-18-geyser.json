@@ -1,0 +1,30 @@
+{
+  "id": "trappist-18-geyser",
+  "size": 13,
+  "solution": [
+    ".............",
+    "..d....dd....",
+    "..ddcccd.....",
+    "...ddcc......",
+    ".....dd......",
+    ".....aa......",
+    ".....aa......",
+    ".....aa......",
+    "..bbbaabb....",
+    ".bbbbaabbb...",
+    "bbbbbbbbbbb..",
+    "..bbbbbbbb...",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Ice Geyser",
+    "id": "Semburan Es"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "trappist-11-drill",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "....aaa......",
+    "....dddd.....",
+    "....aaa.d....",
+    "....aaabd....",
+    "....aab......",
+    "....acc......",
+    "...bbccbb....",
+    "..bbbcbbbb...",
+    "...bbbbbb....",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Asteroid Drill",
+    "id": "Bor Asteroid"
+  }
+}

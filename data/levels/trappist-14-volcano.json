@@ -1,0 +1,30 @@
+{
+  "id": "trappist-14-volcano",
+  "size": 13,
+  "solution": [
+    ".............",
+    "......c......",
+    "......cc.....",
+    "......c......",
+    "....aa.da....",
+    "....aaada....",
+    "...aaadaaa...",
+    "...aaddaaaa..",
+    "..aaadaaaaaa.",
+    ".aaaadaaaaaa.",
+    ".aabbbbbbaaa.",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Shield Volcano",
+    "id": "Gunung Api Perisai"
+  }
+}

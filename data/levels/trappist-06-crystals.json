@@ -1,0 +1,30 @@
+{
+  "id": "trappist-06-crystals",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    "......b......",
+    ".....ba......",
+    "..d..aaa.b...",
+    "..d.baaa.b...",
+    "..ddbaaabb...",
+    "..bddaaabbb..",
+    "..bddaaabbb..",
+    "..bbbbbbbbb..",
+    ".............",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Crystal Outcrop",
+    "id": "Singkapan Kristal"
+  }
+}

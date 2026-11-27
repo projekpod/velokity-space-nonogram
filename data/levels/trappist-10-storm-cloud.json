@@ -1,0 +1,30 @@
+{
+  "id": "trappist-10-storm-cloud",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    ".....aaaa....",
+    "...aaaaaaab..",
+    "..aaaaaaaabb.",
+    ".aaaaaaaaabb.",
+    ".aaddddddddd.",
+    "..addddbbdd..",
+    "...aacc......",
+    ".....ccc.....",
+    "......c......",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Storm Cloud",
+    "id": "Awan Badai"
+  }
+}

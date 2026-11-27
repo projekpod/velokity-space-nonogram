@@ -1,0 +1,30 @@
+{
+  "id": "trappist-20-ice-flake",
+  "size": 13,
+  "solution": [
+    ".............",
+    "...a....a....",
+    "...aa..aa....",
+    "....aa.aa....",
+    "....adda.....",
+    ".aaadccdaaaa.",
+    "aaaadccdaaaa.",
+    "....adda.....",
+    "....aa.aa....",
+    "...aa...a....",
+    "...a....aa...",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Ice Flake",
+    "id": "Keping Es"
+  }
+}

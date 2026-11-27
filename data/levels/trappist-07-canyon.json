@@ -1,0 +1,30 @@
+{
+  "id": "trappist-07-canyon",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    ".............",
+    ".........aa..",
+    "........aaa..",
+    "aaa....daaa..",
+    "aaaa..ddaaa..",
+    "aaaaaddaaaa..",
+    ".aaadaaaaa...",
+    ".abbbbbbbb...",
+    ".aaaaaaaaa...",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Canyon Wall",
+    "id": "Dinding Ngarai"
+  }
+}

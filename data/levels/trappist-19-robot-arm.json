@@ -1,0 +1,30 @@
+{
+  "id": "trappist-19-robot-arm",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".....b.......",
+    "....bbbaa....",
+    "..cbbbbaaaa..",
+    "...c....aaa..",
+    "...c....aa...",
+    ".......aaa...",
+    ".......aa....",
+    "......daa....",
+    "....bbdadbbb.",
+    "....bbbbbbbb.",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Robot Arm",
+    "id": "Lengan Robot"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "trappist-09-launch-rocket",
+  "size": 13,
+  "solution": [
+    ".............",
+    "....a........",
+    "....aa.......",
+    "....aaa......",
+    "....dda......",
+    "....ada......",
+    "....aaaa.....",
+    "....aaaa.....",
+    "...bbaabb....",
+    "...bb.c.b....",
+    "...b..c......",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Launch Rocket",
+    "id": "Roket Peluncur"
+  }
+}

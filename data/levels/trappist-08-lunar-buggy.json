@@ -1,0 +1,30 @@
+{
+  "id": "trappist-08-lunar-buggy",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "......aa.....",
+    "...aaaaaa....",
+    "...adddda....",
+    ".baaaaaaaab..",
+    ".ccaaaaaacc..",
+    ".bbbbbbbbbb..",
+    ".baabbbbaab..",
+    "..cc....cc...",
+    "..aa....aa...",
+    "............."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Lunar Buggy",
+    "id": "Buggy Bulan"
+  }
+}
