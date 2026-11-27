@@ -37,12 +37,14 @@
 2. `godot --headless -s res://tests/run_tests.gd` — all tests pass. Write tests for every rule (clues, solver, lives, save, economy, daily selection, Star Battle validator).
 3. `python3 tools/check_levels.py` — every nonogram and daily puzzle has exactly one solution.
 4. Web export with preset "Web" succeeds; report the total size.
-5. No secrets, no paid dependencies, no new warnings.
+5. `node --test .github/autopilot/*.test.mjs` — the Autopilot decision and workflow tests pass.
+6. No secrets, no paid dependencies, no new warnings.
 
 ## Workflow
 - Start every task by reading AGENTS.md, ROADMAP.md and HANDOFF.md. Read other files selectively; do not re-read the whole repo.
 - Do ROADMAP tasks in order and tick a checkbox only when its acceptance criteria are met.
-- Small, clear commits.
-- Do not try to open pull requests through the GitHub API. Push the work to a branch named codex/<task-id>-<short-name> and end your reply with the exact branch name; Oz opens and merges the PR after Claude's review.
+- Small, clear commits. Run every local quality gate before each push.
+- Before your final reply, wait for the latest **Quality gates** run on the pushed branch to finish green. If it fails, fix the failure, rerun the local gates, push, and check the new run. Include the successful run number in your final reply.
+- Push to a branch named codex/<task-id>-<short-name> and end your reply with the exact branch name. Don’t open pull requests through the GitHub API during a coding task. Oz opens the PR or activates Autopilot to open drafts, and merges after Claude’s review.
 - Before finishing, or when close to your limits, update HANDOFF.md: state, what works, what is broken, exact commands, next 3 steps.
 - Never weaken CI checks or delete tests to make them pass.
