@@ -22,6 +22,7 @@ Urutan rilis Web adalah **itch.io → Playgama → CrazyGames Basic Launch → G
 
 - [ ] Launcher membuka Moon 01 di browser baru. Panduan bisa dilewati dan menu muncul setelah puzzle pertama.
 - [ ] Sentuhan, suara setelah input, dan save setelah muat ulang bekerja di pratinjau. Cek potret dan lanskap.
+- [ ] Saat Bridge melaporkan platform `mock` tanpa dukungan iklan, tombol iklan tidak tampil di puzzle, panel menang/kalah, atau toko. Tombol **Traktir Velokity** di menu membuka URL Trakteer yang dikonfigurasi.
 - [ ] Cover, screenshot, teks EN/ID, privasi, dan tautan Traktir tampil di halaman publik.
 
 [Dokumentasi unggah dan embed itch.io](https://itch.io/docs/creators/html5) · [Pengaturan halaman itch.io](https://itch.io/docs/creators/getting-started)

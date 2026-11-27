@@ -1,6 +1,6 @@
 # Handoff — Velokity Release Refresh v1.1
 
-Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR #15. T15 masih terbuka. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR #15. T15 selesai. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
 
 ## T15 · Bagian 1 selesai
 
@@ -13,7 +13,13 @@ Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR
 
 - Empat PNG 720×1280 di `docs/store/` menampilkan zoom papan Twin Worlds 15×15, tip Sel Terungkap, Velokity menahan papan retak, dan Savannah Legendaris. PNG terbesar 168.249 byte.
 - Preview 1920×1080 dan 1080×1620 masing-masing berdurasi 15,27 detik. Web QA membuka papan Twin Worlds dari katalog dengan sebagian baris terisi. Chromium merekam 21 isian lewat klik biasa, kombo, dan gambar berwarna setelah menang. CI menerbitkan kedua MP4 dalam artefak `velokity-store-videos`.
-- Gate lokal lulus dan ekspor Web mentah 41.412.535 byte. Kedua video serta keempat PNG dihasilkan dan diperiksa secara lokal. Verifikasi ZIP itch.io dengan Bridge mock masih terbuka.
+- Gate lokal dan Quality gates #61 lulus. Kedua video serta keempat PNG dihasilkan dan diperiksa.
+
+## T15 · Bagian 3 selesai
+
+- Chromium memakai SDK Bridge yang disertakan di build. Platform `mock` melaporkan rewarded, interstitial, dan banner tidak tersedia. Tombol iklan tersembunyi pada puzzle, panel kalah/menang, dan toko. Gameplay lanskap juga berjalan tanpa banner.
+- `velokity-itch.zip` diuji setelah diekstrak dan dimuat di iframe lokal. Tombol Traktir di build rilis membuka URL yang dikonfigurasi. Pengujian mencegat permintaan tautan agar tidak membuka situs pembayaran. Pembaruan halaman itch.io menunggu review dan merge.
+- Gate lokal lulus dengan 592 pemeriksaan Godot, 18 tes Python, 13 tes Node, validator, dan kedua ekspor Web. Web rilis berukuran 41.412.535 byte dan ZIP itch.io 11.198.065 byte. CI mengulangi uji ZIP melalui `.github/qa/itch-check.mjs`.
 
 ## T14 · Bagian 0 selesai
 
@@ -147,6 +153,7 @@ godot --headless --export-release 'Web QA' build/web-qa/index.html
 python3 tools/report_web_size.py build/web
 python3 tools/report_web_size.py build/web-qa
 python3 tools/package_itch.py build/web build/velokity-itch.zip
+python3 -m zipfile -e build/velokity-itch.zip build/itchio
 git diff --check origin/main
 npm --prefix .github/qa ci
 (cd .github/qa && npx playwright install chromium)
@@ -160,6 +167,7 @@ node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
 node .github/qa/capture.mjs http://127.0.0.1:8765/ build/t14-qa twists
 node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
+node .github/qa/itch-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/t15-store gameplay
 node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
@@ -167,6 +175,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Uji ZIP itch.io di iframe lokal dengan Bridge mock. Periksa kontrol iklan dan tautan Traktir.
-2. Jalankan gate lokal, tandai T15 selesai, push, lalu tunggu Quality gates hijau.
-3. Oz review MP4 dan screenshot dari commit yang sama sebelum memperbarui halaman itch.io.
+1. Oz review screenshot dan dua MP4 dari Quality gates terbaru, lalu tangani PR dan merge T15.
+2. Perbarui halaman itch.io dengan ZIP build dari run yang hijau dan ulangi cek di pratinjau portal.
+3. Lanjutkan T11 dengan uji performa, audio, dan zoom sentuh di ponsel kelas menengah.

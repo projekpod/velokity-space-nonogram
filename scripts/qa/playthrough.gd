@@ -74,6 +74,9 @@ func _process(delta: float) -> void:
 		_add_button(state.buttons, button, button.text)
 		if button.is_visible_in_tree():
 			state.visibleButtons.append(button.text)
+	if is_instance_valid(main._support_button) and main._support_button.is_visible_in_tree():
+		_add_button(state.buttons, main._support_button, "MENU_SUPPORT")
+		state.visibleButtons.append("MENU_SUPPORT")
 	_document.documentElement.setAttribute("data-velokity-playthrough", JSON.stringify(state))
 
 

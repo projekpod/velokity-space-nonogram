@@ -118,6 +118,10 @@ jobs:
         with:
           name: velokity-web-qa
           path: build/web-qa/
+      - uses: actions/download-artifact@v8
+        with:
+          name: velokity-itch
+          path: build/
       - name: Install Playwright and Chromium
         working-directory: .github/qa
         run: |
@@ -143,6 +147,8 @@ jobs:
           node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
           node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
           node .github/qa/release-check.mjs http://127.0.0.1:8765/
+          python3 -m zipfile -e build/velokity-itch.zip build/itchio
+          node .github/qa/itch-check.mjs http://127.0.0.1:8765/
           node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
       - uses: actions/upload-artifact@v6
         with:
