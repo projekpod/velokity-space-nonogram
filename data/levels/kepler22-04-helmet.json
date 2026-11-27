@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-04-helmet",
+  "size": 14,
+  "solution": [
+    "..............",
+    ".....aaaaa....",
+    "....aaaaaaa...",
+    "....aaddddaa..",
+    "....accdddba..",
+    "...aadddddba..",
+    "....abdddbba..",
+    "....abbbbbaa..",
+    "....aaaaaadd..",
+    ".....abbbbdb..",
+    "......bbbbbb..",
+    "......bb......",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Astronaut Helmet",
+    "id": "Helm Astronaut"
+  }
+}

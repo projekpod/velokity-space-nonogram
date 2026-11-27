@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-01-sample-tube",
+  "size": 14,
+  "solution": [
+    "....bbbbbbb...",
+    "....bbbbbbb...",
+    "....bbbbbbb...",
+    "....bbbbbbb...",
+    ".....dddda....",
+    ".....dddda....",
+    ".....dccda....",
+    ".....dccda....",
+    ".....dccda....",
+    ".....aaaaa....",
+    ".....aaaaa....",
+    ".....aaaa.....",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Sample Tube",
+    "id": "Tabung Sampel"
+  }
+}

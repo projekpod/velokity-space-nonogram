@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-11-oxygen-pack",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..............",
+    "........bb....",
+    "....bb..bbb...",
+    "....bbb.baa...",
+    "...bbaaaadab..",
+    "....aaddddab..",
+    "....badcdddb..",
+    "....baddaaaa..",
+    "....baaaaaaa..",
+    ".....aaa.ccb..",
+    ".....bbbcc....",
+    "......dd......",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Oxygen Pack",
+    "id": "Tabung Oksigen"
+  }
+}

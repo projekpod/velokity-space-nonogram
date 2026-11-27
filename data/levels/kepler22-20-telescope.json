@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-20-telescope",
+  "size": 14,
+  "solution": [
+    "..ddddd.......",
+    ".ddddddd......",
+    "..dddddda.....",
+    "...dddddaa....",
+    ".....dbaaaaa..",
+    "......cbabba..",
+    ".....bcbabb...",
+    "....bbcb.bb...",
+    "...bb.cbb.....",
+    "...b..c.b.....",
+    "..bb.c..b.....",
+    "..b..c...b....",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Telescope",
+    "id": "Teleskop"
+  }
+}

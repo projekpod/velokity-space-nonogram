@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-15-crescent",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..............",
+    ".....aaaa.....",
+    "....aaaa......",
+    "...aaaa.......",
+    "..aaaa........",
+    "..aacc........",
+    "..accc........",
+    "..accc........",
+    "..accca.......",
+    "..acccaa......",
+    "...ccaaaaaa...",
+    "....aaaaa.....",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Crescent Moon",
+    "id": "Bulan Sabit"
+  }
+}

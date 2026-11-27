@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-12-spacesuit-glove",
+  "size": 14,
+  "solution": [
+    "..............",
+    "......a.......",
+    ".....aa.aa....",
+    ".....aa.aa....",
+    "..a..aaaaaa...",
+    ".aaa.aaaaaa...",
+    "..aaaaddaaa...",
+    "...aaddddaa...",
+    "...aaddddaa...",
+    "...aaaddaa....",
+    "...abbbbba....",
+    "..............",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Suit Glove",
+    "id": "Sarung Tangan Astronaut"
+  }
+}
