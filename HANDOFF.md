@@ -1,6 +1,6 @@
 # Handoff — Velokity Content v1.1
 
-Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. T13 dibuka kembali untuk menindaklanjuti review Claude. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. Tindak lanjut review Claude selesai dan T13 ditandai tuntas. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
 
 ## Review T13 · Gambar album
 
@@ -9,6 +9,12 @@ Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. 
 - Setiap planet baru memiliki tiga ukuran berturut-turut, dengan 6, 8, lalu 6 level per ukuran. Median ambiguitas petunjuk naik antarukuran dan antarplanet. `tools/check_levels.py` memeriksa cakupan, baris dan kolom kosong, pengulangan gambar atau motif, dan progresi ukuran serta membuktikan satu solusi per papan.
 - Sumber `art/levels_src/*.txt` untuk planet baru memakai header `slug-id-lama|judul-en|judul-id|motif`, diikuti kisi persegi. Gunakan ID motif yang sama untuk varian dari gambar yang sama. Jalankan `python3 tools/build_levels.py` untuk memperbarui JSON.
 - Gate lokal lulus dengan 549 pemeriksaan Godot, 17 tes Python, 12 tes Node, dan ekspor Web serta Web QA. Web mentah 41.385.139 byte. Chromium memperbarui 12 PNG di `docs/qa/` dari build Web QA. PNG terbesar 141.069 byte. Ulangi pengambilan dengan perintah tangkapan album di bawah setelah mengubah gambar.
+
+## Review T13 · Deploy Pages
+
+- **Quality gates** dapat dipicu manual. Job `publish-pages` berjalan setelah gate Web dan Chromium lulus pada push atau dispatch dari `main`.
+- Upload dan deploy menggunakan nama artefak `github-pages-${{ github.run_attempt }}`. Setelah percobaan deploy gagal, job menunggu 30 detik dan mencoba sekali lagi dengan nama yang sama. Kegagalan pada percobaan kedua membuat job gagal.
+- YAML dan persyaratan input kedua action Pages sudah diperiksa. Uji deploy dari **Actions → Quality gates → Run workflow → main** setelah merge, lalu buka URL Pages di bawah.
 
 ## T13 · Bagian 3 selesai
 
@@ -82,7 +88,7 @@ Run #25 gagal saat reload terakhir. Predikat asinkron `waitForFunction` dianggap
 
 https://projekpod.github.io/velokity-space-nonogram/
 
-Job `publish-pages` mengunduh artefak Web rilis dari run yang sama dan menerbitkannya setelah job `web` dan `qa-screenshots` lulus pada push ke `main`. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Cek status job dan buka URL di atas setelah merge pertama. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
+Job `publish-pages` mengunduh artefak Web rilis dari run yang sama. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
 
 ## Pemeriksaan T11b
 
@@ -132,6 +138,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Terapkan dispatch manual dan retry deploy Pages, lalu jalankan kembali Quality gates sebelum menutup T13.
-2. Oz review album, hasil Quality gates, dan PR T13.
-3. Lanjutkan T14 setelah review T13. Uji audio, zoom, dan performa ponsel kelas menengah untuk T11 dan T11b.
+1. Oz review album dan run Quality gates terbaru pada `codex/t13-content-v11`, lalu tangani PR dan merge T13.
+2. Jalankan Quality gates manual dari `main` dan periksa deployment Pages.
+3. Lanjutkan T14. Uji audio, zoom, dan performa ponsel kelas menengah untuk T11 dan T11b.
