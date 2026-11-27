@@ -2,18 +2,18 @@
   "id": "earth-09-canyon",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "........aaa.",
-    "........aaa.",
-    ".aaa...daaa.",
-    ".aaaa.daaaa.",
-    ".aaaadaaaaa.",
-    ".aaadaaaaaa.",
-    "..bbbbaaaa..",
-    "............",
-    "............"
+    "...bbbbbccc.",
+    "..aabbbccb..",
+    ".aaacccbbba.",
+    "aaccbbbbaaa.",
+    "bbbbbbbaaaaa",
+    "bddddddbaaaa",
+    "abbbbbbbaaaa",
+    "aabbbbbbaaaa",
+    "aaaddbbabaa.",
+    ".aabbddabaa.",
+    "..aabbaaaa..",
+    "....baaa...."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Canyon Wall",
-    "id": "Dinding Ngarai"
-  }
+    "en": "Africa and Europe",
+    "id": "Afrika dan Eropa"
+  },
+  "motif": "africa-europe"
 }

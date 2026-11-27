@@ -1,19 +1,20 @@
 {
   "id": "jupiter-11-drill",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "...dddd.....",
-    "...dddd.....",
-    ".ddaaa......",
-    "..dbba......",
-    "...aaa......",
-    "...acc......",
-    ".bbbccbbb...",
-    ".bbbcbbbb...",
-    "............",
-    "............"
+    ".ccc.........",
+    "ddccc.....d..",
+    "cdddccc.ddddd",
+    "cccddccdddddd",
+    "ccccdddaaaadd",
+    ".cccdddaaaadd",
+    "..ccddddddddd",
+    "....bddddd...",
+    "...bbddddb...",
+    "...bbbbbdb...",
+    "..bbbbbbbdb..",
+    "..bbbbbbbdb..",
+    "........bbd.."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Asteroid Drill",
-    "id": "Bor Asteroid"
-  }
+    "en": "Europa Clipper",
+    "id": "Wahana Europa Clipper"
+  },
+  "motif": "europa-clipper"
 }

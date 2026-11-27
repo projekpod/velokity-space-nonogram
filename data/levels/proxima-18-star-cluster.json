@@ -2,18 +2,18 @@
   "id": "proxima-18-star-cluster",
   "size": 12,
   "solution": [
-    "............",
-    "....d.c.....",
-    "...ddcc.....",
-    "....dcc.....",
-    "...cdaaccc..",
-    "...ccaacc...",
-    ".....cc.b...",
-    ".....ccbb...",
-    "......bbbb..",
-    "........b...",
-    "........b...",
-    "............"
+    "aaaaaaaaa...",
+    "abbbaaaaaaa.",
+    "aabbbbaaaaaa",
+    "a.bbbbbaaaaa",
+    ".dddddcaaaaa",
+    "..bbccd.....",
+    "..bbccd...cc",
+    "..bbcccdcccc",
+    "..bbbacddccc",
+    "..bbba..dccc",
+    "..bbba...dcc",
+    "..bbba.....c"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Star Cluster",
-    "id": "Gugus Bintang"
-  }
+    "en": "Subsurface Lift",
+    "id": "Lift Bawah Tanah"
+  },
+  "motif": "subsurface-lift"
 }

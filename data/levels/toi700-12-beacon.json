@@ -1,22 +1,21 @@
 {
   "id": "toi700-12-beacon",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    ".......a.......",
-    ".......cc......",
-    "......cccc.....",
-    "......dddd.....",
-    "...............",
-    ".......aa......",
-    ".......aa......",
-    ".......aa......",
-    ".....bbaabb....",
-    "...bbbbbbbbbb..",
-    "..bbbbbbbbbbbb.",
-    "...............",
-    "..............."
+    "....dddddd....",
+    "...ddccccdd...",
+    ".cccccccccdd..",
+    "cdcccccccccdd.",
+    ".dccccaaacccd.",
+    "ddcaac..aaccbb",
+    "ddcaa...cbbbd.",
+    "ddcaaa.bbbacd.",
+    ".dcaabbaaaacd.",
+    ".dcbbaaaaacdd.",
+    "..bbccaaccdd..",
+    ".bbddccccdd...",
+    "bb..dddddd....",
+    ".............."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Landing Beacon",
-    "id": "Suar Pendaratan"
-  }
+    "en": "Planet e Transit",
+    "id": "Transit Planet e"
+  },
+  "motif": "toi700-e-transit"
 }

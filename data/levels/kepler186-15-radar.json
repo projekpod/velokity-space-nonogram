@@ -1,20 +1,21 @@
 {
   "id": "kepler186-15-radar",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    "..c..........",
-    ".dcddd.......",
-    ".aacadddddd..",
-    ".aaacaaaaa...",
-    "..aacaaaaa...",
-    "...aacaaa....",
-    ".....bb......",
-    "......b......",
-    "......b......",
-    "..ccccccc....",
-    "............."
+    "aabbbbb.......",
+    "aaaabbbbbb....",
+    "aaaaaabbbbbbb.",
+    "aaaaaabbbbbbbb",
+    "daaaabbbaaabbb",
+    "ddaaabbbcaaabb",
+    "adaabbbbccaaab",
+    "addccbbbccaaaa",
+    "aadcccccccaadd",
+    "aaddccccccddda",
+    "aacddccccddaaa",
+    "aacccddcddbbbb",
+    "aaccccddabbbbb",
+    ".bbbccaaabbbbb"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +25,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Tracking Radar",
-    "id": "Radar Pelacak"
-  }
+    "en": "Crater Lake Island",
+    "id": "Pulau di Danau Kawah"
+  },
+  "motif": "crater-lake-island"
 }

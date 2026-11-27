@@ -1,21 +1,20 @@
 {
   "id": "lhs1140-04-ice-mesa",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    "......aa......",
-    ".....aaaaaa...",
-    "....aaaaaaaa..",
-    "....aaaaadda..",
-    "...aaaaaddaaa.",
-    "..aaaaddaaaaa.",
-    "..aaaddaaaaaa.",
-    "..abbbbbbbbb..",
-    "..aaaaaaaaaa..",
-    "..............",
-    ".............."
+    ".........c...",
+    "bb.....bbcc..",
+    "bbbbbbbbbbcc.",
+    "bbbbbbbbbbbbb",
+    "bbbccccbbbbbb",
+    "bbccdddccbabb",
+    ".ccdddddcaaa.",
+    "aaccddcccaaaa",
+    "aaaccccaaaaaa",
+    "aaaaaaaaaaaaa",
+    "aaaaaaaaaaaa.",
+    ".aaaaaaaddda.",
+    "...........dd"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +24,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Ice Mesa",
-    "id": "Dataran Es"
-  }
+    "en": "Deep Ocean Submersible",
+    "id": "Kapal Selam Laut Dalam"
+  },
+  "motif": "deep-sea-submersible"
 }

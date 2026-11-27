@@ -1,18 +1,17 @@
 {
   "id": "venus-03-banded-planet",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "....aaa....",
-    "..aaaaaa...",
-    "..ddddddd..",
-    ".bbbbbbbb..",
-    ".ccddcaaaa.",
-    "..bbacccc..",
-    "..abbbbbb..",
-    "....aaa....",
-    "...........",
-    "..........."
+    "aaa..c.bbb",
+    "aaaaaccbdd",
+    "aaaaaacdbb",
+    "aaaaa.cdbb",
+    "aaa..cbbbd",
+    "aaa.cbbbbb",
+    "aaac..bbbb",
+    "aaac.bbbbb",
+    "aaac.bbbbb",
+    "aacc..bbbb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +21,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Banded Planet",
-    "id": "Planet Belang"
-  }
+    "en": "Ridge and Trough",
+    "id": "Punggung dan Lembah"
+  },
+  "motif": "ridge-trough"
 }

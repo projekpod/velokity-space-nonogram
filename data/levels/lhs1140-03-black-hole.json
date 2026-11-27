@@ -1,21 +1,20 @@
 {
   "id": "lhs1140-03-black-hole",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    "..............",
-    "..bbaaabb.....",
-    "..baabbbabb...",
-    "..baccbbbaab..",
-    "...bbcbbbcaab.",
-    "....bbbbbccab.",
-    "......bbbbbbb.",
-    ".........bb...",
-    "..............",
-    "..............",
-    ".............."
+    "....ddddd....",
+    "...dddddddd..",
+    "cccccccddddd.",
+    ".dddddcccddd.",
+    ".dddcccccccdd",
+    "dddccbbbbcccd",
+    "dddcccbbccccc",
+    "ddaaaccccaadc",
+    ".daaaaaaaaaad",
+    ".daaaaaaaaaa.",
+    ".dddaaaadddd.",
+    "...ddddddaa..",
+    "....aaaaa...."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +24,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Black Hole",
-    "id": "Lubang Hitam"
-  }
+    "en": "Iris Ocean World",
+    "id": "Dunia Samudra Mirip Iris"
+  },
+  "motif": "iris-ocean-world"
 }

@@ -1,20 +1,21 @@
 {
   "id": "trappist-18-geyser",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    "..d....dd....",
-    "..ddcccd.....",
-    "...ddcc......",
-    ".....dd......",
-    ".....aa......",
-    ".....aa......",
-    ".....aa......",
-    "..bbbaabb....",
-    ".bbbbaabbb...",
-    "bbbbbbbbbbb..",
-    "..bbbbbbbb...",
-    "............."
+    "......a......c",
+    "......a....ccc",
+    ".....aad...ccc",
+    ".....add..bccc",
+    ".a...add.bbccc",
+    ".aa.aadddbbccc",
+    "..aaadddddbccc",
+    "a..aadddddbccc",
+    "aaaaa.ddddbccc",
+    "aaa..dddddbccc",
+    "aaaabbddddbccc",
+    "aaaabbddddbccc",
+    "aaaabbddddbccb",
+    "aaaabbdbbbbcbb"
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Ice Geyser",
-    "id": "Semburan Es"
-  }
+    "en": "Basalt Organ Pipes",
+    "id": "Pilar Basalt"
+  },
+  "motif": "basalt-organ-pipes"
 }

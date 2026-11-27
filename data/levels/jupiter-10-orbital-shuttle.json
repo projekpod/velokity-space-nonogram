@@ -1,19 +1,20 @@
 {
   "id": "jupiter-10-orbital-shuttle",
-  "size": 12,
+  "size": 13,
   "solution": [
-    ".....a......",
-    ".....a......",
-    ".....dd.....",
-    "....adda....",
-    "....adda....",
-    "....badab...",
-    "....baaabb..",
-    "...bbaaabb..",
-    "...bb.aabb..",
-    "......cc....",
-    "............",
-    "............"
+    "aaaaaaaa.....",
+    "cccaaaaaaa...",
+    "accccaacccccc",
+    "aaaaccccccccc",
+    "aaaaaccaaaaaa",
+    "aaaaaaaa.aaaa",
+    "aaaaaddd....a",
+    "ddddddddddddd",
+    "dddddbbdddddd",
+    "bbbbbbbbbbbbb",
+    "bbbbbbbbbbbbb",
+    "bbbbbbbbbbbbb",
+    "b.....bbbb..."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Orbital Shuttle",
-    "id": "Pesawat Ulang Alik"
-  }
+    "en": "Jovian Cloud Stack",
+    "id": "Lapisan Awan Jupiter"
+  },
+  "motif": "jovian-cloud-stack"
 }

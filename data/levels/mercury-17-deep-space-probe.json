@@ -1,18 +1,19 @@
 {
   "id": "mercury-17-deep-space-probe",
-  "size": 11,
+  "size": 12,
   "solution": [
-    ".c.........",
-    ".cc........",
-    "...........",
-    "...c.......",
-    ".b..addab..",
-    "..baaddabb.",
-    "...aaaaabb.",
-    "....bbbbbb.",
-    "...bbbb....",
-    "...........",
-    "..........."
+    "baaaaaaaaaa.",
+    "bba.....aaa.",
+    "bbb......aa.",
+    "bbaaaaa..aaa",
+    "bb.....b.aaa",
+    "bbbd...bbaaa",
+    "bbbbdddabbaa",
+    "bbbbbbaaabaa",
+    "bbbbbaaaabaa",
+    "bbbbbaaaabaa",
+    "bbbbaaaabaaa",
+    "............"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +23,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Deep Space Probe",
-    "id": "Wahana Antariksa Jauh"
-  }
+    "en": "Ghost Crater",
+    "id": "Jejak Kawah Purba"
+  },
+  "motif": "ghost-crater"
 }

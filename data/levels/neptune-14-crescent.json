@@ -2,18 +2,18 @@
   "id": "neptune-14-crescent",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "....aa......",
-    "...aaa......",
-    "...aaa......",
-    "..aacc......",
-    "..aacc......",
-    "...accaa.a..",
-    "...accaaaa..",
-    ".....caa....",
-    "............",
-    "............"
+    "..d.........",
+    ".ddd..d.....",
+    "ddddddd.....",
+    ".dddddd.....",
+    "..dbbd......",
+    "...bdcd..ddd",
+    "..dddcddd...",
+    ".d..bbdd....",
+    ".d...dddb...",
+    "dd...ddd....",
+    "d....d.ddd..",
+    "........dd.."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Crescent Moon",
-    "id": "Bulan Sabit"
-  }
+    "en": "Voyager 2",
+    "id": "Wahana Voyager 2"
+  },
+  "motif": "voyager-two"
 }

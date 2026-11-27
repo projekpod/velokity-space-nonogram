@@ -2,18 +2,18 @@
   "id": "uranus-10-drill",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....dddd....",
-    "....ddddd...",
-    ".....aabdd..",
-    ".....aaa....",
-    ".....cca....",
-    "..bbbccbbb..",
-    "..bbbbcbbb..",
-    "............",
-    "............"
+    "..ccccccc...",
+    ".cddccccccc.",
+    ".cccddddddc.",
+    "ccccccccccdd",
+    "bbcccccccccc",
+    "baaaacccaaab",
+    "aaaaaaaaaaaa",
+    "aaaaaaaadaaa",
+    "baaaaaaddaa.",
+    ".ddddddabbb.",
+    "..bbbbbbbb..",
+    "...bbbbbb..."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Asteroid Drill",
-    "id": "Bor Asteroid"
-  }
+    "en": "Polar Hood",
+    "id": "Selubung Awan Kutub"
+  },
+  "motif": "uranus-polar-hood"
 }

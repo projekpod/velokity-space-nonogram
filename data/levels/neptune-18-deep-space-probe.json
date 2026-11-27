@@ -1,19 +1,20 @@
 {
   "id": "neptune-18-deep-space-probe",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "cc..........",
-    "...caddabb..",
-    ".bbaaddabb..",
-    "...aaaaabb..",
-    "....bbb.b...",
-    "...bbbbb....",
-    "...b........",
-    "............"
+    "....cccccbb..",
+    "..ccccdccbb..",
+    ".cc.dddd.bcc.",
+    ".c..dddddbcc.",
+    "cc..dddddb.cc",
+    "cc.addddbb.cc",
+    "c..aadddbd..c",
+    "c..aaddbddd.c",
+    "cc.aadbbdddcc",
+    "ccbbbbbddddc.",
+    "cccb..a.ddcc.",
+    "ccccc...ccc..",
+    "cc..ccccc...."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +24,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Deep Space Probe",
-    "id": "Wahana Antariksa Jauh"
-  }
+    "en": "Triton Orbital Path",
+    "id": "Orbit Triton"
+  },
+  "motif": "triton-orbit"
 }

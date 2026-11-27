@@ -1,19 +1,20 @@
 {
   "id": "uranus-15-lunar-lander",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "....aaaa....",
-    "...aaddaa...",
-    "...aaddda...",
-    "...aaadaa...",
-    "..aababaa...",
-    "...bcccba...",
-    "..bb.ccbb...",
-    ".cc.....b...",
-    "........cc..",
-    "............",
-    "............"
+    "....bbbb.....",
+    "..bbbbbbbb...",
+    ".bbbbbbbbbb..",
+    ".bbbbbbbbbbb.",
+    "bbbbbbbbbbbb.",
+    "bbabadddddbb.",
+    "dabacccddddbb",
+    "dbbccccdddddb",
+    "ddccccddddddd",
+    "ddcccdddddddd",
+    "dccccdddddddd",
+    ".cccddddddddd",
+    "..ddddddddd.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +24,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Lunar Lander",
-    "id": "Pendarat Bulan"
-  }
+    "en": "Oberon Central Peak",
+    "id": "Puncak Kawah Oberon"
+  },
+  "motif": "oberon-central-peak"
 }

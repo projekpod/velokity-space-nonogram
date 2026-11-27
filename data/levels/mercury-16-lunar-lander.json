@@ -1,18 +1,19 @@
 {
   "id": "mercury-16-lunar-lander",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "....aaaa...",
-    "....aadda..",
-    "...aaddda..",
-    "...aaaaaa..",
-    "...abaaba..",
-    "...b.ccbb..",
-    "..b.....b..",
-    "..c......b.",
-    ".........b.",
-    "..........."
+    ".d.......daa",
+    ".daaadaaadaa",
+    ".daaaaaaadaa",
+    ".daaaaaaadaa",
+    ".daaaaaaadaa",
+    ".dbaadc..d..",
+    ".dbbdccccccc",
+    ".dbccdbbbccc",
+    ".dccbbbbbbbb",
+    ".dcbbbbbbbb.",
+    "ccbbbbbbb...",
+    ".....bb....."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +23,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Lunar Lander",
-    "id": "Pendarat Bulan"
-  }
+    "en": "Heat Radiator",
+    "id": "Radiator Panas"
+  },
+  "motif": "heat-radiator"
 }

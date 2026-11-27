@@ -2,21 +2,21 @@
   "id": "toi700-17-geyser",
   "size": 15,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "..dd..c.dd.....",
-    "..dddcccd......",
-    "....dddd.......",
-    "......d........",
-    "......aa.......",
-    "......aa.......",
-    "......aa.......",
-    "..bbbbaabb.....",
-    ".bbbbbaabbbb...",
-    "bbbbbbbbbbbbb..",
-    "..bbbbbbbbb....",
-    "..............."
+    ".............d.",
+    "ccc..........dd",
+    "cccccc......dd.",
+    "ccccccccc..dd..",
+    "ccccccccccddd..",
+    "cccccccccdddbb.",
+    "ccccccccdddccb.",
+    "ccccccccddcccc.",
+    "bccccccccbbabb.",
+    "bccdddddbbaaa..",
+    "bbccddddaaaaa..",
+    "bbbcccaaaaaaaa.",
+    ".bbaaaaaaaaaaa.",
+    "..aaaaaaaaaaaa.",
+    ".aaaaaaaaaaaaa."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Ice Geyser",
-    "id": "Semburan Es"
-  }
+    "en": "Far-Side Observatory",
+    "id": "Observatorium Sisi Jauh"
+  },
+  "motif": "far-side-observatory"
 }

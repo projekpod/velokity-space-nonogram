@@ -2,18 +2,18 @@
   "id": "uranus-14-survey-rover",
   "size": 12,
   "solution": [
-    "....c.......",
-    "....b.......",
-    "....baaa....",
-    "...addaa....",
-    "..badddaa...",
-    ".baaaaaaa...",
-    ".bbbaaaaa...",
-    ".aababbbb...",
-    ".aa.c..cb...",
-    "....a..c....",
-    "............",
-    "............"
+    "..cd.cc.....",
+    "...cdddc....",
+    "...cc.dcc...",
+    "..aacaadaa..",
+    ".abbcbbddba.",
+    "abbbcbbbdbba",
+    "aabbbcbbddaa",
+    ".aaaacaaada.",
+    "..aaacaaad..",
+    "...ccccccd..",
+    "....cccccd..",
+    ".....cc.cc.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Survey Rover",
-    "id": "Rover Survei"
-  }
+    "en": "Epsilon Ring",
+    "id": "Cincin Epsilon"
+  },
+  "motif": "epsilon-ring"
 }

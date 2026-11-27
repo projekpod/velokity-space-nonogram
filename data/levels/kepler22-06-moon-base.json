@@ -1,21 +1,20 @@
 {
   "id": "kepler22-06-moon-base",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "....a.........",
-    "....a.........",
-    ".....aaaa.....",
-    "...aaaaaaa....",
-    "...aaaaaaaa...",
-    "...aaaaaaaa...",
-    "..bbbbaaaaa...",
-    "..bbddbbbbb...",
-    "..bbdddddbb...",
-    "..bbdddddbb...",
-    ".cccccccbbb...",
-    "......ccccc...",
-    ".............."
+    "cc...bbb.c...",
+    "cc.bbbbbbcc..",
+    ".ccbaaaaacb..",
+    ".cccaaaaccbb.",
+    ".bccc...ccab.",
+    "aaacccccccab.",
+    "baaaaaaaaaaa.",
+    "bba.ddddccab.",
+    ".ba.cc..cccb.",
+    ".bbccc..accb.",
+    "..bccaaaabcc.",
+    "..ccbbbbbbccc",
+    "..cc.bbb...cc"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +24,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Moon Base",
-    "id": "Pangkalan Bulan"
-  }
+    "en": "Pelagic Research Wheel",
+    "id": "Roda Riset Samudra"
+  },
+  "motif": "pelagic-wheel"
 }

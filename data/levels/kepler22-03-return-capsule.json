@@ -1,21 +1,20 @@
 {
   "id": "kepler22-03-return-capsule",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    ".......aa.....",
-    "......aaaa....",
-    "......aaaa....",
-    ".....aaddda...",
-    ".....adddda...",
-    "....aaaddaa...",
-    "....aaaaaaaa..",
-    "....ccccccc...",
-    ".....aaaaaa...",
-    ".....bbbbb....",
-    "..............",
-    ".............."
+    "....ddddd....",
+    "...dcccccd...",
+    "..ccccccccc..",
+    ".cccccccccc..",
+    "...ccccccc...",
+    "b.......bb...",
+    "bbbbbbbccccc.",
+    "bbbbbcccccccc",
+    "bbbbcccbbaaaa",
+    "bbacddaaaaaaa",
+    "aacccadaaaaaa",
+    "ccccaaddaaaaa",
+    "bbbaaaadaabb."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +24,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Return Capsule",
-    "id": "Kapsul Pulang"
-  }
+    "en": "Sun Halo at Sea",
+    "id": "Halo Matahari di Laut"
+  },
+  "motif": "sun-halo-at-sea"
 }

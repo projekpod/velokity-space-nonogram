@@ -1,19 +1,18 @@
 {
   "id": "earth-02-dunes",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "............",
-    "....aaaa....",
-    "..aaaaaaaa..",
-    ".aaaadddaaa.",
-    ".aaadaaaaaa.",
-    "..aaaaaabba.",
-    "............",
-    "............"
+    "bbdbbbbbbaa",
+    "bbbbbbbbaaa",
+    "bbbddbbaaab",
+    "aaabbdaabbb",
+    "aaaabadbbbb",
+    "bbbaaadb...",
+    "ccbbbbbd...",
+    "bbcbbbbdd..",
+    "bbcbbbb.d..",
+    "bbbbbbccc..",
+    "bbbbbbbb..."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Dunes",
-    "id": "Bukit Pasir"
-  }
+    "en": "Amazon River",
+    "id": "Sungai Amazon"
+  },
+  "motif": "amazon-river"
 }

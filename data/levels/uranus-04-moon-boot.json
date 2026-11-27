@@ -1,19 +1,18 @@
 {
   "id": "uranus-04-moon-boot",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "......a.....",
-    "......aaa...",
-    "......ddd...",
-    ".....addd...",
-    ".....aaaa...",
-    ".....abbb...",
-    "..aaaabbb...",
-    "..cccaaaa...",
-    "....ccccc...",
-    "............"
+    ".......aa..",
+    "..aa..aaaaa",
+    ".aadddddaaa",
+    "aaddddddaaa",
+    "bbbbbaaaccb",
+    "bccccbccccb",
+    "bbccccccbb.",
+    "bbbbbbbbb..",
+    "bbbbbbbb...",
+    "bbbbbbbb...",
+    "bbbbbb....."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +22,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Moon Boot",
-    "id": "Sepatu Bulan"
-  }
+    "en": "High-Latitude Cloud",
+    "id": "Awan Lintang Tinggi"
+  },
+  "motif": "high-latitude-cloud"
 }

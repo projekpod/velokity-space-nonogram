@@ -1,20 +1,21 @@
 {
   "id": "kepler186-16-antenna",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    "...........cc",
-    "...dddddd..b.",
-    "...aaaaaddddd",
-    "....aaaaaaaa.",
-    ".....aaaaaa..",
-    "......abaa...",
-    ".......bb....",
-    "........b....",
-    "....ccccccc..",
-    ".............",
-    "............."
+    "bbbbbbccbb....",
+    "bbbbbbbccbb...",
+    "bbbbbbdccddd..",
+    "bdddddddccddb.",
+    "bdddddddccddbb",
+    "bdddddddcccdbb",
+    "bddaaaaacccbbb",
+    "ddaaaaaaccbbbb",
+    "ddaaaaaccaabbb",
+    "ddaaaacccabbbb",
+    "bbdaaaccaabbb.",
+    ".ddddccaabbbb.",
+    ".aaddddddbbd..",
+    ".....dddddddd."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +25,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Antenna Mast",
-    "id": "Tiang Antena"
-  }
+    "en": "Humidity Chamber",
+    "id": "Ruang Uji Kelembapan"
+  },
+  "motif": "humidity-chamber"
 }

@@ -2,18 +2,18 @@
   "id": "proxima-20-ice-flake",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "...a...a....",
-    "...a..aa....",
-    "...aa.a.....",
-    "....ddd.....",
-    ".aaadcdaaa..",
-    "....ddd.....",
-    "....a.a.....",
-    "...aa..a....",
-    "...a...a....",
-    "............"
+    "ddddd.......",
+    "dddddd....dd",
+    "dddddddddddd",
+    "dddddddddddd",
+    ".dddccddd...",
+    "..ccbbccc...",
+    ".....bbacc..",
+    "c....baa....",
+    "ccc...aa....",
+    "..cc.aaab...",
+    "...c.aaab...",
+    ".....aaab..."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Ice Flake",
-    "id": "Keping Es"
-  }
+    "en": "Relay Tower",
+    "id": "Menara Relai"
+  },
+  "motif": "relay-tower"
 }

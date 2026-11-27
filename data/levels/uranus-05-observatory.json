@@ -1,19 +1,18 @@
 {
   "id": "uranus-05-observatory",
-  "size": 12,
+  "size": 11,
   "solution": [
-    ".......d....",
-    "......dd....",
-    ".....dd.....",
-    "...addba....",
-    "..addabaa...",
-    ".aaaaaaaaa..",
-    ".bbbbbbbbb..",
-    ".bbbbbbbbb..",
-    ".bbbbbbbbb..",
-    ".ccccccccc..",
-    "............",
-    "............"
+    "dd...aa....",
+    "ddd.aaaa...",
+    ".dddaaaaa..",
+    "..cddbbbaa.",
+    "..ccbdbbba.",
+    "..cabbddddd",
+    "..cabbbbba.",
+    "...aabbbaa.",
+    "...aabdaa..",
+    "....abbddd.",
+    ".....bbb.dd"
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +22,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Observatory",
-    "id": "Observatorium"
-  }
+    "en": "Uranus at Solstice",
+    "id": "Uranus Saat Solstis"
+  },
+  "motif": "uranus-solstice"
 }

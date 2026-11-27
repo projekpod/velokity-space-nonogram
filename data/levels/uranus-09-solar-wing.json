@@ -2,18 +2,18 @@
   "id": "uranus-09-solar-wing",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "...aaaa.db..",
-    ".dcaadacdd..",
-    ".dccdddccdc.",
-    ".ddcdddaccc.",
-    ".bd.aaaa....",
-    "....aaa.....",
-    "....aca.....",
-    "............"
+    "aaaaaa......",
+    "aaaaaaaa....",
+    "bbbaaaaaaa..",
+    "bbbbbcccccaa",
+    "ccccccccddcc",
+    "ccccbbadaaac",
+    "aaaabbdaaaaa",
+    "aaaabdaaaaaa",
+    "aaaddbbaaabb",
+    "dddaabbaabbb",
+    "aaaaaabbbbb.",
+    "aaaaaaabb..."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Solar Wing",
-    "id": "Sayap Surya"
-  }
+    "en": "Shear Clouds",
+    "id": "Awan Berlapis Berlawanan"
+  },
+  "motif": "uranus-shear-clouds"
 }

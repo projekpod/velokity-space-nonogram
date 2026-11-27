@@ -2,21 +2,21 @@
   "id": "toi700-15-radar",
   "size": 15,
   "solution": [
-    "...............",
-    "...............",
-    "............c..",
-    "...........ccc.",
-    ".........ddcd..",
-    ".....dddddaaa..",
-    "..dddddaaacaa..",
-    "...aaaaaacaa...",
-    "....aaaacaa....",
-    "......abca.....",
-    ".......b.......",
-    ".......bb......",
-    ".......bb......",
-    "....cccccccc...",
-    "..............."
+    "acaaaaa........",
+    "acccaaacc......",
+    "aacccccccaa....",
+    "aaaaaaaaacaaa..",
+    "aaaaaaaaacaaaa.",
+    "aaaaaaaaaabbaa.",
+    "aaaaaaabbbbbbaa",
+    "bbaabbbbbbbbbba",
+    "bbbbbbbcbbbbbdd",
+    "bbbbbbcccbbbbdd",
+    "bbbbbcddddddddb",
+    "bbbddddccccdbbb",
+    "dddddccccccccb.",
+    "cccccccccccccc.",
+    "acccccccccccccc"
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Tracking Radar",
-    "id": "Radar Pelacak"
-  }
+    "en": "Night-Side Landing Lights",
+    "id": "Lampu Pendaratan Sisi Malam"
+  },
+  "motif": "night-landing-lights"
 }

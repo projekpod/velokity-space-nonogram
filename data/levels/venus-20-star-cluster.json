@@ -1,18 +1,19 @@
 {
   "id": "venus-20-star-cluster",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    ".....c.....",
-    "...d.c.....",
-    "..dddc.....",
-    "...dccc....",
-    ".ccdaacccc.",
-    "....cacb...",
-    ".....cbbb..",
-    ".....c.b...",
-    ".....c.b...",
-    "..........."
+    ".ddddddd....",
+    "ccccccccdd..",
+    "ccccccccccdd",
+    "ccccccccccc.",
+    ".aaaaaaacc..",
+    ".aaaaaaaaa..",
+    "..aaaabbaa..",
+    "..aaabbbaa..",
+    "..aaabbbcccc",
+    "..aaccccccc.",
+    "..cccaba....",
+    ".cc........."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Star Cluster",
-    "id": "Gugus Bintang"
-  }
+    "en": "Parker Solar Shield",
+    "id": "Pelindung Panas Parker"
+  },
+  "motif": "parker-shield"
 }

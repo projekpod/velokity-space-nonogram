@@ -2,18 +2,18 @@
   "id": "earth-10-crystals",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "......a.....",
-    ".....aa.....",
-    "..d.baa.....",
-    "..bdbaa.b...",
-    "..bdbaaabb..",
-    "..bddaaabb..",
-    "..bdbbaabb..",
-    "...bbbbbbb..",
-    "............"
+    "..bbbbba....",
+    "..bbbbbba...",
+    ".bbbccbba...",
+    ".bbbbbbaa...",
+    "..abbbaaa...",
+    "...aaaa.....",
+    "....dddd.ddd",
+    "..dddddddddd",
+    "ddddddddbbbb",
+    "dddddaaaaabb",
+    "bbaaaabbbaab",
+    "aaabbbbbbbba"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Crystal Outcrop",
-    "id": "Singkapan Kristal"
-  }
+    "en": "Earthrise",
+    "id": "Bumi Terbit"
+  },
+  "motif": "earthrise"
 }

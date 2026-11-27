@@ -1,18 +1,19 @@
 {
   "id": "venus-19-crescent",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "...........",
-    ".......a...",
-    "........a..",
-    "........aa.",
-    ".......caa.",
-    ".......cca.",
-    "......ccca.",
-    "..a...ccca.",
-    "...aaacca..",
-    ".....aa...."
+    "......c.....",
+    ".....ccc....",
+    ".....cdc....",
+    "....ccdc....",
+    "....ccdcc...",
+    ".cccccdcccc.",
+    "...cccdcccbb",
+    "bbbbccccabbb",
+    "aaaaaaaaaaaa",
+    "bbbbbccbbbbb",
+    "bbbbbbcbbbbb",
+    ".bbbbbbbbbbb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Crescent Moon",
-    "id": "Bulan Sabit"
-  }
+    "en": "Evening Star",
+    "id": "Bintang Senja"
+  },
+  "motif": "evening-star"
 }

@@ -1,19 +1,20 @@
 {
   "id": "neptune-19-radio-dish",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    ".c..........",
-    ".dbd........",
-    ".aabddddda..",
-    ".aaabaaaa...",
-    "..aaaaaa....",
-    "...aaba.....",
-    ".....b......",
-    ".....b......",
-    "...cccccc...",
-    "............"
+    "ddddddcc.....",
+    "dddddddc.....",
+    "dddddddcc....",
+    "ddddddddcc...",
+    "ddddddbbdcc..",
+    "ddd...bbbdcc.",
+    "dd...bbbb.dc.",
+    "d...bbbbb.dd.",
+    "dddbbbbbbaddd",
+    "..ddbbbbbaadd",
+    "....ddbbaaadd",
+    ".....ddaaa..d",
+    ".......da...."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +24,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Radio Dish",
-    "id": "Antena Parabola"
-  }
+    "en": "Ring Shepherd",
+    "id": "Satelit Penjaga Cincin"
+  },
+  "motif": "ring-shepherd"
 }

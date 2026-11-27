@@ -2,18 +2,18 @@
   "id": "earth-14-volcano",
   "size": 12,
   "solution": [
-    "......c.....",
-    "......c.....",
-    "......c.....",
-    ".....a.a....",
-    ".....adaa...",
-    "....aadaaa..",
-    "...aaaadaa..",
-    "...aaaaadaa.",
-    "...abbbbbba.",
-    "............",
-    "............",
-    "............"
+    ".c..........",
+    "bbcc......c.",
+    "dbbbc....cdd",
+    "dddbbccbbddb",
+    "...ddbcdd.bb",
+    "....ddd.....",
+    "........a...",
+    "..bb...aaa..",
+    ".bbbb.abbaa.",
+    ".aaabbbaaba.",
+    "aaaabaaaaaba",
+    "aaaaaaaaaabb"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Shield Volcano",
-    "id": "Gunung Api Perisai"
-  }
+    "en": "Aurora Curtain",
+    "id": "Tirai Aurora"
+  },
+  "motif": "aurora-curtain"
 }

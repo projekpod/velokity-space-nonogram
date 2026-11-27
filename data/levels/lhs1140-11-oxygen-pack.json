@@ -2,20 +2,20 @@
   "id": "lhs1140-11-oxygen-pack",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "........bb....",
-    "...bbb..bbb...",
-    "...bbb.bbaab..",
-    "...bbaaaaaab..",
-    "...aaddcdaab..",
-    "...baddcddab..",
-    "...baddaaaaa..",
-    "...baaaaaaab..",
-    "....aaa..bbb..",
-    ".....bccccdd..",
-    "..........dd..",
-    ".............."
+    "...bbbbbbbbb..",
+    "..bbbbbbbbbbb.",
+    ".bccccccccccbb",
+    "bb....cccccccb",
+    "...ccc..cccccb",
+    "bbcca.....cccb",
+    "bbcca...aa...b",
+    "bbcaa...baac..",
+    "bbcaabbbbbbccb",
+    "bbcabbbbbbbccb",
+    "bbccbbbbbbccbb",
+    "bbccbbbbbccbbb",
+    ".bbccb.cccbbb.",
+    "..bbbbbbbbbb.."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Oxygen Pack",
-    "id": "Tabung Oksigen"
-  }
+    "en": "Pressure Window",
+    "id": "Jendela Tahan Tekanan"
+  },
+  "motif": "pressure-window"
 }

@@ -1,22 +1,21 @@
 {
   "id": "toi700-08-storm-cloud",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "......aaa......",
-    ".....aaaaaa....",
-    "...baaaaaaaa...",
-    "..bbaaaaaaaaaa.",
-    "..bbaaaaaaaaaa.",
-    "..baaaaaaaaaaa.",
-    "..ddddddddddaa.",
-    "...aabbbbdddaa.",
-    ".......ccbaa...",
-    ".......cc......",
-    "........c......",
-    ".......c......."
+    "bbbbbbbdb.....",
+    "bbbbbbbddb....",
+    "bbbbbbbddbbb..",
+    "bbbaaddddbbbb.",
+    "aaaaadddaaabbb",
+    "ccccadddaaaaab",
+    "cccccccdaaaaaa",
+    "aaaacccccaaaaa",
+    "aaaaaaaccccaaa",
+    "aaaaaaddaccaaa",
+    "aaaaaddaaaaaaa",
+    "bbccadddccccaa",
+    "bbcccccccccccc",
+    ".......cc....."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Thermal Well",
+    "id": "Sumur Panas Bumi"
+  },
+  "motif": "thermal-well"
 }

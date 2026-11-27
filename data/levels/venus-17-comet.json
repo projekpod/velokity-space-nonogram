@@ -1,18 +1,19 @@
 {
   "id": "venus-17-comet",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "bbc........",
-    ".cbbc......",
-    "dbccbb.....",
-    ".ddcccb....",
-    "..bddcaa...",
-    "....bbaaa..",
-    ".....badd..",
-    "......aaa..",
-    "...........",
-    "..........."
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "...........b",
+    "......cc....",
+    "...a.cccca..",
+    "...acccccca.",
+    "..accccccdd.",
+    "acdddddddcca",
+    "aabcccccccbb",
+    "aabbcccccbba",
+    ".aabbbbbbb.."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Comet",
-    "id": "Komet"
-  }
+    "en": "Pancake Dome",
+    "id": "Kubah Lava Pipih"
+  },
+  "motif": "pancake-dome"
 }

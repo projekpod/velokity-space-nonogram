@@ -1,19 +1,17 @@
 {
   "id": "proxima-04-black-hole",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "...b........",
-    ".babbaa.....",
-    ".bacbbbaa...",
-    "...bbbbcab..",
-    ".....bbbbb..",
-    "............",
-    "............",
-    "............",
-    "............"
+    ".aaacccc..",
+    ".dddcccca.",
+    "..aadaaaaa",
+    "..aaaaaaaa",
+    "..aaaaccaa",
+    "..aaaadaaa",
+    ".bbaaaada.",
+    "bbbbaaaadd",
+    "bbbaaaa...",
+    "baaaa....."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Black Hole",
-    "id": "Lubang Hitam"
-  }
+    "en": "Photometer",
+    "id": "Fotometer"
+  },
+  "motif": "photometer"
 }

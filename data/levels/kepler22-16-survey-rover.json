@@ -1,21 +1,22 @@
 {
   "id": "kepler22-16-survey-rover",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "....c.........",
-    "....c.........",
-    ".....baaaa....",
-    ".....aaadda...",
-    ".....addddaa..",
-    "....aaaaaaaab.",
-    "...baaaaaaaaa.",
-    "...babbbabbaa.",
-    "....aabac..cc.",
-    "....cc.aca.aa.",
-    "....aa..a.....",
-    "..............",
-    ".............."
+    "aaaaaaddbaa....",
+    "aaaaaaddbbbaa..",
+    "aaaaaaddbbbbba.",
+    "bbbbbbddbbbbba.",
+    "abbbbbddbbbbba.",
+    "abbbbbdddbbbbb.",
+    "abbbbdddddbbbb.",
+    "abbbccdbccddbb.",
+    "aabccdbbbcdddb.",
+    "accbddbbbccddb.",
+    "ccabddbbbccbdd.",
+    "aadddbbbbcbbdd.",
+    "addddbbbbcbbddd",
+    "dddaabbbccbbbdd",
+    ".d............."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +26,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Survey Rover",
-    "id": "Rover Survei"
-  }
+    "en": "Freshwater Delta",
+    "id": "Delta Air Tawar"
+  },
+  "motif": "freshwater-delta"
 }

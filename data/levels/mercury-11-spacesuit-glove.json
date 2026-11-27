@@ -2,17 +2,17 @@
   "id": "mercury-11-spacesuit-glove",
   "size": 11,
   "solution": [
-    "...........",
-    ".....a.a...",
-    ".....a.aa..",
-    "..aa.aaaa..",
-    "...a.aaaa..",
-    "...aaddda..",
-    "...aaddda..",
-    "....aadaa..",
-    "....bbbb...",
-    "...........",
-    "..........."
+    "........ccc",
+    "......ccccc",
+    "...cccccccc",
+    ".ccbbbcc.cc",
+    "ccbbbbb....",
+    "..ccc......",
+    "..aaaa...a.",
+    "ddddddddddd",
+    "aaaaaaaaaaa",
+    "aaaaacccaaa",
+    "aacccaaaccc"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Suit Glove",
-    "id": "Sarung Tangan Astronaut"
-  }
+    "en": "Mercury at Dawn",
+    "id": "Merkurius Saat Fajar"
+  },
+  "motif": "dawn-mercury"
 }

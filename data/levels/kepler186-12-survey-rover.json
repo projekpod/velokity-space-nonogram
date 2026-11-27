@@ -2,19 +2,19 @@
   "id": "kepler186-12-survey-rover",
   "size": 13,
   "solution": [
-    "..c..........",
-    "..c....a.....",
-    "...baaaaa....",
-    "...aaddda....",
-    "...addddaab..",
-    "...adaaaaaa..",
-    "..baaaaaabb..",
-    "..baababbaa..",
-    "..babbca.ac..",
-    "...ca.ca..a..",
-    "...aa........",
-    ".............",
-    "............."
+    "abbbbbbbbbb..",
+    "aaabbbbbbb.b.",
+    "acccccccb....",
+    "accccccc...bb",
+    "acccccc...bbb",
+    "cc.cca...bbbb",
+    "cc..ca..abbbb",
+    "ccc.aab.abbbb",
+    "cc.....baabbb",
+    "c..a...bbabbb",
+    "c.caa..abaabb",
+    ".ccaaaaaabaab",
+    "cbaaaaaaabaab"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Survey Rover",
-    "id": "Rover Survei"
-  }
+    "en": "Cave Skylight Ferns",
+    "id": "Pakis di Lubang Gua"
+  },
+  "motif": "cave-skylight-ferns"
 }

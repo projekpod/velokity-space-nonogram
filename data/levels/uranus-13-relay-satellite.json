@@ -2,18 +2,18 @@
   "id": "uranus-13-relay-satellite",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "....c.......",
-    "....a.......",
-    "...aaa.db...",
-    ".ccaaaacd...",
-    ".dcaddaccc..",
-    ".cdcddaccc..",
-    ".bb.aaa.....",
-    "....a.......",
-    "............",
-    "............"
+    "cccccccc....",
+    ".ccccccccc..",
+    ".ccccccccccc",
+    "ddddddcccccc",
+    ".....ddddccc",
+    "......cddd.c",
+    "......c.....",
+    "..bb.ca..bb.",
+    "bbbbcccabbbb",
+    "bbbbcccaabbb",
+    "bbbbcbbbabbb",
+    ".bbbbbbbbabb"
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Relay Satellite",
-    "id": "Satelit Relai"
-  }
+    "en": "Deep Atmosphere Probe",
+    "id": "Wahana Penyelam Atmosfer"
+  },
+  "motif": "uranus-deep-probe"
 }

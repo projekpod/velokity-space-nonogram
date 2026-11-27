@@ -1,20 +1,19 @@
 {
   "id": "trappist-06-crystals",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    "......b......",
-    ".....ba......",
-    "..d..aaa.b...",
-    "..d.baaa.b...",
-    "..ddbaaabb...",
-    "..bddaaabbb..",
-    "..bddaaabbb..",
-    "..bbbbbbbbb..",
-    ".............",
-    ".............",
-    "............."
+    "..cccc......",
+    "cc...bbbb...",
+    "c...bb..bb..",
+    "c...b....bb.",
+    ".ccbb....bb.",
+    "..ccbbaaaaa.",
+    ".....a....aa",
+    ".....a.....a",
+    ".....a....aa",
+    "...dccaaaaa.",
+    "..ddd.cccc..",
+    "...d......cc"
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +23,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Crystal Outcrop",
-    "id": "Singkapan Kristal"
-  }
+    "en": "Resonance Chain",
+    "id": "Rantai Resonansi"
+  },
+  "motif": "resonance-chain"
 }

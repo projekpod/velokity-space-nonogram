@@ -2,17 +2,17 @@
   "id": "venus-09-black-hole",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    ".......bb..",
-    "....babaab.",
-    "...abbbcb..",
-    "..abbbbb...",
-    ".baccbb....",
-    "..bbb......",
-    "...........",
-    "...........",
-    "..........."
+    ".....c.....",
+    "...cccc....",
+    "ccccaaca...",
+    "bbbaaaaaa..",
+    "baaaaaaaab.",
+    "aaaaaaaaaab",
+    "aaaaadaaaab",
+    "aaaddaddaab",
+    "aadaaaaaaaa",
+    "aaaaaaaaaaa",
+    "aaaaaaaaaaa"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Black Hole",
-    "id": "Lubang Hitam"
-  }
+    "en": "Venus Highlands",
+    "id": "Dataran Tinggi Venus"
+  },
+  "motif": "venus-highlands"
 }

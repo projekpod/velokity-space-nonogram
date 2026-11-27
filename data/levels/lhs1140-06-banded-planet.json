@@ -1,21 +1,20 @@
 {
   "id": "lhs1140-06-banded-planet",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    ".....aaa......",
-    "...aaaaaaa....",
-    "..ddddaaaaa...",
-    "..bbaddddaaa..",
-    ".cabbbbadddd..",
-    ".ccccabbbbad..",
-    ".bbaccccdbbb..",
-    "..bbbbcdddca..",
-    "..aaabbbbcc...",
-    "...aaaaabbb...",
-    "....aaaaa.....",
-    ".............."
+    ".......aabbb.",
+    "......aabbbbb",
+    ".....dddddbbb",
+    "...dddddddddb",
+    "..bddbbbabbaa",
+    ".bddbbbaaaaaa",
+    "bbddbbbaaaaa.",
+    ".ddbbb..aaa..",
+    "ddbbbbcc.....",
+    "ddbbbbccc....",
+    "aabbbcc.ccc..",
+    "aaaa.cc..ccc.",
+    "aaaa.c.....cc"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +24,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Banded Planet",
-    "id": "Planet Belang"
-  }
+    "en": "Ice Wave Arch",
+    "id": "Lengkung Gelombang Es"
+  },
+  "motif": "ice-wave-arch"
 }

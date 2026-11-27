@@ -2,17 +2,17 @@
   "id": "venus-14-ringed-world",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "....aaaa...",
-    "...adddda..",
-    ".ccaddddd..",
-    "...ccbbdd..",
-    "...bbccbd..",
-    "...bbbbccc.",
-    "...abbbba.c",
-    "...aaaaa...",
-    ".....a....."
+    "abbacc.....",
+    ".abccac....",
+    ".acabbac...",
+    ".caaaabacc.",
+    ".....abb.cc",
+    ".....aabb..",
+    ".....aaab..",
+    ".....aa....",
+    ".....bbbb..",
+    "...bbbbbbb.",
+    "..bbbbbbbbb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Ringed World",
-    "id": "Planet Bercincin"
-  }
+    "en": "Radio Reflector",
+    "id": "Reflektor Radio"
+  },
+  "motif": "radio-reflector"
 }

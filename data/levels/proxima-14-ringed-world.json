@@ -1,19 +1,18 @@
 {
   "id": "proxima-14-ringed-world",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....aaaa...",
-    "....ddddda..",
-    "....dddddd..",
-    "...abbbbbccc",
-    ".ccccbbbbba.",
-    "....bbbbbb..",
-    ".....aaaa...",
-    "............",
-    "............"
+    "c..........",
+    "bccb......a",
+    ".bccb....aa",
+    ".bbbcb..aaa",
+    ".bbbbcb.aaa",
+    ".bbbbacaaaa",
+    "...bbbccaaa",
+    "bb..bb.cc..",
+    "bbcc.b..cc.",
+    "bbbcc....c.",
+    "bbbbcc....c"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Ringed World",
-    "id": "Planet Bercincin"
-  }
+    "en": "Dish Network",
+    "id": "Jaringan Antena Piring"
+  },
+  "motif": "dish-network"
 }

@@ -2,19 +2,19 @@
   "id": "kepler186-11-relay-satellite",
   "size": 13,
   "solution": [
-    ".............",
-    ".........c...",
-    "........ac...",
-    "........a....",
-    "......aaa....",
-    "...dd.ada.cc.",
-    "...dcadddbdc.",
-    "...ccaddabdc.",
-    "....caaaa.cc.",
-    ".....aaaa....",
-    ".............",
-    ".............",
-    "............."
+    "ccaaaa...ddd.",
+    "accccaa.cdddd",
+    "acccccacdddd.",
+    "accccccddddd.",
+    "acccccda.....",
+    "ccccaaaaa....",
+    "aaa.aaaaaaaa.",
+    "..aaaaaaaaaaa",
+    ".aaaaaaaaaaaa",
+    "aaaaaaaaaa..a",
+    "aaaaaaaaaaa..",
+    ".aaaaa.......",
+    "...a........."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Relay Satellite",
-    "id": "Satelit Relai"
-  }
+    "en": "Triple-Leaf Emblem",
+    "id": "Lambang Tiga Daun"
+  },
+  "motif": "triple-leaf-emblem"
 }

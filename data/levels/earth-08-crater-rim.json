@@ -2,18 +2,18 @@
   "id": "earth-08-crater-rim",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "............",
-    "..a.........",
-    "..aaa..aa...",
-    ".aaaaadda...",
-    ".aaaadaaaa..",
-    ".aaadaaaaa..",
-    "..aaaaaaa...",
-    "............"
+    "....dddddd..",
+    "..dddaaaad..",
+    ".daaaaaaaad.",
+    "aaaaaaaaaadd",
+    "daaadddddddd",
+    "dddadddddddd",
+    "dbbbddcccddd",
+    "bbbbcccccddd",
+    "bbdbcccccddd",
+    "dddccccccdd.",
+    ".dddccccdd..",
+    "..ddccccdd.."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Crater Rim",
-    "id": "Bibir Kawah"
-  }
+    "en": "Orbital Cupola",
+    "id": "Kubola Pengamat Bumi"
+  },
+  "motif": "orbital-cupola"
 }

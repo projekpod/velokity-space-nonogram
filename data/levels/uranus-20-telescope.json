@@ -1,19 +1,20 @@
 {
   "id": "uranus-20-telescope",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "........d...",
-    "......dddd..",
-    ".....ddddd..",
-    "...aaddddd..",
-    "..aaabdd....",
-    ".abaac......",
-    ".abbbcb.....",
-    "....b.cb....",
-    "....b.cbb...",
-    "...b..c.b...",
-    "...b..c.....",
-    "............"
+    "ddd..a.....ad",
+    "bbbddddaaaadd",
+    "bbbbaaddaadaa",
+    "bbbaaaadddacc",
+    "bbbaaaaa..ccc",
+    "bbbaaa....ccc",
+    "bbbaaa...cccc",
+    "bbbba....cccc",
+    "bbbb.....cccc",
+    "bbbb....ccccc",
+    "bbbbd..cccccc",
+    "bbbbdbccccccc",
+    "....ddddddc.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +24,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Telescope",
-    "id": "Teleskop"
-  }
+    "en": "Miranda Cliffs",
+    "id": "Tebing Miranda"
+  },
+  "motif": "miranda-cliffs"
 }

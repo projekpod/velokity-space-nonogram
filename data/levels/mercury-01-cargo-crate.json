@@ -1,18 +1,17 @@
 {
   "id": "mercury-01-cargo-crate",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "...........",
-    "....ddda...",
-    "..dddddda..",
-    ".ddddddaa..",
-    ".aaaaabaa..",
-    "..abccaaa..",
-    "..abaaaaa..",
-    "..aba......",
-    "...........",
-    "..........."
+    "ccaaaaaaa.",
+    "ccccaaaaaa",
+    "accccddddd",
+    "aaaccbbb..",
+    "aabbccbbb.",
+    "abbbbcbbb.",
+    "abbbbcbbb.",
+    "bbbbbbcbbb",
+    "bbbbbbbccb",
+    "bbbbbbbccc"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Cargo Crate",
-    "id": "Peti Kargo"
-  }
+    "en": "Lobate Scarp",
+    "id": "Tebing Lengkung"
+  },
+  "motif": "lobate-scarp"
 }

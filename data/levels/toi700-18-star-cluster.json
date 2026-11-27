@@ -2,21 +2,21 @@
   "id": "toi700-18-star-cluster",
   "size": 15,
   "solution": [
-    "...............",
-    "...............",
-    "........c......",
-    "......d.c......",
-    "....ddddcc.....",
-    "......dccc.....",
-    "....ccdcaaccc..",
-    ".....ccaaaccc..",
-    ".......cac.b...",
-    "........cc.b...",
-    "........bbbbbbb",
-    "........c.bb...",
-    "...........b...",
-    "...........b...",
-    "..............."
+    "dd......cc.....",
+    "ddaad.ccccc....",
+    "ddaaaaacccccc..",
+    "dddddaaaaacccc.",
+    "ddddddddaaaaccc",
+    "dddddddddddaaa.",
+    "dddddddddddda..",
+    "ddddddddddddddd",
+    "ddddddddddddddd",
+    "ddddbbddddd..dd",
+    "ddddbbdd.......",
+    "ddddbbb........",
+    "ddddccb........",
+    "dddcccccc......",
+    "ddccccccccc...."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Star Cluster",
-    "id": "Gugus Bintang"
-  }
+    "en": "Communication Kite Mast",
+    "id": "Tiang Layang-Layang Komunikasi"
+  },
+  "motif": "communication-kite-mast"
 }

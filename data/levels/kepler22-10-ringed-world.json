@@ -2,20 +2,20 @@
   "id": "kepler22-10-ringed-world",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    ".....aaaa.....",
-    "....adddda....",
-    "...adddddda...",
-    "...dddddddd...",
-    ".cccccbbbbc...",
-    "...bbbbbcccccc",
-    "...bbbbbbba...",
-    "....bbbbba....",
-    "....aaaaaa....",
-    "..............",
-    "..............",
-    ".............."
+    "........dd....",
+    "aa......dcddd.",
+    "aaaa...dccbcd.",
+    "aaaadccdbbbbdd",
+    "adddddcdbbbbcd",
+    "ddddddddbbbbb.",
+    "caaaaadddbbbb.",
+    "caaaabddddbbb.",
+    "ccccccdbddddd.",
+    "cccccddbbbdddd",
+    "ccccdcccbbb...",
+    ".cddccccbbb...",
+    ".ddccccccb....",
+    "d............."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +25,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Ringed World",
-    "id": "Planet Bercincin"
-  }
+    "en": "Salinity Prism",
+    "id": "Prisma Pengukur Salinitas"
+  },
+  "motif": "salinity-prism"
 }

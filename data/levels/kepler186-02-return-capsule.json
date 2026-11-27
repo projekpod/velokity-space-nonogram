@@ -1,20 +1,19 @@
 {
   "id": "kepler186-02-return-capsule",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    "....aaa......",
-    "....aaa......",
-    "...aaaa......",
-    "...addaa.....",
-    "...dddda.....",
-    "..aaddaaa....",
-    "..caaaaaa....",
-    "..ccccccc....",
-    "...aaaaa.....",
-    "...bbbbb.....",
-    "............."
+    ".aaaaacaaaa.",
+    "bbaaaaccaaa.",
+    "bbbaaccccaaa",
+    "bbbbacccccca",
+    "bbbbbcccaacd",
+    "bbbbbdddddcc",
+    "bbbbdccaaacc",
+    "bbbdccccccca",
+    "bbdccaaccaaa",
+    "ddbccaaaaaaa",
+    "dbbacccaaaa.",
+    ".....ccc...."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Return Capsule",
-    "id": "Kapsul Pulang"
-  }
+    "en": "Meander Oxbow",
+    "id": "Danau Tapal Kuda"
+  },
+  "motif": "meander-oxbow"
 }

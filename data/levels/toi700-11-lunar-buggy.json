@@ -1,22 +1,21 @@
 {
   "id": "toi700-11-lunar-buggy",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    ".....aa........",
-    "....aaaaaa.....",
-    "....adddda.....",
-    "..baaddddaa....",
-    ".cbaaaaaaaab...",
-    ".ccaaaaaaaacc..",
-    "..babbbbbbab...",
-    "...ca....ac....",
-    "...ca....ac....",
-    "...a......a....",
-    "...............",
-    "..............."
+    "acccc.........",
+    "cccccca.......",
+    "cccccccaaa....",
+    "cccccccbbba...",
+    "cccccccbbdbb..",
+    "cccccccbbdbbb.",
+    "cccbbbbbbbbba.",
+    "ccbbbbbbbbbb..",
+    "ccbbbbbbbbb...",
+    "cbbbbbbbccc...",
+    "cbbbbbcccacc..",
+    "abbbbbaa...c..",
+    "aaaaa.......c.",
+    ".............."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Lunar Buggy",
-    "id": "Buggy Bulan"
-  }
+    "en": "Gliding Rockfish",
+    "id": "Ikan Batu Peluncur"
+  },
+  "motif": "gliding-rockfish"
 }

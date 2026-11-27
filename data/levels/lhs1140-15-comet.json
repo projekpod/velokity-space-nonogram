@@ -1,21 +1,22 @@
 {
   "id": "lhs1140-15-comet",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "..............",
-    "..........cb..",
-    "........cbbb..",
-    ".......cbbcbd.",
-    "......cbbcbdd.",
-    "......bcccd...",
-    ".....bcccdb...",
-    "....bacddb....",
-    "....aaabb.....",
-    "...aaaaa......",
-    "...addaa......",
-    "....aaa.......",
-    ".............."
+    "aaaaaaacc....aa",
+    "aaaaaaccccccaaa",
+    "accaddddddddcaa",
+    "aaddddddddddddd",
+    "aaddccccccccddd",
+    "aaaccccccccccaa",
+    "baaacccccccaaaa",
+    "baaaccccccaaaaa",
+    "bbaaccccccaaabb",
+    "bbbaccccccaabbb",
+    "bbbbbccccbbbbbb",
+    "bbbbbccccbbbbbb",
+    "bbbbbbcbbbabbbb",
+    "bbbbbbbbaaaaaab",
+    ".......aa....aa"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +26,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Comet",
-    "id": "Komet"
-  }
+    "en": "Icebreaker Bow",
+    "id": "Haluan Kapal Pemecah Es"
+  },
+  "motif": "icebreaker-bow"
 }

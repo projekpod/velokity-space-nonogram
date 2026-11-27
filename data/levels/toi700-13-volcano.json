@@ -1,22 +1,21 @@
 {
   "id": "toi700-13-volcano",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "......c........",
-    "......cc.......",
-    "......cc.......",
-    ".....ac........",
-    ".....a..a......",
-    "....aaadda.....",
-    "....aaadaa.....",
-    "...aaadaaaa....",
-    "..aaaadaaaaa...",
-    "..aaadaaaaaaa..",
-    ".aaaadaaaaaaa..",
-    "..abbbbbbbba...",
-    "..aaaaa........",
-    "..............."
+    "bbbbbbbbb.....",
+    "bbbbbbbbbbb...",
+    "bbbbbbbbcccc..",
+    "bbbbbaaaaacccc",
+    "bbbaaaaaaaaacc",
+    "baaaaabbccaacc",
+    "aaaabbbbcc....",
+    "aabbbbbc......",
+    "bbbbbb........",
+    "bbddddd.ddddd.",
+    "bddddddddddddd",
+    ".ddd....dddddd",
+    ".bdd......dddd",
+    "..d........ddd"
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Shield Volcano",
-    "id": "Gunung Api Perisai"
-  }
+    "en": "Robotic Trail Dog",
+    "id": "Robot Anjing Penjelajah"
+  },
+  "motif": "trail-dog"
 }

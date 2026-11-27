@@ -2,19 +2,19 @@
   "id": "trappist-12-docking",
   "size": 13,
   "solution": [
-    ".............",
-    "....bbb......",
-    ".....d.......",
-    "...aaaaa.....",
-    "cccaaaaa.....",
-    "cccadddabdd..",
-    "cccaddda.dd..",
-    "...aaaaa.cc..",
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    "............."
+    "bddddd..dccc.",
+    "dbbddddddd...",
+    "dbbbbddddd...",
+    "dddbbbddddd..",
+    "ddddbbbddddd.",
+    "dddddbbdbdddd",
+    "dddd..dbbbdd.",
+    "dddd..ccbddd.",
+    "ddd...cc.....",
+    ".dd....cc....",
+    ".d....aaa....",
+    "......aaaaa..",
+    ".....aaaaaaa."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Docking Craft",
-    "id": "Wahana Sandar"
-  }
+    "en": "Radio Array Dish",
+    "id": "Piringan Susunan Radio"
+  },
+  "motif": "radio-array-dish"
 }

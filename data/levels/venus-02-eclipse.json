@@ -1,18 +1,17 @@
 {
   "id": "venus-02-eclipse",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "....ccc....",
-    "...caaabc..",
-    "..cbbbaab..",
-    "..cabbbabc.",
-    ".ccbbbaabc.",
-    "..cbbabbc..",
-    "..cccbbcc..",
-    "...ccccc...",
-    "...........",
-    "..........."
+    ".aaaaa.cbb",
+    "daaaaaaccb",
+    ".daaaaa.cc",
+    ".daaaaaccc",
+    ".adddacccb",
+    ".aaaaacbbb",
+    ".aaaaaccbb",
+    ".aaaaaccbb",
+    ".aaaaaccbb",
+    ".aaaaacbbb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +21,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Solar Eclipse",
-    "id": "Gerhana Matahari"
-  }
+    "en": "Aphrodite Fault",
+    "id": "Patahan Aphrodite"
+  },
+  "motif": "aphrodite-fault"
 }

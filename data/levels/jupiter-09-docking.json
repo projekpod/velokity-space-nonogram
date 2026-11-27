@@ -1,19 +1,20 @@
 {
   "id": "jupiter-09-docking",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "....bbb.....",
-    ".....d......",
-    "....aaa.....",
-    "....ada.....",
-    ".cdcdddbdd..",
-    ".cdcdddbcd..",
-    ".cdcaaa.cc..",
-    "............",
-    "............",
-    "............",
-    "............"
+    "cccc.........",
+    "cccccccbbbbb.",
+    "aaaaacccbbbb.",
+    "aaaaaaaccbbbb",
+    "aaaabbacccaaa",
+    "aaaabcaacccaa",
+    "aaacccccccccc",
+    "abbcddcccaacc",
+    "bbbbbbaaaaaab",
+    "bbbbbbaaabbb.",
+    "bbbbbbbbbbb..",
+    "bbbbbbbbbb...",
+    "bbbbbbbbbb..."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Docking Craft",
-    "id": "Wahana Sandar"
-  }
+    "en": "Infrared Hot Spot",
+    "id": "Titik Panas Inframerah"
+  },
+  "motif": "jupiter-infrared-hot-spot"
 }

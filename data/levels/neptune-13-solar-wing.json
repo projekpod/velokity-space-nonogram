@@ -2,18 +2,18 @@
   "id": "neptune-13-solar-wing",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "....aaaa....",
-    ".cccadda....",
-    ".cccaddabdd.",
-    ".cdcaddabdc.",
-    "....aaaa.cc.",
-    "....aca.....",
-    "......a.....",
-    "............"
+    "a...acca....",
+    ".a..acca....",
+    ".aa..aa..aac",
+    "cca..aa.acaa",
+    "ccaccccaac.a",
+    ".a.ccdda..aa",
+    "a...cddcccaa",
+    "..ccaccccaca",
+    "cccaacc...ca",
+    "ccaa.cc....a",
+    "..a..cc....a",
+    ".a...cc....a"
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Solar Wing",
-    "id": "Sayap Surya"
-  }
+    "en": "Ammonia Snowflake",
+    "id": "Kristal Salju Amonia"
+  },
+  "motif": "ammonia-snowflake"
 }

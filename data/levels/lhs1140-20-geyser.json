@@ -1,21 +1,22 @@
 {
   "id": "lhs1140-20-geyser",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "....dd....d...",
-    "....ddcccdd...",
-    "......dccd....",
-    ".......dd.....",
-    ".......a......",
-    ".......a......",
-    ".......a......",
-    ".....baa......",
-    "...bbbaabbb...",
-    "..bbbbaabbbb..",
-    "..bbbbbbbbbbb.",
-    "........bbbb..",
-    ".............."
+    ".d.............",
+    "ddd............",
+    ".dd.......aaa..",
+    "..ddc..aaaaaaa.",
+    "..ddcccaaaaccc.",
+    "..cccccccaccccd",
+    ".accccccccccccc",
+    ".acccccccccccc.",
+    ".acccccccbcccc.",
+    ".acccbbbbbccc..",
+    ".acccbbbbbc....",
+    ".acccbbbbb.....",
+    ".dccccbbbb.....",
+    ".adaacbbbb.....",
+    "..ddddddddddddd"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +26,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Ice Geyser",
-    "id": "Semburan Es"
-  }
+    "en": "Floating Research Pier",
+    "id": "Dermaga Riset Terapung"
+  },
+  "motif": "research-pier"
 }

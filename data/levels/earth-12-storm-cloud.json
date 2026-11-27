@@ -2,18 +2,18 @@
   "id": "earth-12-storm-cloud",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    ".....aa.....",
-    "....aaaa....",
-    "...aaaaaa...",
-    "..baaaaaaaa.",
-    "..baaaaaaaa.",
-    "..dddddddda.",
-    "...abbbbaaa.",
-    "......c.....",
-    "......c.....",
-    "............"
+    "..........d.",
+    "bb........dd",
+    "bbb.........",
+    "ccbbccccc...",
+    "ccccccccccc.",
+    "abbacccccdc.",
+    "aadacccccdc.",
+    ".ccddccdd...",
+    ".cccddddd...",
+    "..cccdddbbb.",
+    ".....ddbbbbb",
+    ".......bbbbb"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Hubble Space Telescope",
+    "id": "Teleskop Antariksa Hubble"
+  },
+  "motif": "hubble-telescope"
 }

@@ -1,18 +1,19 @@
 {
   "id": "mercury-19-ring-station",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "...........",
-    "...aacaa...",
-    "..a.d..aa..",
-    ".bbbdd..a..",
-    ".a..ddbbb..",
-    "..a.cc.aa..",
-    "..aaccaa...",
-    "....c......",
-    "...........",
-    "..........."
+    "....cc......",
+    "...cccc.....",
+    "..ccddddd...",
+    "ddddcccc....",
+    "bbcccccc.ddd",
+    ".bbccccddddd",
+    "..bbccaaaddd",
+    "..bbcdaaadd.",
+    "...bdddddd..",
+    "....ddddd...",
+    ".....bdd....",
+    ".....b......"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +23,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Ring Station",
-    "id": "Stasiun Cincin"
-  }
+    "en": "Messenger Spacecraft",
+    "id": "Wahana MESSENGER"
+  },
+  "motif": "messenger-spacecraft"
 }

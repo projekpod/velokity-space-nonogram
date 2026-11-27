@@ -1,22 +1,21 @@
 {
   "id": "toi700-10-canyon",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    ".............a.",
-    "............aa.",
-    "...........aaa.",
-    ".aa......aaaa..",
-    ".aaaa...addaa..",
-    ".aaaaaadddaaa..",
-    "..aaaaddaaaaa..",
-    "..aaadaaaaaaa..",
-    "..abbbbbbbbba..",
-    "...............",
-    "..............."
+    "......c.......",
+    "....accbbbbbb.",
+    "..aaccbbbbbbb.",
+    ".aaacccbbbbbb.",
+    "daaaacccbbbbb.",
+    "ddaaaaaccbbbbb",
+    "aadaaaaccbbbbb",
+    "aaadaaaccbbbbb",
+    "aaadaaaccbbbbb",
+    ".aaadaaccbbbbb",
+    ".aaadaccaabbbb",
+    "..aaadcccbbbbb",
+    "....aaacccbbb.",
+    "........cc...."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Canyon Wall",
-    "id": "Dinding Ngarai"
-  }
+    "en": "Synchronous Globe",
+    "id": "Globe Rotasi Terkunci"
+  },
+  "motif": "synchronous-globe"
 }

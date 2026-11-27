@@ -2,18 +2,18 @@
   "id": "jupiter-06-canyon",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    ".........aa.",
-    ".aaa...aaaa.",
-    "..aaa..daaa.",
-    "..aaaddaaaa.",
-    "..aadaaaaa..",
-    "..aaaaaaaa..",
-    "............",
-    "............"
+    "....dbb.....",
+    "....dbb.....",
+    "....dbbd....",
+    "....dbbd....",
+    "....dddd....",
+    "....dccdbbb.",
+    "...ddcddbbbb",
+    "...adddddbdd",
+    ".aaaddddddbb",
+    "aaddadd...bb",
+    "adaa........",
+    "aa.........."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Canyon Wall",
-    "id": "Dinding Ngarai"
-  }
+    "en": "Juno Probe",
+    "id": "Wahana Juno"
+  },
+  "motif": "juno-probe"
 }

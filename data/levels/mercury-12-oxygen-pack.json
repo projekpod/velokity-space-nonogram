@@ -2,17 +2,17 @@
   "id": "mercury-12-oxygen-pack",
   "size": 11,
   "solution": [
-    "...........",
-    "......b....",
-    "..bb.bbb...",
-    "..bbaaaa...",
-    "..aadcaab..",
-    "..baddaab..",
-    "..baaaacb..",
-    "...bb.c....",
-    "....dc.....",
-    "....d......",
-    "..........."
+    ".....aaa...",
+    "..a.bbbaa..",
+    ".a.bccccaa.",
+    "...caaaaca.",
+    "abcaaaaaaca",
+    "abccbbbacc.",
+    "abbcccccc.a",
+    ".abbbbbbb..",
+    ".aabbbbb...",
+    "..aaaaaa...",
+    ".....a....."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Oxygen Pack",
-    "id": "Tabung Oksigen"
-  }
+    "en": "Caloris Basin",
+    "id": "Cekungan Caloris"
+  },
+  "motif": "caloris-basin"
 }

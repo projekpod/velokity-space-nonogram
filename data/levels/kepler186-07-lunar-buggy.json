@@ -2,19 +2,19 @@
   "id": "kepler186-07-lunar-buggy",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    "....aa.......",
-    "...aaaaaa....",
-    "...aaddda....",
-    "..aaaaaaaab..",
-    ".ccaaaaaaac..",
-    "..bbbbbbbbb..",
-    "..aabbbbaab..",
-    "..ac....ac...",
-    "...a....aa...",
-    ".............",
-    "............."
+    "caaaabaaaa...",
+    "accaabbaaaa..",
+    "aaccbbbaaaaa.",
+    "aaaccbbaaaaa.",
+    "aaaaccbaaaaaa",
+    "aaaabcaaaaaaa",
+    "aaaabbcaaaaaa",
+    "aaabbaacaaaac",
+    "accbbaaacccca",
+    "aabbdddaaaaaa",
+    "abbbbbaaaaaaa",
+    "aabbbbbaaaaa.",
+    "aaabbbbbaa..."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Lunar Buggy",
-    "id": "Buggy Bulan"
-  }
+    "en": "Creek Stepping Stones",
+    "id": "Batu Pijakan Sungai"
+  },
+  "motif": "creek-stepping-stones"
 }

@@ -2,18 +2,18 @@
   "id": "earth-11-lunar-buggy",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "...aaa......",
-    "...addda....",
-    "..aadddaa...",
-    ".baaaaaaab..",
-    ".aaaaaaaac..",
-    ".aaabbbaaa..",
-    "aacaa.aaca..",
-    ".aaa...aaa..",
-    "............",
-    "............"
+    ".....dd.....",
+    "dbbdddd..db.",
+    "dbbdddadbdbb",
+    "dbbdddadbdbb",
+    "..bbdcad.b..",
+    ".dbbdcaddbd.",
+    "ddbbdcaddbdd",
+    "..bbddad.b..",
+    "..bbdda..bdd",
+    "dbbbdda.dddb",
+    "bddddda.bbbb",
+    ".....dd....."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Lunar Buggy",
-    "id": "Buggy Bulan"
-  }
+    "en": "International Space Station",
+    "id": "Stasiun Luar Angkasa Internasional"
+  },
+  "motif": "international-space-station"
 }

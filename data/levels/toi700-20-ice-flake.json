@@ -2,21 +2,21 @@
   "id": "toi700-20-ice-flake",
   "size": 15,
   "solution": [
-    "...............",
-    "...a.....a.....",
-    "...aa...aaa....",
-    "...aa...aa.....",
-    "....aa.aa......",
-    "....addda......",
-    "aaaaddcdaaaaa..",
-    "aaaadcccdaaaaa.",
-    ".....ddd.......",
-    "....aadaa......",
-    "...aaa.aa......",
-    "...aa...aa.....",
-    "..aa.....a.....",
-    "...............",
-    "..............."
+    ".dd............",
+    "ddddddccccc....",
+    "..dddddccccc...",
+    "..cc.ddddcccc..",
+    ".cc....dddddcc.",
+    ".cc.....ddddccd",
+    ".c...aaaaa..dcc",
+    "dd..bbaaabbb.cc",
+    "dddbbbbbbbbb.cc",
+    ".dddbbbbbbb..c.",
+    ".cddd.......cc.",
+    "..cddd.....cc..",
+    "...cddd...cc...",
+    "....cddddddddd.",
+    "......ddddddddd"
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Ice Flake",
-    "id": "Keping Es"
-  }
+    "en": "Microlens Arc",
+    "id": "Busur Pelensaan Mikro"
+  },
+  "motif": "microlens-arc"
 }

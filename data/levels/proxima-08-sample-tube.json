@@ -1,19 +1,18 @@
 {
   "id": "proxima-08-sample-tube",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "....b.......",
-    "....bbbbbb..",
-    "....bbbbbbb.",
-    "....aaaabb..",
-    "....adddda..",
-    "....adcdd...",
-    "....accca...",
-    "....adcda...",
-    "....aaaaa...",
-    "....aaaaa...",
-    "............"
+    "bbbd......b",
+    "abbdc...bbb",
+    "abdbdd..bbb",
+    "aaddddd.bbb",
+    "aabbbcd.bbb",
+    "aaabbcd.bbb",
+    "aaabbcddbbc",
+    "aaabbccddbc",
+    "aaaabbcddcc",
+    "aaaaabccccc",
+    "aaaaabbcccc"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Shadow Valley",
+    "id": "Lembah Bayangan"
+  },
+  "motif": "proxima-shadow-valley"
 }

@@ -1,18 +1,19 @@
 {
   "id": "venus-16-spacesuit-glove",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "....a.a....",
-    "...aa.a....",
-    "...aaaa.a..",
-    "...aaaa.aa.",
-    "...aaddaa..",
-    "...adddaa..",
-    "...adddaa..",
-    "....bbbb...",
-    ".......a...",
-    "..........."
+    "...aaaaaa...",
+    ".aaaccccaaa.",
+    ".abccccccaa.",
+    "bbbbccdddcaa",
+    "bbbbbcccdcca",
+    "bbbbbccccdca",
+    "cbbbccccccca",
+    "caccccccccac",
+    "cccccccccccc",
+    ".cccccccccc.",
+    "..cccccccc..",
+    "...cccccc..."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Suit Glove",
-    "id": "Sarung Tangan Astronaut"
-  }
+    "en": "Venus in Transit",
+    "id": "Venus Melintas di Depan Matahari"
+  },
+  "motif": "venus-transit"
 }

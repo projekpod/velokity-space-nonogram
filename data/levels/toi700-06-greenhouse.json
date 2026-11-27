@@ -1,22 +1,20 @@
 {
   "id": "toi700-06-greenhouse",
-  "size": 15,
+  "size": 13,
   "solution": [
-    "...............",
-    ".......a.......",
-    "....aaaaaa.....",
-    "...aaaaaaaa....",
-    "..aaaaaaaaaa...",
-    "..aaaaaaaaaa...",
-    "..addaaaaadaa..",
-    ".bbddaaaaddbb..",
-    ".bbddddddddbb..",
-    ".bbddddbdddbb..",
-    ".bbbbbbbbbbbb..",
-    ".ccccccccccccc.",
-    ".cccccccc......",
-    "...............",
-    "..............."
+    "...cccc......",
+    "caaacccaaaa..",
+    "cccaaaaaccca.",
+    "cccccddccccca",
+    "cccc.ddcccccc",
+    ".....ddcc..cc",
+    ".....dd......",
+    ".....dd......",
+    ".....ddbbbbbb",
+    ".....bbbbbbbb",
+    "..bbbbbbbcbbb",
+    "bbbbbcccccbb.",
+    "cccccccccc..."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +24,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Moon Greenhouse",
-    "id": "Rumah Kaca Bulan"
-  }
+    "en": "Dusk Solar Tower",
+    "id": "Menara Surya Senja"
+  },
+  "motif": "dusk-solar-tower"
 }

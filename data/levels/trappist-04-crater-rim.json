@@ -1,20 +1,19 @@
 {
   "id": "trappist-04-crater-rim",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    "..aaa....a...",
-    "..aaaa..ada..",
-    ".aaaaaaddaaa.",
-    ".aaaaddaaaaa.",
-    ".aaaadaaaaaa.",
-    "..abbbbbbba..",
-    ".............",
-    "............."
+    "ccc..dd....c",
+    "cccccdd.cccc",
+    "cccccccccccc",
+    "..cccccccccc",
+    "....cdd.....",
+    ".....dd.....",
+    ".....dda...a",
+    "..aaaddaa.aa",
+    ".aaabbbbaaaa",
+    "aaabbbbbbaaa",
+    "aaacccccccca",
+    "aaabbbbbbacc"
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +23,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Crater Rim",
-    "id": "Bibir Kawah"
-  }
+    "en": "Subsurface Antenna",
+    "id": "Antena Bawah Permukaan"
+  },
+  "motif": "subsurface-antenna"
 }

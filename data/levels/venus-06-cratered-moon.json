@@ -1,18 +1,17 @@
 {
   "id": "venus-06-cratered-moon",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "......a....",
-    "....bbaa...",
-    "...aabaaa..",
-    "...aaaabb..",
-    "..aaaaabba.",
-    "...addaaaa.",
-    "...addaaa..",
-    "...aaaaaa..",
-    "....aaaa...",
-    "..........."
+    "aaaaaaaaaa",
+    "..bbbbaaaa",
+    "..........",
+    "bbbbbbbbbb",
+    "..ccddd...",
+    "....dddcc.",
+    "....ccccc.",
+    "......ccc.",
+    ".....ccc..",
+    ".....c...."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +21,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Cratered Moon",
-    "id": "Bulan Berkawah"
-  }
+    "en": "Sulfur Lightning",
+    "id": "Petir di Awan Sulfur"
+  },
+  "motif": "sulfur-lightning"
 }

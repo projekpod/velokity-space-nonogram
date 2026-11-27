@@ -2,20 +2,20 @@
   "id": "kepler22-13-comet",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "...c..........",
-    "..bbcc........",
-    "..bbbbc.......",
-    ".ddcbbbb......",
-    "..ddccbbb.....",
-    "....ddccc.....",
-    "....bddaaa....",
-    ".....baaaab...",
-    "......aada....",
-    "......aadd....",
-    ".......aaa....",
-    ".............."
+    "aa....bbbb....",
+    "aadd.bbbbb....",
+    ".dadcbbbbbb...",
+    ".ddacbbbbbb...",
+    ".ddcabbbbbb...",
+    ".ddccaabbbbb..",
+    ".dcccbaaaaab..",
+    ".dccccbbbbaa..",
+    ".cccccbbbbbaa.",
+    ".ccccccbbbbbaa",
+    ".cccccccbbbb..",
+    "..cccccccbbbb.",
+    "..ccccccccbbb.",
+    "...c.....bbbbb"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +25,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Comet",
-    "id": "Komet"
-  }
+    "en": "Air Sampling Kite",
+    "id": "Layang-Layang Pengambil Sampel Udara"
+  },
+  "motif": "sampling-kite"
 }

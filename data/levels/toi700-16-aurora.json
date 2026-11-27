@@ -2,21 +2,21 @@
   "id": "toi700-16-aurora",
   "size": 15,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "...........c...",
-    "..........cc...",
-    "....cccc.ccc...",
-    "..cccccccc.....",
-    ".......cc......",
-    ".........aa....",
-    "...aaaaaaaaa...",
-    ".aaaadaaaaaaaa.",
-    "..aaadddddaaa..",
-    "..abbbbbbbbba..",
-    "..aaaaaaaaaaa..",
-    "..............."
+    "bbb........bbb.",
+    "bbbddddddbbbbb.",
+    "bbbddddddddbbb.",
+    "bbbdddddddddbbb",
+    "bbdbbbdddddddbb",
+    "bbbbbbbddddddb.",
+    "bbbbbbbbbddddb.",
+    "cccbbaaabbddb..",
+    "bbccbaabbbbb...",
+    "bbbbccbbbbb....",
+    ".bbbbccaaa.....",
+    ".bbbbbbcccc....",
+    ".bbbbbbbbb.cccc",
+    ".bbbbbbbb......",
+    "cccccccc......."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Aurora Horizon",
-    "id": "Cakrawala Aurora"
-  }
+    "en": "TESS Camera Array",
+    "id": "Susunan Kamera TESS"
+  },
+  "motif": "tess-cameras"
 }

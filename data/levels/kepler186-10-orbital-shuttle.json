@@ -2,19 +2,19 @@
   "id": "kepler186-10-orbital-shuttle",
   "size": 13,
   "solution": [
-    ".............",
-    "......a......",
-    "......a......",
-    ".....ad......",
-    "....adda.....",
-    "....bdda.....",
-    "...bbadab....",
-    "..bbbaabb....",
-    ".bbbbaabbb...",
-    "..b..cabbb...",
-    ".....cc......",
-    ".............",
-    "............."
+    "aaaaaadddd...",
+    ".aaaaaadddd..",
+    "..aaaaaaddddd",
+    "..aaaabaaaada",
+    "..cccbaaaaaaa",
+    "..cbbbaaaaaaa",
+    ".ccbbbaaaaaaa",
+    ".accccbaaaaaa",
+    "daaccaabaaaaa",
+    "dddaaaaabaddd",
+    "aadddaaaddda.",
+    ".aaadddddab..",
+    "....aaaaaabb."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Orbital Shuttle",
-    "id": "Pesawat Ulang Alik"
-  }
+    "en": "Kepler Photometer",
+    "id": "Fotometer Kepler"
+  },
+  "motif": "kepler-photometer"
 }

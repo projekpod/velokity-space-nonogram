@@ -1,19 +1,17 @@
 {
   "id": "proxima-06-eclipse",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    "......c.....",
-    "....ccbbc...",
-    "...cbaaabc..",
-    "..ccabbaac..",
-    "..cbbbbaab..",
-    "..ccabbabc..",
-    "..ccbaabbc..",
-    "...ccbbbc...",
-    "....ccccc...",
-    "............",
-    "............"
+    ".......ddd",
+    "......ddd.",
+    ".....ddd..",
+    "....dddd..",
+    ".bbbddd.c.",
+    "bbcdddcc..",
+    "bcdddc....",
+    "bccccb....",
+    "bbccbb....",
+    ".bbbb....."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Solar Eclipse",
-    "id": "Gerhana Matahari"
-  }
+    "en": "Proxima Flare",
+    "id": "Semburan Proxima"
+  },
+  "motif": "proxima-flare"
 }

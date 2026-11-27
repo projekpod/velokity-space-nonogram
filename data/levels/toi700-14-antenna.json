@@ -1,22 +1,21 @@
 {
   "id": "toi700-14-antenna",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...cc..........",
-    "...............",
-    "....b...ddddd..",
-    "...dbdddddaaa..",
-    "..dddaaaaaaaa..",
-    "...aaaaaaaaa...",
-    "....aaaaaaaa...",
-    ".....aaaaaa....",
-    ".......ba......",
-    ".......b.......",
-    ".......b.......",
-    ".......b.......",
-    "....ccccccc....",
-    "...............",
-    "..............."
+    "..ccd.........",
+    ".cccdd........",
+    ".ccccdd...c...",
+    ".ccccdddc.c...",
+    ".cccccddcc....",
+    "ccccccddcc....",
+    "..cccccdccc...",
+    "...cccccd....b",
+    "....ccccd..bbb",
+    ".bbb.cbddddbaa",
+    "bbaaaaaaaaaaaa",
+    "bbaaaaaaaaaabb",
+    "bbbbbbbbbdbbb.",
+    "bbbbbbbbbbbb.."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Antenna Mast",
-    "id": "Tiang Antena"
-  }
+    "en": "Dune Sail Skimmer",
+    "id": "Peluncur Layar Bukit Pasir"
+  },
+  "motif": "dune-sail-skimmer"
 }

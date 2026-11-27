@@ -1,18 +1,19 @@
 {
   "id": "mercury-15-survey-rover",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "......c....",
-    "......b....",
-    "..aaaa.....",
-    "..addda....",
-    "..adddaab..",
-    ".aaaaaaab..",
-    ".aaabbbba..",
-    ".babbc.ac..",
-    ".ac..c..a..",
-    "..a........"
+    "cccccccccccc",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbaa.",
+    ".bbbbaaccaaa",
+    "....aaccaaaa",
+    "....ccaaaaaa",
+    "....cdddaadd",
+    "..dddaadddaa",
+    "ddaaaaaaaaaa",
+    "aaaaaaaaaaaa"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +23,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Survey Rover",
-    "id": "Rover Survei"
-  }
+    "en": "Dust Horizon",
+    "id": "Horizon Debu"
+  },
+  "motif": "mercury-dust-horizon"
 }

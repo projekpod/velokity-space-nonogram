@@ -1,20 +1,19 @@
 {
   "id": "kepler186-05-observatory",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    "..d..........",
-    "..dd.........",
-    "...dd........",
-    "....addaa....",
-    "...abbdda....",
-    "..aaaaaaaa...",
-    "..aaaabbbb...",
-    "..bbbbbbbbb..",
-    "..bbbbbbbbb..",
-    "..bbbbbcccc..",
-    "..ccccc......",
-    "............."
+    ".....ddd....",
+    ".....ccd....",
+    ".....ccd....",
+    "ddddddcd....",
+    "ddddaaaad...",
+    "ddddaaaad...",
+    "ddddddddddd.",
+    "ccccddcccccd",
+    "ddddccdddddc",
+    "ddddd...dbd.",
+    "dbbb....bbbb",
+    ".bb......bb."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Observatory",
-    "id": "Observatorium"
-  }
+    "en": "Travelling Weather Rover",
+    "id": "Rover Pengamat Cuaca"
+  },
+  "motif": "weather-rover"
 }

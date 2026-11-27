@@ -1,19 +1,20 @@
 {
   "id": "neptune-16-spacesuit-glove",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    ".....aa.....",
-    ".....aa.aa..",
-    "...a.aaaaa..",
-    "..aa.aaaaa..",
-    "...aaaaaaa..",
-    "...aadddaa..",
-    "...aadddaa..",
-    "...aaddda...",
-    "...bbbbaa...",
-    ".....abb....",
-    "............"
+    "...ccccccccc.",
+    "..ccccccccccc",
+    "bbbbccccccccc",
+    "bbbbbbccccccc",
+    "...cbbbc.....",
+    ".....bbc.....",
+    ".cccccbb..bb.",
+    "......bbbbbb.",
+    "......cbbb.aa",
+    "..aaaaabbadda",
+    "aaaaaaaaaddaa",
+    "aaaaaaaddaaaa",
+    "aaaaaaddaaaaa"
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +24,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Suit Glove",
-    "id": "Sarung Tangan Astronaut"
-  }
+    "en": "Cold-World Drill",
+    "id": "Bor Es Dunia Dingin"
+  },
+  "motif": "cold-world-drill"
 }

@@ -1,21 +1,20 @@
 {
   "id": "lhs1140-02-sample-tube",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "....bb........",
-    "....bbbbbb....",
-    "....bbbbbb....",
-    "....aabbbb....",
-    "....addaa.....",
-    "....ddcda.....",
-    "...adccda.....",
-    "...adccd......",
-    "...aadcd......",
-    "...aaaaa......",
-    "...aaaaa......",
-    "..............",
-    "..............",
-    ".............."
+    "cbbbbaa......",
+    "ccaaaaaaab...",
+    "bcddddddddb..",
+    "bcdddddddddd.",
+    "bbcaacaaccadb",
+    "bbcaacaaccaab",
+    "bbccccaaccaab",
+    "bbdddcddccaab",
+    "bbdaccddccaab",
+    "bbbaacaaccaab",
+    ".bbaacaaccdbb",
+    "..baaaabbbddb",
+    "...babbbbbddb"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +24,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Ice Core Storage Rack",
+    "id": "Rak Penyimpan Inti Es"
+  },
+  "motif": "core-storage-rack"
 }

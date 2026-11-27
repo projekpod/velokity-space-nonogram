@@ -2,18 +2,18 @@
   "id": "neptune-07-oxygen-pack",
   "size": 12,
   "solution": [
-    "............",
-    "...bb...b...",
-    "..bbbb.bbb..",
-    "..baaaabbb..",
-    "..baddddab..",
-    "..aadcdaab..",
-    "..aaaaaaab..",
-    "..bcaaaaa...",
-    "....ccbbb...",
-    "......dd....",
-    "............",
-    "............"
+    "..ddd.......",
+    "aaaadddaaaa.",
+    "abbbbadddaa.",
+    "bbbbbabbbba.",
+    "dbbbaabbbbba",
+    "ddaaaabbbbaa",
+    "adddaddaaaaa",
+    "aaaadbbddaaa",
+    "aaabbbbaadda",
+    "aabbbbaaaaad",
+    "aabbbaaaaaaa",
+    "aabbaaacccaa"
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Oxygen Pack",
-    "id": "Tabung Oksigen"
-  }
+    "en": "Triton Cantaloupe Terrain",
+    "id": "Dataran Bermotif di Triton"
+  },
+  "motif": "triton-terrain"
 }

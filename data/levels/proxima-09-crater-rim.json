@@ -1,19 +1,18 @@
 {
   "id": "proxima-09-crater-rim",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".........a..",
-    "........aa..",
-    "..aaaa.aaaa.",
-    ".aadaaaaaaa.",
-    ".aaadddaaaa.",
-    ".aaaaaadaaa.",
-    "..bbbbbbbba.",
-    "............",
-    "............"
+    "...bbbbbb..",
+    ".bbbbbbbbb.",
+    "bccbbcbbbbb",
+    "ccccbcbddbb",
+    "ccccbcdaacb",
+    "baabbcdaccc",
+    "baaaadaaccc",
+    "baaaadaacc.",
+    "baaadaab...",
+    ".abbdaa....",
+    "...bbab...."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Crater Rim",
-    "id": "Bibir Kawah"
-  }
+    "en": "Alien Seedpod",
+    "id": "Polong Benih Alien"
+  },
+  "motif": "alien-seedpod"
 }

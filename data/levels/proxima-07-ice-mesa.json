@@ -1,19 +1,18 @@
 {
   "id": "proxima-07-ice-mesa",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....aaa....",
-    "...aaaaa....",
-    "...daaaaa...",
-    "..aaddaaaa..",
-    "..aaaadaaa..",
-    "..aaaaadaaa.",
-    "...aaaaaaa..",
-    "............",
-    "............"
+    "bbbbbbb....",
+    "bbbbaabbb..",
+    "bbaaaaabbb.",
+    "aaaaacddbb.",
+    "aacccddcbbb",
+    "aadcdccccbb",
+    "aaaddcccabb",
+    "aaaadcccabb",
+    "aaaadacabbb",
+    "aaaadaaabbb",
+    "baaaaaaabb."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Ice Mesa",
-    "id": "Dataran Es"
-  }
+    "en": "Seed Vault",
+    "id": "Brankas Benih"
+  },
+  "motif": "seed-vault"
 }

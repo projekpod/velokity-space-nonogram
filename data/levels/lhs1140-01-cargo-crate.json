@@ -1,21 +1,20 @@
 {
   "id": "lhs1140-01-cargo-crate",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    "..ddaaaa......",
-    ".dddddddda....",
-    ".addddddddd...",
-    ".aabddddddda..",
-    ".aabaaadbaa...",
-    ".aabaaaabaa...",
-    ".aaacccaaaa...",
-    ".abaaaabaaa...",
-    ".abaaaabaaa...",
-    ".......baaa...",
-    "..............",
-    ".............."
+    "......ccbb...",
+    "...cccccccc..",
+    ".ccccccccccc.",
+    "cccddddddcccc",
+    "cccdddddddccc",
+    "cccddddddddac",
+    "cccdddbbdaabb",
+    "cccaaaaaaadbb",
+    "dddaaaaabbdbb",
+    "ddcdddbbbbbbb",
+    "cdccdbbbbbbbb",
+    "cccbbbbbbbbbb",
+    "cccbbbbbbbbb."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +24,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Cargo Crate",
-    "id": "Peti Kargo"
-  }
+    "en": "Ice Anchor",
+    "id": "Jangkar Es"
+  },
+  "motif": "ice-anchor"
 }

@@ -2,20 +2,20 @@
   "id": "lhs1140-08-spiral-galaxy",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "..bbbbb.......",
-    ".baaabbbb.....",
-    ".baadbabbb....",
-    ".bbabdddabb...",
-    ".bbbacddbab...",
-    "..bbbaccbabb..",
-    "...bbbbacaab..",
-    "....bbbbbbb...",
-    "......bbbb....",
-    "..............",
-    "..............",
-    ".............."
+    "ddddddddd.....",
+    "dddddddddddd..",
+    "ddddddddddddd.",
+    "ddddddddddbbd.",
+    "dddddddddbbbb.",
+    ".dddddddbbbbbb",
+    ".dd..ddbbbbbbb",
+    "...ccccccbbbbb",
+    "...ccccccbbbbb",
+    "baaaaaacbbbbbb",
+    "baaaaaaaabbbbb",
+    "baaaaddbbbbbbb",
+    "bbbbbddbbbbbbb",
+    "bbbbbbdbbbbbbb"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Spiral Galaxy",
-    "id": "Galaksi Spiral"
-  }
+    "en": "Under-Ice Lantern",
+    "id": "Lentera Bawah Es"
+  },
+  "motif": "under-ice-lantern"
 }

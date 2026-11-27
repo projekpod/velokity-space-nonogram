@@ -1,21 +1,22 @@
 {
   "id": "kepler22-17-deep-space-probe",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".c............",
-    "ccc...........",
-    "...ccaddabbb..",
-    "....aadddbbb..",
-    ".bbbaaaaabbb..",
-    "....abbb..bb..",
-    "....bbbbb.....",
-    "...bbb........",
-    "..............",
-    "..............",
-    ".............."
+    ".cccbcc........",
+    "ccbbbcc........",
+    "bbbbbccc.......",
+    "bbbbbcbcc......",
+    "bbbbbcbccaaaaaa",
+    "bbbbcccaaaaaaaa",
+    "bbbbccaaaaaaaaa",
+    "bbddddaaaaaaaaa",
+    "dddddddaaaacccc",
+    "dbbbcdddaaccccc",
+    ".bbbcdddddcccc.",
+    "..cccddddddccc.",
+    "...ccdddcdddd..",
+    "......cccccdddd",
+    "............ddd"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +26,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Deep Space Probe",
-    "id": "Wahana Antariksa Jauh"
-  }
+    "en": "Frond Sailbug",
+    "id": "Serangga Bersayap Daun"
+  },
+  "motif": "frond-sailbug"
 }

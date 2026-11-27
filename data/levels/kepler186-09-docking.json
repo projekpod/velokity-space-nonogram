@@ -2,19 +2,19 @@
   "id": "kepler186-09-docking",
   "size": 13,
   "solution": [
-    ".............",
-    ".....bbb.....",
-    "......bb.....",
-    "....aad......",
-    "....aaaaa....",
-    ".cccaddda.cc.",
-    ".cccadddabcc.",
-    ".cccadddabcc.",
-    "....aaaaa.cc.",
-    ".............",
-    ".............",
-    ".............",
-    "............."
+    ".bbbbbbb...d.",
+    ".bbbbbbbbbddd",
+    ".bbbbbbbbbdd.",
+    "ccbbbbbbbddb.",
+    "cccbaabbdddb.",
+    ".ccbaaaaddb..",
+    ".bccaaaddbb..",
+    ".bccaaaddbbb.",
+    ".accaaaddabbb",
+    ".accaaaddaccc",
+    ".accaaaddaaaa",
+    ".accaaaddaaaa",
+    ".accaaaddaaaa"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Docking Craft",
-    "id": "Wahana Sandar"
-  }
+    "en": "Cool Forest",
+    "id": "Hutan di Dunia Sejuk"
+  },
+  "motif": "kepler186-cool-forest"
 }

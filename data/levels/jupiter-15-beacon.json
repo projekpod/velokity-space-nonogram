@@ -1,19 +1,21 @@
 {
   "id": "jupiter-15-beacon",
-  "size": 12,
+  "size": 14,
   "solution": [
-    "............",
-    "............",
-    ".....a......",
-    ".....a......",
-    "....ccc.....",
-    "....ddd.....",
-    ".....ca.....",
-    ".....aa.....",
-    ".....aa.....",
-    "...bbaabb...",
-    ".bbbbbbbbb..",
-    "............"
+    "..b.........d.",
+    "dbbdddaaadddd.",
+    "dbbdddaadddccc",
+    "dbbdddadaacccc",
+    "ddbbddaaaccccc",
+    "ddbbdaaaaccbbb",
+    "ddbbaaaaabbbbb",
+    "ddbbbaabbbbccc",
+    "ddabbbbbbddccc",
+    "daaaabbddddccc",
+    "daaadddddddaaa",
+    "aaaadddddddaaa",
+    "aaaaddddddaaaa",
+    "aaaddddddaaaaa"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +25,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Landing Beacon",
-    "id": "Suar Pendaratan"
-  }
+    "en": "Europa Ice Rafts",
+    "id": "Rakit Es Europa"
+  },
+  "motif": "europa-ice-rafts"
 }

@@ -1,20 +1,19 @@
 {
   "id": "kepler186-01-helmet",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".....aa......",
-    "...aaaaaa....",
-    "..abddbaaa...",
-    "..dccddbaa...",
-    ".bdddddbaa...",
-    ".abdddbbaa...",
-    "..abbbbaaa...",
-    "..aaaaaadd...",
-    "..bbbbbbdd...",
-    "..bbbbbbb....",
-    ".............",
-    "............."
+    "bbbbcbbbb...",
+    "bccbbcbbbbb.",
+    "accbbbcbcbbb",
+    "aaccccccccbb",
+    "aaacccccaccc",
+    "aadaaaacaddd",
+    "aadddddcdddb",
+    "aaaaaaacaaab",
+    "aaaddaacaabb",
+    "adddddacabbb",
+    "dddbaddddddd",
+    "......dddddd"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Astronaut Helmet",
-    "id": "Helm Astronaut"
-  }
+    "en": "Terraced Seedbeds",
+    "id": "Bedeng Benih Bertingkat"
+  },
+  "motif": "terraced-seedbeds"
 }

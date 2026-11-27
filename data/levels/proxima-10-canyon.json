@@ -1,19 +1,18 @@
 {
   "id": "proxima-10-canyon",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "..........a.",
-    "..a.....aaa.",
-    "..aaa..adaa.",
-    "..aaaaddaa..",
-    "..aaadaaaa..",
-    "..abbbbbbb..",
-    "............",
-    "............"
+    "abbbbaa....",
+    "ccccbaaa...",
+    "cccccbaaa..",
+    "ddddcbbaaa.",
+    "ccccddbbaaa",
+    "ccccccccbba",
+    "cccca..aaaa",
+    "cccca...aaa",
+    "cccaa...aa.",
+    "ccca....a..",
+    "ccca......."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Canyon Wall",
-    "id": "Dinding Ngarai"
-  }
+    "en": "Habitat Arch",
+    "id": "Lengkung Habitat"
+  },
+  "motif": "habitat-arch"
 }

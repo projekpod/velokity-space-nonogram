@@ -1,18 +1,17 @@
 {
   "id": "mercury-03-helmet",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "....aa.....",
-    "..aaaaaa...",
-    "..bdddaa...",
-    ".adddddaa..",
-    ".addddbaa..",
-    ".abbbbbaa..",
-    "..aaaaaa...",
-    "..bbbbdd...",
-    "..bbbbb....",
-    "...........",
-    "..........."
+    "a......cc.",
+    "accccccccc",
+    "acccddccc.",
+    "ddddcccc..",
+    "aacccccaa.",
+    "aaaccbbbaa",
+    "aaabbbbbba",
+    "aaabbbbbbb",
+    "aaaabbbbbb",
+    "aaaabbbbbb"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Astronaut Helmet",
-    "id": "Helm Astronaut"
-  }
+    "en": "Long Shadow",
+    "id": "Bayangan Panjang"
+  },
+  "motif": "mercury-long-shadow"
 }

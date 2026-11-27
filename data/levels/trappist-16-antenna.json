@@ -1,20 +1,21 @@
 {
   "id": "trappist-16-antenna",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    "...c.........",
-    "........ddd..",
-    "....dddddaa..",
-    "..dddaaaaa...",
-    "...aaaaaaa...",
-    "....aaaaa....",
-    "......b......",
-    "......b......",
-    "......b......",
-    "....cccccc...",
-    "............."
+    "....dddddd....",
+    "...ddddbbbc...",
+    "..dddbbbbbbb..",
+    ".cddbbbbbbbbb.",
+    "ccdb..bbbbbbb.",
+    "cccc...bbbbbbb",
+    "cccccccbbbbbbb",
+    "cddccccccccbbb",
+    "ccdbbbcccccccc",
+    ".cdbbbbbbbcccc",
+    ".ccdbbbbbbbbc.",
+    "..ccdbbbbbbc..",
+    "...cccccccc...",
+    ".....cccc....."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Antenna Mast",
-    "id": "Tiang Antena"
-  }
+    "en": "Twin Transit",
+    "id": "Transit Dua Planet"
+  },
+  "motif": "twin-transit"
 }

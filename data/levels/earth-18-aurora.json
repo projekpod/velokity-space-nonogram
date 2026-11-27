@@ -1,19 +1,20 @@
 {
   "id": "earth-18-aurora",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....c.ccc...",
-    ".....ccc..c.",
-    "....a.......",
-    "...aaaa.a...",
-    "...aaaaddaa.",
-    "..aaaddaaaa.",
-    "...abbbbbba.",
-    "............",
-    "............"
+    "ddbbb.....c..",
+    "bdddbb...cccc",
+    "bbbddbb..cccc",
+    "bbbbbddbbbbc.",
+    "bbbb..ddbbbb.",
+    "bbaaaaaddbbbb",
+    "bbb.bbaaddbb.",
+    "bbb.bbabbbdd.",
+    "bbdbaaaabbb..",
+    "bbddbbbbaab..",
+    "baddbbbbbaa..",
+    "adbbdb....aa.",
+    ".db.d.......a"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Aurora Horizon",
-    "id": "Cakrawala Aurora"
-  }
+    "en": "Solar Farm",
+    "id": "Kebun Panel Surya"
+  },
+  "motif": "solar-farm"
 }

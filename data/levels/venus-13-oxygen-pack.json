@@ -2,17 +2,17 @@
   "id": "venus-13-oxygen-pack",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "....bb..b..",
-    "....bb.bb..",
-    "...baaaabb.",
-    "...baddaab.",
-    "...badcaa..",
-    "...aaaaaa..",
-    "...bb.aab..",
-    "...d.ccb...",
-    "...d......."
+    ".bbbb......",
+    "dbbbbd.....",
+    "dbbcbd.....",
+    "dbbccc.....",
+    ".ddcccc.aa.",
+    "...ccccaaab",
+    "...cccaaac.",
+    "....caaacc.",
+    "....aaccccc",
+    "ccaaa.cccc.",
+    "aaa.....c.."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Oxygen Pack",
-    "id": "Tabung Oksigen"
-  }
+    "en": "Magellan Probe",
+    "id": "Wahana Magellan"
+  },
+  "motif": "magellan-probe"
 }

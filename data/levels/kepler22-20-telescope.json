@@ -1,21 +1,22 @@
 {
   "id": "kepler22-20-telescope",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..ddddd.......",
-    ".ddddddd......",
-    "..dddddda.....",
-    "...dddddaa....",
-    ".....dbaaaaa..",
-    "......cbabba..",
-    ".....bcbabb...",
-    "....bbcb.bb...",
-    "...bb.cbb.....",
-    "...b..c.b.....",
-    "..bb.c..b.....",
-    "..b..c...b....",
-    "..............",
-    ".............."
+    ".aaaaaccc......",
+    ".aaaacccc......",
+    ".aaaacccc......",
+    ".aaacccccc.....",
+    ".aaacccccc.....",
+    ".aaddddddd.....",
+    ".addddddddd....",
+    ".dddcccccdddb..",
+    ".ddaccccccddd..",
+    "ddaaacc.ccbdd..",
+    "ddaaacc..cbbdd.",
+    ".aaaaa....bbbdd",
+    ".aaaaaa...bbbb.",
+    ".aaaaaa...bbbb.",
+    ".aaa......bbbb."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +26,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Telescope",
-    "id": "Teleskop"
-  }
+    "en": "Rainforest Sail",
+    "id": "Layar Hutan Eksoplanet"
+  },
+  "motif": "rainforest-sail"
 }

@@ -1,18 +1,17 @@
 {
   "id": "mercury-02-sample-tube",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "...........",
-    "...bbbbb...",
-    "..bbbbb....",
-    "..baadd....",
-    "...ddcda...",
-    "...accda...",
-    "...adcaa...",
-    "....aaaa...",
-    "....a......",
-    "..........."
+    ".aa.......",
+    "aaaacaaada",
+    "aacacaadaa",
+    "aaaccadccc",
+    "cccccdcaaa",
+    "aaacdaaaaa",
+    "aaacdccaaa",
+    "aacaadacaa",
+    "adaaadaaca",
+    "daaaaaaa.c"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Crater Rays",
+    "id": "Sinar Kawah"
+  },
+  "motif": "crater-rays"
 }

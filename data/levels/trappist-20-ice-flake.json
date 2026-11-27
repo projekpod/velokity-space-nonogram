@@ -1,20 +1,21 @@
 {
   "id": "trappist-20-ice-flake",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    "...a....a....",
-    "...aa..aa....",
-    "....aa.aa....",
-    "....adda.....",
-    ".aaadccdaaaa.",
-    "aaaadccdaaaa.",
-    "....adda.....",
-    "....aa.aa....",
-    "...aa...a....",
-    "...a....aa...",
-    ".............",
-    "............."
+    ".......bb.....",
+    "..aaabbbbbb...",
+    ".bbaaaabbbbbb.",
+    ".bbbbbaaaabbb.",
+    ".bbbbbbbbaabb.",
+    ".bbdddddccaab.",
+    "...dddddccca..",
+    "..cdddddd.ccc.",
+    "cccdddddd..ccc",
+    "cccdddddd...cc",
+    "cc..d...dd..cc",
+    "cc......dd..cc",
+    "cc.......dd...",
+    "..........d..."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Ice Flake",
-    "id": "Keping Es"
-  }
+    "en": "Solar-Powered Walker",
+    "id": "Penjelajah Berkaki Bertenaga Surya"
+  },
+  "motif": "solar-walker"
 }

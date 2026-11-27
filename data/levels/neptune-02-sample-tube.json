@@ -1,19 +1,18 @@
 {
   "id": "neptune-02-sample-tube",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "....bbbbbb..",
-    "....bbbbbb..",
-    ".....aaaa...",
-    ".....ddda...",
-    ".....dcca...",
-    ".....dcca...",
-    ".....dcca...",
-    ".....aaaa...",
-    ".....aaaa...",
-    "............"
+    "bbbbaaaaaaa",
+    "bbbbaaaaaaa",
+    "bbbbbaaddaa",
+    "bbbbbddd.aa",
+    "bbbbddd...c",
+    "bbbddaa..c.",
+    "bbbadaaac..",
+    "bbbaddcc...",
+    "bbbaddcaa..",
+    "bbbaddcaa..",
+    "bbbadaaca.."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +22,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Triton Slope Streak",
+    "id": "Jejak di Lereng Triton"
+  },
+  "motif": "triton-slope-streak"
 }

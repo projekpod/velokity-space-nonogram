@@ -1,19 +1,20 @@
 {
   "id": "earth-20-ice-flake",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "....a...a...",
-    "....aa..a...",
-    ".....a.aa...",
-    ".....add....",
-    "..aaadccaaaa",
-    "..aaadcd....",
-    ".....aaaa...",
-    ".....a..a...",
-    "....aa..aa..",
-    "............",
-    "............"
+    ".....ccc....c",
+    "a..ccbcccc.cc",
+    "aacbbbbbbccc.",
+    ".abb....bccc.",
+    ".db......bdc.",
+    "ddb......bdc.",
+    "ddb......bdcc",
+    "ddb.....bbddd",
+    ".ddbb..bbdddd",
+    ".cddbbbbdddd.",
+    ".ddddddddcdd.",
+    "dddddddccdd..",
+    ".....dddddd.."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Ice Flake",
-    "id": "Keping Es"
-  }
+    "en": "Total Solar Eclipse",
+    "id": "Gerhana Matahari Total"
+  },
+  "motif": "solar-eclipse"
 }

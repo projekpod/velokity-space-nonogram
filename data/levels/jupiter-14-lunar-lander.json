@@ -1,19 +1,20 @@
 {
   "id": "jupiter-14-lunar-lander",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "....aaaa....",
-    "...adddaa...",
-    "...adddaa...",
-    "...aaaaaa...",
-    "...abaaba...",
-    "...abcccb...",
-    "...b.cc.bb..",
-    "...b.....cc.",
-    "..cc........",
-    "............"
+    "dd...aaa.....",
+    "ddccaaaaaa...",
+    "cddcc.aaaa...",
+    "ccdd..bbbaa..",
+    ".cddd..bbba..",
+    "..cddd..bba..",
+    "..bcddd..baa.",
+    "..bbcdddbba..",
+    "..abbccddda..",
+    "..aabcccddd..",
+    "...aaaccccdd.",
+    "....aaaacccdd",
+    "......a....dd"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Lunar Lander",
-    "id": "Pendarat Bulan"
-  }
+    "en": "Jupiter's Faint Ring",
+    "id": "Cincin Tipis Jupiter"
+  },
+  "motif": "jupiter-dust-ring"
 }

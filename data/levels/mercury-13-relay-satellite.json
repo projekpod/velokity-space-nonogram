@@ -2,17 +2,17 @@
   "id": "mercury-13-relay-satellite",
   "size": 11,
   "solution": [
-    "...........",
-    "...c.......",
-    "....a......",
-    "...aaaa....",
-    "cccaada.dd.",
-    "cccadddbdd.",
-    "...aada.cc.",
-    "...aaaa....",
-    "...........",
-    "...........",
-    "..........."
+    "..ccc......",
+    ".ccccc.....",
+    "ccaaadd....",
+    "ccaaaddd...",
+    "ccccaddd...",
+    ".ccccdddddd",
+    "...cccccccd",
+    "....cdddd..",
+    "....ccd....",
+    ".....cbbbb.",
+    "......bbbb."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Relay Satellite",
-    "id": "Satelit Relai"
-  }
+    "en": "Solar Tide",
+    "id": "Pasang Surut Matahari"
+  },
+  "motif": "solar-tide"
 }

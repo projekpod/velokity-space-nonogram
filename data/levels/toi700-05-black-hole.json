@@ -1,22 +1,20 @@
 {
   "id": "toi700-05-black-hole",
-  "size": 15,
+  "size": 13,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    ".....bbbbbb....",
-    "...bbbbbaaab...",
-    "..bbbaabbaaab..",
-    ".bbabbbbccabb..",
-    "bbabcbbbbcbbb..",
-    "baaccbbbabbb...",
-    "bbaaabbbbbb....",
-    ".bbbbbbbb......",
-    "....bb.........",
-    "...............",
-    "...............",
-    "..............."
+    "aaaabaaaaa...",
+    "aaaaabbbbaa..",
+    "aaaaaabbbbaa.",
+    "aaaaccccaaaaa",
+    "aaccccccca...",
+    "cccccccc....a",
+    "..cccc....aaa",
+    ".....cccccaaa",
+    "aa..cccccaaa.",
+    ".aaacccccaaa.",
+    "..aaccaaaca..",
+    "...acaaaacc..",
+    "...caaaaa...."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +24,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Black Hole",
-    "id": "Lubang Hitam"
-  }
+    "en": "Dust Separator",
+    "id": "Pemisah Debu"
+  },
+  "motif": "dust-separator"
 }

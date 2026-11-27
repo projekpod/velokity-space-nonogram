@@ -2,18 +2,18 @@
   "id": "proxima-19-geyser",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "...d.c..d...",
-    "....cccd....",
-    ".....dd.....",
+    "..aaadd.....",
+    "..aaadaa....",
     ".....d......",
-    ".....a......",
-    ".....a......",
-    "...bbabb....",
-    ".bbbbabbb...",
-    ".bbbbbbbbb..",
-    "............"
+    ".....d......",
+    "cccccddccc..",
+    "cccccdccccc.",
+    "cccccdcccccc",
+    "ccccccdccccb",
+    "ccbbbbbddbbb",
+    "cccbbbbbbdbb",
+    ".....bbbbbb.",
+    "......bbbbb."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Ice Geyser",
-    "id": "Semburan Es"
-  }
+    "en": "Red dwarf beacon",
+    "id": "Suar Bintang Katai Merah"
+  },
+  "motif": "red-dwarf-beacon"
 }

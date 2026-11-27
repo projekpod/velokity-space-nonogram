@@ -1,19 +1,17 @@
 {
   "id": "proxima-03-cratered-moon",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    ".....aaa....",
-    "....abaaaa..",
-    "...abbabba..",
-    "...aaaabbba.",
-    "...aaaaabaa.",
-    "...adddaaaa.",
-    "...adddaaa..",
-    "....adaaaa..",
-    ".....aaaa...",
-    "............",
-    "............"
+    "...acbbb..",
+    "..aacbbbb.",
+    ".aaacbbbbb",
+    "aaaaccbbbb",
+    "aaaaaccbbb",
+    "adddaacbbb",
+    "aaaaaccbdb",
+    ".aaaccbbbb",
+    "..aacbbbb.",
+    "...ccbb..."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Cratered Moon",
-    "id": "Bulan Berkawah"
-  }
+    "en": "Tidal Terminator",
+    "id": "Batas Siang dan Malam"
+  },
+  "motif": "tidal-terminator"
 }

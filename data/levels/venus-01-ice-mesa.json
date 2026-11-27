@@ -1,18 +1,17 @@
 {
   "id": "venus-01-ice-mesa",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "...........",
-    "...........",
-    "...........",
-    "...aaaa....",
-    "...ddaaaa..",
-    "...aadaaaa.",
-    "..aaaaddaa.",
-    "..aaabbbbaa",
-    "...a.......",
-    "..........."
+    "aaaadbbaaa",
+    "aaaadbaaaa",
+    "aaacdbaaaa",
+    "aaccbaaaaa",
+    "aaccaaaaaa",
+    "accbaaaaaa",
+    "accbaaaaaa",
+    "aacccaaaaa",
+    "aaacccbaaa",
+    "....bcbb.."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +21,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Ice Mesa",
-    "id": "Dataran Es"
-  }
+    "en": "Lava Channel",
+    "id": "Saluran Lava"
+  },
+  "motif": "lava-channel"
 }

@@ -1,19 +1,18 @@
 {
   "id": "uranus-06-oxygen-pack",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "...bb..bb...",
-    "...bb.bbab..",
-    "...baaadab..",
-    "...aaacdaab.",
-    "...aaadaaab.",
-    "...baaaaab..",
-    "....bcc.bb..",
-    "........cd..",
-    "............"
+    "cbbbbbb....",
+    "bccbbbbbb..",
+    "bbbccbbbbb.",
+    "bdbbbcccbbb",
+    "bddbbbbbccb",
+    ".....ddbbcc",
+    "......ddbbc",
+    "......bdd..",
+    "..cc..b....",
+    "b..cc.b....",
+    "...bcb....."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +22,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Oxygen Pack",
-    "id": "Tabung Oksigen"
-  }
+    "en": "Uranus Ring Scan",
+    "id": "Pemindaian Cincin Uranus"
+  },
+  "motif": "uranus-ring-scan"
 }

@@ -2,17 +2,17 @@
   "id": "venus-10-crater-rim",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "...........",
-    "...........",
-    ".........a.",
-    "........aa.",
-    "...aaaaaaa.",
-    "..adddaaaa.",
-    "..aaaaddaaa",
-    "..abbbbbba.",
-    "...a......."
+    ".....aaa...",
+    "....aaaaa..",
+    "...aaaaaa..",
+    "..aaaccaaa.",
+    ".aaaadddda.",
+    "aadddaaaaaa",
+    "aaaaaaaaaaa",
+    "aaaaaaaaaaa",
+    "a.aaaaaaa.a",
+    "..accccca..",
+    "..aacccaa.."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Crater Rim",
-    "id": "Bibir Kawah"
-  }
+    "en": "Pressure Capsule",
+    "id": "Kapsul Penahan Tekanan"
+  },
+  "motif": "pressure-capsule"
 }

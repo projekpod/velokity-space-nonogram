@@ -2,20 +2,20 @@
   "id": "kepler22-12-spacesuit-glove",
   "size": 14,
   "solution": [
-    "..............",
-    "......a.......",
-    ".....aa.aa....",
-    ".....aa.aa....",
-    "..a..aaaaaa...",
-    ".aaa.aaaaaa...",
-    "..aaaaddaaa...",
-    "...aaddddaa...",
-    "...aaddddaa...",
-    "...aaaddaa....",
-    "...abbbbba....",
-    "..............",
-    "..............",
-    ".............."
+    ".cbbbbbbbbcddd",
+    "cccbbbbbddddbb",
+    ".cccaaaddccbbb",
+    ".bcccaddccabbb",
+    ".aaccddccaaaa.",
+    ".aaacdcccb....",
+    ".aaaadccb.....",
+    ".aaaadccc.....",
+    ".adaddccc.....",
+    ".aadddcccc....",
+    ".aaadccbccc...",
+    ".aaaccbbbcccc.",
+    ".aaccbbbbbbccc",
+    "...cc.......cc"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +25,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Suit Glove",
-    "id": "Sarung Tangan Astronaut"
-  }
+    "en": "Mangrove Roots",
+    "id": "Akar Bakau"
+  },
+  "motif": "alien-mangrove-roots"
 }

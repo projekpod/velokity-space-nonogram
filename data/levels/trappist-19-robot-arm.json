@@ -1,20 +1,21 @@
 {
   "id": "trappist-19-robot-arm",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    ".....b.......",
-    "....bbbaa....",
-    "..cbbbbaaaa..",
-    "...c....aaa..",
-    "...c....aa...",
-    ".......aaa...",
-    ".......aa....",
-    "......daa....",
-    "....bbdadbbb.",
-    "....bbbbbbbb.",
-    "............."
+    "..aacaaa......",
+    "..aaccaaa.....",
+    "..aaacaaaaa.aa",
+    "..aaacaaddddaa",
+    "..aabacdddddda",
+    "..bbbbcaaddaaa",
+    ".bbbbbbcaaaaaa",
+    ".bbbbbbcaaaa..",
+    ".bbbbbbcaaa...",
+    ".bbbbbc..a....",
+    "bbbbbccddd....",
+    "aaaaaccddddd..",
+    "aaaacc.....dd.",
+    "aaaaca......d."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Robot Arm",
-    "id": "Lengan Robot"
-  }
+    "en": "Tracking Mount",
+    "id": "Dudukan Pelacak Langit"
+  },
+  "motif": "tracking-mount"
 }

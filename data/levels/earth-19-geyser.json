@@ -1,19 +1,20 @@
 {
   "id": "earth-19-geyser",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "....dcc.dd..",
-    ".....cccd...",
-    ".....ddd....",
-    "......a.....",
-    "......a.....",
-    "......a.....",
-    "....bbabb...",
-    "...bbbabbbb.",
-    "..bbbbabbbb.",
-    "...bbbbbbb..",
-    "............"
+    "...bb..daa...",
+    ".bbbbbdcaaaa.",
+    "bbbbbaccdaaa.",
+    "bbbbbdcdaaaaa",
+    ".bbbdcadaaaa.",
+    ".bbccbbdaaabb",
+    "bbdbbbbdabb..",
+    "bbdbbbbdb....",
+    "bbdbbbbbdd...",
+    ".bdbbbbbbddd.",
+    ".bdbbbbbbb...",
+    "..db.bbbbb...",
+    "..d...bbb...."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Ice Geyser",
-    "id": "Semburan Es"
-  }
+    "en": "Rainforest Canopy",
+    "id": "Kanopi Hutan Hujan"
+  },
+  "motif": "rainforest-canopy"
 }

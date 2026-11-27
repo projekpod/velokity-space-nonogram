@@ -2,18 +2,18 @@
   "id": "uranus-11-docking",
   "size": 12,
   "solution": [
-    ".....bb.....",
-    ".....bb.....",
-    ".....dd.....",
-    ".cccaaaa....",
-    ".cccaddabdc.",
-    ".cccadddbdc.",
-    ".cccadda.cc.",
-    "....aaaa....",
-    "............",
-    "............",
-    "............",
-    "............"
+    ".ccdd.......",
+    "..cccdd.....",
+    ".bbcccdd....",
+    "bbbbccddd...",
+    "bbbbbccbdd..",
+    "bbbabccbbdd.",
+    "bbbbaaccbbb.",
+    "bbbbbaaccbbb",
+    "bbbbbbaccbbd",
+    ".bbbbbbbcbb.",
+    ".....dd.cc..",
+    ".....d..c..."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Docking Craft",
-    "id": "Wahana Sandar"
-  }
+    "en": "Tumbling Top",
+    "id": "Gasing Sumbu Miring"
+  },
+  "motif": "tumbling-top"
 }

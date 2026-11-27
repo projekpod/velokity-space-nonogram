@@ -1,20 +1,19 @@
 {
   "id": "kepler186-04-habitat",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    ".........aa..",
-    "...aaaa.aaaa.",
-    "...addacadda.",
-    "...addadadda.",
-    "...aaaadaaaa.",
-    ".......c.aaa.",
-    "..........a..",
-    ".............",
-    "............."
+    "........d...",
+    "dddd....dd..",
+    "ddddd..dddd.",
+    "cccccd.ccccc",
+    "ddddcccccdcc",
+    "dddddcccdddd",
+    ".ddddddd....",
+    "....ddaaa...",
+    "...ddaaaaaa.",
+    "aaaaaaaaaaaa",
+    "aabbbbaaabbb",
+    "......bbb..."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Habitat Modules",
-    "id": "Modul Hunian"
-  }
+    "en": "Canopy Glider",
+    "id": "Peluncur di Atas Kanopi"
+  },
+  "motif": "canopy-glider"
 }

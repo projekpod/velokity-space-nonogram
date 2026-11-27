@@ -1,19 +1,20 @@
 {
   "id": "earth-16-beacon",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    ".....a......",
-    "....cac.....",
-    "....ddd.....",
-    ".....c......",
-    "....aa......",
-    "....aa......",
-    "....aa......",
-    "..bbaabb....",
-    ".bbbbbbbb...",
-    "............",
-    "............"
+    "....aadaa....",
+    "..aaabdccaa..",
+    ".aabbbdccccc.",
+    ".abbaadccccc.",
+    "aabaabdcccccc",
+    "abbabbdcccccc",
+    "ddddddddddddd",
+    "abbabbdbcccca",
+    "aabaabdbaacca",
+    ".abbaadaabba.",
+    ".acccbdbbbaa.",
+    "..cccbdbaaa..",
+    "....aadaa...."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Landing Beacon",
-    "id": "Suar Pendaratan"
-  }
+    "en": "Weather Radar",
+    "id": "Radar Cuaca"
+  },
+  "motif": "weather-radar"
 }

@@ -1,19 +1,17 @@
 {
   "id": "proxima-01-dunes",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "............",
-    ".....aa.....",
-    "..aaaaaa....",
-    ".aaaaaddaaa.",
-    ".aaaddaaaaa.",
-    ".abbbbbbba..",
-    "............",
-    "............"
+    ".dbccbb...",
+    "dacccbbb..",
+    "dacaabbbb.",
+    "ddcaaaabbb",
+    "aadcaaabbb",
+    "aaaccaaabb",
+    "aaaaccabbb",
+    "aaaaaccccc",
+    "aaaaaaacbb",
+    "aaaaaabbbb"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Dunes",
-    "id": "Bukit Pasir"
-  }
+    "en": "Frozen Crescent Coast",
+    "id": "Pesisir Sabit Beku"
+  },
+  "motif": "frozen-crescent-coast"
 }

@@ -1,19 +1,21 @@
 {
   "id": "jupiter-18-antenna",
-  "size": 12,
+  "size": 14,
   "solution": [
-    "............",
-    "............",
-    "........c...",
-    "..dddd......",
-    ".aaaaddddd..",
-    "..aaaaaaa...",
-    "...aaaaa....",
-    "...aab......",
-    ".....b......",
-    ".....b......",
-    "...ccccc....",
-    "............"
+    "cc............",
+    ".ccccccaaaa...",
+    "..accccdddaa..",
+    ".aabbccccdddd.",
+    ".bbbbbccaccad.",
+    ".bbbbbccaaccc.",
+    "bbbbbbcccaaaa.",
+    "bbbbbbbcccaaa.",
+    ".dbbbbbbcccaa.",
+    "dddbbbbbbcccb.",
+    ".bddbbbbbbccc.",
+    "..bdbbbbbbbcc.",
+    "...bdbbbbb..cc",
+    ".....dbb....cc"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +25,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Antenna Mast",
-    "id": "Tiang Antena"
-  }
+    "en": "Ganymede Grooves",
+    "id": "Alur Ganimede"
+  },
+  "motif": "ganymede-grooves"
 }

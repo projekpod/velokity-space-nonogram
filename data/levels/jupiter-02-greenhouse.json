@@ -2,18 +2,18 @@
   "id": "jupiter-02-greenhouse",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "...aaaa.....",
-    "..aaaaaa....",
-    ".aaaaaaaa...",
-    ".aaaaaaaa...",
-    ".adaaaada...",
-    ".bddddddbb..",
-    ".bddddddbb..",
-    ".bbbbbbbbb..",
-    "cccccccccc..",
-    "............"
+    "aaaaadda....",
+    "aaaadddda...",
+    "aadaadddaa..",
+    "aaaaaaaaaaa.",
+    "aaaaaaaaddaa",
+    "aaaaaaadddaa",
+    "cccccccdddaa",
+    "bbbbaaccddab",
+    ".bbbbbadccbb",
+    ".bbbbbbddccb",
+    "..bbbbddbbbb",
+    "..bbbbdbb..."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Moon Greenhouse",
-    "id": "Rumah Kaca Bulan"
-  }
+    "en": "Atmospheric Lightning",
+    "id": "Petir di Atmosfer Jupiter"
+  },
+  "motif": "jupiter-lightning"
 }

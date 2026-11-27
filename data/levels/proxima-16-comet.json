@@ -2,18 +2,18 @@
   "id": "proxima-16-comet",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    ".......c....",
-    "......cbb...",
-    ".....cbbb...",
-    "....bbcbd...",
-    "....bccd....",
-    "...cccd.....",
-    "..aaadb.....",
-    "..adaa......",
-    "..adaa......",
-    "...aa......."
+    ".cddddd.....",
+    ".cccbddddccd",
+    ".bbbbbbcccdd",
+    ".cccccbccdd.",
+    ".ccccbcdddd.",
+    "..cccbdddaa.",
+    ".accdbaaaaa.",
+    "..aaabdddda.",
+    "..ccbddddd..",
+    "..cbbdddc...",
+    "...bd..cccc.",
+    "..........c."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Comet",
-    "id": "Komet"
-  }
+    "en": "Laser Sail",
+    "id": "Layar Laser"
+  },
+  "motif": "laser-sail"
 }

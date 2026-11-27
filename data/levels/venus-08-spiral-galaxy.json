@@ -2,17 +2,17 @@
   "id": "venus-08-spiral-galaxy",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "...........",
-    "badab......",
-    ".aaddd.....",
-    ".babddab...",
-    "...adcbab..",
-    "....bacab..",
-    ".......b...",
-    "...........",
-    "..........."
+    "......dddd.",
+    "...cccccc..",
+    ".bbbbccccc.",
+    "bbbbbbcccc.",
+    "bbbbbbb....",
+    "bbbbabbb.aa",
+    "bbbaaaaaaca",
+    "bbaaaccccaa",
+    ".ccccaaaaaa",
+    "aaaaaaaaaaa",
+    "aaaaaaaaaaa"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Spiral Galaxy",
-    "id": "Galaksi Spiral"
-  }
+    "en": "Twilight Clouds",
+    "id": "Awan Senja"
+  },
+  "motif": "twilight-clouds"
 }

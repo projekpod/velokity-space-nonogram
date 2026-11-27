@@ -1,19 +1,18 @@
 {
   "id": "earth-06-eclipse",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "...ccccc....",
-    "..ccbbbbc...",
-    "..cbaaaabc..",
-    ".ccabbbabc..",
-    ".ccabbbabc..",
-    "..cbbbabbc..",
-    "..ccbbbbc...",
-    "...ccccc....",
-    "............",
-    "............"
+    ".....d.....",
+    ".....d.....",
+    "....ddd....",
+    "....ddd....",
+    "...dddd....",
+    "...ddddd...",
+    "...dccdd...",
+    "...dcddd...",
+    ".bbccccd...",
+    "bbbcddccdd.",
+    ".dddd.bbbdd"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Solar Eclipse",
-    "id": "Gerhana Matahari"
-  }
+    "en": "Rocket Launch",
+    "id": "Peluncuran Roket"
+  },
+  "motif": "rocket-launch"
 }

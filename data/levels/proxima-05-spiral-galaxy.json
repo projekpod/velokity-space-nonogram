@@ -1,19 +1,17 @@
 {
   "id": "proxima-05-spiral-galaxy",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    ".bbaaabbb...",
-    "bdddddbaab..",
-    "baabdcdbaab.",
-    ".bbbaaaabb..",
-    "...bbbbbb...",
-    "............",
-    "............",
-    "............"
+    "d.a.......",
+    "ad........",
+    "aadd......",
+    "aaaad...dd",
+    ".aaaadddaa",
+    "....aaaaaa",
+    ".bb.baaaab",
+    "bbbb.b.bbb",
+    "bbbb......",
+    ".bbbbbbbbb"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Spiral Galaxy",
-    "id": "Galaksi Spiral"
-  }
+    "en": "Horizon Spectrum",
+    "id": "Spektrum di Horizon"
+  },
+  "motif": "horizon-spectrum"
 }

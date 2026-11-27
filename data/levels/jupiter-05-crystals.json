@@ -2,18 +2,18 @@
   "id": "jupiter-05-crystals",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....a......",
-    "....baa.....",
-    "....baa.....",
-    "..dbbaabb...",
-    "..ddbaabb...",
-    ".bddbaabb...",
-    ".bddbaabbb..",
-    "...bbbbbb...",
-    "............"
+    "dd..........",
+    "bbdbaaaab...",
+    "bbbbaaaaab..",
+    ".bbbbbcca.b.",
+    ".b.dbbcca.bb",
+    "bccabbcca.bb",
+    "cccccbcca.bb",
+    ".b.aaccccccc",
+    ".b.aabbccddd",
+    "..baabbbabdd",
+    "...baabbbb..",
+    ".....aa.bb.."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Crystal Outcrop",
-    "id": "Singkapan Kristal"
-  }
+    "en": "Jovian Radiation Belt",
+    "id": "Sabuk Radiasi Jupiter"
+  },
+  "motif": "jupiter-radiation-belt"
 }

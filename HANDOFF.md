@@ -1,6 +1,14 @@
 # Handoff — Velokity Content v1.1
 
-Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. T13 selesai. Katalog sekarang berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. T13 dibuka kembali untuk menindaklanjuti review Claude. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+
+## Review T13 · Gambar album
+
+- Gambar ulang 240 papan pada 12 planet. Earth memuat ISS, roket, satelit pengamat Bumi, benua, dan aurora. Jupiter memuat Bintik Merah Besar, gunung api Io, dan Juno. Neptunus memuat geiser Triton dan Voyager 2. Album eksoplanet memuat alat observasi, rover, dan bentang alam bertema planet masing-masing.
+- Katalog memuat 296 motif berbeda. Cakupan kotak pembatas gambar baru minimum 86,22% dan rata-rata 99,64%. Setiap gambar baru menyisakan paling banyak satu baris dan satu kolom kosong. Ketiga album awal sama persis dengan versi sebelum review. ID seluruh 300 level tetap berlaku untuk progres tersimpan.
+- Setiap planet baru memiliki tiga ukuran berturut-turut, dengan 6, 8, lalu 6 level per ukuran. Median ambiguitas petunjuk naik antarukuran dan antarplanet. `tools/check_levels.py` memeriksa cakupan, baris dan kolom kosong, pengulangan gambar atau motif, dan progresi ukuran serta membuktikan satu solusi per papan.
+- Sumber `art/levels_src/*.txt` untuk planet baru memakai header `slug-id-lama|judul-en|judul-id|motif`, diikuti kisi persegi. Gunakan ID motif yang sama untuk varian dari gambar yang sama. Jalankan `python3 tools/build_levels.py` untuk memperbarui JSON.
+- Gate lokal lulus dengan 549 pemeriksaan Godot, 17 tes Python, 12 tes Node, dan ekspor Web serta Web QA. Web mentah 41.385.139 byte. Chromium memperbarui 12 PNG di `docs/qa/` dari build Web QA. PNG terbesar 141.069 byte. Ulangi pengambilan dengan perintah tangkapan album di bawah setelah mengubah gambar.
 
 ## T13 · Bagian 3 selesai
 
@@ -14,13 +22,10 @@ Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. 
 - Tes Godot mencakup batas zoom dan akurasi tap pada 12×12 dan 15×15. `?qa=zoom` menyalakan fixture 15×15 di build Web QA untuk uji gestur Chromium melalui `.github/qa/release-check.mjs`.
 - Pada checkpoint Bagian 1, katalog masih 60 Nonogram, 12 puzzle bonus, dan 120 puzzle harian. Web Bagian 1 sekitar 41,16 MB. Jalankan gate lokal di bawah sebelum push berikutnya.
 
-## T13 · Bagian 2 selesai
+## T13 · Progres dan hadiah album
 
-- Katalog berisi 15 album × 20 papan. 12 planet baru punya sumber di `art/levels_src/`, masing-masing satu commit dengan JSON hasil build dan PNG album di `docs/qa/album-*.png`. PNG terbesar 126.781 byte.
-- Tiga planet lama mempertahankan ID dan posisi. Planet baru mengikuti ukuran 11→15 dan median ambiguitas petunjuk yang naik. Daftar planet memakai halaman dan album memakai pemilih planet. Papan 11×11 juga mendukung zoom dan pan.
+- Katalog berisi 15 album dengan masing-masing 20 papan. Daftar planet memakai halaman dan album memakai pemilih planet. Papan 11×11 juga mendukung zoom dan pan.
 - Buka planet setelah 15 dari 20 puzzle planet sebelumnya selesai. Album baru membayar bonus koin sekali saat puzzle ke-20 tersimpan. Hadiah per level tetap maksimum 60, dan iklan pengganda hanya menghitung hadiah level. Hadiah kostum untuk tiga album lama tetap berlaku.
-- 548 pemeriksaan Godot, 10 tes Python, 12 tes Node, validator semua puzzle, ekspor Web dan Web QA, serta 12 tangkapan Chromium lulus. Web mentah 41.309.902 byte. Pada checkpoint Bagian 2, katalog harian masih 120 papan.
-- Ulangi pembuatan JSON dengan `python3 tools/build_levels.py`. Ambil semua album dari Web QA yang sedang disajikan dengan `node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots`.
 
 ## T12b · Autopilot & CI hygiene
 
@@ -119,6 +124,7 @@ Dengan server berjalan, jalankan di terminal lain. Set `PLAYWRIGHT_CHROMIUM_EXEC
 
 ```sh
 node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
+node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
 node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
@@ -126,6 +132,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Review perubahan T13 dan hasil Quality gates branch `codex/t13-content-v11`. Oz menangani PR dan merge.
-2. T14 — Tambahkan mekanik kecil setiap 10–15 level setelah review T13.
-3. Uji audio, zoom sentuh, dan performa pada ponsel kelas menengah. Lanjutkan QA portal untuk menutup T11 dan T11b.
+1. Terapkan dispatch manual dan retry deploy Pages, lalu jalankan kembali Quality gates sebelum menutup T13.
+2. Oz review album, hasil Quality gates, dan PR T13.
+3. Lanjutkan T14 setelah review T13. Uji audio, zoom, dan performa ponsel kelas menengah untuk T11 dan T11b.

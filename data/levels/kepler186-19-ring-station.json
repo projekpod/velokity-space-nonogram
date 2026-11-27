@@ -1,20 +1,21 @@
 {
   "id": "kepler186-19-ring-station",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "...aacca.....",
-    "..aa.cc.a....",
-    "..a..dd..a...",
-    ".bbbbddbbb...",
-    "..a..dd.aa...",
-    "..aa.c.aa....",
-    "...aacaa.....",
-    ".............",
-    ".............",
-    "............."
+    "......ccc.....",
+    "......ccc.....",
+    ".ccccccccc....",
+    "cccccaaaacccc.",
+    "ccccaadacccccc",
+    "cccaaacccaaccc",
+    ".ccaaccbaaaccc",
+    ".ccaccbbbaaccc",
+    "..cccbbbaaaccc",
+    "ccccaabaaacc..",
+    "..cccaaaacc...",
+    "..ccc.ccccc...",
+    "..c....cccc...",
+    ".......cccc..."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +25,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Ring Station",
-    "id": "Stasiun Cincin"
-  }
+    "en": "Pollen Spore",
+    "id": "Spora di Udara"
+  },
+  "motif": "pollen-spore"
 }

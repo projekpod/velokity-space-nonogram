@@ -1,19 +1,20 @@
 {
   "id": "uranus-17-antenna",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "..c.........",
-    "..b.....d...",
-    "..bdddddd...",
-    ".dddaaaaa...",
-    "..aaaaaa....",
-    "..aaaaaa....",
-    "....bb......",
-    "....bb......",
-    "....bb......",
-    "..cccccc....",
-    "............"
+    ".d...dd......",
+    ".d.ddddddd...",
+    ".daacbbbbdd..",
+    ".ddaccabbddd.",
+    "dadaaccaabddc",
+    "daddacccabdc.",
+    "daaddccccadc.",
+    "dddbddccaadd.",
+    "dddbbddcaaad.",
+    ".dddbcdddaad.",
+    "..dddccdddd..",
+    "...ddcdddd...",
+    ".....ddd..d.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +24,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Antenna Mast",
-    "id": "Tiang Antena"
-  }
+    "en": "Off-Axis Compass",
+    "id": "Kompas Sumbu Miring"
+  },
+  "motif": "off-axis-compass"
 }

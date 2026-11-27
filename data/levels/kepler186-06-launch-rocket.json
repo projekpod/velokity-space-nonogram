@@ -1,20 +1,19 @@
 {
   "id": "kepler186-06-launch-rocket",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    "......a......",
-    ".....aa......",
-    "....aad......",
-    "....addd.....",
-    "....aad......",
-    "....aaa......",
-    "...aaaab.....",
-    "...baaabb....",
-    "..b.ccbbb....",
-    "....c........",
-    "............."
+    ".........cc.",
+    ".....b..cccc",
+    ".....bb..ccc",
+    ".....bb..cc.",
+    "....dbb.....",
+    "....dbb.dd..",
+    "...ddbb.ddd.",
+    ".ddacccadddd",
+    "ddaccbbccaaa",
+    "accabbbbccaa",
+    "ccaaabbbaacd",
+    ".aaaaaabaaa."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Launch Rocket",
-    "id": "Roket Peluncur"
-  }
+    "en": "Red Dwarf Sundial",
+    "id": "Jam Matahari Katai Merah"
+  },
+  "motif": "red-dwarf-sundial"
 }

@@ -1,18 +1,19 @@
 {
   "id": "mercury-20-telescope",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "..d........",
-    ".ddd.......",
-    ".ddddd.....",
-    ".dddddaa...",
-    "...dddaaa..",
-    ".....cabb..",
-    "....bcbbb..",
-    "....bcb....",
-    "...b...b...",
-    "...b..c.b..",
-    "...b..c.b.."
+    "...dddddd...",
+    "..ddd...dd..",
+    ".dd......dd.",
+    ".d..bbbbbbbb",
+    "bbbbcccc..dd",
+    "d...cccc...d",
+    "d...cccc...d",
+    "dd..cccc...d",
+    ".d........dd",
+    ".dd...a..dd.",
+    "..ddaaaadd..",
+    "....aaaad..."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +23,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Telescope",
-    "id": "Teleskop"
-  }
+    "en": "Orbital Resonance",
+    "id": "Resonansi Orbit"
+  },
+  "motif": "orbital-resonance"
 }

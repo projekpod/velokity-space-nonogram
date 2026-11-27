@@ -1,19 +1,20 @@
 {
   "id": "earth-15-star-cluster",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....cc......",
-    "..dddc......",
-    "...dccccc...",
-    ".cccaacb....",
-    "....cacb....",
-    ".....cbbbb..",
-    ".....c.bb...",
-    "............",
-    "............"
+    "aaadd........",
+    "aaadccccc....",
+    "aaddcddccaaaa",
+    "aaddcdddddaaa",
+    "addccddddaaaa",
+    "dddccdddaaaaa",
+    "ddddccdaaaaaa",
+    "dddddccaaaabb",
+    "dddaaaaccabbb",
+    "dddaaaaaacbbb",
+    "ddaaaaaaaacbb",
+    "ddaaaaaaabbcc",
+    "daaaaaaaabbcc"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Star Cluster",
-    "id": "Gugus Bintang"
-  }
+    "en": "Arctic Sea Ice",
+    "id": "Es Laut Arktik"
+  },
+  "motif": "arctic-sea-ice"
 }

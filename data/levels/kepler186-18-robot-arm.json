@@ -1,20 +1,21 @@
 {
   "id": "kepler186-18-robot-arm",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    "....bb.......",
-    "....bbaa.....",
-    "...bb.aaa....",
-    "..cc...aaa...",
-    "...c...aaa...",
-    ".......aa....",
-    "......aaa....",
-    "......aa.....",
-    ".....daa.....",
-    "...bbbddbb...",
-    ".............",
-    "............."
+    "dddddddddddddd",
+    "dddddddddddddd",
+    "ddddddddddddda",
+    ".aa.dddd.dddaa",
+    "..aadddd...aa.",
+    "...addd...aa..",
+    "....ddd.aa....",
+    "...ccccccc....",
+    "...ccccccc....",
+    "...ccccccc....",
+    ".bbbcccdd..bbb",
+    "bbbbcccdcbbbbb",
+    "bbbbbccdcbbbbb",
+    "bbbbbcddbbbbbb"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +25,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Robot Arm",
-    "id": "Lengan Robot"
-  }
+    "en": "Rain Gauge",
+    "id": "Pengukur Curah Hujan"
+  },
+  "motif": "rain-gauge"
 }

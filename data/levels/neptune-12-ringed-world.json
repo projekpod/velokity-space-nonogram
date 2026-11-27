@@ -2,18 +2,18 @@
   "id": "neptune-12-ringed-world",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....da.....",
-    "...ddddda...",
-    "...dddddd...",
-    ".ccbbbbbccc.",
-    "ccccccccccc.",
-    "...bbbbbb...",
-    "....bbbbb...",
-    "............",
-    "............"
+    "......aaa...",
+    "...ddaaaaba.",
+    "....daaabba.",
+    "..aaadaabba.",
+    "baaaaadaab..",
+    "bbbbbaada...",
+    "bbbbbaadd.dd",
+    "bbbbbbaaddd.",
+    "bbbbbba..d..",
+    "bbbbbba.....",
+    ".bbbbb......",
+    ".bbbbb......"
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Ringed World",
-    "id": "Planet Bercincin"
-  }
+    "en": "Hippocamp Moonlet",
+    "id": "Bulan Kecil Hippocamp"
+  },
+  "motif": "hippocamp-moonlet"
 }

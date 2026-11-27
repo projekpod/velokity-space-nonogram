@@ -2,18 +2,18 @@
   "id": "proxima-17-volcano",
   "size": 12,
   "solution": [
-    "............",
-    ".....cc.....",
-    ".....cc.....",
-    "......ca....",
-    "....adaa....",
-    "....adaaa...",
-    "...aaadaaa..",
-    "..aaaaadaaa.",
-    ".aaaaaadaaa.",
-    "..abbbbbbba.",
-    "............",
-    "............"
+    ".....ddddd..",
+    ".........d..",
+    ".....aaa..d.",
+    "aaaaaaaaa..d",
+    "aaaaaaccaaa.",
+    "accccccccaaa",
+    "aacccccccaaa",
+    "aaccccccaaaa",
+    "aaaaaaaaaaaa",
+    "aaaaaa....a.",
+    "aaaaaaaaaaa.",
+    "abb.....abb."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Shield Volcano",
-    "id": "Gunung Api Perisai"
-  }
+    "en": "Mobile Lab",
+    "id": "Laboratorium Keliling"
+  },
+  "motif": "mobile-lab"
 }

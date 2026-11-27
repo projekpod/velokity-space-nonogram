@@ -1,19 +1,18 @@
 {
   "id": "neptune-01-cargo-crate",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "...adddddaa.",
-    "..adddddddd.",
-    "..aaadddddd.",
-    "..aabaaaaba.",
-    "..aabaccaaa.",
-    "..aabaaabaa.",
-    "....baaabaa.",
-    ".........a..",
-    "............"
+    "cccaaaaa...",
+    "ccccccaaa..",
+    "cdddccccaa.",
+    "ccccdcccca.",
+    "cccbcdccccc",
+    "bcbbbbddcbb",
+    "bbbbbbbbdbb",
+    "babbbbbbbba",
+    ".abbbbbbba.",
+    "..aaabaaa..",
+    "...aaaa...."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +22,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Cargo Crate",
-    "id": "Peti Kargo"
-  }
+    "en": "Triton Ice Cap",
+    "id": "Tudung Es Triton"
+  },
+  "motif": "triton-ice-cap"
 }

@@ -1,19 +1,18 @@
 {
   "id": "uranus-01-return-capsule",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "......aaa...",
-    ".....aaaa...",
-    "....aadda...",
-    "....aaddd...",
-    "...aaadda...",
-    "...cccccaa..",
-    "...aaaaac...",
-    "....bbbb....",
-    "............",
-    "............"
+    "cbbbb.....c",
+    "ccbbbd...cc",
+    "bcbdddd.cc.",
+    "bbccdddccbb",
+    "bbddccccbbb",
+    "bbdddbbbbbb",
+    "bbddbcbcbbb",
+    "bbddccccccb",
+    "bbdaabcbbaa",
+    "aaaaaabaaaa",
+    "aaaaaaaaaaa"
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +22,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Return Capsule",
-    "id": "Kapsul Pulang"
-  }
+    "en": "Ice-Seismometer",
+    "id": "Seismometer Es"
+  },
+  "motif": "ice-seismometer"
 }

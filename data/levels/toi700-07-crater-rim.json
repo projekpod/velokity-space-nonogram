@@ -1,22 +1,21 @@
 {
   "id": "toi700-07-crater-rim",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    "...a...........",
-    "...aaaa....a...",
-    "..aaaaaa..dda..",
-    ".aaaaaaadddaaa.",
-    "..aaaadddaaaaa.",
-    "..aaaddaaaaaaa.",
-    "..abbbbbbbbbba.",
-    "..aaaaaaaaaaa..",
-    "..............."
+    "bbbbbbbbb.....",
+    "bbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbb",
+    "bbbbbbbbbbbb..",
+    "bcccac.....aaa",
+    "aaaaaaaaaaaaaa",
+    "aacdddcaaaaaaa",
+    "ccccdccaacccca",
+    "acccccaaaccddd",
+    "aaaaaaaacccddd",
+    "aaaaaaaaacccdc",
+    "aaaaaaaaaaccc."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Crater Rim",
-    "id": "Bibir Kawah"
-  }
+    "en": "Alien Burrow Mounds",
+    "id": "Gundukan Liang Alien"
+  },
+  "motif": "alien-burrow-mounds"
 }

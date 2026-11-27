@@ -1,20 +1,21 @@
 {
   "id": "trappist-17-aurora",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "....c........",
-    "...cccc.cc...",
-    ".cc..cccc....",
-    "........a....",
-    "...aa..aaa...",
-    ".aadddaaaaa..",
-    ".aaaadddaaa..",
-    ".abbbbbbbba..",
-    "....aaaaaaa..",
-    "............."
+    "dd............",
+    "dddd...ddd....",
+    "ddddd.dddd....",
+    "daaddadddd....",
+    "ddaaaaaddd....",
+    "dddaaddaad....",
+    "dddddcccad....",
+    "ddddccccaccc..",
+    "ddddccccaccccc",
+    "dddcccccaccccc",
+    "bbbbbcccaccccc",
+    "bbbbb.ccaaccc.",
+    ".bbbbb.ccca...",
+    "..bb....c....."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Aurora Horizon",
-    "id": "Cakrawala Aurora"
-  }
+    "en": "Specimen Grabber",
+    "id": "Penjepit Sampel"
+  },
+  "motif": "specimen-grabber"
 }

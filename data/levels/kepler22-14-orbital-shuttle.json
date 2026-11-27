@@ -2,20 +2,20 @@
   "id": "kepler22-14-orbital-shuttle",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".......aa.....",
-    "......ada.....",
-    "......ddda....",
-    "......ddda....",
-    ".....baddab...",
-    "....bbaaaabb..",
-    "...bbbaaabbb..",
-    "..bbbbaaabbbb.",
-    "...bb.aaa.bb..",
-    "......ccc.....",
-    ".............."
+    "cccacccccc....",
+    "ccaaaccccccc..",
+    "aaaaaaccccccc.",
+    "aaaaaacccccccc",
+    "caaaaabbccccca",
+    "caaaaabbaccaca",
+    "caaaaabbacaa..",
+    ".ccaaabbcc....",
+    "..cccddd......",
+    "....ddddd.....",
+    "...ddddddd....",
+    ".dd..ddbbdd...",
+    "........bbddd.",
+    "........bb..dd"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +25,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Orbital Shuttle",
-    "id": "Pesawat Ulang Alik"
-  }
+    "en": "Orbital Umbrella",
+    "id": "Payung di Orbit"
+  },
+  "motif": "orbital-umbrella"
 }

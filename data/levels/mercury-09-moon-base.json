@@ -2,17 +2,17 @@
   "id": "mercury-09-moon-base",
   "size": 11,
   "solution": [
-    ".......a...",
-    ".......a...",
-    "...........",
-    "...aaaaa...",
-    "..aaaaaaa..",
-    "..aaaaaaab.",
-    "..aabbbbbb.",
-    "..bbddddbb.",
-    "..bbddddbcc",
-    "..bbccccc..",
-    "..cc......."
+    ".aaa.......",
+    "bb.aaaaa...",
+    "bbbaaaaaaa.",
+    "bbbcccbbbb.",
+    "bccccccbbbb",
+    "bcccccccbbb",
+    "cccddddbbbb",
+    "ccccddbbbbb",
+    "cccccbbbbbb",
+    "bcccbbbbbbb",
+    "..bbbbbbb.."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Moon Base",
-    "id": "Pangkalan Bulan"
-  }
+    "en": "Polar Ice Crater",
+    "id": "Kawah Es Kutub"
+  },
+  "motif": "polar-ice-crater"
 }

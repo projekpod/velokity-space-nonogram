@@ -1,21 +1,22 @@
 {
   "id": "kepler22-19-ring-station",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    "......acc.....",
-    "...aaaaccaa...",
-    "..ba...dd.aa..",
-    "..bbbbddd..aa.",
-    "...a..dddbbbb.",
-    "...aaa.cd..ab.",
-    ".....accaaaa..",
-    "......cc......",
-    "..............",
-    "..............",
-    ".............."
+    ".cbbbbbbbb.....",
+    "ccbbbbbbbbb....",
+    ".ccbbbbbbbbb...",
+    ".cccddddddbbb..",
+    ".bccddddddbbbb.",
+    ".bbccbbbbbbbaa.",
+    ".bbcccbbbbaaaa.",
+    ".bbaccaaaaaaaa.",
+    ".aaaacccaaaaaa.",
+    ".aaaaaccccc....",
+    ".aaaaaabcccc...",
+    ".aaaaabbb.ccdd.",
+    ".ddddddddddddc.",
+    ".ddddddddb..ccc",
+    ".............c."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +26,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Ring Station",
-    "id": "Stasiun Cincin"
-  }
+    "en": "Spiral Weather Balcony",
+    "id": "Balkon Pengamat Cuaca"
+  },
+  "motif": "weather-balcony"
 }

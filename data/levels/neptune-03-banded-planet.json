@@ -1,19 +1,18 @@
 {
   "id": "neptune-03-banded-planet",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "....aaaaa...",
-    "...aaaaaaa..",
-    "...dddddddd.",
-    "..ddabbbbbb.",
-    "..bbbbaaacc.",
-    "..cdddccccb.",
-    "...bbbbbbba.",
-    "...aaaaaaa..",
-    "....aaaaa...",
-    "............"
+    "...baabb...",
+    "..aaaaaab..",
+    ".acccccaaa.",
+    ".baaaaaccca",
+    ".bddddaaabc",
+    "bddbddaddbb",
+    "ddbbaabaddd",
+    ".bbbabbccd.",
+    "..babcccba.",
+    "..acccbbb..",
+    "..cc.b....."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +22,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Banded Planet",
-    "id": "Planet Belang"
-  }
+    "en": "Neptune Storm Bands",
+    "id": "Pita Badai Neptunus"
+  },
+  "motif": "neptune-storm-bands"
 }

@@ -1,19 +1,18 @@
 {
   "id": "earth-05-black-hole",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "......bb....",
-    "...bbbaaab..",
-    "..baabbccab.",
-    "..aacbbcab..",
-    "..bacbbbb...",
-    "..bbbbbb....",
-    "............",
-    "............",
-    "............",
-    "............"
+    "cc..ddd..cc",
+    "ccccdddcccc",
+    "....ddd....",
+    "....ccc....",
+    "....ddd....",
+    "...ddbb....",
+    "...dbdd....",
+    "..bbbbbb..b",
+    "bbbbbbbbbbb",
+    "aaaaaabbbbb",
+    "bddddaaaaaa"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Black Hole",
-    "id": "Lubang Hitam"
-  }
+    "en": "Coastal Lighthouse",
+    "id": "Mercusuar Pesisir"
+  },
+  "motif": "coastal-lighthouse"
 }

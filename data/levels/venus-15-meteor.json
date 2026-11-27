@@ -1,18 +1,19 @@
 {
   "id": "venus-15-meteor",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    ".b.........",
-    "..bbb......",
-    "..bcbb.....",
-    "..bccbb....",
-    "...bcccb...",
-    "....bbaa...",
-    ".....baaa..",
-    "......ada..",
-    "......aaa..",
-    "..........."
+    "....bbbbb...",
+    ".bbbbbbbbbb.",
+    "baaaaaaabbbb",
+    "aaaaaaaaaabb",
+    "aaaaaaaaaaab",
+    "accccccaaaab",
+    "accccccccaab",
+    "acbbbbbccaaa",
+    "acbbbbccaaaa",
+    "ddcccccaaaaa",
+    "bddddaaaaabb",
+    "bbaadddaabbb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Meteor",
-    "id": "Meteor"
-  }
+    "en": "Lava Tube Skylight",
+    "id": "Lubang Tabung Lava"
+  },
+  "motif": "lava-tube-skylight"
 }

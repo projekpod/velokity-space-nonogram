@@ -1,18 +1,17 @@
 {
   "id": "mercury-06-moon-boot",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    ".....aa....",
-    "....aaa....",
-    "....ddda...",
-    "....ddda...",
-    "....aabb...",
-    ".....bbb...",
-    "...aaaaaa..",
-    "..aaacccc..",
-    "..cccc.....",
-    "..........."
+    ".dd.......",
+    "dddaa.....",
+    ".daa......",
+    "..ac.bb.c.",
+    ".aacbbbccc",
+    ".a.bb.ccc.",
+    "a..bb.ccc.",
+    "....bccc..",
+    "....baac..",
+    "...aa....."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Moon Boot",
-    "id": "Sepatu Bulan"
-  }
+    "en": "Mariner 10",
+    "id": "Wahana Mariner 10"
+  },
+  "motif": "mariner-ten"
 }

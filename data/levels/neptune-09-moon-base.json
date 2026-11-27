@@ -2,18 +2,18 @@
   "id": "neptune-09-moon-base",
   "size": 12,
   "solution": [
-    "............",
-    "........a...",
-    "...aaaaa....",
-    "..aaaaaaa...",
-    ".aaaaaaaa...",
-    ".aaaaaaaa...",
-    ".bbbbbbbbb..",
-    ".bbddddbbb..",
-    ".bbddddbbb..",
-    "cccccccccc..",
-    "............",
-    "............"
+    "....aaaaa...",
+    "..aaaaaaaa..",
+    ".ddddaaaaaa.",
+    "dddadddaaaaa",
+    "bbbcccccdddd",
+    "abbcccccaaaa",
+    "aaaaaaaaaaaa",
+    "aaaaaabbbbba",
+    "daaaabbbbbdb",
+    ".ddaaabdddd.",
+    "..ddddddaa..",
+    "....aaaaa..."
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Moon Base",
-    "id": "Pangkalan Bulan"
-  }
+    "en": "Great Dark Spot",
+    "id": "Bintik Gelap Besar"
+  },
+  "motif": "great-dark-spot"
 }

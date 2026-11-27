@@ -2,17 +2,17 @@
   "id": "mercury-10-solar-wing",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "...........",
-    ".....a.....",
-    "...aaa.....",
-    ".ccdddbcd..",
-    "cdcdddaccc.",
-    "cdcaaaa.cc.",
-    "...aaa.....",
-    "...acc.....",
-    "..........."
+    "cccbbb.....",
+    "bbcccbb....",
+    "bbbbccc....",
+    "bbbbbcc....",
+    "bbbbaacc...",
+    "bbaaaaaccc.",
+    "baaaaaaaacc",
+    "aaaaadddddc",
+    "aaaadaaaadd",
+    "ddddaaaaaac",
+    "aaaaaaaaaac"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Solar Wing",
-    "id": "Sayap Surya"
-  }
+    "en": "Escarpment Traverse",
+    "id": "Jalur di Tebing"
+  },
+  "motif": "escarpment-traverse"
 }

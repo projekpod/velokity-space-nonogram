@@ -2,17 +2,17 @@
   "id": "mercury-07-meteor",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "........bb.",
-    "......bbb..",
-    ".....bccb..",
-    "..aacccb...",
-    "..aaabb....",
-    "..ddab.....",
-    "...ab......",
-    "...........",
-    "..........."
+    "bbbbb......",
+    "bbbbbbbbbbb",
+    "abbbbbbbbbb",
+    "aaabbbbbbbb",
+    "aaaaabbbbbb",
+    "aaaaadbbbbb",
+    "baaddcdbbbb",
+    "badccccaabb",
+    "bcccccccaaa",
+    "bbbcaaaaab.",
+    "bbbbaabbb.."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Meteor",
-    "id": "Meteor"
-  }
+    "en": "Impact Melt Pool",
+    "id": "Kolam Lelehan Tumbukan"
+  },
+  "motif": "impact-melt-pool"
 }

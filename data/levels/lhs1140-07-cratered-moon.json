@@ -2,20 +2,20 @@
   "id": "lhs1140-07-cratered-moon",
   "size": 14,
   "solution": [
-    "..............",
-    ".....aaa......",
-    "...aaaaaaa....",
-    "..aaaaaabba...",
-    "..abbbaaaaaa..",
-    ".aabbbaaaaaa..",
-    ".aaabadddaaa..",
-    ".aaaaaddddaa..",
-    "..aaaadddaa...",
-    "...aaaaaaaa...",
-    "....aaaaa.....",
-    "..............",
-    "..............",
-    ".............."
+    "bbbbbb...ddddd",
+    "bbbbbbbdddbbb.",
+    "bbbbbbddbbbbbb",
+    "bbbbbddbbbbbbb",
+    "bbbbbddbbbbbbb",
+    "bb....d..bbbbb",
+    "....ccdbb.....",
+    "cccccccbbbcc..",
+    "cccccccbbbaaac",
+    "aaaaaaabbbbaac",
+    "aaaaaabbbbbaac",
+    "aaaaabbbbbaaac",
+    "aaaaabbbbbaaaa",
+    "ccccaabbaaaaaa"
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Cratered Moon",
-    "id": "Bulan Berkawah"
-  }
+    "en": "Hydrothermal Chimney",
+    "id": "Cerobong Hidrotermal"
+  },
+  "motif": "hydrothermal-chimney"
 }

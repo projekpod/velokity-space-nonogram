@@ -2,20 +2,20 @@
   "id": "lhs1140-12-meteor",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".........bbb..",
-    ".......bbbbb..",
-    ".......bbcc...",
-    "......bbccb...",
-    "....abcccbb...",
-    "...aaaccbb....",
-    "..aaaaabb.....",
-    "...ddaab......",
-    "...aaab.......",
-    "....a.........",
-    ".............."
+    "bbbbbbb.....b.",
+    "cccccbbbb..bbb",
+    "cccccccbbbbbab",
+    "baaaacccbddaab",
+    ".aaaaacccddabb",
+    ".aaaaaacccdbbb",
+    ".aaaaaaaccdbbb",
+    ".daaaaaaccdbb.",
+    "..daaaabccd...",
+    "..d..abbbcd...",
+    "..dd..bbbcdd..",
+    "...d...bbccd..",
+    "...dd...bbcddd",
+    "....d...bbcc.."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Meteor",
-    "id": "Meteor"
-  }
+    "en": "Bioluminescent Fin",
+    "id": "Sirip Bercahaya"
+  },
+  "motif": "bioluminescent-fin"
 }

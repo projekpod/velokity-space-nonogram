@@ -2,19 +2,19 @@
   "id": "trappist-14-volcano",
   "size": 13,
   "solution": [
+    "bb...........",
+    "bbb...d......",
+    ".b...ddd.....",
+    "...ccdd......",
+    "...cc...bb...",
     ".............",
-    "......c......",
-    "......cc.....",
-    "......c......",
-    "....aa.da....",
-    "....aaada....",
-    "...aaadaaa...",
-    "...aaddaaaa..",
-    "..aaadaaaaaa.",
-    ".aaaadaaaaaa.",
-    ".aabbbbbbaaa.",
-    ".............",
-    "............."
+    "...........ca",
+    "..........ccc",
+    "....dd....ccc",
+    "....dddbb.aaa",
+    "......bbbaaaa",
+    "......abaaaa.",
+    "..aaaaaaaaaa."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Shield Volcano",
-    "id": "Gunung Api Perisai"
-  }
+    "en": "Seven-Planet Lineup",
+    "id": "Barisan Tujuh Planet"
+  },
+  "motif": "seven-planet-lineup"
 }

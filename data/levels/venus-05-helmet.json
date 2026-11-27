@@ -1,18 +1,17 @@
 {
   "id": "venus-05-helmet",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "...........",
-    "....aaaa...",
-    "...aabdba..",
-    "..aacdddba.",
-    "..abddddba.",
-    "..aabbbba..",
-    "...aaaabdd.",
-    "....bbbbb..",
-    "....b......",
-    "..........."
+    "...ddbdd..",
+    "...ddbdd..",
+    ".....b....",
+    ".....b....",
+    ".aaaaacc..",
+    "dddddddddd",
+    ".ddddddddd",
+    ".b.....b..",
+    "bbcddddcb.",
+    "b..cbbb.bb"
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +21,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Astronaut Helmet",
-    "id": "Helm Astronaut"
-  }
+    "en": "Venera Lander",
+    "id": "Wahana Pendarat Venera"
+  },
+  "motif": "venera-lander"
 }

@@ -2,21 +2,21 @@
   "id": "toi700-19-robot-arm",
   "size": 15,
   "solution": [
-    "...............",
-    "....bba........",
-    "....bbba.......",
-    "...bbbaaaa.....",
-    "ccbb...aaaaa...",
-    ".bc......aaa...",
-    "..c.....aaaa...",
-    ".......aaaa....",
-    "......daaa.....",
-    "......aaa......",
-    "...bbbaaabbb...",
-    "...bbbbdbbbb...",
-    "...............",
-    "...............",
-    "..............."
+    "...bbbc.......c",
+    "..bbbcccb....c.",
+    ".bbbccccb...cc.",
+    "bbbbccccbb..c..",
+    "bbbcccccbb.cc..",
+    "bbbbcccbbbcc...",
+    "bbbbbcbaacca...",
+    ".bbbbbaaccaaa..",
+    "..bbbaaccaaaaa.",
+    "...cccccdddaaa.",
+    ".ccccadddddddaa",
+    "....aadddddddd.",
+    ".....aaddddddd.",
+    "......adddddd..",
+    ".......ddddd..."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +26,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Robot Arm",
-    "id": "Lengan Robot"
-  }
+    "en": "Twin Worlds",
+    "id": "Dua Dunia Bersaudara"
+  },
+  "motif": "toi700-twin-worlds"
 }

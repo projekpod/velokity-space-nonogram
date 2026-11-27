@@ -1,19 +1,18 @@
 {
   "id": "proxima-13-crystals",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "......a.....",
-    ".....baa....",
-    ".....baa....",
-    "...d.baa....",
-    "...ddbaabb..",
-    "...ddbaabb..",
-    "...ddbaabbb.",
-    "...bdbbbbbb.",
-    ".....bbbb..."
+    "c.....b....",
+    "cc...aab.dd",
+    ".c...aabdd.",
+    ".cc.aadddbb",
+    "ddddaddbbbb",
+    ".dddddabbbb",
+    "...aacabbbb",
+    "....acabbdd",
+    ".....acddbb",
+    "......cbbbb",
+    ".......cbbb"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Crystal Outcrop",
-    "id": "Singkapan Kristal"
-  }
+    "en": "Starlight Prism",
+    "id": "Prisma Cahaya Bintang"
+  },
+  "motif": "starlight-prism"
 }

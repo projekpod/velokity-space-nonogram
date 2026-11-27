@@ -2,18 +2,18 @@
   "id": "jupiter-03-habitat",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "..aa...aa...",
-    ".aaaa.aaaa..",
-    ".addacadda..",
-    ".addadadda..",
-    ".aaaadaaaa..",
-    ".aaaaccaaa..",
-    "..aa...aa...",
-    "............",
-    "............",
-    "............"
+    "..aaacaaa...",
+    ".aaaaaaaaa..",
+    ".aaaaaaaabb.",
+    "aaaaacabbabb",
+    "aaaacccbaaaa",
+    "aaaacdcaaaaa",
+    "aaaacccaaaaa",
+    "aaabbbbbaaab",
+    ".aabaaaaaab.",
+    ".baaaaaccaa.",
+    "ddddaaaaaaa.",
+    "....dddddddd"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Habitat Modules",
-    "id": "Modul Hunian"
-  }
+    "en": "Polar Cyclone Cluster",
+    "id": "Gugus Siklon Kutub"
+  },
+  "motif": "jupiter-cyclone-cluster"
 }

@@ -2,17 +2,17 @@
   "id": "mercury-08-launch-rocket",
   "size": 11,
   "solution": [
-    "......a....",
-    ".....aa....",
-    "....aad....",
-    "....add....",
-    "....aaa....",
-    "....aaa....",
-    "...baabb...",
-    "...bcabbb..",
-    "....c..b...",
-    "...........",
-    "..........."
+    "...bbb.....",
+    "bbbbbbbb...",
+    "aacccbbbbb.",
+    "aaaabbbbbbb",
+    "aadabbbbbbb",
+    "aaaaccbbbbb",
+    "aaaacccbbbb",
+    "aabbbcaddbb",
+    "abaaabbbddb",
+    "bbaaaaaabba",
+    "baaaaaaaabb"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +22,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Launch Rocket",
-    "id": "Roket Peluncur"
-  }
+    "en": "Hollows",
+    "id": "Cekungan Cerah"
+  },
+  "motif": "mercury-hollows"
 }

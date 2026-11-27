@@ -1,18 +1,17 @@
 {
   "id": "mercury-04-return-capsule",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    "...........",
-    "....aa.....",
-    "....aaa....",
-    "....dda....",
-    "....ddda...",
-    "...aaaaca..",
-    "...accca...",
-    "....aabb...",
-    ".....b.....",
-    "..........."
+    "aa........",
+    "aaabb....b",
+    "cccaabbbba",
+    "aaacaaacaa",
+    "aaacaaacaa",
+    "aaaacdddca",
+    "aaaaaacaac",
+    "aaaaaaacac",
+    ".aaaaaaacb",
+    "..aaaaaabb"
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Return Capsule",
-    "id": "Kapsul Pulang"
-  }
+    "en": "Ancient Lava Plain",
+    "id": "Dataran Lava Purba"
+  },
+  "motif": "ancient-lava-plain"
 }

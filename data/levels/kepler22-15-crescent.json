@@ -1,21 +1,22 @@
 {
   "id": "kepler22-15-crescent",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "..............",
-    ".....aaaa.....",
-    "....aaaa......",
-    "...aaaa.......",
-    "..aaaa........",
-    "..aacc........",
-    "..accc........",
-    "..accc........",
-    "..accca.......",
-    "..acccaa......",
-    "...ccaaaaaa...",
-    "....aaaaa.....",
-    ".............."
+    "ddddddddddddddd",
+    "ddddddddccddddd",
+    "dddddddccccdddd",
+    "dddddddccccdddd",
+    "dddddddccccddd.",
+    "..dddd.cccc....",
+    "a......ccccc..a",
+    "aaa....cccccaaa",
+    "aaaaa..ccc.aaaa",
+    "aaaaaaccaaaabaa",
+    "aaaaaacaaabbddd",
+    "ddbbaaabbbddddd",
+    "dddddddddddddbb",
+    "bbdddddddddbbbb",
+    "bbbbbddddbbbbbb"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +26,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Crescent Moon",
-    "id": "Bulan Sabit"
-  }
+    "en": "Ocean World Cloudbreak",
+    "id": "Celah Awan Dunia Samudra"
+  },
+  "motif": "ocean-cloudbreak"
 }

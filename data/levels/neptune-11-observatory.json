@@ -2,18 +2,18 @@
   "id": "neptune-11-observatory",
   "size": 12,
   "solution": [
-    "......d.....",
-    ".....dd.....",
-    "...addaa....",
-    "..addbbaa...",
-    ".aadaaaaa...",
-    ".aaaaaaabb..",
-    ".bbbbbbbbb..",
-    ".bbbbbbbbb..",
-    ".bbbbbbbbcc.",
-    ".cccccccc...",
-    "............",
-    "............"
+    "...ddddddd..",
+    "dddddccdddd.",
+    ".d...ccddddd",
+    ".....cc.dddd",
+    ".....cc....d",
+    ".....ccb....",
+    ".bb..cbbb...",
+    "bbbaaabbbbbb",
+    "baaaaddddbbb",
+    "aaaadaaabbbb",
+    "aaadaaaaaaab",
+    "aadaaaaaaaaa"
   ],
   "palette": {
     "a": "#5b9eff",
@@ -23,7 +23,8 @@
   },
   "planet": "neptune",
   "title": {
-    "en": "Observatory",
-    "id": "Observatorium"
-  }
+    "en": "Triton Geyser",
+    "id": "Geiser Triton"
+  },
+  "motif": "triton-geyser"
 }

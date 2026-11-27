@@ -1,21 +1,22 @@
 {
   "id": "lhs1140-17-solar-wing",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".......aa.....",
-    ".....aaaa.ccc.",
-    "..cc.adddaccc.",
-    ".cddbaddda.cc.",
-    "..cccaddda....",
-    "..c...aaaa....",
-    "......aaaa....",
-    ".......caa....",
-    "..............",
-    "..............",
-    ".............."
+    "....ccccccccc..",
+    "......ddddd....",
+    "......cccdbbb..",
+    ".....cccccbbbb.",
+    "..bcccbbbcbbbb.",
+    "bcccbbbbbbbbbb.",
+    "ccbbbbbbbbbbbb.",
+    "bbbbbbbbbbbbbb.",
+    "bbbbbbbbaaaabb.",
+    "bbbbbbaaaaaaa..",
+    "bbbbbaaaaddaaa.",
+    "aaaaaaadddddddd",
+    "aaaaaddddaaddd.",
+    "addddddaaaaaaa.",
+    "..ddd.........."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +26,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Solar Wing",
-    "id": "Sayap Surya"
-  }
+    "en": "Ocean Moonrise",
+    "id": "Bulan Terbit di Atas Samudra"
+  },
+  "motif": "ocean-moonrise"
 }

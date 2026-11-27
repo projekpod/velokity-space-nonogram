@@ -1,22 +1,20 @@
 {
   "id": "toi700-04-ice-mesa",
-  "size": 15,
+  "size": 13,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    "...a...........",
-    "..daaaaa.......",
-    "..ddaaaaaa.....",
-    "..aaddaaaaaa...",
-    ".aaaaddaaaaa...",
-    ".aaaaaddaaaaa..",
-    ".aaaaaaddaaaa..",
-    ".aaaaaaadaaaa..",
-    ".abbbbbbbbbbaa.",
-    "...............",
-    "..............."
+    "......dd.....",
+    ".....ddddd...",
+    ".bb.ddddddd..",
+    ".bbbddaadbbd.",
+    ".bbdbbaabbbb.",
+    "dbbbbbbbbbbbb",
+    "dbbbbbbbbbbbd",
+    "dbbbbbbbbbbbd",
+    "ddddddddddddd",
+    "dddddd.dddddd",
+    "cccc..cccccdd",
+    "ccccccccccccc",
+    "cccccc...cccc"
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +24,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Ice Mesa",
-    "id": "Dataran Es"
-  }
+    "en": "Thermal Rover",
+    "id": "Rover Pemetaan Panas"
+  },
+  "motif": "thermal-rover"
 }

@@ -2,19 +2,19 @@
   "id": "kepler186-08-drill",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    ".....dddd....",
-    ".....dddd....",
-    ".....aaa.d...",
-    ".....aabbd...",
-    ".....aaa.....",
-    ".....acc.....",
-    "..bbbbcbbb...",
-    "...bbbcbbb...",
-    "......c......",
-    "............."
+    "....aaaaaa...",
+    "...aaaaaaaa..",
+    "..aaaaaaaaaa.",
+    "aaaaaaaaaaaaa",
+    "aacccaaaaaaaa",
+    "ccccccddddaaa",
+    "cccccccaaabaa",
+    "ccccccaaaabbc",
+    "ccccaaaaabbcc",
+    "cbaaaaaaabbcb",
+    "bbaaaaaaabcbb",
+    "bccaaaccccbbb",
+    "bbccccccbbbb."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Asteroid Drill",
-    "id": "Bor Asteroid"
-  }
+    "en": "Exoplanet Field Station",
+    "id": "Pos Riset Eksoplanet"
+  },
+  "motif": "exoplanet-field-station"
 }

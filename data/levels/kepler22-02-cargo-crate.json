@@ -1,21 +1,20 @@
 {
   "id": "kepler22-02-cargo-crate",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".......addd...",
-    "...aaddddddd..",
-    "..ddddddddaa..",
-    ".adddddddbaa..",
-    ".aaabaaaabaa..",
-    ".aaabacccbaa..",
-    "..aabacccaaa..",
-    "..aabaaaaaba..",
-    "..aaaaaa......",
-    "..............",
-    ".............."
+    "bbaa.........",
+    "ccccaaaaa....",
+    "bccccaaaaaaaa",
+    "bbbbccbaccaaa",
+    "bbbbbccccccbb",
+    "bbbbbbcbbcccb",
+    "bbbbbbbbbbccc",
+    "bbbbbdddbbbdd",
+    "bbdddddddbddd",
+    "dddddbbddcdd.",
+    "ddccbbbbcda..",
+    "ccabccbcaa...",
+    "caaabcca....."
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +24,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Cargo Crate",
-    "id": "Peti Kargo"
-  }
+    "en": "Storm Loom",
+    "id": "Pola Pita Badai"
+  },
+  "motif": "storm-loom"
 }

@@ -1,19 +1,20 @@
 {
   "id": "jupiter-12-relay-satellite",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    ".....c......",
-    ".....a......",
-    "....aaaa....",
-    ".cccadda....",
-    ".ccbaddaccc.",
-    ".cc.addacd..",
-    "....aaa.dd..",
-    "............",
-    "............",
-    "............",
-    "............"
+    "bbbbb........",
+    "bbbbbbbb.....",
+    "bbbbbbbb.....",
+    ".bbbbbbb.....",
+    ".bbbbddbb.ddd",
+    ".ddddddddddaa",
+    "...ddcdd.aaaa",
+    "..dddddddaaaa",
+    "..dddddddaaaa",
+    "..ddddddaaaa.",
+    "...ddddaaaaa.",
+    "....daaaaaaa.",
+    ".......aaaaa."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Relay Satellite",
-    "id": "Satelit Relai"
-  }
+    "en": "JUICE Flyby",
+    "id": "Lintasan Wahana JUICE"
+  },
+  "motif": "juice-flyby"
 }

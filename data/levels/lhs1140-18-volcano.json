@@ -1,21 +1,22 @@
 {
   "id": "lhs1140-18-volcano",
-  "size": 14,
+  "size": 15,
   "solution": [
-    "..............",
-    ".......cc.....",
-    ".......cc.....",
-    ".......cc.....",
-    "......a..a....",
-    "......adaaa...",
-    ".....aadaaa...",
-    "....aaaadaaa..",
-    "...aaaaaddaaa.",
-    "..aaaaaaadaaa.",
-    "...abbbbbbbba.",
-    "..............",
-    "..............",
-    ".............."
+    ".dddddd........",
+    ".bddddddd......",
+    "bbbdddddddd....",
+    ".bbbddddddddddd",
+    ".bbbddddddddddd",
+    ".dbbddddddddd.d",
+    ".dbbbdd..ddd..d",
+    ".ddbbd....ccccc",
+    ".ddbbb..ccccaa.",
+    ".ccccbbccccccaa",
+    ".dd.cccc.cccccc",
+    ".aaa..bbaaaccaa",
+    ".aaaaaaaaaaaaaa",
+    ".aaaaaaaaaaaaaa",
+    "...aaaaaaaaaa.."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +26,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Shield Volcano",
-    "id": "Gunung Api Perisai"
-  }
+    "en": "Glacier Calving",
+    "id": "Runtuhan Gletser"
+  },
+  "motif": "glacier-calving"
 }

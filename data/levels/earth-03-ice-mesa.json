@@ -1,19 +1,18 @@
 {
   "id": "earth-03-ice-mesa",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....aaa....",
-    "...aaaaaa...",
-    "..adaaaaa...",
-    "..aaddaaaa..",
-    "..aaaaddaaa.",
-    "..aaaaaaaaa.",
-    "..aaaaaaaaa.",
-    "............",
-    "............"
+    "..bbaaaa...",
+    ".bbbbbaaa..",
+    "bbbbbaaaac.",
+    "dddbaaaaacc",
+    "aabbaaaadaa",
+    "aaaabbbadda",
+    "aaabbbbbaaa",
+    "aaabbbbbaaa",
+    ".aabbbbaaa.",
+    "dddddbaadd.",
+    "....dddd..."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Ice Mesa",
-    "id": "Dataran Es"
-  }
+    "en": "Blue Marble",
+    "id": "Bumi Biru"
+  },
+  "motif": "blue-marble"
 }

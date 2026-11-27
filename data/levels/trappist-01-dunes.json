@@ -1,20 +1,19 @@
 {
   "id": "trappist-01-dunes",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    ".............",
-    "...aaaaa.....",
-    ".aaaaaaaa....",
-    "aaaaadddaaa..",
-    "aaaaddaaaaa..",
-    ".abbbbbbbba..",
-    ".aaaaaaaaa...",
-    "............."
+    "ddddddddddd.",
+    "ccccccccccc.",
+    "ccccccccccc.",
+    "aaccccccccc.",
+    "bbaaaaaaabb.",
+    "bbbbbbabbab.",
+    "bbbbbdddbab.",
+    "bbbddbbbdda.",
+    "bbdbbbbbbdd.",
+    "bbbbbbbbbbb.",
+    "bbbbbbbbbb..",
+    "bbbbbbbbb..."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +23,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Dunes",
-    "id": "Bukit Pasir"
-  }
+    "en": "Thin Atmosphere",
+    "id": "Atmosfer Tipis"
+  },
+  "motif": "trappist-thin-atmosphere"
 }

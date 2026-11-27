@@ -1,19 +1,20 @@
 {
   "id": "uranus-19-ring-station",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....cc.....",
-    "...aacca....",
-    "..aa.dd.a...",
-    "..bbbddb.a..",
-    "..a..ddbbb..",
-    "...aac.aa...",
-    "....acaa....",
-    ".....c......",
-    "............"
+    ".....a......a",
+    "....aa.....aa",
+    "...aaaa...aaa",
+    "..abbaaaaaaab",
+    ".bbbbbaaabccc",
+    "bbbbbbbbbccbb",
+    "bbbccccccabb.",
+    "cccbbaaaaaddd",
+    "bbbbaaddddddd",
+    "bbaaaddddaa..",
+    "aaaaddaaaa...",
+    "dddddaaaa....",
+    "ddddaaaa....."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +24,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Ring Station",
-    "id": "Stasiun Cincin"
-  }
+    "en": "Uranian Equator Waves",
+    "id": "Gelombang Khatulistiwa Uranus"
+  },
+  "motif": "uranian-equator-waves"
 }

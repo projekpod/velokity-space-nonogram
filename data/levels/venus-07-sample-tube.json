@@ -2,17 +2,17 @@
   "id": "venus-07-sample-tube",
   "size": 11,
   "solution": [
-    "...........",
-    ".......b...",
-    "..bbbbbb...",
-    "...bbba....",
-    "...addd....",
-    "...adcd....",
-    "...adcda...",
-    "....daaa...",
-    "....aaaa...",
-    ".....a.....",
-    "..........."
+    "bbbbbbbbccc",
+    "bbbaacccccc",
+    "bbaaccccccb",
+    "baacccccccc",
+    "baacaccaacc",
+    "baacaccaacc",
+    "baaccaaaccb",
+    "bbacccacccb",
+    "bbdaaccccb.",
+    "bddbbbbbb..",
+    "d.........."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Spiral Cloud",
+    "id": "Awan Pusaran Venus"
+  },
+  "motif": "venus-cloud-vortex"
 }

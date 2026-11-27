@@ -1,20 +1,19 @@
 {
   "id": "trappist-02-greenhouse",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "....aaaa.....",
-    "...aaaaaa....",
-    "..aaaaaaaa...",
-    "..aaaaaaaa...",
-    ".bbdaaaadb...",
-    ".bbddddddb...",
-    ".bbddddddb...",
-    ".bbbbbbbbb...",
-    ".cccccccccc..",
-    "............."
+    "bccccccc....",
+    "bccccccccb..",
+    "bcaaaaacccb.",
+    "bcaaaaaacccb",
+    "bcaaaaaacccb",
+    "bcaadddacccb",
+    "bcaadaaacccb",
+    "bddadaaacccb",
+    "bcaddaaaccbb",
+    "bbaadddaccbb",
+    ".bccdccdddbb",
+    "..ccdccccdd."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +23,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Moon Greenhouse",
-    "id": "Rumah Kaca Bulan"
-  }
+    "en": "Habitat Airlock",
+    "id": "Pintu Udara Habitat"
+  },
+  "motif": "habitat-airlock"
 }

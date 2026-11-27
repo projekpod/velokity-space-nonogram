@@ -1,19 +1,20 @@
 {
   "id": "jupiter-07-lunar-buggy",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....aaaa....",
-    "....addda...",
-    "..baaaaaaa..",
-    "..baaaaaacc.",
-    "..aaabbbaa..",
-    "..aca..aca..",
-    "...a....aa..",
-    "............",
-    "............"
+    ".baaaaaaaaaa.",
+    "bbaaaaaaaaaaa",
+    "bbaaaaaaaaaaa",
+    "baabbbbbaaaaa",
+    "aabbbbbbbaaaa",
+    "aabbaaabbbaaa",
+    "aabcaaaacbaaa",
+    "aabccaaccbaaa",
+    ".abbccccbbaaa",
+    ".aabbbbbbaaac",
+    "..adbbbbaaadd",
+    "..adaaaaaadda",
+    "...ddddddddc."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Lunar Buggy",
-    "id": "Buggy Bulan"
-  }
+    "en": "Callisto Ringed Basin",
+    "id": "Cekungan Bercincin Kalisto"
+  },
+  "motif": "callisto-basin"
 }

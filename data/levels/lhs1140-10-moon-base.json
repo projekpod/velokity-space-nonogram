@@ -2,20 +2,20 @@
   "id": "lhs1140-10-moon-base",
   "size": 14,
   "solution": [
-    "..............",
-    "....a.........",
-    "......aaa.....",
-    ".....aaaaaa...",
-    "....aaaaaaaa..",
-    "...aaaaaaaaa..",
-    "...aaaaaaaaa..",
-    "..bbbbbaaaaaa.",
-    "..bbbdddbbbbb.",
-    "..bbbdddddbbb.",
-    "..bbbdddddbbb.",
-    ".cccccccccbbb.",
-    ".......accccc.",
-    ".............."
+    ".....c........",
+    ".aaaccca......",
+    "ddbbbccca...aa",
+    ".ddbbbcbbbaaaa",
+    ".addbbbccbbbaa",
+    ".adddbbbcbbbba",
+    ".abdddbbcbbcbb",
+    ".abbddbbcccddd",
+    ".abbbddbccdddb",
+    ".abbccccccddbb",
+    "..accbbdccbba.",
+    "..acaabbbcc...",
+    "..ccaaaaaccc..",
+    "..c..aaaa.c..."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Moon Base",
-    "id": "Pangkalan Bulan"
-  }
+    "en": "Spectral Water Lines",
+    "id": "Garis Spektrum Air"
+  },
+  "motif": "spectral-water-lines"
 }

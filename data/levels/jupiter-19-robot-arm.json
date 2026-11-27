@@ -1,19 +1,21 @@
 {
   "id": "jupiter-19-robot-arm",
-  "size": 12,
+  "size": 14,
   "solution": [
-    "............",
-    "............",
-    "....bba.....",
-    ".ccbbbaaaa..",
-    "..b....aaaa.",
-    ".......aaa..",
-    ".......aa...",
-    "......aaa...",
-    ".....daa....",
-    "...bbbddbb..",
-    "............",
-    "............"
+    ".aaaaaaaaa....",
+    "aaaaaaaaaaa...",
+    "aaaaaaaaaaa...",
+    "aaccccaaaaa.a.",
+    "acccccaaaaa.aa",
+    "accccccaaaa.aa",
+    "acc....cccc.aa",
+    "cc......cccc.a",
+    "cc.......cccc.",
+    "cc.......ccccc",
+    "ac..dddddddddc",
+    "aacdd...cccddd",
+    "aaaaccccccaaaa",
+    "aaaaaaaaaaaaaa"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +25,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Robot Arm",
-    "id": "Lengan Robot"
-  }
+    "en": "Io Sulfur Lake",
+    "id": "Danau Sulfur Io"
+  },
+  "motif": "io-sulfur-lake"
 }

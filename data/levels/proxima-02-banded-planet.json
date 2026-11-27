@@ -1,19 +1,17 @@
 {
   "id": "proxima-02-banded-planet",
-  "size": 12,
+  "size": 10,
   "solution": [
-    "............",
-    "............",
-    "....aaaa....",
-    "...aaaaaaa..",
-    "..ddddddddd.",
-    "..bbbbbbbbb.",
-    "..aadaaaaaa.",
-    "..ccddccccc.",
-    "..bbbbbbbbb.",
-    "...aaaaaaa..",
-    ".....aaa....",
-    "............"
+    ".bbbbbbbb.",
+    ".bbbbbbbb.",
+    "..aaaacc..",
+    ".addcccca.",
+    "aadccdcdaa",
+    "aaccaccaaa",
+    "aacaacaaaa",
+    ".aaacaaaaa",
+    "aaacdaaaaa",
+    "aaaaaaaaaa"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +21,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Banded Planet",
-    "id": "Planet Belang"
-  }
+    "en": "Bubble Greenhouse",
+    "id": "Rumah Kaca Gelembung"
+  },
+  "motif": "bubble-greenhouse"
 }

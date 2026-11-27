@@ -3,19 +3,19 @@
   "size": 14,
   "solution": [
     "..............",
-    "..............",
-    ".......aaa....",
-    ".....aaaaaa...",
-    "....aaaaaaaa..",
-    "..aaaaaaaaaab.",
-    "..aaaaaaaaaabb",
-    "..aaaaaaaaaabb",
-    "..adddddddddd.",
-    "...aaabcbbaa..",
-    ".......cc.....",
-    "......ccc.....",
-    ".......c......",
-    ".............."
+    "..aaaab.......",
+    "..aaa...c.bb..",
+    ".aaaa...bcbbb.",
+    ".aaaa...bccbb.",
+    "baaaaa...acaab",
+    "aaaaa....accaa",
+    "acc....aaaaaaa",
+    "aacc.aaaaaaaaa",
+    "ba..ccaaaaaaaa",
+    ".aa..ccaaaaaaa",
+    ".....accaaaaaa",
+    "....aaaacaaaa.",
+    ".....aaaccaa.."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Icy Nightside",
+    "id": "Sisi Malam Berlapis Es"
+  },
+  "motif": "icy-nightside"
 }

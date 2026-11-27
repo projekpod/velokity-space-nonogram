@@ -1,19 +1,18 @@
 {
   "id": "proxima-11-meteor",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".......bbbb.",
-    "......bbbb..",
-    ".....bbccb..",
-    "...aacccb...",
-    "..aaacbb....",
-    "..ddabb.....",
-    "..aaab......",
-    "............",
-    "............"
+    "....ccccddd",
+    "....ccccddd",
+    "...cccccccc",
+    "...ccccccc.",
+    ".dccccccc..",
+    ".dccccccc..",
+    ".dcccbbc...",
+    ".ddcbbb....",
+    "aaaddbb....",
+    "aaaadb.....",
+    "aaaad......"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Meteor",
-    "id": "Meteor"
-  }
+    "en": "Direct-Imaging Telescope",
+    "id": "Teleskop Pencitraan Langsung"
+  },
+  "motif": "direct-imaging-telescope"
 }

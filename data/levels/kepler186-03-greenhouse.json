@@ -1,20 +1,19 @@
 {
   "id": "kepler186-03-greenhouse",
-  "size": 13,
+  "size": 12,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "...aaaaa.....",
-    "..aaaaaaa....",
-    ".aaaaaaaaa...",
-    ".adaaaaada...",
-    ".bdddbdddbb..",
-    ".bdddbdddbb..",
-    ".bbbbbbbbbb..",
-    "ccccccccccc..",
-    ".............",
-    "............."
+    ".d..ddba....",
+    "aadaadbbacc.",
+    "aaadbbdbccca",
+    "aabbdbddcbaa",
+    "abbbdbcdbbaa",
+    "dddbddcdbbaa",
+    "abbddccddaaa",
+    "abbddcbbbaaa",
+    "abbddddddaaa",
+    "abcccbbaddaa",
+    "accbbbaaaaa.",
+    "aaaabaaaa..."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +23,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Moon Greenhouse",
-    "id": "Rumah Kaca Bulan"
-  }
+    "en": "Fern Fossil Tile",
+    "id": "Ubin Fosil Pakis"
+  },
+  "motif": "fern-fossil"
 }

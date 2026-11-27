@@ -1,22 +1,21 @@
 {
   "id": "toi700-09-crystals",
-  "size": 15,
+  "size": 14,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    ".......a.......",
-    "......aa.......",
-    ".....baa.......",
-    "..b..baa.......",
-    "..bd.baa.b.....",
-    "..bdbbaa.bb....",
-    "..bddbaabbb....",
-    "..bddbaaabb....",
-    "..bddbaaabbb...",
-    "..bddbbbabbb...",
-    "....bbbbbbb....",
-    "..............."
+    ".bbbaaccaaa...",
+    ".bbbbaccaaaa..",
+    ".bbbbbccccccaa",
+    ".bbbbbbcccccaa",
+    ".bbbbbbbcaacca",
+    ".bbcccccccacca",
+    ".bcccbbbccccca",
+    ".bccbbbbbcccc.",
+    ".ccbbbbbbbcca.",
+    ".ccbbbbbbbba..",
+    "ccbbbbbdbbb...",
+    "ccbbbdddddd...",
+    ".ddddbbbbbddd.",
+    "....bbbbbb..dd"
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +25,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Crystal Outcrop",
-    "id": "Singkapan Kristal"
-  }
+    "en": "Dust Devil Tracks",
+    "id": "Jejak Pusaran Debu"
+  },
+  "motif": "dust-devil-tracks"
 }

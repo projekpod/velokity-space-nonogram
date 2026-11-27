@@ -2,18 +2,18 @@
   "id": "jupiter-01-dunes",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "............",
-    "............",
-    ".....aaa....",
-    "..aaaaaaaa..",
-    "..aaaadddaaa",
-    "..aaadaaaaa.",
-    "..aaaaaaaaa.",
-    "............",
-    "............"
+    "cc..........",
+    "acccaaaa....",
+    "bbbbcaaaa...",
+    "bbbbbcaaaaa.",
+    "bbbbddccaabb",
+    "bbbdddddccbb",
+    "bbbdddddddcc",
+    "ccbdddddddbb",
+    "ccccddddbbcc",
+    "abcccccbbccc",
+    "abbbccccccaa",
+    "abbbbbaacaaa"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Dunes",
-    "id": "Bukit Pasir"
-  }
+    "en": "Cloud-Top Shadow",
+    "id": "Bayangan di Puncak Awan"
+  },
+  "motif": "jupiter-cloud-shadow"
 }

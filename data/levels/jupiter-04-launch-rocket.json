@@ -2,18 +2,18 @@
   "id": "jupiter-04-launch-rocket",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    ".....aa.....",
-    ".....daa....",
-    "....ddaa....",
-    ".....aaa....",
-    "....baaa....",
-    "...bbaaa....",
-    "...bbbcbb...",
-    "...b..c.....",
-    "............"
+    "....aaaa....",
+    "ddddaaaaaa..",
+    ".ddddddddddd",
+    "ddaaddaaaddd",
+    "dddddaaaaaaa",
+    "aaabbbbbbaaa",
+    "aaabccccbaaa",
+    "bbbaaaaaaabb",
+    ".bbbbbbabbb.",
+    ".aaabbbbbba.",
+    "..adddddda..",
+    "....aaaa...."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +23,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Launch Rocket",
-    "id": "Roket Peluncur"
-  }
+    "en": "Great Red Spot",
+    "id": "Bintik Merah Besar"
+  },
+  "motif": "great-red-spot"
 }

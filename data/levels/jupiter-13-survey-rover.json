@@ -1,19 +1,20 @@
 {
   "id": "jupiter-13-survey-rover",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "....c.......",
-    "....aaaaa...",
-    "....adddaa..",
-    "...aadddaa..",
-    "..baaaaaaaa.",
-    "..bbbbbbbbb.",
-    "...c..c..ca.",
-    "...a..a..a..",
-    "............",
-    "............",
-    "............"
+    ".d...cccc....",
+    "cdd..ccc....d",
+    "..ddccccc.ddd",
+    "...ddccccdd..",
+    "....dccddcccc",
+    ".....ddc.....",
+    ".....ccca....",
+    ".....accaa...",
+    "...aaaccaab..",
+    "aaaaaccaaaab.",
+    "dddddddaaaaab",
+    "baaaccadddaab",
+    "baaacaaaadddb"
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Survey Rover",
-    "id": "Rover Survei"
-  }
+    "en": "Io Volcano",
+    "id": "Gunung Api Io"
+  },
+  "motif": "io-volcano"
 }

@@ -2,19 +2,19 @@
   "id": "trappist-09-launch-rocket",
   "size": 13,
   "solution": [
-    ".............",
-    "....a........",
-    "....aa.......",
-    "....aaa......",
-    "....dda......",
-    "....ada......",
-    "....aaaa.....",
-    "....aaaa.....",
-    "...bbaabb....",
-    "...bb.c.b....",
-    "...b..c......",
-    ".............",
-    "............."
+    "bbbbb....aaaa",
+    "bbbbbb...aacc",
+    "bbbbbbbddccca",
+    "bbbbbbdddcddd",
+    "ccbbbdddcaaad",
+    "bcbbbddc.aaaa",
+    "bccdddccaaaaa",
+    "ddccd.c.aaaaa",
+    "bbbcccdaaaaaa",
+    "bbb.cddddaaaa",
+    "bb..dd..addda",
+    "b..dd....aaad",
+    "...d.....aaaa"
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Launch Rocket",
-    "id": "Roket Peluncur"
-  }
+    "en": "Canyon Relay Bridge",
+    "id": "Jembatan Relai Ngarai"
+  },
+  "motif": "canyon-relay-bridge"
 }

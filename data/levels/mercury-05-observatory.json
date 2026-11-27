@@ -1,18 +1,17 @@
 {
   "id": "mercury-05-observatory",
-  "size": 11,
+  "size": 10,
   "solution": [
-    "...........",
-    ".......dd..",
-    "......dd...",
-    "...aadd....",
-    "..addbba...",
-    ".aaaaaaaa..",
-    ".bbbbaaaa..",
-    "bbbbbbbbb..",
-    "bbbbbbbbb..",
-    "cccccbbbb..",
-    ".....cccc.."
+    "......d...",
+    "bbbb.ddd..",
+    "bb..dddd..",
+    "..adddd...",
+    "ccaaccd...",
+    "ddaccac...",
+    "dddcaaac..",
+    "..cddaaac.",
+    "..c.d.aaac",
+    ".......aa."
   ],
   "palette": {
     "a": "#d0b49f",
@@ -22,7 +21,8 @@
   },
   "planet": "mercury",
   "title": {
-    "en": "Observatory",
-    "id": "Observatorium"
-  }
+    "en": "BepiColombo",
+    "id": "Wahana BepiColombo"
+  },
+  "motif": "bepicolombo-spacecraft"
 }

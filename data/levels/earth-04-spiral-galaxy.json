@@ -1,19 +1,18 @@
 {
   "id": "earth-04-spiral-galaxy",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "..bdaaa.....",
-    "..babddaa...",
-    "...baddbba..",
-    "....baaccab.",
-    "......bbbb..",
-    "............",
-    "............",
-    "............",
-    "............"
+    ".....b.....",
+    "....bb.....",
+    "....bb.....",
+    "....bbb....",
+    "..c.bbb....",
+    "..cccccc.a.",
+    "daccccccca.",
+    "ddaccbcaaa.",
+    "ddddddaaad.",
+    "aaaaaddadd.",
+    ".aaaaadddd."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Spiral Galaxy",
-    "id": "Galaksi Spiral"
-  }
+    "en": "Ocean Buoy",
+    "id": "Pelampung Pengamat Laut"
+  },
+  "motif": "ocean-buoy"
 }

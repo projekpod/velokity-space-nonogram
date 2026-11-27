@@ -1,22 +1,20 @@
 {
   "id": "toi700-02-spiral-galaxy",
-  "size": 15,
+  "size": 13,
   "solution": [
-    "...............",
-    "...............",
-    "...............",
-    "...............",
-    "..bbb..........",
-    ".badaaaa.......",
-    ".baabdddaa.....",
-    "..baabdddbab...",
-    "...bbadcbbaab..",
-    ".....bbaaccab..",
-    "........bbbbb..",
-    "...............",
-    "...............",
-    "...............",
-    "..............."
+    "bbbcccb......",
+    "bbccbccb.....",
+    "bbcbbbbccc...",
+    "aaaaaaabbcccc",
+    "badddddabbb.c",
+    "baddddddaabb.",
+    "badddddddaab.",
+    "badcccddaaaab",
+    "baacccccccccc",
+    "bbacaaaaccccc",
+    ".bccaaaaaaaaa",
+    "ccccaaaaaaaa.",
+    "cccbaaaaaa..."
   ],
   "palette": {
     "a": "#d4afec",
@@ -26,7 +24,8 @@
   },
   "planet": "toi700",
   "title": {
-    "en": "Spiral Galaxy",
-    "id": "Galaksi Spiral"
-  }
+    "en": "Permafrost Crawler",
+    "id": "Robot Perayap Tanah Beku"
+  },
+  "motif": "permafrost-crawler"
 }

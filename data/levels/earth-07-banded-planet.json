@@ -2,18 +2,18 @@
   "id": "earth-07-banded-planet",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "....aaaa....",
-    "..aaaaaaa...",
-    "..dddddddd..",
-    ".bbbbbbbbb..",
-    ".aadaaaabb..",
-    ".ccddccccc..",
-    "..bbbbbbbb..",
-    "..aaaaaaa...",
-    "...aaaaa....",
-    "............"
+    ".bccccccc...",
+    "bccdbbbdca..",
+    "cddbbbbddc..",
+    "ddbbdbbbddc.",
+    "dbbdddbbddc.",
+    "dbbddbbdddcc",
+    "dbbdddddbbcc",
+    "bbbbdddbbbcc",
+    "cbbbbbbbbccc",
+    "ccbbbbbcccb.",
+    "cccbccccbbb.",
+    ".cccccbb...."
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +23,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Banded Planet",
-    "id": "Planet Belang"
-  }
+    "en": "Pacific Cyclone",
+    "id": "Siklon Pasifik"
+  },
+  "motif": "pacific-cyclone"
 }

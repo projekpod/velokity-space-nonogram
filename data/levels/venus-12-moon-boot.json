@@ -2,17 +2,17 @@
   "id": "venus-12-moon-boot",
   "size": 11,
   "solution": [
-    "...........",
-    "...........",
-    "...aaa.....",
-    "...aaaa....",
-    "..addd.....",
-    "..aadd.....",
-    "..bbba.....",
-    "..bbba.....",
-    ".aaaaaaaa..",
-    "..cccccaa..",
-    ".......c..."
+    ".bbbbbbbbb.",
+    "..aaaaaaa..",
+    "aaaaaaaaaaa",
+    "aaaccccaaaa",
+    ".cccccccca.",
+    "..dcccc.d..",
+    "..dd...dd..",
+    "...d...d...",
+    "...ddddd...",
+    "....bbb....",
+    "....bbb...."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +22,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Moon Boot",
-    "id": "Sepatu Bulan"
-  }
+    "en": "Cloud Balloon",
+    "id": "Balon Penjelajah Awan"
+  },
+  "motif": "cloud-balloon"
 }

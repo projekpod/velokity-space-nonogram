@@ -1,19 +1,20 @@
 {
   "id": "earth-17-radar",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "........c...",
-    ".....ddcd...",
-    ".adddaaaa...",
-    "..aaaaca....",
-    "...aaaaa....",
-    "....bb......",
-    ".....b......",
-    ".....b......",
-    "...ccccc....",
-    "............"
+    ".bbbbccc.....",
+    "bbbbbbcccccc.",
+    "bbbbbbbccbbbb",
+    ".cbbbbbbbbbb.",
+    "ddcccbbbbbbdd",
+    "..dd.....dd..",
+    "....d...d....",
+    ".....ddd.....",
+    "aaaaaddd..aaa",
+    "aaaadddddaaaa",
+    "bbbbbbbbaaaaa",
+    "aaaaaaabbaaaa",
+    ".aaaaaaabbbbb"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +24,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Tracking Radar",
-    "id": "Radar Pelacak"
-  }
+    "en": "Parachute Splashdown",
+    "id": "Kapsul Mendarat di Laut"
+  },
+  "motif": "parachute-splashdown"
 }

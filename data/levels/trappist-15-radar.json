@@ -1,20 +1,21 @@
 {
   "id": "trappist-15-radar",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    ".............",
-    ".cc..........",
-    "..cddd.......",
-    ".aacadddddd..",
-    "..aacaaaaa...",
-    "...aacaaa....",
-    ".....aba.....",
-    "......b......",
-    "......b......",
-    "...cccccc....",
-    ".............",
-    "............."
+    ".......bbbbb..",
+    "bbbbbaaaaabbb.",
+    "bbbaaacccaaaaa",
+    "aaabccbbcbbbbb",
+    "abbccbbbccbbbb",
+    "bbccbbbbbcbbbb",
+    "bccbbbbbbbcbbb",
+    "bccbbbbbbbdbbb",
+    "bbcbbbbdbcbbbb",
+    "bbccbbbdccbbbb",
+    "bbbccbbccbbbbb",
+    "bbbbccccbbbbb.",
+    ".bbbbbccbbbb..",
+    "..bbbbbbbbb..."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +25,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Tracking Radar",
-    "id": "Radar Pelacak"
-  }
+    "en": "Star Chart",
+    "id": "Peta Bintang"
+  },
+  "motif": "star-chart"
 }

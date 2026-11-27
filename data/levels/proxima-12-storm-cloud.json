@@ -1,19 +1,18 @@
 {
   "id": "proxima-12-storm-cloud",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    "...aaaa.....",
-    "...aaaa.....",
-    ".baaaaaaa...",
-    ".baaaaaaaa..",
-    ".baaaaaaaa..",
-    ".dddddddda..",
-    "....bccaa...",
-    "....cc......",
-    ".....c......",
-    "............"
+    "...ccc.....",
+    "..ccccc.d..",
+    "...ccc..dd.",
+    "....b......",
+    "....bb.....",
+    "...bbbbbb..",
+    ".bbbbbaaab.",
+    "bbaaccccccb",
+    "baccaaaaaac",
+    "ccaaaaaaaaa",
+    "aaaaaaaaaaa"
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +22,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Binary Sunrise",
+    "id": "Fajar Dua Bintang"
+  },
+  "motif": "binary-sunrise"
 }

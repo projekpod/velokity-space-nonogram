@@ -2,19 +2,19 @@
   "id": "kepler186-13-lunar-lander",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    "......aa.....",
-    "....aaaaaa...",
-    "....adddaa...",
-    "...aadddaa...",
-    "...aaaaaaa...",
-    "...abbaaba...",
-    "...bbcccba...",
-    "..bb....bb...",
-    ".ccc.....b...",
-    ".........b.c.",
-    "............."
+    "bbbbaa.......",
+    "bbaa.........",
+    "baa....cccccb",
+    "a...ccccccabb",
+    "a.ccccaaaaaaa",
+    "a....aaaaaaaa",
+    "acc..aaaaaaaa",
+    "a..caaaaaaaaa",
+    "a..caaaaaaaaa",
+    "aa..caaaaaaaa",
+    "aa..caaaaaabb",
+    "aa..caaaabbbb",
+    "aa..caaabbbbb"
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +24,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Lunar Lander",
-    "id": "Pendarat Bulan"
-  }
+    "en": "Buried Ice Core",
+    "id": "Inti Es Terkubur"
+  },
+  "motif": "buried-ice-core"
 }

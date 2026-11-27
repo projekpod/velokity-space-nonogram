@@ -1,19 +1,20 @@
 {
   "id": "jupiter-08-storm-cloud",
-  "size": 12,
+  "size": 13,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....aaaa....",
-    "....aaaaa...",
-    "..aaaaaaab..",
-    ".aaaaaaaabb.",
-    ".aaddddddd..",
-    "..aabcbba...",
-    ".....cc.....",
-    ".....c......",
-    "............"
+    "aaaaaaaa.....",
+    "dddddaaaaa...",
+    "ddddddaaaaaa.",
+    "dddddddaaaad.",
+    "dddddddddddd.",
+    "dddddaaaaadd.",
+    "bbbbbaaaaaaa.",
+    "aaabbbaaaaab.",
+    "aaaaabbaabbbb",
+    "aaaaabbbbbba.",
+    "aaaaaabbbbbb.",
+    "cccccccccccc.",
+    "cccccccccccc."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +24,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Europa Ocean",
+    "id": "Samudra Bawah Es Europa"
+  },
+  "motif": "europa-ocean"
 }

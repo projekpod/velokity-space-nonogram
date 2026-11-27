@@ -2,19 +2,19 @@
   "id": "trappist-10-storm-cloud",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    ".....aaaa....",
-    "...aaaaaaab..",
-    "..aaaaaaaabb.",
-    ".aaaaaaaaabb.",
-    ".aaddddddddd.",
-    "..addddbbdd..",
-    "...aacc......",
-    ".....ccc.....",
-    "......c......",
-    "............."
+    ".a...........",
+    ".aaa......ccc",
+    ".aaaa....ccca",
+    ".acccc.accaaa",
+    "cccccccccaaaa",
+    "dcaaaaacaaaaa",
+    ".daaaaaaaaaab",
+    ".daaaaaaaabbb",
+    ".adaaaaabbbbb",
+    ".aadaaabbbbbb",
+    ".aadaabbbbbbb",
+    ".aaadbbbbbbbb",
+    ".baadbbbbbbb."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Storm Cloud",
-    "id": "Awan Badai"
-  }
+    "en": "Tidal Ice Bridge",
+    "id": "Jembatan Es Pasang Surut"
+  },
+  "motif": "tidal-ice-bridge"
 }

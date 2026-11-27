@@ -1,21 +1,20 @@
 {
   "id": "kepler22-01-sample-tube",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "....bbbbbbb...",
-    "....bbbbbbb...",
-    "....bbbbbbb...",
-    "....bbbbbbb...",
-    ".....dddda....",
-    ".....dddda....",
-    ".....dccda....",
-    ".....dccda....",
-    ".....dccda....",
-    ".....aaaaa....",
-    ".....aaaaa....",
-    ".....aaaa.....",
-    "..............",
-    ".............."
+    "...add.......",
+    "..aaddaa.....",
+    ".aaaddaaaa...",
+    "aaaaddaaaaa..",
+    "aadccdccdaaa.",
+    "addccddccdaaa",
+    "aabbbddaaaaaa",
+    "bbbbbddaaaacc",
+    "bbbbbddaccccc",
+    "bbbbbddcccbbb",
+    "bbbdddcccbbbb",
+    "ccccccccbbbbb",
+    "ccccccbbbbbbb"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +24,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Sample Tube",
-    "id": "Tabung Sampel"
-  }
+    "en": "Round Wave Harvester",
+    "id": "Pemanen Energi Ombak"
+  },
+  "motif": "wave-harvester"
 }

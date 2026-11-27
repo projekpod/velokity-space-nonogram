@@ -1,19 +1,18 @@
 {
   "id": "earth-01-cratered-moon",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "...aaaa.....",
-    "..abaaaa....",
-    ".aabbaaaa...",
-    ".aaaaaaaa...",
-    ".aaaaabba...",
-    ".aaddabba...",
-    ".addddbaa...",
-    ".aaddaaaa...",
-    "..aaaaaa....",
-    "..aaaaa.....",
-    "............",
-    "............"
+    "dbacbbbbbb.",
+    "daaccbbbddd",
+    "bdaaddddbbb",
+    "adddccaabbb",
+    "aadaaccaabb",
+    "bbaaaccaaaa",
+    "bbbbaccaaaa",
+    "bbbbbccaaaa",
+    "bbbbbcccaaa",
+    "bbbbbacccca",
+    "........ccc"
   ],
   "palette": {
     "a": "#4fb8ef",
@@ -23,7 +22,8 @@
   },
   "planet": "earth",
   "title": {
-    "en": "Cratered Moon",
-    "id": "Bulan Berkawah"
-  }
+    "en": "Tectonic Plates",
+    "id": "Lempeng Tektonik"
+  },
+  "motif": "tectonic-plates"
 }

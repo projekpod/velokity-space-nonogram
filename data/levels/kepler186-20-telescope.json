@@ -1,20 +1,21 @@
 {
   "id": "kepler186-20-telescope",
-  "size": 13,
+  "size": 14,
   "solution": [
-    ".............",
-    "..ddd........",
-    ".ddddd.......",
-    "ddddddda.....",
-    ".ddddddaaaa..",
-    "....dacaabb..",
-    ".....bcaabb..",
-    ".....bcb.....",
-    "....bbcbb....",
-    "....b.c.b....",
-    "....b.c..b...",
-    "...bbc...b...",
-    "............."
+    ".........c....",
+    "........ccaaa.",
+    ".ddd...cccada.",
+    ".dddddaccddaaa",
+    ".....dcccdaaaa",
+    ".....adcdadaad",
+    "....acddddddd.",
+    "....accddddd..",
+    "...accddddaa..",
+    "...acddbaaa...",
+    "..acccbbaa....",
+    "bbbbbbba......",
+    ".ccbaa........",
+    ".cc..........."
   ],
   "palette": {
     "a": "#a1db8f",
@@ -24,7 +25,8 @@
   },
   "planet": "kepler186",
   "title": {
-    "en": "Telescope",
-    "id": "Teleskop"
-  }
+    "en": "Frost Fern",
+    "id": "Pakis Bersalju"
+  },
+  "motif": "frost-fern"
 }

@@ -1,19 +1,20 @@
 {
   "id": "uranus-18-radio-dish",
-  "size": 12,
+  "size": 13,
   "solution": [
-    ".......c....",
-    ".......b....",
-    ".....dbda...",
-    "...dddbaa...",
-    ".dddabaa....",
-    "..aaaaaa....",
-    "..aaaaaa....",
-    "....bb......",
-    ".....b......",
-    ".....b......",
-    "...cccccc...",
-    "............"
+    "aaaaaaa...d..",
+    "aaaaaacc..dbb",
+    "aaaaaccc..dbb",
+    "aaaaccc...ddb",
+    "aaaa.c....bdb",
+    "aaaa.cc...bdb",
+    "aaaa.cc..bbbd",
+    "aaacccc.bbbbd",
+    "aaaccccbbbbbb",
+    "aaacc..bbbbaa",
+    "aa.cc.bbbbbaa",
+    "a..cc.bbbbabb",
+    "..........a.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +24,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Radio Dish",
-    "id": "Antena Parabola"
-  }
+    "en": "Ariel Canyon",
+    "id": "Ngarai Ariel"
+  },
+  "motif": "ariel-canyon"
 }

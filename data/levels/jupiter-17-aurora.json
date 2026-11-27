@@ -1,19 +1,21 @@
 {
   "id": "jupiter-17-aurora",
-  "size": 12,
+  "size": 14,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "...ccc..cc..",
-    "..c..ccc....",
-    ".......aa...",
-    "..aaaaaaaaa.",
-    ".aaaddddaaa.",
-    "..bbbbbbbba.",
-    "............",
-    "............",
-    "............"
+    "bb...aaaa....d",
+    "bb..aaaaaa.ddd",
+    "bbb.accccadddd",
+    "bbbbaccccadddd",
+    "bbbbccccccaddd",
+    ".bbbbcccccadd.",
+    "bbbbbcccccad..",
+    "bbbbbcccccaa..",
+    "bbbbcccccca.dd",
+    "bbbaaccccaa..d",
+    "bb.aacccaaa..d",
+    "....aacaaa...d",
+    "....aacaaa....",
+    ".....aaaa....."
   ],
   "palette": {
     "a": "#ffb68d",
@@ -23,7 +25,8 @@
   },
   "planet": "jupiter",
   "title": {
-    "en": "Aurora Horizon",
-    "id": "Cakrawala Aurora"
-  }
+    "en": "Io Tidal Flex",
+    "id": "Tarikan Pasang Surut Io"
+  },
+  "motif": "io-tidal-flex"
 }

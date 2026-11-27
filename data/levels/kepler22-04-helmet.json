@@ -1,21 +1,20 @@
 {
   "id": "kepler22-04-helmet",
-  "size": 14,
+  "size": 13,
   "solution": [
-    "..............",
-    ".....aaaaa....",
-    "....aaaaaaa...",
-    "....aaddddaa..",
-    "....accdddba..",
-    "...aadddddba..",
-    "....abdddbba..",
-    "....abbbbbaa..",
-    "....aaaaaadd..",
-    ".....abbbbdb..",
-    "......bbbbbb..",
-    "......bb......",
-    "..............",
-    ".............."
+    "...bbbbbb....",
+    "..bbaaaabb...",
+    ".bbaacdaaabd.",
+    "cccccccddabdd",
+    "baaccdccdcab.",
+    "baccaddcccab.",
+    "baccaaaaccab.",
+    "baacaaaaccab.",
+    "bbaccaacccab.",
+    ".baaccccacb..",
+    ".bbbaaaaabc..",
+    "...bbbbbbb.c.",
+    "......b......"
   ],
   "palette": {
     "a": "#a9d2fd",
@@ -25,7 +24,8 @@
   },
   "planet": "kepler22",
   "title": {
-    "en": "Astronaut Helmet",
-    "id": "Helm Astronaut"
-  }
+    "en": "Habitable-Zone Dial",
+    "id": "Dial Zona Layak Huni"
+  },
+  "motif": "habitable-zone-dial"
 }

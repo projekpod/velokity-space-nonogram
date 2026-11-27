@@ -2,18 +2,18 @@
   "id": "proxima-15-crescent",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "....aaa.....",
-    "...aaa......",
-    "..aac.......",
-    "..aacc......",
-    "..accc......",
-    "...ccc......",
-    "...acaaa.a..",
-    ".....aaa....",
-    "............"
+    "bbaaaaaaa...",
+    "bbbbbbbaaa..",
+    "bbbbbcccbaa.",
+    "bbbbcccccaa.",
+    "bbbccdbbcca.",
+    "bbbccbdbcca.",
+    "bbbcbbdbbcc.",
+    "bbccbcddbcc.",
+    "bbccccccccc.",
+    "bbccccbbaaa.",
+    "abccbbbaaaa.",
+    "aaabbbbaaa.."
   ],
   "palette": {
     "a": "#fcb099",
@@ -23,7 +23,8 @@
   },
   "planet": "proxima",
   "title": {
-    "en": "Crescent Moon",
-    "id": "Bulan Sabit"
-  }
+    "en": "Mineral Fossil",
+    "id": "Fosil Mineral"
+  },
+  "motif": "mineral-fossil"
 }

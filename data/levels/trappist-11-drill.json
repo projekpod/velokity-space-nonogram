@@ -2,19 +2,19 @@
   "id": "trappist-11-drill",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "....aaa......",
-    "....dddd.....",
-    "....aaa.d....",
-    "....aaabd....",
-    "....aab......",
-    "....acc......",
-    "...bbccbb....",
-    "..bbbcbbbb...",
-    "...bbbbbb....",
-    "............."
+    "bbbbbbb......",
+    "bbbbbbbb...c.",
+    "bbddddbbccccc",
+    "dddddddcccccc",
+    ".cc..bddccccc",
+    "..c...addcccc",
+    ".cc...acddddc",
+    ".ccc..a..dddd",
+    ".ccc.aa..d...",
+    "..caaaaadd...",
+    ".acaaaaadaa..",
+    ".acaaaaadaaa.",
+    "aacaaaadaaaa."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Asteroid Drill",
-    "id": "Bor Asteroid"
-  }
+    "en": "Interferometer Baseline",
+    "id": "Garis Dasar Interferometer"
+  },
+  "motif": "interferometer-baseline"
 }

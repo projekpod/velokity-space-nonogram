@@ -1,18 +1,19 @@
 {
   "id": "venus-18-solar-wing",
-  "size": 11,
+  "size": 12,
   "solution": [
-    "...........",
-    "...........",
-    "...........",
-    "..cc.aaaa..",
-    ".cccadda...",
-    "....adddbdc",
-    "....adda.cc",
-    "....aaaa.cc",
-    "....aca....",
-    "...........",
-    "..........."
+    "......d.....",
+    "......da....",
+    "b....ada....",
+    "b...aadaa.b.",
+    "bb.aadddaab.",
+    "bbaaaddddab.",
+    "bbaaa..abda.",
+    "baaca.aabdd.",
+    "baaacaaaabb.",
+    "aabbccaaaab.",
+    "bbccaaaaaaa.",
+    "bbaaaaaaaaa."
   ],
   "palette": {
     "a": "#ffd39a",
@@ -22,7 +23,8 @@
   },
   "planet": "venus",
   "title": {
-    "en": "Solar Wing",
-    "id": "Sayap Surya"
-  }
+    "en": "Lava Fan",
+    "id": "Kipas Aliran Lava"
+  },
+  "motif": "lava-fan"
 }

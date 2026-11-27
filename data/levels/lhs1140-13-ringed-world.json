@@ -2,20 +2,20 @@
   "id": "lhs1140-13-ringed-world",
   "size": 14,
   "solution": [
-    "..............",
-    "..............",
-    "..............",
-    ".....aaaaa....",
-    "....aaadaaa...",
-    "....addddda.cc",
-    "...adddddcccc.",
-    "...addbbcccc..",
-    "....cbccbbbb..",
-    "...cccbbbbba..",
-    "..cccbbbbbaa..",
-    ".....aaaaaa...",
-    "......aaaa....",
-    ".............."
+    "aaaaaaaaaa....",
+    "aaaaaaaaaaaa..",
+    "aaaaaaaaaccccc",
+    "..ddd..ccccccc",
+    "..dddccccaaaaa",
+    "acccccccddaaaa",
+    "a.cccc.ddddaaa",
+    "a.ddd..ddddccc",
+    "a........cccca",
+    "a.......ccccca",
+    "aa....cccccc.a",
+    "aa.cccccccc...",
+    ".acccccccc....",
+    ".aa.ccc......."
   ],
   "palette": {
     "a": "#71c7e4",
@@ -25,7 +25,8 @@
   },
   "planet": "lhs1140",
   "title": {
-    "en": "Ringed World",
-    "id": "Planet Bercincin"
-  }
+    "en": "Harbour Float Garden",
+    "id": "Kebun Terapung di Teluk"
+  },
+  "motif": "harbour-float-garden"
 }

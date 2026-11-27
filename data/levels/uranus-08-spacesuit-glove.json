@@ -2,18 +2,18 @@
   "id": "uranus-08-spacesuit-glove",
   "size": 12,
   "solution": [
-    "............",
-    "............",
-    "............",
-    "......aa.a..",
-    "...a..aaaa..",
-    "...aaaaaaa..",
-    "....aaaaaaa.",
-    "....addddaa.",
-    "....aaddda..",
-    "....bbbaa...",
-    ".......ba...",
-    "............"
+    "....aadbbbbb",
+    "..aaaddbbbbb",
+    "daaaddbbbbbb",
+    "ddddcccccbbb",
+    "aaaacdddccbb",
+    "aaaacdddcbcb",
+    "aaaaccccbcbb",
+    "aaaaccccbcbb",
+    "aaaaaabbbbbb",
+    ".aaaaabbbbbb",
+    "..aaaabbbbbb",
+    "...aaabbbb.."
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +23,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Suit Glove",
-    "id": "Sarung Tangan Astronaut"
-  }
+    "en": "Ice Mantle Cutaway",
+    "id": "Penampang Mantel Es"
+  },
+  "motif": "uranus-mantle"
 }

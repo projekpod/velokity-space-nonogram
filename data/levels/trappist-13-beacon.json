@@ -2,19 +2,19 @@
   "id": "trappist-13-beacon",
   "size": 13,
   "solution": [
-    ".............",
-    ".............",
-    ".............",
-    "......a......",
-    "....ccac.....",
-    "....cddd.....",
-    ".....aa......",
-    ".....aa......",
-    ".....aa......",
-    "...bbaabb....",
-    ".bbbbbbbbbb..",
-    "..bbbbbbbbb..",
-    "............."
+    "...bbbbbbb.aa",
+    "..bbb.bcbbaaa",
+    ".bb...cc..baa",
+    "bb...ccc...bb",
+    "b...ddcccaaab",
+    "baa.dddcaa.bb",
+    ".baaddaac..b.",
+    ".bbbaaaccbbb.",
+    "...bbbcccb...",
+    ".....cccc....",
+    "....cccc.....",
+    "...cccccc....",
+    "...ccccccc..."
   ],
   "palette": {
     "a": "#efa584",
@@ -24,7 +24,8 @@
   },
   "planet": "trappist",
   "title": {
-    "en": "Landing Beacon",
-    "id": "Suar Pendaratan"
-  }
+    "en": "Clockwork Orrery",
+    "id": "Model Mekanis Orbit"
+  },
+  "motif": "clockwork-orrery"
 }

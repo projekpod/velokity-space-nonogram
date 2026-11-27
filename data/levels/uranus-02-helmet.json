@@ -1,19 +1,18 @@
 {
   "id": "uranus-02-helmet",
-  "size": 12,
+  "size": 11,
   "solution": [
-    "............",
-    "............",
-    ".....aaaa...",
-    "....aabbaa..",
-    "....accdda..",
-    "...abddddb..",
-    "...aabddda..",
-    "....abbbba..",
-    "....baaaa...",
-    "....bbbbd...",
-    ".....bbb....",
-    "............"
+    ".dbbbcbb...",
+    ".bdbccbbb..",
+    ".bddccbbbbb",
+    ".bbdccbbbbb",
+    ".aadaabbbbb",
+    ".aaaaaabbbb",
+    ".adaaaaccca",
+    ".adaaaacccc",
+    ".daaaaaccaa",
+    "daaaaadaaaa",
+    ".aaaadaaaaa"
   ],
   "palette": {
     "a": "#8fe7e3",
@@ -23,7 +22,8 @@
   },
   "planet": "uranus",
   "title": {
-    "en": "Astronaut Helmet",
-    "id": "Helm Astronaut"
-  }
+    "en": "Diamond Rain",
+    "id": "Hujan Berlian"
+  },
+  "motif": "diamond-rain"
 }
