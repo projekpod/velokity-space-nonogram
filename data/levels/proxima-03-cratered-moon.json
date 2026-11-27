@@ -24,5 +24,8 @@
     "en": "Tidal Terminator",
     "id": "Batas Siang dan Malam"
   },
-  "motif": "tidal-terminator"
+  "motif": "tidal-terminator",
+  "twist": {
+    "kind": "shield"
+  }
 }

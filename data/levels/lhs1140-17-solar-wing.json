@@ -29,5 +29,9 @@
     "en": "Ocean Moonrise",
     "id": "Bulan Terbit di Atas Samudra"
   },
-  "motif": "ocean-moonrise"
+  "motif": "ocean-moonrise",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

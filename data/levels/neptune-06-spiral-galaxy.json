@@ -25,5 +25,8 @@
     "en": "Arcs of Adams",
     "id": "Busur Cincin Adams"
   },
-  "motif": "adams-ring-arcs"
+  "motif": "adams-ring-arcs",
+  "twist": {
+    "kind": "perfect"
+  }
 }

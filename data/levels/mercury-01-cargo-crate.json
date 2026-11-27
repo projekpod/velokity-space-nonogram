@@ -24,5 +24,13 @@
     "en": "Lobate Scarp",
     "id": "Tebing Lengkung"
   },
-  "motif": "lobate-scarp"
+  "motif": "lobate-scarp",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      38,
+      49,
+      59
+    ]
+  }
 }

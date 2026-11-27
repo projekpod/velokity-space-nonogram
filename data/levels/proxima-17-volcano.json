@@ -26,5 +26,9 @@
     "en": "Mobile Lab",
     "id": "Laboratorium Keliling"
   },
-  "motif": "mobile-lab"
+  "motif": "mobile-lab",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

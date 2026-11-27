@@ -26,5 +26,9 @@
     "en": "Titania Fault Valley",
     "id": "Lembah Patahan Titania"
   },
-  "motif": "titania-fault-valley"
+  "motif": "titania-fault-valley",
+  "twist": {
+    "kind": "star",
+    "cell": 75
+  }
 }

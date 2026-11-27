@@ -28,5 +28,8 @@
     "en": "Ganymede Ice Drill",
     "id": "Pengebor Es Ganimede"
   },
-  "motif": "ganymede-ice-drill"
+  "motif": "ganymede-ice-drill",
+  "twist": {
+    "kind": "perfect"
+  }
 }

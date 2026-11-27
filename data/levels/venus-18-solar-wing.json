@@ -26,5 +26,13 @@
     "en": "Lava Fan",
     "id": "Kipas Aliran Lava"
   },
-  "motif": "lava-fan"
+  "motif": "lava-fan",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      9,
+      21,
+      34
+    ]
+  }
 }

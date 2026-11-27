@@ -28,5 +28,8 @@
     "en": "Cryobot Tether",
     "id": "Kabel Robot Pengebor Es"
   },
-  "motif": "cryobot-tether"
+  "motif": "cryobot-tether",
+  "twist": {
+    "kind": "shield"
+  }
 }

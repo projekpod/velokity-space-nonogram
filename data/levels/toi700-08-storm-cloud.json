@@ -28,5 +28,13 @@
     "en": "Thermal Well",
     "id": "Sumur Panas Bumi"
   },
-  "motif": "thermal-well"
+  "motif": "thermal-well",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      54,
+      98,
+      141
+    ]
+  }
 }

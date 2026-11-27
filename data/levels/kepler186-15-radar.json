@@ -28,5 +28,9 @@
     "en": "Crater Lake Island",
     "id": "Pulau di Danau Kawah"
   },
-  "motif": "crater-lake-island"
+  "motif": "crater-lake-island",
+  "twist": {
+    "kind": "star",
+    "cell": 103
+  }
 }

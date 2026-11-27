@@ -28,5 +28,8 @@
     "en": "Triple Lagoon",
     "id": "Tiga Laguna"
   },
-  "motif": "triple-lagoon"
+  "motif": "triple-lagoon",
+  "twist": {
+    "kind": "perfect"
+  }
 }

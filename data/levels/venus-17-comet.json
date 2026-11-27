@@ -26,5 +26,13 @@
     "en": "Pancake Dome",
     "id": "Kubah Lava Pipih"
   },
-  "motif": "pancake-dome"
+  "motif": "pancake-dome",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      45,
+      57,
+      72
+    ]
+  }
 }

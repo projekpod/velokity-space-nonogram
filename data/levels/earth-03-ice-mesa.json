@@ -25,5 +25,13 @@
     "en": "Blue Marble",
     "id": "Bumi Biru"
   },
-  "motif": "blue-marble"
+  "motif": "blue-marble",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      34,
+      60,
+      85
+    ]
+  }
 }

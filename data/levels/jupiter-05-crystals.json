@@ -26,5 +26,9 @@
     "en": "Jovian Radiation Belt",
     "id": "Sabuk Radiasi Jupiter"
   },
-  "motif": "jupiter-radiation-belt"
+  "motif": "jupiter-radiation-belt",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

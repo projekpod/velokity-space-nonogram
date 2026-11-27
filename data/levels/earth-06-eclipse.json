@@ -25,5 +25,13 @@
     "en": "Rocket Launch",
     "id": "Peluncuran Roket"
   },
-  "motif": "rocket-launch"
+  "motif": "rocket-launch",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      19,
+      42,
+      68
+    ]
+  }
 }

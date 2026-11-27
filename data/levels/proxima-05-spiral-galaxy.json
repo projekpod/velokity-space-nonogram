@@ -24,5 +24,8 @@
     "en": "Horizon Spectrum",
     "id": "Spektrum di Horizon"
   },
-  "motif": "horizon-spectrum"
+  "motif": "horizon-spectrum",
+  "twist": {
+    "kind": "shield"
+  }
 }

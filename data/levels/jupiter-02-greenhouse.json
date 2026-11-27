@@ -26,5 +26,9 @@
     "en": "Atmospheric Lightning",
     "id": "Petir di Atmosfer Jupiter"
   },
-  "motif": "jupiter-lightning"
+  "motif": "jupiter-lightning",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

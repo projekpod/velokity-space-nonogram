@@ -26,5 +26,13 @@
     "en": "Terraced Seedbeds",
     "id": "Bedeng Benih Bertingkat"
   },
-  "motif": "terraced-seedbeds"
+  "motif": "terraced-seedbeds",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      11,
+      133,
+      135
+    ]
+  }
 }

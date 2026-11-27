@@ -28,5 +28,13 @@
     "en": "Dust Devil Tracks",
     "id": "Jejak Pusaran Debu"
   },
-  "motif": "dust-devil-tracks"
+  "motif": "dust-devil-tracks",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      42,
+      126,
+      167
+    ]
+  }
 }

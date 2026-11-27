@@ -4,9 +4,10 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fixedDate, launch, openGame, watchErrors } from "./browser.mjs";
 
-const [baseUrl, output] = process.argv.slice(2);
-assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir>");
-const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "streak", "space", "cats", "shop-legendary"];
+const [baseUrl, output, only] = process.argv.slice(2);
+assert(baseUrl && output, "Usage: node .github/qa/capture.mjs <base-url> <output-dir> [screen]");
+const screens = ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "streak", "space", "cats", "shop-legendary", "twists"];
+assert(!only || screens.includes(only), `Unknown screenshot route: ${only}`);
 const browser = await launch();
 
 async function captureBalance(page, screenshot) {
@@ -78,7 +79,7 @@ try {
   assert.deepEqual(unknown.firstPuzzle, release.firstPuzzle, "Unknown QA routes should open Moon 01");
 
   const screenshots = [];
-  for (const screen of screens) {
+  for (const screen of only ? [only] : screens) {
     const { screenshot } = await capture(`web-qa/index.html?qa=${screen}`, screen);
     assert(!screenshot.equals(release.screenshot), `QA ${screen} did not render its fixture`);
     assert(!screenshots.some(previous => previous.equals(screenshot)), `Duplicate rendering for QA ${screen}`);
@@ -88,7 +89,7 @@ try {
     assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${screen} changed release onboarding`);
     console.log(`Captured ${screen}.png and verified the release ignores ?qa=${screen}`);
   }
-  for (const route of ["store-icon", "store-cover", "preview", "playthrough", "zoom"]) {
+  for (const route of only ? [] : ["store-icon", "store-cover", "preview", "playthrough", "zoom"]) {
     const queriedRelease = await capture(`web/index.html?qa=${route}`);
     assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${route} changed release onboarding`);
     console.log(`Verified the release ignores ?qa=${route}`);

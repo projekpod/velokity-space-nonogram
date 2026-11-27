@@ -25,5 +25,13 @@
     "en": "Spiral Cloud",
     "id": "Awan Pusaran Venus"
   },
-  "motif": "venus-cloud-vortex"
+  "motif": "venus-cloud-vortex",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      27,
+      54,
+      81
+    ]
+  }
 }

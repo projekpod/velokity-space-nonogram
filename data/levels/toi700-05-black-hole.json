@@ -27,5 +27,13 @@
     "en": "Dust Separator",
     "id": "Pemisah Debu"
   },
-  "motif": "dust-separator"
+  "motif": "dust-separator",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      36,
+      71,
+      121
+    ]
+  }
 }

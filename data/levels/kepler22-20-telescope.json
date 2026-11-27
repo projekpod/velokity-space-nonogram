@@ -29,5 +29,13 @@
     "en": "Rainforest Sail",
     "id": "Layar Hutan Eksoplanet"
   },
-  "motif": "rainforest-sail"
+  "motif": "rainforest-sail",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      64,
+      121,
+      166
+    ]
+  }
 }

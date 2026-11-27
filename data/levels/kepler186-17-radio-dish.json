@@ -28,5 +28,9 @@
     "en": "Thimble Bloom",
     "id": "Bunga Berbentuk Lonceng"
   },
-  "motif": "thimble-bloom"
+  "motif": "thimble-bloom",
+  "twist": {
+    "kind": "star",
+    "cell": 73
+  }
 }

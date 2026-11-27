@@ -28,5 +28,8 @@
     "en": "Io Tidal Flex",
     "id": "Tarikan Pasang Surut Io"
   },
-  "motif": "io-tidal-flex"
+  "motif": "io-tidal-flex",
+  "twist": {
+    "kind": "perfect"
+  }
 }

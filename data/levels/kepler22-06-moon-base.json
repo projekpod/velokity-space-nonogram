@@ -27,5 +27,8 @@
     "en": "Pelagic Research Wheel",
     "id": "Roda Riset Samudra"
   },
-  "motif": "pelagic-wheel"
+  "motif": "pelagic-wheel",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -26,5 +26,13 @@
     "en": "Earth Observation Satellite",
     "id": "Satelit Pengamat Bumi"
   },
-  "motif": "earth-observation-satellite"
+  "motif": "earth-observation-satellite",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      36,
+      74,
+      111
+    ]
+  }
 }

@@ -26,5 +26,8 @@
     "en": "Messenger Spacecraft",
     "id": "Wahana MESSENGER"
   },
-  "motif": "messenger-spacecraft"
+  "motif": "messenger-spacecraft",
+  "twist": {
+    "kind": "shield"
+  }
 }

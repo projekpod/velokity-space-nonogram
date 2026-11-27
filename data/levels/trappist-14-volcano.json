@@ -27,5 +27,13 @@
     "en": "Seven-Planet Lineup",
     "id": "Barisan Tujuh Planet"
   },
-  "motif": "seven-planet-lineup"
+  "motif": "seven-planet-lineup",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      55,
+      122,
+      150
+    ]
+  }
 }

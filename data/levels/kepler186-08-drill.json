@@ -27,5 +27,13 @@
     "en": "Exoplanet Field Station",
     "id": "Pos Riset Eksoplanet"
   },
-  "motif": "exoplanet-field-station"
+  "motif": "exoplanet-field-station",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      10,
+      14,
+      26
+    ]
+  }
 }

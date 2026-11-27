@@ -27,5 +27,9 @@
     "en": "Habitable-Zone Dial",
     "id": "Dial Zona Layak Huni"
   },
-  "motif": "habitable-zone-dial"
+  "motif": "habitable-zone-dial",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

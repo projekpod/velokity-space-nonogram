@@ -27,5 +27,13 @@
     "en": "Ice Plume Fan",
     "id": "Kipas Semburan Es"
   },
-  "motif": "ice-plume-fan"
+  "motif": "ice-plume-fan",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      42,
+      82,
+      132
+    ]
+  }
 }

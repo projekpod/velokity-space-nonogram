@@ -29,5 +29,9 @@
     "en": "Bathymetry Map",
     "id": "Peta Kedalaman Laut"
   },
-  "motif": "bathymetry-map"
+  "motif": "bathymetry-map",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

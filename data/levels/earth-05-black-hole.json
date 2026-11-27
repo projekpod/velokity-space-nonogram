@@ -25,5 +25,13 @@
     "en": "Coastal Lighthouse",
     "id": "Mercusuar Pesisir"
   },
-  "motif": "coastal-lighthouse"
+  "motif": "coastal-lighthouse",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      32,
+      47,
+      65
+    ]
+  }
 }

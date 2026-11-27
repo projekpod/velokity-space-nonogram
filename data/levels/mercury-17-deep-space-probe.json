@@ -26,5 +26,8 @@
     "en": "Ghost Crater",
     "id": "Jejak Kawah Purba"
   },
-  "motif": "ghost-crater"
+  "motif": "ghost-crater",
+  "twist": {
+    "kind": "shield"
+  }
 }

@@ -26,5 +26,13 @@
     "en": "Meander Oxbow",
     "id": "Danau Tapal Kuda"
   },
-  "motif": "meander-oxbow"
+  "motif": "meander-oxbow",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      131,
+      134,
+      140
+    ]
+  }
 }

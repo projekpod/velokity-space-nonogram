@@ -29,5 +29,9 @@
     "en": "Vented Ice Cave",
     "id": "Gua Es Berventilasi"
   },
-  "motif": "vented-ice-cave"
+  "motif": "vented-ice-cave",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

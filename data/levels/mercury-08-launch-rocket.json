@@ -25,5 +25,9 @@
     "en": "Hollows",
     "id": "Cekungan Cerah"
   },
-  "motif": "mercury-hollows"
+  "motif": "mercury-hollows",
+  "twist": {
+    "kind": "star",
+    "cell": 66
+  }
 }

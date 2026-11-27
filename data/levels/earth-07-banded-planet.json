@@ -26,5 +26,13 @@
     "en": "Pacific Cyclone",
     "id": "Siklon Pasifik"
   },
-  "motif": "pacific-cyclone"
+  "motif": "pacific-cyclone",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      22,
+      47,
+      132
+    ]
+  }
 }

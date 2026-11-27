@@ -26,5 +26,13 @@
     "en": "Voyager 2",
     "id": "Wahana Voyager 2"
   },
-  "motif": "voyager-two"
+  "motif": "voyager-two",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      39,
+      74,
+      102
+    ]
+  }
 }

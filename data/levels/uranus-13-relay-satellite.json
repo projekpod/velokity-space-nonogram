@@ -26,5 +26,8 @@
     "en": "Deep Atmosphere Probe",
     "id": "Wahana Penyelam Atmosfer"
   },
-  "motif": "uranus-deep-probe"
+  "motif": "uranus-deep-probe",
+  "twist": {
+    "kind": "shield"
+  }
 }

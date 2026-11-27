@@ -28,5 +28,13 @@
     "en": "Synchronous Globe",
     "id": "Globe Rotasi Terkunci"
   },
-  "motif": "synchronous-globe"
+  "motif": "synchronous-globe",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      12,
+      55,
+      182
+    ]
+  }
 }

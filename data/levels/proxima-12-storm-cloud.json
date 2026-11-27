@@ -25,5 +25,9 @@
     "en": "Binary Sunrise",
     "id": "Fajar Dua Bintang"
   },
-  "motif": "binary-sunrise"
+  "motif": "binary-sunrise",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

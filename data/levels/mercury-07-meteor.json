@@ -25,5 +25,9 @@
     "en": "Impact Melt Pool",
     "id": "Kolam Lelehan Tumbukan"
   },
-  "motif": "impact-melt-pool"
+  "motif": "impact-melt-pool",
+  "twist": {
+    "kind": "star",
+    "cell": 62
+  }
 }

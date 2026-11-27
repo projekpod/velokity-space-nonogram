@@ -25,5 +25,9 @@
     "en": "Dish Network",
     "id": "Jaringan Antena Piring"
   },
-  "motif": "dish-network"
+  "motif": "dish-network",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

@@ -26,5 +26,9 @@
     "en": "Ice Mantle Cutaway",
     "id": "Penampang Mantel Es"
   },
-  "motif": "uranus-mantle"
+  "motif": "uranus-mantle",
+  "twist": {
+    "kind": "star",
+    "cell": 71
+  }
 }

@@ -27,5 +27,8 @@
     "en": "Iris Ocean World",
     "id": "Dunia Samudra Mirip Iris"
   },
-  "motif": "iris-ocean-world"
+  "motif": "iris-ocean-world",
+  "twist": {
+    "kind": "shield"
+  }
 }

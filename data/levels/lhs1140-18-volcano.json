@@ -29,5 +29,9 @@
     "en": "Glacier Calving",
     "id": "Runtuhan Gletser"
   },
-  "motif": "glacier-calving"
+  "motif": "glacier-calving",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

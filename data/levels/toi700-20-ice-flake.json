@@ -29,5 +29,13 @@
     "en": "Microlens Arc",
     "id": "Busur Pelensaan Mikro"
   },
-  "motif": "microlens-arc"
+  "motif": "microlens-arc",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      45,
+      107,
+      175
+    ]
+  }
 }

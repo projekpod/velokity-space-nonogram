@@ -26,5 +26,13 @@
     "en": "Aurora Curtain",
     "id": "Tirai Aurora"
   },
-  "motif": "aurora-curtain"
+  "motif": "aurora-curtain",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      19,
+      63,
+      81
+    ]
+  }
 }

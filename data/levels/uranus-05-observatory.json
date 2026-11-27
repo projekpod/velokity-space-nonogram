@@ -25,5 +25,9 @@
     "en": "Uranus at Solstice",
     "id": "Uranus Saat Solstis"
   },
-  "motif": "uranus-solstice"
+  "motif": "uranus-solstice",
+  "twist": {
+    "kind": "star",
+    "cell": 60
+  }
 }

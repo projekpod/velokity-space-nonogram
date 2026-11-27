@@ -28,5 +28,8 @@
     "en": "Air Sampling Kite",
     "id": "Layang-Layang Pengambil Sampel Udara"
   },
-  "motif": "sampling-kite"
+  "motif": "sampling-kite",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -26,5 +26,8 @@
     "en": "Subsurface Antenna",
     "id": "Antena Bawah Permukaan"
   },
-  "motif": "subsurface-antenna"
+  "motif": "subsurface-antenna",
+  "twist": {
+    "kind": "perfect"
+  }
 }

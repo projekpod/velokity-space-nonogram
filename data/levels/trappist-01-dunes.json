@@ -26,5 +26,8 @@
     "en": "Thin Atmosphere",
     "id": "Atmosfer Tipis"
   },
-  "motif": "trappist-thin-atmosphere"
+  "motif": "trappist-thin-atmosphere",
+  "twist": {
+    "kind": "perfect"
+  }
 }

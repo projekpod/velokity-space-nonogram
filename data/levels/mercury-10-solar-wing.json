@@ -25,5 +25,9 @@
     "en": "Escarpment Traverse",
     "id": "Jalur di Tebing"
   },
-  "motif": "escarpment-traverse"
+  "motif": "escarpment-traverse",
+  "twist": {
+    "kind": "star",
+    "cell": 71
+  }
 }

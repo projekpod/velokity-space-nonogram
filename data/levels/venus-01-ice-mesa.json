@@ -24,5 +24,13 @@
     "en": "Lava Channel",
     "id": "Saluran Lava"
   },
-  "motif": "lava-channel"
+  "motif": "lava-channel",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      23,
+      47,
+      70
+    ]
+  }
 }

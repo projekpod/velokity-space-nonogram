@@ -27,5 +27,9 @@
     "en": "Storm Loom",
     "id": "Pola Pita Badai"
   },
-  "motif": "storm-loom"
+  "motif": "storm-loom",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

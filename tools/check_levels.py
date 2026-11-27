@@ -8,7 +8,9 @@ import re
 from statistics import median
 
 from build_daily import BANDS, COUNTS, SIZES, OUTPUT as DAILY_OUTPUT
-from build_levels import BONUS_OUTPUT, LEGACY_PLANETS, OUTPUT, PLANETS, generated_bonus_files, generated_files
+from build_levels import (
+    BONUS_OUTPUT, LEGACY_PLANETS, OUTPUT, PLANETS, TWIST_ORDER, generated_bonus_files, generated_files,
+)
 from nonogram import count_solutions, line_patterns, puzzle_clues
 from star_battle import canonical_grid, solve, valid_solution, validate_regions
 
@@ -118,6 +120,42 @@ def check_progression(albums):
         raise SystemExit("Album median clue ambiguity must rise with progression")
 
 
+def check_twist(level, image, clues):
+    """Keep reward-only rules hidden from the solver and prove the actual starting board."""
+    twist = level.get("twist", {})
+    kind = twist.get("kind")
+    level_id = level["id"]
+    if level["planet"] in LEGACY_PLANETS:
+        if twist:
+            raise SystemExit(f"{level_id}: twists are only for the newer planets")
+        return
+    if kind not in TWIST_ORDER:
+        raise SystemExit(f"{level_id}: missing or unknown twist")
+    size = level["size"]
+    givens = {}
+    cells = twist.get("cells", [])
+    if kind in ("revealed", "asteroid", "star"):
+        indices = [twist.get("cell")] if kind == "star" else cells
+        expected_count = 1 if kind == "star" else 3
+        if len(indices) != expected_count or any(type(i) is not int or not 0 <= i < size * size for i in indices):
+            raise SystemExit(f"{level_id}: invalid {kind} cells")
+        if len(set(indices)) != expected_count:
+            raise SystemExit(f"{level_id}: duplicate {kind} cells")
+        for i in indices:
+            y, x = divmod(i, size)
+            filled = kind != "asteroid"
+            if image[y][x] != filled or not clues[0][y] or not clues[1][x]:
+                raise SystemExit(f"{level_id}: {kind} conflicts with the stored picture or an auto-crossed line")
+            if kind != "star":
+                givens[x, y] = filled
+        if kind == "revealed" and sum(map(sum, image)) <= len(givens):
+            raise SystemExit(f"{level_id}: the givens complete the picture before play")
+    elif kind == "comet" and (type(twist.get("seconds")) is not int or twist["seconds"] <= 0):
+        raise SystemExit(f"{level_id}: invalid comet target")
+    if count_solutions(*clues, givens=givens) != 1:
+        raise SystemExit(f"{level_id}: the clues and starting marks must have exactly one solution")
+
+
 def check_levels():
     files = {path.name: path.read_text(encoding="utf-8") for path in OUTPUT.glob("*.json")}
     if files != generated_files():
@@ -139,9 +177,11 @@ def check_levels():
         albums[level["planet"]].append((level, score))
         if solutions != 1:
             raise SystemExit(f'{level["id"]}: expected one solution, found {solutions}')
+        check_twist(level, image, clues)
     motifs = check_pictures(levels)
     check_progression(albums)
     print(f"Nonogram: {len(files)} levels, {motifs} distinct motifs, one solution each")
+    print(f"Twists: {sum('twist' in level for level in levels)} levels, one solution each with starting marks")
     return images
 
 

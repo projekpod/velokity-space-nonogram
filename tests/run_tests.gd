@@ -10,6 +10,7 @@ const Purchases := preload("res://scripts/payments/purchase_provider.gd")
 const AdsProvider := preload("res://scripts/ads/ads_provider.gd")
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Catalog := preload("res://scripts/nonogram/catalog.gd")
+const Twists := preload("res://scripts/nonogram/twists.gd")
 const Board := preload("res://ui/board.gd")
 const Daily := preload("res://scripts/daily/calendar.gd")
 const DailyPuzzle := preload("res://scripts/daily/puzzle.gd")
@@ -76,6 +77,9 @@ func _run() -> void:
 	await _test_first_puzzle()
 	await _test_bonus_flow()
 	_test_puzzle()
+	_test_twist_rules()
+	await _test_twist_screen()
+	await _test_twist_rewards()
 	_test_continue()
 	_test_hint()
 	_test_board_size()
@@ -643,6 +647,165 @@ func _test_catalog() -> void:
 		check(levels[0].planet == "moon" and levels[0].size == 5, "Moon album comes first")
 		check(levels[20].planet == "mars" and levels[20].size == 8, "Mars album comes second")
 		check(levels[40].planet == "saturn" and levels[40].size == 10, "Saturn album comes third")
+	check(levels.slice(0, 60).all(func(level: Dictionary) -> bool: return not level.has("twist")), "The three original albums have no twist")
+	var expected: Array[String] = []
+	for band in range(20):
+		for offset in range(12):
+			expected.append(Twists.KINDS[band % Twists.KINDS.size()])
+	var actual := levels.slice(60).map(func(level: Dictionary) -> String: return level.get("twist", {}).get("kind", ""))
+	check(actual == expected, "All 240 newer levels rotate through six rules every twelve levels")
+
+
+func _twist_fixture(twist: Dictionary) -> Dictionary:
+	return {
+		"id": "twist-test-%s" % twist.kind, "size": 5, "planet": "venus",
+		"title": {"en": "Twist test", "id": "Uji aturan"},
+		"solution": ["aa...", ".a...", "..aa.", "...aa", "....a"],
+		"palette": {"a": "#93f2e4"}, "twist": twist,
+	}
+
+
+func _test_twist_rules() -> void:
+	var revealed := _twist_fixture({"kind": "revealed", "cells": [0, 1, 12]})
+	var puzzle := Puzzle.new(revealed)
+	check(puzzle.is_given(Vector2i.ZERO) and puzzle.at(Vector2i.ZERO) == Puzzle.Cell.FILLED, "Revealed cells start filled and locked")
+	check(puzzle.rows_done[0] == 1 and puzzle.at(Vector2i(4, 0)) == Puzzle.Cell.CROSSED, "Revealed cells complete their line and auto-cross its remaining cells")
+	puzzle.mark(Vector2i.ZERO, true)
+	check(not puzzle.made_mistake and puzzle.at(Vector2i.ZERO) == Puzzle.Cell.FILLED, "Revealed cells ignore incorrect input")
+	_fill_nonogram(puzzle, revealed.solution)
+	check(puzzle.state == Puzzle.State.WON, "The remaining cells alone finish a revealed puzzle")
+
+	var asteroid := _twist_fixture({"kind": "asteroid", "cells": [2, 5, 14]})
+	puzzle = Puzzle.new(asteroid)
+	var rocky := Vector2i(2, 0)
+	check(puzzle.is_given(rocky) and puzzle.at(rocky) == Puzzle.Cell.CROSSED, "Asteroid cells start crossed and locked")
+	puzzle.mark(rocky, false)
+	check(puzzle.lives == 3 and puzzle.at(rocky) == Puzzle.Cell.CROSSED, "Asteroid cells ignore fill attempts")
+
+	var star := _twist_fixture({"kind": "star", "cell": 6})
+	puzzle = Puzzle.new(star)
+	var hidden := Vector2i(1, 1)
+	check(not puzzle.has_collected_star(hidden) and puzzle.at(hidden) == Puzzle.Cell.UNKNOWN, "The star gives no starting information")
+	puzzle.mark(hidden, false)
+	check(puzzle.has_collected_star(hidden) and not puzzle.earned_twist_bonus(0.0), "A correct fill reveals the bonus star but cannot pay before a win")
+	_fill_nonogram(puzzle, star.solution)
+	check(puzzle.earned_twist_bonus(0.0), "The collected star qualifies on a clear")
+	puzzle = Puzzle.new(star)
+	puzzle.mark(hidden, true)
+	_fill_nonogram(puzzle, star.solution)
+	check(not puzzle.has_collected_star(hidden) and not puzzle.earned_twist_bonus(0.0), "Auto-correcting a wrong star mark does not qualify")
+
+	puzzle = Puzzle.new(_twist_fixture({"kind": "shield"}))
+	puzzle.mark(Vector2i.ZERO, true)
+	check(puzzle.lives == 3 and puzzle.made_mistake and puzzle.shield_used, "The shield absorbs the first mistake and records it")
+	puzzle.mark(Vector2i(1, 0), true)
+	check(puzzle.lives == 2, "The next mistake still costs a life")
+
+	var comet := _twist_fixture({"kind": "comet", "seconds": 40})
+	puzzle = Puzzle.new(comet)
+	_fill_nonogram(puzzle, comet.solution)
+	check(puzzle.earned_twist_bonus(39.99), "Finishing under the comet target qualifies")
+	check(not puzzle.earned_twist_bonus(40.0) and puzzle.lives == 3 and puzzle.state == Puzzle.State.WON, "The timer expiring affects only the bonus")
+
+	var perfect := _twist_fixture({"kind": "perfect"})
+	puzzle = Puzzle.new(perfect)
+	_fill_nonogram(puzzle, perfect.solution)
+	check(puzzle.earned_twist_bonus(0.0), "A mistake-free and hint-free clear qualifies")
+	puzzle = Puzzle.new(perfect)
+	check(puzzle.hint(), "A hint fills a cell in the perfect-run puzzle")
+	_fill_nonogram(puzzle, perfect.solution)
+	check(puzzle.used_hint and not puzzle.earned_twist_bonus(0.0), "A used hint disqualifies a perfect-run clear")
+	puzzle = Puzzle.new(perfect)
+	puzzle.mark(Vector2i.ZERO, true)
+	_fill_nonogram(puzzle, perfect.solution)
+	check(not puzzle.earned_twist_bonus(0.0), "A mistake disqualifies a perfect-run clear")
+
+
+func _test_twist_screen() -> void:
+	var save := root.get_node("Save")
+	var prior_data: Dictionary = save.data
+	var prior_path: String = save.storage_path
+	var path := "user://test-twists-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	save.data = SaveScript.migrate({"version": 8, "onboarding_complete": true, "coins": 40})
+	check(save.data.version == SaveScript.VERSION and save.data.coins == 40 and save.data.twist_tips.is_empty(), "Version eight saves retain progress and start with unseen twists")
+	check(SaveScript.migrate({"version": 9, "twist_tips": {"star": true, "bad": true, "shield": 1}}).twist_tips == {"star": true}, "Only supported, acknowledged tips survive migration")
+
+	var main := preload("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	for index: int in main._planet_levels("saturn").slice(0, Catalog.PLANET_CLEAR_REQUIREMENT):
+		save.data.nonogram[main._levels[index].id] = {"reward": 30, "doubled": false}
+	main._show_levels("venus")
+	await process_frame
+	var grid: GridContainer = main._column.get_child(3)
+	var card: Button = grid.get_child(0)
+	check(card.icon != null and card.tooltip_text.contains(tr("TWIST_REVEALED")), "A newer level card shows its twist icon and name")
+	check(grid.get_combined_minimum_size().x <= 696.0, "Rule icons fit the four-column level grid")
+	var screen: NonogramScreen = main._play(60)
+	check(screen._twist_tip.visible and not screen._board.is_visible_in_tree(), "A new twist tip blocks play until acknowledged")
+	check(_press_button(screen._twist_tip, "TWIST_START"), "The tip has a start button")
+	while screen._saving:
+		await process_frame
+	check(screen._twist_tip == null and screen._board.visible and save.data.twist_tips == {"revealed": true}, "Acknowledging the tip starts play and saves just that tip")
+	check(save.load_game() == OK and save.data.twist_tips.has("revealed"), "An acknowledged tip survives a save reload")
+	screen = main._play(60)
+	check(screen._twist_tip == null and screen._board.visible, "Replaying an acknowledged twist opens the board directly")
+
+	main._reset_column(NonogramScreen.BOARD_WIDTH)
+	var comet := NonogramScreen.new()
+	comet.level = _twist_fixture({"kind": "comet", "seconds": 40})
+	main._column.add_child(comet)
+	check(comet._clock_started_msec == -1 and comet._twist_tip.visible, "Comet time starts after the tip")
+	_press_button(comet._twist_tip, "TWIST_START")
+	while comet._saving:
+		await process_frame
+	check(comet._clock_started_msec >= 0 and comet._clock_seconds == 40, "The clock starts when the player is able to play")
+	paused = true
+	var before := comet._elapsed_seconds()
+	await process_frame
+	check(comet._clock_started_msec == -1 and comet._elapsed_seconds() == before, "Pausing the tree freezes active play time")
+	paused = false
+	check(comet._clock_started_msec >= 0, "Unpausing the tree resumes the comet clock")
+	comet._played_msec = 40000
+	comet._update_clock()
+	check(comet._clock_seconds == 0 and comet._puzzle.lives == 3 and comet._puzzle.state == Puzzle.State.PLAYING, "Clock expiry leaves the board and lives playable")
+	await _solve_nonogram(comet)
+	check(comet._win_coins == 52 and comet._status.text == "GAME_WON", "A late comet clear still pays the normal reward")
+	main._reset_column(NonogramScreen.BOARD_WIDTH)
+	var perfect := NonogramScreen.new()
+	perfect.level = _twist_fixture({"kind": "perfect"})
+	main._column.add_child(perfect)
+	_press_button(perfect._twist_tip, "TWIST_START")
+	await _solve_nonogram(perfect)
+	var reward_text := tr("TWIST_EXTRA_COINS") % Twists.COINS.perfect
+	check(perfect._win_coins == 60 and perfect._result.find_children("*", "Label", true, false).any(
+		func(label: Label) -> bool: return label.text == reward_text
+	), "An uninterrupted perfect run awards and displays ten twist coins within the cap")
+	main.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(path)
+	save.data = prior_data
+	save.storage_path = prior_path
+
+
+func _test_twist_rewards() -> void:
+	var save := root.get_node("Save")
+	var economy := root.get_node("Economy")
+	var prior_data: Dictionary = save.data
+	var prior_path: String = save.storage_path
+	var path := "user://test-twist-reward-%d.json" % OS.get_process_id()
+	save.storage_path = path
+	save.data = SaveScript.defaults()
+	check(await economy.award_nonogram("star-first", 2, 0, "star", true) == 31, "First-clear bonus adds coins when there is room")
+	check(await economy.award_nonogram("star-first", 2, 0, "star", true) == 0, "A replay pays no twist coins")
+	check(await economy.award_nonogram("comet-cap", 2, 4, "comet", true) == 60, "The first-clear cap includes the twist bonus")
+	check(await economy.award_nonogram("shield-hit", 3, 0, "shield", false, true) == 30 and not economy.has_flawless_badge("shield-hit"), "A shielded mistake cannot earn a flawless badge")
+	check(await economy.award_nonogram("perfect-assist", 3, 20, "perfect", false) == 50, "A combo leaves room for the perfect-run bonus")
+	check(await economy.award_nonogram("perfect-clear", 3, 20, "perfect", true) == 60, "A perfect run earns the full bonus even at the combo cap")
+	check(save.load_game() == OK and economy.balance() == 231, "First-clear rewards and their capped bonuses persist once")
+	DirAccess.remove_absolute(path)
+	save.data = prior_data
+	save.storage_path = prior_path
 
 
 func _test_level_progression() -> void:
@@ -982,13 +1145,17 @@ func _test_daily_rewards() -> void:
 
 
 func _solve_nonogram(screen: NonogramScreen) -> void:
-	for y in range(screen._puzzle.size):
-		for x in range(screen._puzzle.size):
-			if screen.level.solution[y][x] != ".":
-				screen._puzzle.mark(Vector2i(x, y), false)
+	_fill_nonogram(screen._puzzle, screen.level.solution)
 
 	while screen._saving:
 		await process_frame
+
+
+func _fill_nonogram(puzzle: Puzzle, rows: Array) -> void:
+	for y in range(puzzle.size):
+		for x in range(puzzle.size):
+			if rows[y][x] != ".":
+				puzzle.mark(Vector2i(x, y), false)
 
 
 func _press_button(parent: Node, key: String) -> bool:
@@ -1252,7 +1419,7 @@ func _test_cosmetic_migration() -> void:
 	var path := "user://test-cosmetics-%d.json" % OS.get_process_id()
 	save.storage_path = path
 	var old := {"version": 7, "coins": 32000, "meta": {"purchased": {"mint_visor": true, "prism_pack": true}, "equipped": {"helmet": "mint_visor"}}}
-	check(save.write_game(old) == OK and save.load_game() == OK and save.data.version == 8, "Load version seven and bump the save schema")
+	check(save.write_game(old) == OK and save.load_game() == OK and save.data.version == SaveScript.VERSION, "Load version seven and bump the save schema")
 	check(economy.owns_costume("mint_visor") and economy.owns_costume("prism_pack") and economy.equipped_costumes().helmet == "mint_visor", "Repriced costumes retain ownership and equipment after migration")
 	check(economy.equipped_cosmetic("cat") == "velokity" and economy.equipped_cosmetic("skin") == "natural", "Migration equips the free default cat and coat")
 	check(not economy.equip_cosmetic("cat", "savannah") and not economy.buy_cosmetic("cat", "velokity"), "Reject an unowned equip or a purchase of the free cat")

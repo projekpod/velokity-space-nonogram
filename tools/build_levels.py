@@ -11,6 +11,8 @@ BONUS_OUTPUT = OUTPUT / "bonus"
 BONUS_PALETTE = {"a": "#8de5e5", "b": "#9d9af4", "c": "#ffdf8e", "d": "#fba1bd"}
 MANIFEST = ROOT / "data" / "config" / "planets.json"
 LEGACY_PLANETS = ("moon", "mars", "saturn")
+TWIST_ORDER = ("revealed", "asteroid", "star", "shield", "comet", "perfect")
+TWIST_INTERVAL = 12
 PLANETS = {
     entry["id"]: entry
     for entry in json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -46,15 +48,52 @@ def read_source(source, palette, fixed_size=None):
         yield level
 
 
+def level_twist(level, index):
+    """Choose one rule per twelve newer levels in the album order."""
+    kind = TWIST_ORDER[index // TWIST_INTERVAL % len(TWIST_ORDER)]
+    twist = {"kind": kind}
+    rows = level["solution"]
+    size = level["size"]
+    if kind in ("revealed", "asteroid", "star"):
+        count = 1 if kind == "star" else 3
+        # Skip lines that the ordinary board automatically crosses on entry.
+        used_rows = [bool(row.strip(".")) for row in rows]
+        used_cols = [any(pixel != "." for pixel in col) for col in zip(*rows)]
+        pool = [
+            y * size + x
+            for y, row in enumerate(rows)
+            for x, pixel in enumerate(row)
+            if used_rows[y] and used_cols[x] and (pixel == ".") == (kind == "asteroid")
+        ]
+        if len(pool) <= count:
+            raise ValueError(f'{level["id"]}: too few eligible {kind} cells')
+        cells = [pool[len(pool) * (i + 1) // (count + 1)] for i in range(count)]
+        if kind == "star":
+            twist["cell"] = cells[0]
+        else:
+            twist["cells"] = cells
+    elif kind == "comet":
+        twist["seconds"] = 7 * size
+    return twist
+
+
 def generated_files():
-    return {
-        level["id"] + ".json": json.dumps(level, ensure_ascii=False, indent=2) + "\n"
+    levels = (
+        level
         for planet, entry in PLANETS.items()
         for level in read_source(
             SOURCES / f"{planet}.txt", entry["palette"],
             entry["size"] if planet in LEGACY_PLANETS else None,
         )
-    }
+    )
+    files = {}
+    twist_index = 0
+    for level in levels:
+        if level["planet"] not in LEGACY_PLANETS:
+            level["twist"] = level_twist(level, twist_index)
+            twist_index += 1
+        files[level["id"] + ".json"] = json.dumps(level, ensure_ascii=False, indent=2) + "\n"
+    return files
 
 
 def generated_bonus_files():

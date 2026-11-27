@@ -27,5 +27,8 @@
     "en": "Brine Pocket",
     "id": "Kantong Air Asin"
   },
-  "motif": "brine-pocket"
+  "motif": "brine-pocket",
+  "twist": {
+    "kind": "shield"
+  }
 }

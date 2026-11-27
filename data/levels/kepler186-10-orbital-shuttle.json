@@ -27,5 +27,9 @@
     "en": "Kepler Photometer",
     "id": "Fotometer Kepler"
   },
-  "motif": "kepler-photometer"
+  "motif": "kepler-photometer",
+  "twist": {
+    "kind": "star",
+    "cell": 87
+  }
 }

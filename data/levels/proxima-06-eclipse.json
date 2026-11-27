@@ -24,5 +24,8 @@
     "en": "Proxima Flare",
     "id": "Semburan Proxima"
   },
-  "motif": "proxima-flare"
+  "motif": "proxima-flare",
+  "twist": {
+    "kind": "shield"
+  }
 }

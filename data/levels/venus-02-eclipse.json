@@ -24,5 +24,13 @@
     "en": "Aphrodite Fault",
     "id": "Patahan Aphrodite"
   },
-  "motif": "aphrodite-fault"
+  "motif": "aphrodite-fault",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      25,
+      51,
+      75
+    ]
+  }
 }

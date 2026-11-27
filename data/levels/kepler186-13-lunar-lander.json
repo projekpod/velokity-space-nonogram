@@ -27,5 +27,9 @@
     "en": "Buried Ice Core",
     "id": "Inti Es Terkubur"
   },
-  "motif": "buried-ice-core"
+  "motif": "buried-ice-core",
+  "twist": {
+    "kind": "star",
+    "cell": 95
+  }
 }

@@ -28,5 +28,8 @@
     "en": "Under-Ice Lantern",
     "id": "Lentera Bawah Es"
   },
-  "motif": "under-ice-lantern"
+  "motif": "under-ice-lantern",
+  "twist": {
+    "kind": "shield"
+  }
 }

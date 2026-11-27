@@ -39,11 +39,15 @@ def line_patterns(length, blocks):
     return tuple(patterns)
 
 
-def count_solutions(row_clues, column_clues, limit=2):
-    """Return the number of solutions up to limit."""
+def count_solutions(row_clues, column_clues, limit=2, *, givens=None):
+    """Return the number of solutions up to limit, honoring known (x, y) cells."""
     height, width = len(row_clues), len(column_clues)
     lines = [line_patterns(width, line) for line in row_clues]
     lines.extend(line_patterns(height, line) for line in column_clues)
+    for (x, y), filled in (givens or {}).items():
+        lines[y] = tuple(pattern for pattern in lines[y] if (pattern >> x) & 1 == filled)
+        column = height + x
+        lines[column] = tuple(pattern for pattern in lines[column] if (pattern >> y) & 1 == filled)
 
     def search(domains, remaining):
         updated = True

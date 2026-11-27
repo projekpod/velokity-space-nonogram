@@ -25,5 +25,13 @@
     "en": "Tectonic Plates",
     "id": "Lempeng Tektonik"
   },
-  "motif": "tectonic-plates"
+  "motif": "tectonic-plates",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      29,
+      57,
+      85
+    ]
+  }
 }

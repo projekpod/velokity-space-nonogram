@@ -27,5 +27,13 @@
     "en": "Permafrost Crawler",
     "id": "Robot Perayap Tanah Beku"
   },
-  "motif": "permafrost-crawler"
+  "motif": "permafrost-crawler",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      50,
+      89,
+      127
+    ]
+  }
 }

@@ -24,5 +24,8 @@
     "en": "Bubble Greenhouse",
     "id": "Rumah Kaca Gelembung"
   },
-  "motif": "bubble-greenhouse"
+  "motif": "bubble-greenhouse",
+  "twist": {
+    "kind": "shield"
+  }
 }

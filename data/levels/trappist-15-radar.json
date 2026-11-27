@@ -28,5 +28,13 @@
     "en": "Star Chart",
     "id": "Peta Bintang"
   },
-  "motif": "star-chart"
+  "motif": "star-chart",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      54,
+      98,
+      142
+    ]
+  }
 }

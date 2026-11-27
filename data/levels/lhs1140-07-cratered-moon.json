@@ -28,5 +28,8 @@
     "en": "Hydrothermal Chimney",
     "id": "Cerobong Hidrotermal"
   },
-  "motif": "hydrothermal-chimney"
+  "motif": "hydrothermal-chimney",
+  "twist": {
+    "kind": "shield"
+  }
 }

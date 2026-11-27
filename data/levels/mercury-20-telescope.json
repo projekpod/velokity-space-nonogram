@@ -26,5 +26,8 @@
     "en": "Orbital Resonance",
     "id": "Resonansi Orbit"
   },
-  "motif": "orbital-resonance"
+  "motif": "orbital-resonance",
+  "twist": {
+    "kind": "shield"
+  }
 }

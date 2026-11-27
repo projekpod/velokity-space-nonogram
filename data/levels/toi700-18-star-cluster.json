@@ -29,5 +29,13 @@
     "en": "Communication Kite Mast",
     "id": "Tiang Layang-Layang Komunikasi"
   },
-  "motif": "communication-kite-mast"
+  "motif": "communication-kite-mast",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      28,
+      162,
+      190
+    ]
+  }
 }

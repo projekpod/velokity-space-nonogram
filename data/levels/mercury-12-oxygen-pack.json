@@ -25,5 +25,9 @@
     "en": "Caloris Basin",
     "id": "Cekungan Caloris"
   },
-  "motif": "caloris-basin"
+  "motif": "caloris-basin",
+  "twist": {
+    "kind": "star",
+    "cell": 58
+  }
 }

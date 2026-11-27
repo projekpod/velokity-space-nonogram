@@ -27,5 +27,8 @@
     "en": "Oberon Central Peak",
     "id": "Puncak Kawah Oberon"
   },
-  "motif": "oberon-central-peak"
+  "motif": "oberon-central-peak",
+  "twist": {
+    "kind": "shield"
+  }
 }

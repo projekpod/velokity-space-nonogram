@@ -28,5 +28,9 @@
     "en": "Icy Nightside",
     "id": "Sisi Malam Berlapis Es"
   },
-  "motif": "icy-nightside"
+  "motif": "icy-nightside",
+  "twist": {
+    "kind": "comet",
+    "seconds": 98
+  }
 }

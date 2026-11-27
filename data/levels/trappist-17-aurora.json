@@ -28,5 +28,13 @@
     "en": "Specimen Grabber",
     "id": "Penjepit Sampel"
   },
-  "motif": "specimen-grabber"
+  "motif": "specimen-grabber",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      24,
+      68,
+      174
+    ]
+  }
 }

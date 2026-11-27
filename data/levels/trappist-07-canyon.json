@@ -27,5 +27,13 @@
     "en": "Tide Pool Fauna",
     "id": "Fauna Kolam Pasang"
   },
-  "motif": "tide-pool-fauna"
+  "motif": "tide-pool-fauna",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      42,
+      82,
+      121
+    ]
+  }
 }

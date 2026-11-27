@@ -27,5 +27,9 @@
     "en": "Europa Ocean",
     "id": "Samudra Bawah Es Europa"
   },
-  "motif": "europa-ocean"
+  "motif": "europa-ocean",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

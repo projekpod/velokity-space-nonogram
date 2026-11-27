@@ -26,5 +26,8 @@
     "en": "Triton Geyser",
     "id": "Geiser Triton"
   },
-  "motif": "triton-geyser"
+  "motif": "triton-geyser",
+  "twist": {
+    "kind": "perfect"
+  }
 }

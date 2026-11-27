@@ -29,5 +29,8 @@
     "en": "Ocean World Cloudbreak",
     "id": "Celah Awan Dunia Samudra"
   },
-  "motif": "ocean-cloudbreak"
+  "motif": "ocean-cloudbreak",
+  "twist": {
+    "kind": "perfect"
+  }
 }

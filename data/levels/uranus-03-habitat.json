@@ -25,5 +25,9 @@
     "en": "Umbriel Bright Ring",
     "id": "Cincin Cerah Umbriel"
   },
-  "motif": "umbriel-bright-ring"
+  "motif": "umbriel-bright-ring",
+  "twist": {
+    "kind": "star",
+    "cell": 60
+  }
 }

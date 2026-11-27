@@ -26,5 +26,9 @@
     "en": "Cloud-Top Shadow",
     "id": "Bayangan di Puncak Awan"
   },
-  "motif": "jupiter-cloud-shadow"
+  "motif": "jupiter-cloud-shadow",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

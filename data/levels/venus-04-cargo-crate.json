@@ -24,5 +24,13 @@
     "en": "Akatsuki Orbiter",
     "id": "Pengorbit Akatsuki"
   },
-  "motif": "akatsuki-orbiter"
+  "motif": "akatsuki-orbiter",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      20,
+      37,
+      56
+    ]
+  }
 }

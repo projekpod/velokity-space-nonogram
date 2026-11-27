@@ -28,5 +28,9 @@
     "en": "Harbour Float Garden",
     "id": "Kebun Terapung di Teluk"
   },
-  "motif": "harbour-float-garden"
+  "motif": "harbour-float-garden",
+  "twist": {
+    "kind": "comet",
+    "seconds": 98
+  }
 }

@@ -27,5 +27,9 @@
     "en": "JUICE Flyby",
     "id": "Lintasan Wahana JUICE"
   },
-  "motif": "juice-flyby"
+  "motif": "juice-flyby",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

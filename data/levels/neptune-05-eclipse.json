@@ -25,5 +25,8 @@
     "en": "Liquid-Ice Laboratory",
     "id": "Lab Es Bertekanan"
   },
-  "motif": "liquid-ice-lab"
+  "motif": "liquid-ice-lab",
+  "twist": {
+    "kind": "perfect"
+  }
 }

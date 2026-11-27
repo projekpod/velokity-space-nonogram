@@ -25,5 +25,8 @@
     "en": "Shadow Valley",
     "id": "Lembah Bayangan"
   },
-  "motif": "proxima-shadow-valley"
+  "motif": "proxima-shadow-valley",
+  "twist": {
+    "kind": "shield"
+  }
 }

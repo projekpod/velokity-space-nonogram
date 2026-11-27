@@ -25,5 +25,8 @@
     "en": "Neptune Storm Bands",
     "id": "Pita Badai Neptunus"
   },
-  "motif": "neptune-storm-bands"
+  "motif": "neptune-storm-bands",
+  "twist": {
+    "kind": "perfect"
+  }
 }

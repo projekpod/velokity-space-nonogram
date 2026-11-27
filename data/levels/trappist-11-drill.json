@@ -27,5 +27,13 @@
     "en": "Interferometer Baseline",
     "id": "Garis Dasar Interferometer"
   },
-  "motif": "interferometer-baseline"
+  "motif": "interferometer-baseline",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      41,
+      84,
+      133
+    ]
+  }
 }

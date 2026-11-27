@@ -26,5 +26,13 @@
     "en": "Travelling Weather Rover",
     "id": "Rover Pengamat Cuaca"
   },
-  "motif": "weather-rover"
+  "motif": "weather-rover",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      16,
+      44,
+      115
+    ]
+  }
 }

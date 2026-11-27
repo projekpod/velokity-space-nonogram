@@ -26,5 +26,9 @@
     "en": "Red dwarf beacon",
     "id": "Suar Bintang Katai Merah"
   },
-  "motif": "red-dwarf-beacon"
+  "motif": "red-dwarf-beacon",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

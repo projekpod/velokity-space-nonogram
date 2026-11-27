@@ -26,5 +26,8 @@
     "en": "Epsilon Ring",
     "id": "Cincin Epsilon"
   },
-  "motif": "epsilon-ring"
+  "motif": "epsilon-ring",
+  "twist": {
+    "kind": "shield"
+  }
 }

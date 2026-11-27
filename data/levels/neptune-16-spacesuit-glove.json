@@ -27,5 +27,13 @@
     "en": "Cold-World Drill",
     "id": "Bor Es Dunia Dingin"
   },
-  "motif": "cold-world-drill"
+  "motif": "cold-world-drill",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      37,
+      89,
+      137
+    ]
+  }
 }

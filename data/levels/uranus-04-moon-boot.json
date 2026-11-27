@@ -25,5 +25,9 @@
     "en": "High-Latitude Cloud",
     "id": "Awan Lintang Tinggi"
   },
-  "motif": "high-latitude-cloud"
+  "motif": "high-latitude-cloud",
+  "twist": {
+    "kind": "star",
+    "cell": 60
+  }
 }

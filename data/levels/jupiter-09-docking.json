@@ -27,5 +27,9 @@
     "en": "Infrared Hot Spot",
     "id": "Titik Panas Inframerah"
   },
-  "motif": "jupiter-infrared-hot-spot"
+  "motif": "jupiter-infrared-hot-spot",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

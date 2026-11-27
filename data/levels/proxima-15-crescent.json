@@ -26,5 +26,9 @@
     "en": "Mineral Fossil",
     "id": "Fosil Mineral"
   },
-  "motif": "mineral-fossil"
+  "motif": "mineral-fossil",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

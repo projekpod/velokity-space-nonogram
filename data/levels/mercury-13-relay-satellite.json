@@ -25,5 +25,9 @@
     "en": "Solar Tide",
     "id": "Pasang Surut Matahari"
   },
-  "motif": "solar-tide"
+  "motif": "solar-tide",
+  "twist": {
+    "kind": "star",
+    "cell": 58
+  }
 }

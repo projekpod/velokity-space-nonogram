@@ -29,5 +29,9 @@
     "en": "Icebreaker Bow",
     "id": "Haluan Kapal Pemecah Es"
   },
-  "motif": "icebreaker-bow"
+  "motif": "icebreaker-bow",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

@@ -27,5 +27,13 @@
     "en": "Crystal Harvest Scoop",
     "id": "Sekop Pengambil Kristal"
   },
-  "motif": "crystal-harvest-scoop"
+  "motif": "crystal-harvest-scoop",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      47,
+      89,
+      125
+    ]
+  }
 }

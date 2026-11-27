@@ -28,5 +28,8 @@
     "en": "Open-Ocean Rover",
     "id": "Rover Laut Lepas"
   },
-  "motif": "ocean-rover"
+  "motif": "ocean-rover",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -8,6 +8,7 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
+const TwistTip := preload("res://ui/twist_tip.gd")
 const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 
 @onready var center: Control = $Center
@@ -165,6 +166,11 @@ func _show_levels(planet: String) -> void:
 		var button := UI.button(grid, caption, cleared)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.tooltip_text = UI.level_title(_levels[index])
+		var twist: Dictionary = _levels[index].get("twist", {})
+		if not twist.is_empty():
+			button.icon = TwistTip.icon(twist.kind)
+			button.add_theme_constant_override("icon_max_width", 19)
+			button.tooltip_text += "\n" + tr(TwistTip.title_key(twist.kind))
 		button.disabled = not unlocked
 		if button.disabled:
 			button.add_theme_font_size_override("font_size", 18)

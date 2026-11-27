@@ -25,5 +25,9 @@
     "en": "Solar Telescope",
     "id": "Teleskop Surya"
   },
-  "motif": "solar-telescope"
+  "motif": "solar-telescope",
+  "twist": {
+    "kind": "star",
+    "cell": 59
+  }
 }

@@ -27,5 +27,13 @@
     "en": "Radio Array Dish",
     "id": "Piringan Susunan Radio"
   },
-  "motif": "radio-array-dish"
+  "motif": "radio-array-dish",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      33,
+      67,
+      100
+    ]
+  }
 }

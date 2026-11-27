@@ -24,5 +24,13 @@
     "en": "Venera Lander",
     "id": "Wahana Pendarat Venera"
   },
-  "motif": "venera-lander"
+  "motif": "venera-lander",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      43,
+      59,
+      82
+    ]
+  }
 }

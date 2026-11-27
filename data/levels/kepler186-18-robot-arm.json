@@ -28,5 +28,9 @@
     "en": "Rain Gauge",
     "id": "Pengukur Curah Hujan"
   },
-  "motif": "rain-gauge"
+  "motif": "rain-gauge",
+  "twist": {
+    "kind": "star",
+    "cell": 102
+  }
 }

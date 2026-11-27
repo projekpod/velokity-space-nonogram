@@ -28,5 +28,13 @@
     "en": "Basalt Organ Pipes",
     "id": "Pilar Basalt"
   },
-  "motif": "basalt-organ-pipes"
+  "motif": "basalt-organ-pipes",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      14,
+      31,
+      58
+    ]
+  }
 }

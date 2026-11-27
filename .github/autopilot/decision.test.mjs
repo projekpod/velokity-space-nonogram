@@ -15,11 +15,11 @@ test("resume only when the newest commit and last comment are both older than tw
   assert.equal(run({ branchAgeMs: 0 }), "idle");
 });
 
-test("a completed task becomes ready and its note respects the comment cooldown", () => {
+test("a completed task gets a note that respects the comment cooldown", () => {
   assert.equal(run({ branchAgeMs: 0, taskDone: true }), "complete");
-  assert.equal(run({ taskDone: true, lastCommentAgeMs: TWO_HOURS_MS }), "ready");
+  assert.equal(run({ taskDone: true, lastCommentAgeMs: TWO_HOURS_MS }), "idle");
   assert.equal(run({ taskDone: true, lastCommentAgeMs: old }), "complete");
-  assert.equal(run({ taskDone: true, completionPosted: true }), "ready");
+  assert.equal(run({ taskDone: true, completionPosted: true }), "idle");
 });
 
 test("the deadline includes all of 9 December in Jakarta", () => {

@@ -26,5 +26,9 @@
     "en": "Juno Probe",
     "id": "Wahana Juno"
   },
-  "motif": "juno-probe"
+  "motif": "juno-probe",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

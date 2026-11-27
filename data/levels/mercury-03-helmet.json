@@ -24,5 +24,13 @@
     "en": "Long Shadow",
     "id": "Bayangan Panjang"
   },
-  "motif": "mercury-long-shadow"
+  "motif": "mercury-long-shadow",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      3,
+      6,
+      38
+    ]
+  }
 }

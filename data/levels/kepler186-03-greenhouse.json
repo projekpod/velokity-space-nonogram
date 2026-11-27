@@ -26,5 +26,13 @@
     "en": "Fern Fossil Tile",
     "id": "Ubin Fosil Pakis"
   },
-  "motif": "fern-fossil"
+  "motif": "fern-fossil",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      8,
+      11,
+      141
+    ]
+  }
 }

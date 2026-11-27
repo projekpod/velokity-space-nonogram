@@ -24,5 +24,13 @@
     "en": "Sulfur Lightning",
     "id": "Petir di Awan Sulfur"
   },
-  "motif": "sulfur-lightning"
+  "motif": "sulfur-lightning",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      14,
+      37,
+      58
+    ]
+  }
 }

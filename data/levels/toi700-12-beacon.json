@@ -28,5 +28,13 @@
     "en": "Planet e Transit",
     "id": "Transit Planet e"
   },
-  "motif": "toi700-e-transit"
+  "motif": "toi700-e-transit",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      25,
+      90,
+      152
+    ]
+  }
 }

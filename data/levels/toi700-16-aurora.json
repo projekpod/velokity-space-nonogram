@@ -29,5 +29,13 @@
     "en": "TESS Camera Array",
     "id": "Susunan Kamera TESS"
   },
-  "motif": "tess-cameras"
+  "motif": "tess-cameras",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      104,
+      161,
+      204
+    ]
+  }
 }

@@ -26,5 +26,8 @@
     "en": "Sample Carousel",
     "id": "Pemutar Wadah Sampel"
   },
-  "motif": "sample-carousel"
+  "motif": "sample-carousel",
+  "twist": {
+    "kind": "perfect"
+  }
 }

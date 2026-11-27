@@ -28,5 +28,8 @@
     "en": "Pressure Window",
     "id": "Jendela Tahan Tekanan"
   },
-  "motif": "pressure-window"
+  "motif": "pressure-window",
+  "twist": {
+    "kind": "shield"
+  }
 }

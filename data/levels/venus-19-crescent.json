@@ -26,5 +26,13 @@
     "en": "Evening Star",
     "id": "Bintang Senja"
   },
-  "motif": "evening-star"
+  "motif": "evening-star",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      13,
+      32,
+      48
+    ]
+  }
 }

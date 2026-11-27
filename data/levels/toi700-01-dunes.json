@@ -27,5 +27,13 @@
     "en": "Stone Rib Canyon",
     "id": "Ngarai Rusuk Batu"
   },
-  "motif": "stone-rib-canyon"
+  "motif": "stone-rib-canyon",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      48,
+      89,
+      128
+    ]
+  }
 }

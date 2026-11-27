@@ -20,8 +20,16 @@ var column_clues: Array[PackedInt32Array] = []
 var rows_done := PackedByteArray()
 var columns_done := PackedByteArray()
 var palette: Dictionary
+var twist_kind: String
+var target_seconds := 0
+var star_collected := false
+var shield_used := false
+var made_mistake := false
+var used_hint := false
 var _solution: Array
 var _cells := PackedByteArray()
+var _givens := PackedByteArray()
+var _star_index := -1
 var _remaining := 0
 var _continued := false
 
@@ -31,6 +39,7 @@ func _init(level: Dictionary) -> void:
 	palette = level.palette
 	size = int(level.size)
 	_cells.resize(size * size)
+	_givens.resize(size * size)
 	rows_done.resize(size)
 	columns_done.resize(size)
 	for index in range(size):
@@ -45,9 +54,26 @@ func _init(level: Dictionary) -> void:
 		column_clues.append(vertical)
 		for number in horizontal:
 			_remaining += number
+	_apply_twist(level.get("twist", {}))
 	for index in range(size):
 		_check_line(true, index)
 		_check_line(false, index)
+
+
+func _apply_twist(twist: Dictionary) -> void:
+	twist_kind = twist.get("kind", "")
+	match twist_kind:
+		"revealed", "asteroid":
+			var filled := twist_kind == "revealed"
+			for value: Variant in twist.cells:
+				var index := int(value)
+				_cells[index] = Cell.FILLED if filled else Cell.CROSSED
+				_givens[index] = 1
+				_remaining -= int(filled)
+		"star":
+			_star_index = int(twist.cell)
+		"comet":
+			target_seconds = int(twist.seconds)
 
 
 static func clues(line: PackedByteArray) -> PackedInt32Array:
@@ -68,6 +94,27 @@ func at(cell: Vector2i) -> int:
 	return _cells[cell.y * size + cell.x]
 
 
+func is_given(cell: Vector2i) -> bool:
+	return _givens[cell.y * size + cell.x] == 1
+
+
+func has_collected_star(cell: Vector2i) -> bool:
+	return star_collected and cell.y * size + cell.x == _star_index
+
+
+func earned_twist_bonus(elapsed: float) -> bool:
+	if state != State.WON:
+		return false
+	match twist_kind:
+		"star":
+			return star_collected
+		"comet":
+			return elapsed < target_seconds
+		"perfect":
+			return not made_mistake and not used_hint
+	return false
+
+
 func reveal(cell: Vector2i) -> Color:
 	return Color(palette.get(_solution[cell.y][cell.x], "#192638"))
 
@@ -80,9 +127,15 @@ func mark(cell: Vector2i, crossed: bool) -> void:
 	var filled: bool = _solution[cell.y][cell.x] != "."
 	var wrong := filled == crossed
 	if wrong:
-		lives -= 1
+		made_mistake = true
+		if twist_kind == "shield" and not shield_used:
+			shield_used = true
+		else:
+			lives -= 1
 		if lives == 0:
 			state = State.LOST
+	elif filled and cell.y * size + cell.x == _star_index:
+		star_collected = true
 	var completed_lines := _apply_mark(cell, filled)
 	if wrong:
 		mistake.emit(cell)
@@ -107,9 +160,15 @@ func _apply_mark(cell: Vector2i, filled: bool) -> int:
 
 
 func hint() -> bool:
-	var cell := hint_cell()
-	if cell.x < 0:
+	return apply_hint(hint_cell())
+
+
+func apply_hint(cell: Vector2i) -> bool:
+	if state != State.PLAYING or not Rect2i(0, 0, size, size).has_point(cell):
 		return false
+	if at(cell) != Cell.UNKNOWN or _solution[cell.y][cell.x] == ".":
+		return false
+	used_hint = true
 	mark(cell, false)
 	return true
 

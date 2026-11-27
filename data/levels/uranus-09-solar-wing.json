@@ -26,5 +26,8 @@
     "en": "Shear Clouds",
     "id": "Awan Berlapis Berlawanan"
   },
-  "motif": "uranus-shear-clouds"
+  "motif": "uranus-shear-clouds",
+  "twist": {
+    "kind": "shield"
+  }
 }

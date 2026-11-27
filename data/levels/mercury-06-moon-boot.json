@@ -24,5 +24,9 @@
     "en": "Mariner 10",
     "id": "Wahana Mariner 10"
   },
-  "motif": "mariner-ten"
+  "motif": "mariner-ten",
+  "twist": {
+    "kind": "star",
+    "cell": 49
+  }
 }

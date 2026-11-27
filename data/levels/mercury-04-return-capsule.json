@@ -24,5 +24,13 @@
     "en": "Ancient Lava Plain",
     "id": "Dataran Lava Purba"
   },
-  "motif": "ancient-lava-plain"
+  "motif": "ancient-lava-plain",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      5,
+      9,
+      18
+    ]
+  }
 }

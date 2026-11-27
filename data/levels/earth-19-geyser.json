@@ -27,5 +27,9 @@
     "en": "Rainforest Canopy",
     "id": "Kanopi Hutan Hujan"
   },
-  "motif": "rainforest-canopy"
+  "motif": "rainforest-canopy",
+  "twist": {
+    "kind": "star",
+    "cell": 76
+  }
 }

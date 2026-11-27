@@ -2,6 +2,7 @@ extends "res://ui/board_feedback.gd"
 
 const Puzzle := preload("res://scripts/nonogram/puzzle.gd")
 const Camera := preload("res://ui/board_camera.gd")
+const Art := preload("res://ui/mascot_art.gd")
 const WIDTH := 696.0
 const EDGE_PADDING := 4.0
 const CLUE_PADDING := 8.0
@@ -436,6 +437,14 @@ func _draw_cells(painter: CanvasItem, grid: Rect2, visible_grid := Rect2()) -> v
 				painter.draw_rect(_bounced(tile, cell), color)
 			if mark == Puzzle.Cell.CROSSED and puzzle.state != Puzzle.State.WON:
 				_draw_cross(painter, position_on_board + block * 0.5, edge * 0.14)
+			if puzzle.state != Puzzle.State.WON and puzzle.is_given(cell):
+				var accent := Color("#b8a0f3") if mark == Puzzle.Cell.CROSSED else Color("#baf9f1")
+				painter.draw_rect(tile.grow(-1.0), accent, false, 2.0)
+				painter.draw_circle(position_on_board + block * Vector2(0.80, 0.20), edge * 0.052, Color("#10222d") if mark == Puzzle.Cell.FILLED else accent)
+			if puzzle.has_collected_star(cell):
+				var pulse := float(_fills.get(cell, 0.0)) / FILL_SECONDS
+				Art.spark(painter, tile.get_center(), edge * (0.29 + 0.09 * pulse), Color("#553b56"))
+				Art.spark(painter, tile.get_center(), edge * (0.23 + 0.09 * pulse), Color("#ffdf8e"))
 			if cell == _mistake:
 				painter.draw_rect(Rect2(position_on_board + Vector2.ONE, block - Vector2.ONE * 2.0), Color("#ff8f99"), false, 2.0)
 			if cell == _cursor and has_focus() and puzzle.state == Puzzle.State.PLAYING:

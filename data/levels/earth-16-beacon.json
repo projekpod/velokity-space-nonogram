@@ -27,5 +27,13 @@
     "en": "Weather Radar",
     "id": "Radar Cuaca"
   },
-  "motif": "weather-radar"
+  "motif": "weather-radar",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      13,
+      117,
+      156
+    ]
+  }
 }

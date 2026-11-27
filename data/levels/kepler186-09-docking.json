@@ -27,5 +27,9 @@
     "en": "Cool Forest",
     "id": "Hutan di Dunia Sejuk"
   },
-  "motif": "kepler186-cool-forest"
+  "motif": "kepler186-cool-forest",
+  "twist": {
+    "kind": "star",
+    "cell": 87
+  }
 }

@@ -9,7 +9,8 @@ const Daily := preload("res://scripts/daily/calendar.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
-const VERSION := 8
+const Twists := preload("res://scripts/nonogram/twists.gd")
+const VERSION := 9
 const VOLUME_SETTINGS := ["music_volume", "effects_volume"]
 const MAX_FREE_COIN_ADS := 5
 const PATH := "user://save.json"
@@ -134,11 +135,23 @@ func needs_onboarding() -> bool:
 	return not data.onboarding_complete and not _future_saves.has(storage_path)
 
 
+func mark_twist_seen(kind: String) -> bool:
+	if kind not in Twists.KINDS:
+		return false
+	await wait_for_pending_writes()
+	if data.twist_tips.has(kind):
+		return true
+	var snapshot := data.duplicate(true)
+	snapshot.twist_tips[kind] = true
+	return await commit(snapshot) == OK
+
+
 static func defaults() -> Dictionary:
 	return {
 		"version": VERSION,
 		"coins": 0,
 		"onboarding_complete": false,
+		"twist_tips": {},
 		"daily": Daily.empty_progress(),
 		"nonogram": {},
 		"bonus_clears": 0,
@@ -154,6 +167,11 @@ static func migrate(raw: Dictionary) -> Dictionary:
 		return {}
 	var result := defaults()
 	result.onboarding_complete = version < 7 or raw.get("onboarding_complete") == true
+	var tips: Variant = raw.get("twist_tips")
+	if version >= 9 and tips is Dictionary:
+		for kind: String in Twists.KINDS:
+			if tips.get(kind) is bool and tips[kind]:
+				result.twist_tips[kind] = true
 	var coins: Variant = raw.get("coins", 0)
 	if (coins is int or coins is float) and coins >= 0 and coins <= 2147483647 and coins == floor(coins):
 		result.coins = int(coins)

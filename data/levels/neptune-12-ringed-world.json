@@ -26,5 +26,8 @@
     "en": "Hippocamp Moonlet",
     "id": "Bulan Kecil Hippocamp"
   },
-  "motif": "hippocamp-moonlet"
+  "motif": "hippocamp-moonlet",
+  "twist": {
+    "kind": "perfect"
+  }
 }

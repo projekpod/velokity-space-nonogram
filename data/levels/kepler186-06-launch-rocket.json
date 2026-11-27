@@ -26,5 +26,13 @@
     "en": "Red Dwarf Sundial",
     "id": "Jam Matahari Katai Merah"
   },
-  "motif": "red-dwarf-sundial"
+  "motif": "red-dwarf-sundial",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      16,
+      40,
+      61
+    ]
+  }
 }

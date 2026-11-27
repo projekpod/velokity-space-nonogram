@@ -24,5 +24,9 @@
     "en": "BepiColombo",
     "id": "Wahana BepiColombo"
   },
-  "motif": "bepicolombo-spacecraft"
+  "motif": "bepicolombo-spacecraft",
+  "twist": {
+    "kind": "star",
+    "cell": 52
+  }
 }

@@ -27,5 +27,13 @@
     "en": "Cloud Spectrometer",
     "id": "Spektrometer Awan"
   },
-  "motif": "cloud-spectrometer"
+  "motif": "cloud-spectrometer",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      41,
+      77,
+      121
+    ]
+  }
 }

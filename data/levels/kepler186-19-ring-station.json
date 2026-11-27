@@ -28,5 +28,9 @@
     "en": "Pollen Spore",
     "id": "Spora di Udara"
   },
-  "motif": "pollen-spore"
+  "motif": "pollen-spore",
+  "twist": {
+    "kind": "star",
+    "cell": 95
+  }
 }

@@ -27,5 +27,8 @@
     "en": "Ice Wave Arch",
     "id": "Lengkung Gelombang Es"
   },
-  "motif": "ice-wave-arch"
+  "motif": "ice-wave-arch",
+  "twist": {
+    "kind": "shield"
+  }
 }

@@ -25,5 +25,13 @@
     "en": "Radio Reflector",
     "id": "Reflektor Radio"
   },
-  "motif": "radio-reflector"
+  "motif": "radio-reflector",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      33,
+      66,
+      86
+    ]
+  }
 }

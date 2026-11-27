@@ -26,5 +26,9 @@
     "en": "Polar Cyclone Cluster",
     "id": "Gugus Siklon Kutub"
   },
-  "motif": "jupiter-cyclone-cluster"
+  "motif": "jupiter-cyclone-cluster",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }
