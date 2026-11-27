@@ -1,0 +1,29 @@
+{
+  "id": "uranus-16-deep-space-probe",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "..........c.",
+    ".........cc.",
+    ".bbaddac....",
+    ".bbaddaa....",
+    ".bbaaaaabb..",
+    ".bb.bba.....",
+    "...bbbb.....",
+    ".....bb.....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Deep Space Probe",
+    "id": "Wahana Antariksa Jauh"
+  }
+}

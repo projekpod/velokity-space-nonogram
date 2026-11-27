@@ -1,0 +1,29 @@
+{
+  "id": "uranus-18-radio-dish",
+  "size": 12,
+  "solution": [
+    ".......c....",
+    ".......b....",
+    ".....dbda...",
+    "...dddbaa...",
+    ".dddabaa....",
+    "..aaaaaa....",
+    "..aaaaaa....",
+    "....bb......",
+    ".....b......",
+    ".....b......",
+    "...cccccc...",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Radio Dish",
+    "id": "Antena Parabola"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "uranus-03-habitat",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "..aa........",
+    ".aaaa..aaa..",
+    ".addacadda..",
+    ".addadadda..",
+    ".aaaadaaaa..",
+    ".aaa.c.aaa..",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Habitat Modules",
+    "id": "Modul Hunian"
+  }
+}

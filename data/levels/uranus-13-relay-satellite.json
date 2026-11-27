@@ -1,0 +1,29 @@
+{
+  "id": "uranus-13-relay-satellite",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....c.......",
+    "....a.......",
+    "...aaa.db...",
+    ".ccaaaacd...",
+    ".dcaddaccc..",
+    ".cdcddaccc..",
+    ".bb.aaa.....",
+    "....a.......",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Relay Satellite",
+    "id": "Satelit Relai"
+  }
+}

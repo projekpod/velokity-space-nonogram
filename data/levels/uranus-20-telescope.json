@@ -1,0 +1,29 @@
+{
+  "id": "uranus-20-telescope",
+  "size": 12,
+  "solution": [
+    "........d...",
+    "......dddd..",
+    ".....ddddd..",
+    "...aaddddd..",
+    "..aaabdd....",
+    ".abaac......",
+    ".abbbcb.....",
+    "....b.cb....",
+    "....b.cbb...",
+    "...b..c.b...",
+    "...b..c.....",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Telescope",
+    "id": "Teleskop"
+  }
+}

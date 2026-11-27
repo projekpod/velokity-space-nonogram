@@ -1,0 +1,29 @@
+{
+  "id": "uranus-12-orbital-shuttle",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    ".....a......",
+    ".....a......",
+    "....ad......",
+    "....ada.....",
+    "...bada.....",
+    "...baabb....",
+    "..bbaabbb...",
+    "..bbaa.bb...",
+    ".....c..b...",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Orbital Shuttle",
+    "id": "Pesawat Ulang Alik"
+  }
+}

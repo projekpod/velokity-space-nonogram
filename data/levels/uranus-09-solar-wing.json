@@ -1,0 +1,29 @@
+{
+  "id": "uranus-09-solar-wing",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "............",
+    "...aaaa.db..",
+    ".dcaadacdd..",
+    ".dccdddccdc.",
+    ".ddcdddaccc.",
+    ".bd.aaaa....",
+    "....aaa.....",
+    "....aca.....",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Solar Wing",
+    "id": "Sayap Surya"
+  }
+}

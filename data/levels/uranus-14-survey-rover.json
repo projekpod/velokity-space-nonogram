@@ -1,0 +1,29 @@
+{
+  "id": "uranus-14-survey-rover",
+  "size": 12,
+  "solution": [
+    "....c.......",
+    "....b.......",
+    "....baaa....",
+    "...addaa....",
+    "..badddaa...",
+    ".baaaaaaa...",
+    ".bbbaaaaa...",
+    ".aababbbb...",
+    ".aa.c..cb...",
+    "....a..c....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Survey Rover",
+    "id": "Rover Survei"
+  }
+}

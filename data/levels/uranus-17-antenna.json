@@ -1,0 +1,29 @@
+{
+  "id": "uranus-17-antenna",
+  "size": 12,
+  "solution": [
+    "............",
+    "..c.........",
+    "..b.....d...",
+    "..bdddddd...",
+    ".dddaaaaa...",
+    "..aaaaaa....",
+    "..aaaaaa....",
+    "....bb......",
+    "....bb......",
+    "....bb......",
+    "..cccccc....",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Antenna Mast",
+    "id": "Tiang Antena"
+  }
+}

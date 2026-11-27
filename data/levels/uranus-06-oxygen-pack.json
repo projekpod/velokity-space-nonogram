@@ -1,0 +1,29 @@
+{
+  "id": "uranus-06-oxygen-pack",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "...bb..bb...",
+    "...bb.bbab..",
+    "...baaadab..",
+    "...aaacdaab.",
+    "...aaadaaab.",
+    "...baaaaab..",
+    "....bcc.bb..",
+    "........cd..",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Oxygen Pack",
+    "id": "Tabung Oksigen"
+  }
+}

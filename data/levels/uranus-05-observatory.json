@@ -1,0 +1,29 @@
+{
+  "id": "uranus-05-observatory",
+  "size": 12,
+  "solution": [
+    ".......d....",
+    "......dd....",
+    ".....dd.....",
+    "...addba....",
+    "..addabaa...",
+    ".aaaaaaaaa..",
+    ".bbbbbbbbb..",
+    ".bbbbbbbbb..",
+    ".bbbbbbbbb..",
+    ".ccccccccc..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Observatory",
+    "id": "Observatorium"
+  }
+}

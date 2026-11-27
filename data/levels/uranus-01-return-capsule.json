@@ -1,0 +1,29 @@
+{
+  "id": "uranus-01-return-capsule",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "......aaa...",
+    ".....aaaa...",
+    "....aadda...",
+    "....aaddd...",
+    "...aaadda...",
+    "...cccccaa..",
+    "...aaaaac...",
+    "....bbbb....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Return Capsule",
+    "id": "Kapsul Pulang"
+  }
+}

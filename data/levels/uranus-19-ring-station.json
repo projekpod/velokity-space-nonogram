@@ -1,0 +1,29 @@
+{
+  "id": "uranus-19-ring-station",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".....cc.....",
+    "...aacca....",
+    "..aa.dd.a...",
+    "..bbbddb.a..",
+    "..a..ddbbb..",
+    "...aac.aa...",
+    "....acaa....",
+    ".....c......",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Ring Station",
+    "id": "Stasiun Cincin"
+  }
+}

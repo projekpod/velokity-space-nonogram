@@ -1,0 +1,29 @@
+{
+  "id": "uranus-07-launch-rocket",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    ".....a......",
+    "....aaa.....",
+    "....adaa....",
+    "....ddaa....",
+    ".....aaa....",
+    "....baaa....",
+    "....baaab...",
+    "...bbbc.bb..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Launch Rocket",
+    "id": "Roket Peluncur"
+  }
+}

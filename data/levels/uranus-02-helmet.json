@@ -1,0 +1,29 @@
+{
+  "id": "uranus-02-helmet",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    ".....aaaa...",
+    "....aabbaa..",
+    "....accdda..",
+    "...abddddb..",
+    "...aabddda..",
+    "....abbbba..",
+    "....baaaa...",
+    "....bbbbd...",
+    ".....bbb....",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Astronaut Helmet",
+    "id": "Helm Astronaut"
+  }
+}

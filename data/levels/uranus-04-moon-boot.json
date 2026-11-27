@@ -1,0 +1,29 @@
+{
+  "id": "uranus-04-moon-boot",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "......a.....",
+    "......aaa...",
+    "......ddd...",
+    ".....addd...",
+    ".....aaaa...",
+    ".....abbb...",
+    "..aaaabbb...",
+    "..cccaaaa...",
+    "....ccccc...",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Moon Boot",
+    "id": "Sepatu Bulan"
+  }
+}

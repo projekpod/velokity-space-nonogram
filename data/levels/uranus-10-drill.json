@@ -1,0 +1,29 @@
+{
+  "id": "uranus-10-drill",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "....dddd....",
+    "....ddddd...",
+    ".....aabdd..",
+    ".....aaa....",
+    ".....cca....",
+    "..bbbccbbb..",
+    "..bbbbcbbb..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Asteroid Drill",
+    "id": "Bor Asteroid"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "uranus-08-spacesuit-glove",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "......aa.a..",
+    "...a..aaaa..",
+    "...aaaaaaa..",
+    "....aaaaaaa.",
+    "....addddaa.",
+    "....aaddda..",
+    "....bbbaa...",
+    ".......ba...",
+    "............"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Suit Glove",
+    "id": "Sarung Tangan Astronaut"
+  }
+}
