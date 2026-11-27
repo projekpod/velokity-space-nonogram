@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-12-survey-rover",
+  "size": 13,
+  "solution": [
+    "..c..........",
+    "..c....a.....",
+    "...baaaaa....",
+    "...aaddda....",
+    "...addddaab..",
+    "...adaaaaaa..",
+    "..baaaaaabb..",
+    "..baababbaa..",
+    "..babbca.ac..",
+    "...ca.ca..a..",
+    "...aa........",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Survey Rover",
+    "id": "Rover Survei"
+  }
+}

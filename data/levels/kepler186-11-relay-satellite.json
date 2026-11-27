@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-11-relay-satellite",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".........c...",
+    "........ac...",
+    "........a....",
+    "......aaa....",
+    "...dd.ada.cc.",
+    "...dcadddbdc.",
+    "...ccaddabdc.",
+    "....caaaa.cc.",
+    ".....aaaa....",
+    ".............",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Relay Satellite",
+    "id": "Satelit Relai"
+  }
+}

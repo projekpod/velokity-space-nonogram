@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-13-lunar-lander",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    "......aa.....",
+    "....aaaaaa...",
+    "....adddaa...",
+    "...aadddaa...",
+    "...aaaaaaa...",
+    "...abbaaba...",
+    "...bbcccba...",
+    "..bb....bb...",
+    ".ccc.....b...",
+    ".........b.c.",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Lunar Lander",
+    "id": "Pendarat Bulan"
+  }
+}

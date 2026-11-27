@@ -9,5 +9,6 @@
   {"id": "earth", "size": 12, "palette": {"a": "#4fb8ef", "b": "#6bc39e", "c": "#fff1bc", "d": "#cdf3f2"}, "coins": 140},
   {"id": "uranus", "size": 12, "palette": {"a": "#8fe7e3", "b": "#7792d1", "c": "#ffffc7", "d": "#bff5df"}, "coins": 150},
   {"id": "jupiter", "size": 12, "palette": {"a": "#ffb68d", "b": "#cb7da1", "c": "#ffdf99", "d": "#e4e9ff"}, "coins": 160},
-  {"id": "trappist", "size": 13, "palette": {"a": "#efa584", "b": "#716ccf", "c": "#a5ebd6", "d": "#ffe1a6"}, "coins": 170}
+  {"id": "trappist", "size": 13, "palette": {"a": "#efa584", "b": "#716ccf", "c": "#a5ebd6", "d": "#ffe1a6"}, "coins": 170},
+  {"id": "kepler186", "size": 13, "palette": {"a": "#a1db8f", "b": "#4bada6", "c": "#fff3a6", "d": "#ded6fb"}, "coins": 180}
 ]

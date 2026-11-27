@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-20-telescope",
+  "size": 13,
+  "solution": [
+    ".............",
+    "..ddd........",
+    ".ddddd.......",
+    "ddddddda.....",
+    ".ddddddaaaa..",
+    "....dacaabb..",
+    ".....bcaabb..",
+    ".....bcb.....",
+    "....bbcbb....",
+    "....b.c.b....",
+    "....b.c..b...",
+    "...bbc...b...",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Telescope",
+    "id": "Teleskop"
+  }
+}

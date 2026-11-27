@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-02-return-capsule",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    "....aaa......",
+    "....aaa......",
+    "...aaaa......",
+    "...addaa.....",
+    "...dddda.....",
+    "..aaddaaa....",
+    "..caaaaaa....",
+    "..ccccccc....",
+    "...aaaaa.....",
+    "...bbbbb.....",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Return Capsule",
+    "id": "Kapsul Pulang"
+  }
+}

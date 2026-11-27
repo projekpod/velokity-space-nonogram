@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-14-deep-space-probe",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    ".c...........",
+    ".cc..........",
+    "....caaa.b...",
+    ".bb.adddbb...",
+    "...baaaabbb..",
+    "....aaaabbb..",
+    "....bbb.bb...",
+    "...bbbbb.....",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Deep Space Probe",
+    "id": "Wahana Antariksa Jauh"
+  }
+}

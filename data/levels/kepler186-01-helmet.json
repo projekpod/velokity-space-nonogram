@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-01-helmet",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".....aa......",
+    "...aaaaaa....",
+    "..abddbaaa...",
+    "..dccddbaa...",
+    ".bdddddbaa...",
+    ".abdddbbaa...",
+    "..abbbbaaa...",
+    "..aaaaaadd...",
+    "..bbbbbbdd...",
+    "..bbbbbbb....",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Astronaut Helmet",
+    "id": "Helm Astronaut"
+  }
+}

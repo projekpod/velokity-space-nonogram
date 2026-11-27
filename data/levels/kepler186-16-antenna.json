@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-16-antenna",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    "...........cc",
+    "...dddddd..b.",
+    "...aaaaaddddd",
+    "....aaaaaaaa.",
+    ".....aaaaaa..",
+    "......abaa...",
+    ".......bb....",
+    "........b....",
+    "....ccccccc..",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Antenna Mast",
+    "id": "Tiang Antena"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-19-ring-station",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    ".............",
+    "...aacca.....",
+    "..aa.cc.a....",
+    "..a..dd..a...",
+    ".bbbbddbbb...",
+    "..a..dd.aa...",
+    "..aa.c.aa....",
+    "...aacaa.....",
+    ".............",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Ring Station",
+    "id": "Stasiun Cincin"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-05-observatory",
+  "size": 13,
+  "solution": [
+    ".............",
+    "..d..........",
+    "..dd.........",
+    "...dd........",
+    "....addaa....",
+    "...abbdda....",
+    "..aaaaaaaa...",
+    "..aaaabbbb...",
+    "..bbbbbbbbb..",
+    "..bbbbbbbbb..",
+    "..bbbbbcccc..",
+    "..ccccc......",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Observatory",
+    "id": "Observatorium"
+  }
+}

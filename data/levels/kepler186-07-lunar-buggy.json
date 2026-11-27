@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-07-lunar-buggy",
+  "size": 13,
+  "solution": [
+    ".............",
+    ".............",
+    "....aa.......",
+    "...aaaaaa....",
+    "...aaddda....",
+    "..aaaaaaaab..",
+    ".ccaaaaaaac..",
+    "..bbbbbbbbb..",
+    "..aabbbbaab..",
+    "..ac....ac...",
+    "...a....aa...",
+    ".............",
+    "............."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Lunar Buggy",
+    "id": "Buggy Bulan"
+  }
+}
