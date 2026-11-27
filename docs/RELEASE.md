@@ -1,6 +1,6 @@
 # Panduan rilis Web untuk Oz
 
-Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → GameDistribution**. Buat draf dan jalankan cek di bawah pada tiap portal. Jika portal meminta perubahan, selesaikan cek portal itu sebelum menerbitkannya.
+Urutan rilis Web adalah **itch.io → Playgama → CrazyGames Basic Launch → GameDistribution**. Buat draf dan jalankan cek di bawah pada tiap portal. Jika portal meminta perubahan, selesaikan cek portal itu sebelum menerbitkannya.
 
 ## Siapkan file di ponsel
 
@@ -25,6 +25,12 @@ Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → 
 - [ ] Cover, screenshot, teks EN/ID, privasi, dan tautan Traktir tampil di halaman publik.
 
 [Dokumentasi unggah dan embed itch.io](https://itch.io/docs/creators/html5) · [Pengaturan halaman itch.io](https://itch.io/docs/creators/getting-started)
+
+### Update an existing itch.io page
+
+1. Buka **Edit game → Uploads** dan hapus ZIP build lama.
+2. Unggah `velokity-itch.zip` yang diekstrak dari artefak GitHub. **Pilih ZIP yang berisi `index.html` di akarnya. ZIP pembungkus artefak GitHub hanya berisi ZIP build.**
+3. Pastikan **This file will be played in the browser** tetap dicentang, lalu klik **Save**.
 
 ## 2. Playgama
 

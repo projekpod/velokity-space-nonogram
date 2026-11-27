@@ -1,6 +1,13 @@
-# Handoff — Velokity Content v1.1
+# Handoff — Velokity Release Refresh v1.1
 
-Branch `codex/t14-twists` berangkat dari `origin/main` setelah merge PR #14. T14 selesai. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR #15. T15 masih terbuka. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+
+## T15 · Bagian 1 selesai
+
+- Project dan preset Android memakai versi 1.1.0. `version/code` Android naik ke 2. Web dan Web QA membaca versi project.
+- `CHANGELOG.md` mencatat perbedaan 1.0 dan 1.1. Teks toko EN/ID menjelaskan 300 gambar di 15 dunia, zoom, enam aturan, 365 Rasi Bintang, dan toko.
+- `docs/RELEASE.md` memuat langkah mengganti build di halaman itch.io dan memilih ZIP dalam dengan `index.html` di akar.
+- Reproduksi build dan tes dengan perintah di bawah. Empat screenshot, dua preview video, dan verifikasi Bridge mock masih menjadi pekerjaan T15.
 
 ## T14 · Bagian 0 selesai
 
@@ -153,6 +160,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz review grid `twists.png` dan run Quality gates terbaru di `codex/t14-twists`, lalu tangani PR dan merge.
-2. Jalankan Autopilot dari `main` dengan PAT repo, lalu periksa log pembuatan PR biasa dan komentar ketika ada tugas yang memenuhi syarat.
-3. Lanjutkan T11. Ukur performa, audio, dan zoom sentuh pada ponsel kelas menengah, lalu teruskan QA portal untuk T11b.
+1. Ambil empat screenshot gameplay dan rekam dua preview dari build Web QA saat ini.
+2. Verifikasi build rilis itch.io dengan Bridge mock, lalu jalankan gate lokal.
+3. Centang T15 setelah semua bagian selesai. Push branch dan tunggu Quality gates hijau.

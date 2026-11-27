@@ -25,3 +25,4 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
 - [x] T12b Autopilot & CI hygiene: limit the Master bus, label Savannah, deduplicate CI runs, require green branch checks, and add the tested Autopilot workflow and setup guide.
 - [x] T13 Content v1.1: grow to 300 nonograms and 365 daily puzzles. Add 12x12 and 15x15 boards with zoom/pan and tune the difficulty curve.
 - [x] T14 Small twists: add a new small mechanic every 10–15 levels.
+- [ ] T15 Release refresh v1.1: set version 1.1.0, update release notes and EN/ID store copy, refresh screenshots and preview videos, document itch.io updates, and verify the Bridge mock experience.

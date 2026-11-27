@@ -8,17 +8,17 @@ Velokity: Space Nonogram
 
 **Short description**
 
-Unwind with space-themed logic puzzles for everyone and a fresh daily star challenge.
+Space-themed logic puzzles for everyone. Reveal 300 pixel pictures and play a fresh Rasi Bintang challenge each day.
 
 **Long description**
 
-Join Velokity, an astronaut cat, and use number clues to reveal pictures across the Moon, Mars, and Saturn. Work through 60 Nonograms at your own pace, collect each picture in your planet album, and earn coins for Velokity’s outfits. Solve puzzles without mistakes to unlock three-part Bonus Rounds.
+Join Velokity, an astronaut cat, and use number clues to reveal 300 pixel pictures across 15 worlds. Start with 5×5 boards and work up to 15×15, with pinch-zoom on larger boards. Collect your pictures in planet albums and discover six twists, from locked asteroid cells and shields to hidden bonus stars and comet timers.
 
-Come back for Rasi Bintang, a daily logic puzzle about placing stars. Play with a mouse, keyboard, or touch, and turn on Calm Mode for gentler effects.
+Come back for Rasi Bintang, with 365 daily puzzles about placing stars. Spend earned coins on cats, fur colors, and costumes in the shop, or solve Nonograms without mistakes to unlock three-stage Bonus Rounds. Play with a mouse, keyboard, or touch and turn on Calm Mode for gentler effects.
 
 **Controls**
 
-Tap or click to fill a square. Select **Mark X** to mark an empty square. Drag along a row or column to mark consecutive squares. With the board focused, use the arrow keys to move and Enter or Space to place the selected mark. In Rasi Bintang, put one star in each row, column, and colored region. Stars cannot touch, even diagonally.
+Tap or click to fill a square. Select **Mark X** to mark an empty square. Drag along a row or column to mark consecutive squares. On larger boards, pinch or scroll to zoom. With the board focused, use the arrow keys to move and Enter or Space to place the selected mark. In Rasi Bintang, put one star in each row, column, and colored region. Stars cannot touch, even diagonally.
 
 **Tags**
 
@@ -32,17 +32,17 @@ Velokity: Space Nonogram
 
 **Deskripsi singkat**
 
-Teka-teki logika santai untuk semua kalangan, dengan tema antariksa dan tantangan bintang harian.
+Teka-teki logika antariksa untuk semua kalangan. Ungkap 300 gambar piksel dan mainkan tantangan Rasi Bintang setiap hari.
 
 **Deskripsi panjang**
 
-Temani Velokity, si kucing astronaut, memecahkan petunjuk angka untuk membuka gambar di Bulan, Mars, dan Saturnus. Selesaikan 60 Nonogram sesuai ritmemu, kumpulkan gambarnya di album planet, lalu gunakan koin untuk membeli kostum Velokity. Selesaikan teka-teki tanpa kesalahan untuk membuka Ronde Bonus tiga tahap.
+Temani Velokity, si kucing astronaut, membaca petunjuk angka untuk mengungkap 300 gambar piksel di 15 dunia. Mulai dari papan 5×5 hingga 15×15, dengan gestur cubit untuk memperbesar papan yang lebih besar. Kumpulkan gambar di album planet dan coba enam variasi aturan, mulai dari sel asteroid terkunci dan perisai hingga bintang bonus tersembunyi dan timer komet.
 
-Mampir lagi untuk bermain Rasi Bintang, teka-teki logika harian tentang penempatan bintang. Mainkan dengan sentuhan, mouse, atau keyboard. Aktifkan Mode Tenang untuk efek yang lebih lembut.
+Mampir lagi untuk bermain Rasi Bintang, dengan 365 papan teka-teki harian tentang penempatan bintang. Gunakan koin untuk membeli kucing, warna bulu, dan kostum di toko. Selesaikan Nonogram tanpa kesalahan untuk membuka Ronde Bonus tiga tahap. Mainkan dengan sentuhan, mouse, atau keyboard dan aktifkan Mode Tenang untuk efek yang lebih lembut.
 
 **Kontrol**
 
-Ketuk atau klik untuk mengisi kotak. Pilih **Tandai X** untuk menandai kotak kosong. Seret sepanjang baris atau kolom untuk menandai beberapa kotak berurutan. Saat papan mendapat fokus, pakai tombol panah untuk berpindah dan Enter atau Spasi untuk menaruh tanda yang dipilih. Di Rasi Bintang, letakkan satu bintang per baris, kolom, dan wilayah warna. Bintang tidak boleh bersentuhan, termasuk secara diagonal.
+Ketuk atau klik untuk mengisi kotak. Pilih **Tandai X** untuk menandai kotak kosong. Seret sepanjang baris atau kolom untuk menandai beberapa kotak berurutan. Pada papan besar, cubit layar atau gulir roda mouse untuk memperbesar. Saat papan mendapat fokus, pakai tombol panah untuk berpindah dan Enter atau Spasi untuk menaruh tanda yang dipilih. Di Rasi Bintang, letakkan satu bintang per baris, kolom, dan wilayah warna. Bintang tidak boleh bersentuhan, termasuk secara diagonal.
 
 **Tag**
 
