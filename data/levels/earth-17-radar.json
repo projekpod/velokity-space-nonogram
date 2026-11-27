@@ -1,0 +1,29 @@
+{
+  "id": "earth-17-radar",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "........c...",
+    ".....ddcd...",
+    ".adddaaaa...",
+    "..aaaaca....",
+    "...aaaaa....",
+    "....bb......",
+    ".....b......",
+    ".....b......",
+    "...ccccc....",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Tracking Radar",
+    "id": "Radar Pelacak"
+  }
+}

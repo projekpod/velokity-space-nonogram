@@ -1,0 +1,29 @@
+{
+  "id": "earth-03-ice-mesa",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".....aaa....",
+    "...aaaaaa...",
+    "..adaaaaa...",
+    "..aaddaaaa..",
+    "..aaaaddaaa.",
+    "..aaaaaaaaa.",
+    "..aaaaaaaaa.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Ice Mesa",
+    "id": "Dataran Es"
+  }
+}

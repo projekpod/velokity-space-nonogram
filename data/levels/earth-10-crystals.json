@@ -1,0 +1,29 @@
+{
+  "id": "earth-10-crystals",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "......a.....",
+    ".....aa.....",
+    "..d.baa.....",
+    "..bdbaa.b...",
+    "..bdbaaabb..",
+    "..bddaaabb..",
+    "..bdbbaabb..",
+    "...bbbbbbb..",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Crystal Outcrop",
+    "id": "Singkapan Kristal"
+  }
+}

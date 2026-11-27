@@ -1,0 +1,29 @@
+{
+  "id": "earth-09-canyon",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "........aaa.",
+    "........aaa.",
+    ".aaa...daaa.",
+    ".aaaa.daaaa.",
+    ".aaaadaaaaa.",
+    ".aaadaaaaaa.",
+    "..bbbbaaaa..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Canyon Wall",
+    "id": "Dinding Ngarai"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "earth-19-geyser",
+  "size": 12,
+  "solution": [
+    "............",
+    "....dcc.dd..",
+    ".....cccd...",
+    ".....ddd....",
+    "......a.....",
+    "......a.....",
+    "......a.....",
+    "....bbabb...",
+    "...bbbabbbb.",
+    "..bbbbabbbb.",
+    "...bbbbbbb..",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Ice Geyser",
+    "id": "Semburan Es"
+  }
+}

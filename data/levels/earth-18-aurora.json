@@ -1,0 +1,29 @@
+{
+  "id": "earth-18-aurora",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "....c.ccc...",
+    ".....ccc..c.",
+    "....a.......",
+    "...aaaa.a...",
+    "...aaaaddaa.",
+    "..aaaddaaaa.",
+    "...abbbbbba.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Aurora Horizon",
+    "id": "Cakrawala Aurora"
+  }
+}

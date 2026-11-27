@@ -1,0 +1,29 @@
+{
+  "id": "earth-07-banded-planet",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....aaaa....",
+    "..aaaaaaa...",
+    "..dddddddd..",
+    ".bbbbbbbbb..",
+    ".aadaaaabb..",
+    ".ccddccccc..",
+    "..bbbbbbbb..",
+    "..aaaaaaa...",
+    "...aaaaa....",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Banded Planet",
+    "id": "Planet Belang"
+  }
+}

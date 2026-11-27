@@ -1,0 +1,29 @@
+{
+  "id": "earth-15-star-cluster",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "....cc......",
+    "..dddc......",
+    "...dccccc...",
+    ".cccaacb....",
+    "....cacb....",
+    ".....cbbbb..",
+    ".....c.bb...",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Star Cluster",
+    "id": "Gugus Bintang"
+  }
+}

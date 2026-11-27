@@ -1,0 +1,29 @@
+{
+  "id": "earth-20-ice-flake",
+  "size": 12,
+  "solution": [
+    "............",
+    "....a...a...",
+    "....aa..a...",
+    ".....a.aa...",
+    ".....add....",
+    "..aaadccaaaa",
+    "..aaadcd....",
+    ".....aaaa...",
+    ".....a..a...",
+    "....aa..aa..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Ice Flake",
+    "id": "Keping Es"
+  }
+}

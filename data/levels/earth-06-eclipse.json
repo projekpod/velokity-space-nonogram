@@ -1,0 +1,29 @@
+{
+  "id": "earth-06-eclipse",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "...ccccc....",
+    "..ccbbbbc...",
+    "..cbaaaabc..",
+    ".ccabbbabc..",
+    ".ccabbbabc..",
+    "..cbbbabbc..",
+    "..ccbbbbc...",
+    "...ccccc....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Solar Eclipse",
+    "id": "Gerhana Matahari"
+  }
+}
