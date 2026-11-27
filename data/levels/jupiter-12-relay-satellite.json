@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-12-relay-satellite",
+  "size": 12,
+  "solution": [
+    "............",
+    ".....c......",
+    ".....a......",
+    "....aaaa....",
+    ".cccadda....",
+    ".ccbaddaccc.",
+    ".cc.addacd..",
+    "....aaa.dd..",
+    "............",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Relay Satellite",
+    "id": "Satelit Relai"
+  }
+}

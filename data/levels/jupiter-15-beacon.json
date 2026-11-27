@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-15-beacon",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    ".....a......",
+    ".....a......",
+    "....ccc.....",
+    "....ddd.....",
+    ".....ca.....",
+    ".....aa.....",
+    ".....aa.....",
+    "...bbaabb...",
+    ".bbbbbbbbb..",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Landing Beacon",
+    "id": "Suar Pendaratan"
+  }
+}

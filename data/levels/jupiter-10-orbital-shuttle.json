@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-10-orbital-shuttle",
+  "size": 12,
+  "solution": [
+    ".....a......",
+    ".....a......",
+    ".....dd.....",
+    "....adda....",
+    "....adda....",
+    "....badab...",
+    "....baaabb..",
+    "...bbaaabb..",
+    "...bb.aabb..",
+    "......cc....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Orbital Shuttle",
+    "id": "Pesawat Ulang Alik"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-04-launch-rocket",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".....aa.....",
+    ".....daa....",
+    "....ddaa....",
+    ".....aaa....",
+    "....baaa....",
+    "...bbaaa....",
+    "...bbbcbb...",
+    "...b..c.....",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Launch Rocket",
+    "id": "Roket Peluncur"
+  }
+}

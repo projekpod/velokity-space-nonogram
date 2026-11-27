@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-06-canyon",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "............",
+    ".........aa.",
+    ".aaa...aaaa.",
+    "..aaa..daaa.",
+    "..aaaddaaaa.",
+    "..aadaaaaa..",
+    "..aaaaaaaa..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Canyon Wall",
+    "id": "Dinding Ngarai"
+  }
+}

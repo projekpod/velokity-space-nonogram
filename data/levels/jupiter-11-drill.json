@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-11-drill",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "...dddd.....",
+    "...dddd.....",
+    ".ddaaa......",
+    "..dbba......",
+    "...aaa......",
+    "...acc......",
+    ".bbbccbbb...",
+    ".bbbcbbbb...",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Asteroid Drill",
+    "id": "Bor Asteroid"
+  }
+}

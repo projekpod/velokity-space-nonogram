@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-17-aurora",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "...ccc..cc..",
+    "..c..ccc....",
+    ".......aa...",
+    "..aaaaaaaaa.",
+    ".aaaddddaaa.",
+    "..bbbbbbbba.",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Aurora Horizon",
+    "id": "Cakrawala Aurora"
+  }
+}

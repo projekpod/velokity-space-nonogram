@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-08-storm-cloud",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "....aaaa....",
+    "....aaaaa...",
+    "..aaaaaaab..",
+    ".aaaaaaaabb.",
+    ".aaddddddd..",
+    "..aabcbba...",
+    ".....cc.....",
+    ".....c......",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Storm Cloud",
+    "id": "Awan Badai"
+  }
+}

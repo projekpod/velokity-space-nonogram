@@ -7,5 +7,6 @@
   {"id": "proxima", "size": 12, "palette": {"a": "#fcb099", "b": "#967bd7", "c": "#ffdc73", "d": "#c0e8ef"}, "coins": 120},
   {"id": "neptune", "size": 12, "palette": {"a": "#5b9eff", "b": "#5b73cb", "c": "#b6f0ff", "d": "#e1c7ff"}, "coins": 130},
   {"id": "earth", "size": 12, "palette": {"a": "#4fb8ef", "b": "#6bc39e", "c": "#fff1bc", "d": "#cdf3f2"}, "coins": 140},
-  {"id": "uranus", "size": 12, "palette": {"a": "#8fe7e3", "b": "#7792d1", "c": "#ffffc7", "d": "#bff5df"}, "coins": 150}
+  {"id": "uranus", "size": 12, "palette": {"a": "#8fe7e3", "b": "#7792d1", "c": "#ffffc7", "d": "#bff5df"}, "coins": 150},
+  {"id": "jupiter", "size": 12, "palette": {"a": "#ffb68d", "b": "#cb7da1", "c": "#ffdf99", "d": "#e4e9ff"}, "coins": 160}
 ]

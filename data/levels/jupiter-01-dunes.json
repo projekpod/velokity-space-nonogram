@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-01-dunes",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "............",
+    "............",
+    ".....aaa....",
+    "..aaaaaaaa..",
+    "..aaaadddaaa",
+    "..aaadaaaaa.",
+    "..aaaaaaaaa.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Dunes",
+    "id": "Bukit Pasir"
+  }
+}

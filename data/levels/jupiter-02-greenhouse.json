@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-02-greenhouse",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "...aaaa.....",
+    "..aaaaaa....",
+    ".aaaaaaaa...",
+    ".aaaaaaaa...",
+    ".adaaaada...",
+    ".bddddddbb..",
+    ".bddddddbb..",
+    ".bbbbbbbbb..",
+    "cccccccccc..",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Moon Greenhouse",
+    "id": "Rumah Kaca Bulan"
+  }
+}

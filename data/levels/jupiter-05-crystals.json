@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-05-crystals",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".....a......",
+    "....baa.....",
+    "....baa.....",
+    "..dbbaabb...",
+    "..ddbaabb...",
+    ".bddbaabb...",
+    ".bddbaabbb..",
+    "...bbbbbb...",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Crystal Outcrop",
+    "id": "Singkapan Kristal"
+  }
+}

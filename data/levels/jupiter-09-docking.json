@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-09-docking",
+  "size": 12,
+  "solution": [
+    "............",
+    "....bbb.....",
+    ".....d......",
+    "....aaa.....",
+    "....ada.....",
+    ".cdcdddbdd..",
+    ".cdcdddbcd..",
+    ".cdcaaa.cc..",
+    "............",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Docking Craft",
+    "id": "Wahana Sandar"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "jupiter-19-robot-arm",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....bba.....",
+    ".ccbbbaaaa..",
+    "..b....aaaa.",
+    ".......aaa..",
+    ".......aa...",
+    "......aaa...",
+    ".....daa....",
+    "...bbbddbb..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Robot Arm",
+    "id": "Lengan Robot"
+  }
+}
