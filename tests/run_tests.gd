@@ -884,9 +884,13 @@ func _test_board_zoom() -> void:
 func _test_daily_selection() -> void:
 	var monday := Daily.day_number({"year": 2026, "month": 11, "day": 23})
 	check(Daily.weekday(monday) == 0 and Daily.weekday(monday + 6) == 6, "Week runs Monday through Sunday")
-	check(Daily.puzzle_name(monday) == Daily.puzzle_name(monday + 18 * 7), "Monday rotates through 18 boards")
-	check(Daily.puzzle_name(monday + 1) == Daily.puzzle_name(monday + 17 * 7 + 1), "Tuesday rotates through 17 boards")
+	check(Daily.puzzle_name(monday) == Daily.puzzle_name(monday + 53 * 7), "Monday rotates through 53 boards")
+	check(Daily.puzzle_name(monday + 1) == Daily.puzzle_name(monday + 52 * 7 + 1), "Tuesday rotates through 52 boards")
 	check(Daily.puzzle_name(monday) != Daily.puzzle_name(monday + 7), "Same weekday changes next week")
+	var year_of_puzzles := {}
+	for offset in range(365):
+		year_of_puzzles[Daily.puzzle_name(monday + offset)] = true
+	check(year_of_puzzles.size() == 365, "Starting on Monday, 365 days visit every puzzle once")
 	var previous_effort := 0
 	for offset in range(7):
 		var puzzle := Daily.puzzle_for(monday + offset)
