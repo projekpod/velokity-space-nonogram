@@ -2,10 +2,12 @@
 
 from collections import Counter
 import json
+from math import log2
+from statistics import median
 
 from build_daily import BANDS, COUNTS, SIZES, OUTPUT as DAILY_OUTPUT
 from build_levels import BONUS_OUTPUT, OUTPUT, PLANETS, generated_bonus_files, generated_files
-from nonogram import count_solutions, puzzle_clues
+from nonogram import count_solutions, line_patterns, puzzle_clues
 from star_battle import canonical_grid, solve, valid_solution, validate_regions
 
 
@@ -14,6 +16,7 @@ def check_levels():
     if files != generated_files():
         raise SystemExit("Nonogram JSON differs from pixel sources. Run tools/build_levels.py.")
     albums = Counter()
+    clue_scores = {planet: [] for planet in PLANETS}
     images = set()
     for content in files.values():
         level = json.loads(content)
@@ -22,11 +25,22 @@ def check_levels():
         if image in images or not any(map(any, image)):
             raise SystemExit(f'{level["id"]}: empty or duplicate puzzle')
         images.add(image)
-        solutions = count_solutions(*puzzle_clues(image))
+        clues = puzzle_clues(image)
+        solutions = count_solutions(*clues)
+        # More plausible line fillings are typically harder to rule out.
+        clue_scores[level["planet"]].append(sum(
+            log2(len(line_patterns(level["size"], line))) for axis in clues for line in axis
+        ))
         if solutions != 1:
             raise SystemExit(f'{level["id"]}: expected one solution, found {solutions}')
     if albums != dict.fromkeys(PLANETS, 20):
         raise SystemExit(f"Expected 20 levels per planet, got {dict(albums)}")
+    sizes = [size for size, _ in PLANETS.values()]
+    if sizes != sorted(sizes) or any(b - a > 1 for a, b in zip(sizes[2:], sizes[3:])):
+        raise SystemExit("Board sizes must rise gradually after Saturn")
+    scores = [median(clue_scores[planet]) for planet in PLANETS]
+    if scores != sorted(scores):
+        raise SystemExit("Album median clue ambiguity must rise with progression")
     print(f"Nonogram: {len(files)} levels, one solution each")
     return images
 

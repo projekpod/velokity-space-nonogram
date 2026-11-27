@@ -9,10 +9,10 @@ SOURCES = ROOT / "art" / "levels_src"
 OUTPUT = ROOT / "data" / "levels"
 BONUS_OUTPUT = OUTPUT / "bonus"
 BONUS_PALETTE = {"a": "#8de5e5", "b": "#9d9af4", "c": "#ffdf8e", "d": "#fba1bd"}
+MANIFEST = ROOT / "data" / "config" / "planets.json"
 PLANETS = {
-    "moon": (5, {"a": "#75e4df", "b": "#6596ef", "c": "#fff1a8", "d": "#f58eaa"}),
-    "mars": (8, {"a": "#ff9c7a", "b": "#ffd275", "c": "#bd6cef", "d": "#fff3dd"}),
-    "saturn": (10, {"a": "#ffd27b", "b": "#b492fa", "c": "#79e3d5", "d": "#fff1e2"}),
+    entry["id"]: (entry["size"], entry["palette"])
+    for entry in json.loads(MANIFEST.read_text(encoding="utf-8"))
 }
 
 

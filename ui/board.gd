@@ -81,7 +81,7 @@ func _grid() -> Rect2:
 
 
 func supports_zoom() -> bool:
-	return puzzle != null and puzzle.size >= 12
+	return puzzle != null and puzzle.size > 10
 
 
 func fit_zoom() -> void:

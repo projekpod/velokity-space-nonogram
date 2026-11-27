@@ -79,7 +79,14 @@ static func open(main: Main) -> bool:
 				push_error("The QA Bonus Round could not start")
 				return false
 		"album":
-			main._open_meta(MetaScreen.Page.ALBUM)
+			var planet: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('planet')", true)
+			if planet is String and planet in Catalog.planets():
+				for index in main._planet_levels(planet):
+					main._save.data.nonogram[main._levels[index].id] = {"reward": 30, "doubled": false}
+				main._open_meta(MetaScreen.Page.ALBUM, planet)
+				JavaScriptBridge.get_interface("document").documentElement.setAttribute("data-velokity-qa-album", planet)
+			else:
+				main._open_meta(MetaScreen.Page.ALBUM)
 		"shop":
 			var save := main.get_node("/root/Save")
 			save.data.coins = 1450

@@ -20,6 +20,8 @@ const MonetizationConfig := preload("res://scripts/ads/monetization_config.gd")
 @onready var _levels: Array[Dictionary] = _economy.levels
 var _column: VBoxContainer
 var _support_button: Button
+var _planet_page := 0
+const PLANETS_PER_PAGE := 5
 
 
 func _ready() -> void:
@@ -90,7 +92,10 @@ func _show_planets() -> void:
 	UI.button(_column, "GAME_BACK").pressed.connect(show_menu)
 	UI.label(_column, "PLANETS_TITLE", 44, UI.MINT)
 	var first: Button
-	for planet: String in Catalog.PLANETS:
+	var planets := Catalog.planets()
+	var pages := ceili(float(planets.size()) / PLANETS_PER_PAGE)
+	var start := _planet_page * PLANETS_PER_PAGE
+	for planet: String in planets.slice(start, start + PLANETS_PER_PAGE):
 		var indices := _planet_levels(planet)
 		var cleared := _planet_cleared(planet)
 		var unlocked := _is_planet_unlocked(planet)
@@ -104,9 +109,15 @@ func _show_planets() -> void:
 			first = card
 		if not unlocked and cleared > 0:
 			UI.button(_column, tr("PLANET_REPLAY") % _planet_title(planet)).pressed.connect(_show_levels.bind(planet))
-	for planet: String in ["jupiter", "neptune"]:
-		var caption := (tr("PLANET_LOCKED") % _planet_title(planet)) + "\n" + tr("PLANET_FUTURE")
-		UI.button(_column, caption).disabled = true
+	if pages > 1:
+		var navigation := UI.row(_column)
+		var previous := UI.action(navigation, "PLANET_PREVIOUS")
+		previous.disabled = _planet_page == 0
+		previous.pressed.connect(_change_planet_page.bind(-1))
+		UI.label(navigation, "%d / %d" % [_planet_page + 1, pages], 22, UI.MUTED)
+		var next := UI.action(navigation, "PLANET_NEXT")
+		next.disabled = _planet_page + 1 == pages
+		next.pressed.connect(_change_planet_page.bind(1))
 	if _economy.next_bonus_index() >= 0:
 		UI.button(_column, "BONUS_TITLE", true).pressed.connect(_open_bonus)
 	else:
@@ -115,10 +126,18 @@ func _show_planets() -> void:
 		first.grab_focus()
 
 
+func _change_planet_page(step: int) -> void:
+	var last := ceili(float(Catalog.planets().size()) / PLANETS_PER_PAGE) - 1
+	_planet_page = clampi(_planet_page + step, 0, last)
+	_show_planets()
+
+
 func _show_levels(planet: String) -> void:
 	var planet_unlocked := _is_planet_unlocked(planet)
 	if not planet_unlocked and _planet_cleared(planet) == 0:
 		return
+	@warning_ignore("integer_division")
+	_planet_page = Catalog.planets().find(planet) / PLANETS_PER_PAGE
 	_reset_column()
 	UI.button(_column, "LEVEL_BACK").pressed.connect(_show_planets)
 	UI.label(_column, _planet_title(planet), 44, UI.MINT)
@@ -179,7 +198,7 @@ func _planet_cleared(planet: String) -> int:
 
 func _is_planet_unlocked(planet: String) -> bool:
 	var previous := Catalog.previous_planet(planet)
-	return planet == Catalog.PLANETS[0] or (not previous.is_empty() and _planet_cleared(previous) >= Catalog.PLANET_CLEAR_REQUIREMENT)
+	return planet == Catalog.planets()[0] or (not previous.is_empty() and _planet_cleared(previous) >= Catalog.PLANET_CLEAR_REQUIREMENT)
 
 
 func _album_complete(planet: String) -> bool:
