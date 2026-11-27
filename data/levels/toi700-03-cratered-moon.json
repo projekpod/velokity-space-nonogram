@@ -1,0 +1,32 @@
+{
+  "id": "toi700-03-cratered-moon",
+  "size": 15,
+  "solution": [
+    "...............",
+    ".....aaaa......",
+    "...aaaaaaa.....",
+    "..aaaaaabba....",
+    "..aaaaaabbaa...",
+    ".aabbbaaaaaa...",
+    ".aabbbaaaaaa...",
+    ".aabbbaddaaaa..",
+    ".aaaaaddddaa...",
+    ".aaaaaddddaa...",
+    "..aaaaaddaaa...",
+    "...aaaaaaaa....",
+    "....aaaaaa.....",
+    "...............",
+    "..............."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Cratered Moon",
+    "id": "Bulan Berkawah"
+  }
+}

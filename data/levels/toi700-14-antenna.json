@@ -1,0 +1,32 @@
+{
+  "id": "toi700-14-antenna",
+  "size": 15,
+  "solution": [
+    "...cc..........",
+    "...............",
+    "....b...ddddd..",
+    "...dbdddddaaa..",
+    "..dddaaaaaaaa..",
+    "...aaaaaaaaa...",
+    "....aaaaaaaa...",
+    ".....aaaaaa....",
+    ".......ba......",
+    ".......b.......",
+    ".......b.......",
+    ".......b.......",
+    "....ccccccc....",
+    "...............",
+    "..............."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Antenna Mast",
+    "id": "Tiang Antena"
+  }
+}

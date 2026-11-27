@@ -1,0 +1,32 @@
+{
+  "id": "toi700-20-ice-flake",
+  "size": 15,
+  "solution": [
+    "...............",
+    "...a.....a.....",
+    "...aa...aaa....",
+    "...aa...aa.....",
+    "....aa.aa......",
+    "....addda......",
+    "aaaaddcdaaaaa..",
+    "aaaadcccdaaaaa.",
+    ".....ddd.......",
+    "....aadaa......",
+    "...aaa.aa......",
+    "...aa...aa.....",
+    "..aa.....a.....",
+    "...............",
+    "..............."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Ice Flake",
+    "id": "Keping Es"
+  }
+}

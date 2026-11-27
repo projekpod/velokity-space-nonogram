@@ -12,5 +12,6 @@
   {"id": "trappist", "size": 13, "palette": {"a": "#efa584", "b": "#716ccf", "c": "#a5ebd6", "d": "#ffe1a6"}, "coins": 170},
   {"id": "kepler186", "size": 13, "palette": {"a": "#a1db8f", "b": "#4bada6", "c": "#fff3a6", "d": "#ded6fb"}, "coins": 180},
   {"id": "lhs1140", "size": 14, "palette": {"a": "#71c7e4", "b": "#5575bd", "c": "#ffcf9d", "d": "#d1e9fa"}, "coins": 190},
-  {"id": "kepler22", "size": 14, "palette": {"a": "#a9d2fd", "b": "#8c79d6", "c": "#e8e9a7", "d": "#afefd9"}, "coins": 200}
+  {"id": "kepler22", "size": 14, "palette": {"a": "#a9d2fd", "b": "#8c79d6", "c": "#e8e9a7", "d": "#afefd9"}, "coins": 200},
+  {"id": "toi700", "size": 15, "palette": {"a": "#d4afec", "b": "#7af1d2", "c": "#ffd788", "d": "#e2f5ff"}, "coins": 210}
 ]

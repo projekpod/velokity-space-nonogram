@@ -1,0 +1,32 @@
+{
+  "id": "toi700-08-storm-cloud",
+  "size": 15,
+  "solution": [
+    "...............",
+    "...............",
+    "...............",
+    "......aaa......",
+    ".....aaaaaa....",
+    "...baaaaaaaa...",
+    "..bbaaaaaaaaaa.",
+    "..bbaaaaaaaaaa.",
+    "..baaaaaaaaaaa.",
+    "..ddddddddddaa.",
+    "...aabbbbdddaa.",
+    ".......ccbaa...",
+    ".......cc......",
+    "........c......",
+    ".......c......."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Storm Cloud",
+    "id": "Awan Badai"
+  }
+}
