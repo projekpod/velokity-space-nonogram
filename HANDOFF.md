@@ -1,6 +1,12 @@
 # Handoff — Velokity Content v1.1
 
-Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. Tindak lanjut review Claude selesai dan T13 ditandai tuntas. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t14-twists` berangkat dari `origin/main` setelah merge PR #14. T14 masih terbuka. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+
+## T14 · Bagian 0 selesai
+
+- Run Autopilot #2 membuka draft PR #14 lalu terkena batas izin token fine-grained. Autopilot kini membuka PR biasa lewat REST dan tidak lagi memakai mutasi GraphQL. PR draft yang sudah ada tetap menerima komentar sesuai status tugas.
+- Kegagalan opsional saat membuka PR dicatat sebagai warning. Autopilot mencari lagi PR yang mungkin baru dibuka dan tetap mengirim komentar jika ada target. Tes API tiruan mencakup komentar resume dan selesai sesudah kegagalan tersebut.
+- Reproduksi dengan `node --test .github/autopilot/*.test.mjs`. Bagian 1 masih terbuka.
 
 ## Review T13 · Gambar album
 
@@ -37,14 +43,14 @@ Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. 
 
 - Bus Master membatasi puncak campuran di −1 dB. SFX dan musik Web lewat mixer Godot agar limiter memproses keduanya. Kartu Savannah memakai label “Legendary · Most expensive breed” atau “Legendaris · Ras termahal”.
 - Push baru membatalkan run lama pada branch Codex yang sama. Run `main` punya grup tersendiri per run. Job PR untuk head `codex/` dilewati karena pemeriksaan commit dijalankan saat push. AGENTS.md mewajibkan gate lokal sebelum push dan run branch terbaru hijau sebelum membalas.
-- Autopilot mencari branch Codex terbaru yang punya commit di depan `main` dan belum di-merge. Ia membuat draft bila belum ada PR, melanjutkan tugas yang sudah diam lebih dari dua jam, atau menyiapkan PR untuk review jika tugasnya ditandai selesai. Komentar dibatasi satu kali per PR dalam dua jam dan pemberitahuan selesai dikirim sekali setelah jeda komentar habis. Batas waktu berakhir pada 9 Desember 2026 pukul 23.59 WIB.
+- Autopilot mencari branch Codex terbaru yang punya commit di depan `main` dan belum di-merge. Ia membuka PR bila diperlukan, melanjutkan tugas yang sudah diam lebih dari dua jam, atau mengirim komentar penyelesaian. Komentar dibatasi satu kali per PR dalam dua jam dan pemberitahuan selesai dikirim sekali setelah jeda komentar habis. Batas waktu berakhir pada 9 Desember 2026 pukul 23.59 WIB.
 
 ## Mengaktifkan Autopilot dari ponsel
 
 1. Di GitHub, buka **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**. Pilih pemilik `projekpod`, **Only select repositories**, lalu pilih `velokity-space-nonogram`. Set masa berlaku **30 days**. [Formulir token GitHub](https://github.com/settings/personal-access-tokens/new)
 2. Di **Repository permissions**, set **Contents: Read-only**, **Issues: Read and write**, dan **Pull requests: Read and write**. Buat token, lalu salin.
 3. Di repo, buka **Settings → Secrets and variables → Actions → New repository secret**. Isi nama `CODEX_AUTOPILOT_TOKEN` dan tempel token pada kolom nilai. [Secret Actions repo](https://github.com/projekpod/velokity-space-nonogram/settings/secrets/actions)
-4. Setelah workflow masuk `main`, buka **Actions → Autopilot → Run workflow**, pilih `main`, dan lihat log. Bisa dicoba sebelum langkah 3 untuk memeriksa bahwa secret yang kosong menghasilkan notice dan run hijau. Dengan token aktif, run manual dapat membuka draft PR atau berkomentar sesuai kondisi branch. [Workflow Autopilot](https://github.com/projekpod/velokity-space-nonogram/actions/workflows/autopilot.yml)
+4. Setelah workflow masuk `main`, buka **Actions → Autopilot → Run workflow**, pilih `main`, dan lihat log. Bisa dicoba sebelum langkah 3 untuk memeriksa bahwa secret yang kosong menghasilkan notice dan run hijau. Dengan token aktif, run manual dapat membuka PR atau berkomentar sesuai kondisi branch. [Workflow Autopilot](https://github.com/projekpod/velokity-space-nonogram/actions/workflows/autopilot.yml)
 5. Untuk menghentikan jadwal dan run manual, buka **Actions → Autopilot → ⋯ → Disable workflow**.
 
 Efek ke PR GitHub diuji dengan API tiruan di CI. Uji dengan token repo menunggu Oz setelah workflow tersedia di `main`.
@@ -138,6 +144,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz review album dan run Quality gates terbaru pada `codex/t13-content-v11`, lalu tangani PR dan merge T13.
-2. Jalankan Quality gates manual dari `main` dan periksa deployment Pages.
-3. Lanjutkan T14. Uji audio, zoom, dan performa ponsel kelas menengah untuk T11 dan T11b.
+1. Terapkan enam twist ke katalog 12 planet baru beserta ikon, tip tersimpan, dan bonus dalam batas 60 koin.
+2. Tambahkan bukti solusi dengan sel awal, tes gameplay, dan tangkapan `?qa=twists`.
+3. Centang T14 setelah semua gate lokal lulus, push, lalu tunggu Quality gates hijau.

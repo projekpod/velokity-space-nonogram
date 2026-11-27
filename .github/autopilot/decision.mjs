@@ -11,7 +11,7 @@ export function decideAutopilot({
   if (pastDeadline(date)) return "stop";
 
   const canComment = lastCommentAgeMs > TWO_HOURS_MS;
-  if (taskDone) return !completionPosted && canComment ? "complete" : "ready";
+  if (taskDone) return !completionPosted && canComment ? "complete" : "idle";
   if (branchAgeMs > TWO_HOURS_MS && canComment) return "resume";
   return "idle";
 }

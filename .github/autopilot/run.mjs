@@ -8,6 +8,13 @@ function branchTitle(name) {
     .map(word => word[0].toUpperCase() + word.slice(1)).join(" ");
 }
 
+function findOpenPull(pulls, repo, branch) {
+  const fullName = `${repo.owner}/${repo.repo}`.toLowerCase();
+  const open = pulls.filter(pull => pull.state === "open" && pull.head.ref === branch
+    && pull.head.repo?.full_name.toLowerCase() === fullName);
+  return open.find(pull => pull.base.ref === "main") ?? open[0];
+}
+
 async function pickBranch(github, repo) {
   const branches = await github.paginate(github.rest.repos.listBranches, { ...repo, per_page: 100 });
   const main = branches.find(branch => branch.name === "main");
@@ -33,8 +40,7 @@ async function pickBranch(github, repo) {
       ...repo, basehead: `${main.commit.sha}...${branch.sha}`, per_page: 1,
     });
     if (data.ahead_by > 0) {
-      const open = localPulls.filter(pull => pull.state === "open" && pull.head.ref === branch.name);
-      return { branch, pull: open.find(pull => pull.base.ref === "main") ?? open[0] };
+      return { branch, pull: findOpenPull(localPulls, repo, branch.name) };
     }
   }
   return {};
@@ -73,11 +79,25 @@ export async function runAutopilot({ github, context, core, now = new Date() }) 
 
   if (!await stillCurrent(github, repo, branch, core)) return;
   if (!pull) {
-    const created = await github.rest.pulls.create({
-      ...repo, base: "main", head: branch.name, title: branchTitle(branch.name), draft: true,
-    });
-    pull = created.data;
-    core.info(`Opened draft PR #${pull.number} for ${branch.name}.`);
+    try {
+      const created = await github.rest.pulls.create({
+        ...repo, base: "main", head: branch.name, title: branchTitle(branch.name), draft: false,
+      });
+      pull = created.data;
+      core.info(`Opened PR #${pull.number} for ${branch.name}.`);
+    } catch (error) {
+      core.warning(`Could not open a PR for ${branch.name}: ${error.message}`);
+      // A contributor may have opened the PR since branch selection.
+      try {
+        const open = await github.paginate(github.rest.pulls.list, {
+          ...repo, state: "open", head: `${repo.owner}:${branch.name}`,
+        });
+        pull = findOpenPull(open, repo, branch.name);
+      } catch (lookupError) {
+        core.warning(`Could not refresh the PR for ${branch.name}: ${lookupError.message}`);
+      }
+      if (!pull) return;
+    }
   }
 
   const { data: actor } = await github.rest.users.getAuthenticated();
@@ -99,21 +119,8 @@ export async function runAutopilot({ github, context, core, now = new Date() }) 
   }
   if (!await stillCurrent(github, repo, branch, core)) return;
 
-  if (taskDone && pull.draft) {
-    await github.graphql(`
-      mutation ($id: ID!) {
-        markPullRequestReadyForReview(input: {pullRequestId: $id}) {
-          pullRequest { id isDraft }
-        }
-      }
-    `, { id: pull.node_id });
-    core.info(`Marked PR #${pull.number} ready for review.`);
-  }
-
-  if (action === "complete" || action === "resume") {
-    await github.rest.issues.createComment({
-      ...repo, issue_number: pull.number, body: action === "complete" ? DONE_COMMENT : RESUME_COMMENT,
-    });
-    core.info(`Posted the ${action} comment on PR #${pull.number}.`);
-  }
+  await github.rest.issues.createComment({
+    ...repo, issue_number: pull.number, body: action === "complete" ? DONE_COMMENT : RESUME_COMMENT,
+  });
+  core.info(`Posted the ${action} comment on PR #${pull.number}.`);
 }
