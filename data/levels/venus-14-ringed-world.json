@@ -1,0 +1,28 @@
+{
+  "id": "venus-14-ringed-world",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....aaaa...",
+    "...adddda..",
+    ".ccaddddd..",
+    "...ccbbdd..",
+    "...bbccbd..",
+    "...bbbbccc.",
+    "...abbbba.c",
+    "...aaaaa...",
+    ".....a....."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Ringed World",
+    "id": "Planet Bercincin"
+  }
+}

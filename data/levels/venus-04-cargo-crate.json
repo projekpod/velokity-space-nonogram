@@ -1,0 +1,28 @@
+{
+  "id": "venus-04-cargo-crate",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "......a....",
+    "...addddd..",
+    "..dddddda..",
+    ".ddddddaaa.",
+    ".aabaaabaa.",
+    "..abcccbaa.",
+    "..abaaaba..",
+    "..aaa......",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Cargo Crate",
+    "id": "Peti Kargo"
+  }
+}

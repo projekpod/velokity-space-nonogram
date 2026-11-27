@@ -1,0 +1,28 @@
+{
+  "id": "venus-15-meteor",
+  "size": 11,
+  "solution": [
+    "...........",
+    ".b.........",
+    "..bbb......",
+    "..bcbb.....",
+    "..bccbb....",
+    "...bcccb...",
+    "....bbaa...",
+    ".....baaa..",
+    "......ada..",
+    "......aaa..",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Meteor",
+    "id": "Meteor"
+  }
+}

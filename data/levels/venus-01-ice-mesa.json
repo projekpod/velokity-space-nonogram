@@ -1,0 +1,28 @@
+{
+  "id": "venus-01-ice-mesa",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "...........",
+    "...........",
+    "...aaaa....",
+    "...ddaaaa..",
+    "...aadaaaa.",
+    "..aaaaddaa.",
+    "..aaabbbbaa",
+    "...a.......",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Ice Mesa",
+    "id": "Dataran Es"
+  }
+}

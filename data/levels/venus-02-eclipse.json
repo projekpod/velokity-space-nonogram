@@ -1,0 +1,28 @@
+{
+  "id": "venus-02-eclipse",
+  "size": 11,
+  "solution": [
+    "...........",
+    "....ccc....",
+    "...caaabc..",
+    "..cbbbaab..",
+    "..cabbbabc.",
+    ".ccbbbaabc.",
+    "..cbbabbc..",
+    "..cccbbcc..",
+    "...ccccc...",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Solar Eclipse",
+    "id": "Gerhana Matahari"
+  }
+}

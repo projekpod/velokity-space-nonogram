@@ -1,0 +1,28 @@
+{
+  "id": "venus-06-cratered-moon",
+  "size": 11,
+  "solution": [
+    "...........",
+    "......a....",
+    "....bbaa...",
+    "...aabaaa..",
+    "...aaaabb..",
+    "..aaaaabba.",
+    "...addaaaa.",
+    "...addaaa..",
+    "...aaaaaa..",
+    "....aaaa...",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Cratered Moon",
+    "id": "Bulan Berkawah"
+  }
+}

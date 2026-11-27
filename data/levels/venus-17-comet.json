@@ -1,0 +1,28 @@
+{
+  "id": "venus-17-comet",
+  "size": 11,
+  "solution": [
+    "...........",
+    "bbc........",
+    ".cbbc......",
+    "dbccbb.....",
+    ".ddcccb....",
+    "..bddcaa...",
+    "....bbaaa..",
+    ".....badd..",
+    "......aaa..",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Comet",
+    "id": "Komet"
+  }
+}

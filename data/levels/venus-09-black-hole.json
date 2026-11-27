@@ -1,0 +1,28 @@
+{
+  "id": "venus-09-black-hole",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    ".......bb..",
+    "....babaab.",
+    "...abbbcb..",
+    "..abbbbb...",
+    ".baccbb....",
+    "..bbb......",
+    "...........",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Black Hole",
+    "id": "Lubang Hitam"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "venus-05-helmet",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....aaaa...",
+    "...aabdba..",
+    "..aacdddba.",
+    "..abddddba.",
+    "..aabbbba..",
+    "...aaaabdd.",
+    "....bbbbb..",
+    "....b......",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Astronaut Helmet",
+    "id": "Helm Astronaut"
+  }
+}

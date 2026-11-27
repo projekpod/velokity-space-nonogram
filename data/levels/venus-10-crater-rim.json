@@ -1,0 +1,28 @@
+{
+  "id": "venus-10-crater-rim",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "...........",
+    "...........",
+    ".........a.",
+    "........aa.",
+    "...aaaaaaa.",
+    "..adddaaaa.",
+    "..aaaaddaaa",
+    "..abbbbbba.",
+    "...a......."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Crater Rim",
+    "id": "Bibir Kawah"
+  }
+}

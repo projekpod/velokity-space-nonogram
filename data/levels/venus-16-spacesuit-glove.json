@@ -1,0 +1,28 @@
+{
+  "id": "venus-16-spacesuit-glove",
+  "size": 11,
+  "solution": [
+    "...........",
+    "....a.a....",
+    "...aa.a....",
+    "...aaaa.a..",
+    "...aaaa.aa.",
+    "...aaddaa..",
+    "...adddaa..",
+    "...adddaa..",
+    "....bbbb...",
+    ".......a...",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Suit Glove",
+    "id": "Sarung Tangan Astronaut"
+  }
+}

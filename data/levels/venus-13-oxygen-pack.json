@@ -1,0 +1,28 @@
+{
+  "id": "venus-13-oxygen-pack",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....bb..b..",
+    "....bb.bb..",
+    "...baaaabb.",
+    "...baddaab.",
+    "...badcaa..",
+    "...aaaaaa..",
+    "...bb.aab..",
+    "...d.ccb...",
+    "...d......."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Oxygen Pack",
+    "id": "Tabung Oksigen"
+  }
+}

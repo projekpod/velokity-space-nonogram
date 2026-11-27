@@ -1,0 +1,28 @@
+{
+  "id": "venus-18-solar-wing",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "...........",
+    "..cc.aaaa..",
+    ".cccadda...",
+    "....adddbdc",
+    "....adda.cc",
+    "....aaaa.cc",
+    "....aca....",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Solar Wing",
+    "id": "Sayap Surya"
+  }
+}

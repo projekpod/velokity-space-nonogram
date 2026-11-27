@@ -1,0 +1,28 @@
+{
+  "id": "venus-20-star-cluster",
+  "size": 11,
+  "solution": [
+    "...........",
+    ".....c.....",
+    "...d.c.....",
+    "..dddc.....",
+    "...dccc....",
+    ".ccdaacccc.",
+    "....cacb...",
+    ".....cbbb..",
+    ".....c.b...",
+    ".....c.b...",
+    "..........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Star Cluster",
+    "id": "Gugus Bintang"
+  }
+}
