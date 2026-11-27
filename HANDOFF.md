@@ -1,6 +1,12 @@
-# Handoff — Velokity Autopilot & CI hygiene
+# Handoff — Velokity Content v1.1
 
-Branch `codex/t12b-autopilot` berangkat dari `origin/main` setelah merge T12. Oz membuka atau meninjau PR dan merge setelah review Claude. Katalog puzzle saat ini berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang.
+Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. T13 tetap terbuka sampai ketiga bagian selesai.
+
+## T13 · Bagian 1 selesai
+
+- Papan 12×12 ke atas mendukung pinch, seret untuk geser, roda mouse, Shift-seret, dan tombol Fit. Saat diperbesar, sisi isi sel minimal 44 px layar. Petunjuk baris dan kolom tetap berada di tepi. Efek streak dan pose menahan papan mengikuti bidang papan, dan gambar kemenangan kembali ke Fit.
+- Tes Godot mencakup batas zoom dan akurasi tap pada 12×12 dan 15×15. `?qa=zoom` menyalakan fixture 15×15 di build Web QA untuk uji gestur Chromium melalui `.github/qa/release-check.mjs`.
+- Katalog masih 60 Nonogram, 12 puzzle bonus, dan 120 puzzle harian. Web Bagian 1 sekitar 41,16 MB. Jalankan gate lokal di bawah sebelum push berikutnya.
 
 ## T12b · Autopilot & CI hygiene
 
@@ -106,6 +112,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR T12b, cek **Quality gates**, dan merge setelah review Claude. Jalankan Autopilot dari `main` untuk menguji secret dan aksesnya.
-2. T13 — Tambahkan papan 12×12 dan 15×15 dengan zoom/pan, naikkan katalog ke 300 Nonogram dan 365 puzzle harian, lalu sesuaikan kurva kesulitan. Mekanik kecil menyusul di T14.
-3. Ukur volume dan performa di ponsel kelas menengah, lalu jalankan QA Playgama dan portal lain sesuai `docs/RELEASE.md` untuk menutup T11 dan T11b.
+1. T13 Bagian 2 — Tambahkan 12 planet, masing-masing 20 level, satu commit per planet dengan screenshot album di `docs/qa/`.
+2. T13 Bagian 3 — Isi 365 Rasi Bintang, pertahankan band hari, lalu tandai T13 selesai setelah verifikasi.
+3. Tunggu Quality gates pada push terakhir. T14 menyusul setelah T13.

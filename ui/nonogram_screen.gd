@@ -152,7 +152,7 @@ func _build_tools() -> void:
 	_tools = VBoxContainer.new()
 	_tools.add_theme_constant_override("separation", 10)
 	add_child(_tools)
-	UI.label(_tools, "GAME_CONTROLS", 21, UI.MUTED)
+	UI.label(_tools, "GAME_ZOOM_CONTROLS" if _board.supports_zoom() else "GAME_CONTROLS", 21, UI.MUTED)
 	var marks := UI.row(_tools)
 	_fill = UI.action(marks, "GAME_FILL", true)
 	_cross = UI.action(marks, "GAME_CROSS")
@@ -164,6 +164,8 @@ func _build_tools() -> void:
 	_fill.pressed.connect(_choose_mark.bind(false))
 	_cross.pressed.connect(_choose_mark.bind(true))
 	UI.action(marks, "GAME_RETRY").pressed.connect(_leave.bind(&"retry"))
+	if _board.supports_zoom():
+		UI.action(marks, "GAME_BOARD_FIT").pressed.connect(_board.fit_zoom)
 	if bonus_index >= 0:
 		return
 	var hints := UI.row(_tools)

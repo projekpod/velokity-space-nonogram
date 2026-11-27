@@ -46,6 +46,12 @@ func _process(delta: float) -> void:
 		board_rect.position.y += screen._board._streak_dip
 		var grid: Rect2 = screen._board.get_global_transform() * board_rect
 		state.grid = _pack_rect(grid)
+		if screen._board.supports_zoom():
+			var frame: Rect2 = screen._board._grid()
+			var content: Rect2 = screen._board._camera.grid(frame, screen._puzzle.size)
+			content.position += screen._board._motion_offset()
+			state.zoom = _pack_rect(screen._board.get_global_transform() * content)
+			state.zoomed = screen._board._camera.edge > 0.0
 	elif screen is DailyScreen:
 		state.scene = "daily"
 		state.state = screen._puzzle.state

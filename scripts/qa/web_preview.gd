@@ -20,16 +20,18 @@ const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary", "zoom"]:
 		return false
 	if route not in ["playthrough", "preview"]:
 		_seed_progress(main)
 	match route:
-		"playthrough", "preview":
+		"playthrough", "preview", "zoom":
 			if route == "playthrough":
 				main._open_start_screen()
-			else:
+			elif route == "preview":
 				main._play(0)
+			else:
+				_open_zoom(main)
 			var observer := Playthrough.new()
 			observer.main = main
 			main.add_child(observer)
@@ -103,6 +105,19 @@ static func open(main: Main) -> bool:
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
+
+
+static func _open_zoom(main: Main) -> void:
+	var rows: Array[String] = []
+	for index in range(15):
+		rows.append(".".repeat(index) + "a" + ".".repeat(14 - index))
+	main._reset_column(NonogramScreen.BOARD_WIDTH, 0, true)
+	var screen := NonogramScreen.new()
+	screen.level = {
+		"id": "qa-zoom", "planet": "moon", "size": 15, "solution": rows,
+		"palette": {"a": "#ffd27b"}, "title": {"en": "Zoom test", "id": "Uji zoom"},
+	}
+	main._column.add_child(screen)
 
 
 static func _open_cat_gallery(main: Main) -> void:
