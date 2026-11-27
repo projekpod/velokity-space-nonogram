@@ -8,6 +8,14 @@ Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. 
 - Tes Godot mencakup batas zoom dan akurasi tap pada 12×12 dan 15×15. `?qa=zoom` menyalakan fixture 15×15 di build Web QA untuk uji gestur Chromium melalui `.github/qa/release-check.mjs`.
 - Katalog masih 60 Nonogram, 12 puzzle bonus, dan 120 puzzle harian. Web Bagian 1 sekitar 41,16 MB. Jalankan gate lokal di bawah sebelum push berikutnya.
 
+## T13 · Bagian 2 selesai
+
+- Katalog berisi 15 album × 20 papan. 12 planet baru punya sumber di `art/levels_src/`, masing-masing satu commit dengan JSON hasil build dan PNG album di `docs/qa/album-*.png`. PNG terbesar 126.781 byte.
+- Tiga planet lama mempertahankan ID dan posisi. Planet baru mengikuti ukuran 11→15 dan median ambiguitas petunjuk yang naik. Daftar planet memakai halaman dan album memakai pemilih planet. Papan 11×11 juga mendukung zoom dan pan.
+- Buka planet setelah 15 dari 20 puzzle planet sebelumnya selesai. Album baru membayar bonus koin sekali saat puzzle ke-20 tersimpan. Hadiah per level tetap maksimum 60, dan iklan pengganda hanya menghitung hadiah level. Hadiah kostum untuk tiga album lama tetap berlaku.
+- 548 pemeriksaan Godot, 10 tes Python, 12 tes Node, validator semua puzzle, ekspor Web dan Web QA, serta 12 tangkapan Chromium lulus. Web mentah 41.309.902 byte. Katalog harian masih 120 papan.
+- Ulangi pembuatan JSON dengan `python3 tools/build_levels.py`. Ambil semua album dari Web QA yang sedang disajikan dengan `node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots`.
+
 ## T12b · Autopilot & CI hygiene
 
 - Bus Master membatasi puncak campuran di −1 dB. SFX dan musik Web lewat mixer Godot agar limiter memproses keduanya. Kartu Savannah memakai label “Legendary · Most expensive breed” atau “Legendaris · Ras termahal”.
@@ -112,6 +120,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. T13 Bagian 2 — Tambahkan 12 planet, masing-masing 20 level, satu commit per planet dengan screenshot album di `docs/qa/`.
-2. T13 Bagian 3 — Isi 365 Rasi Bintang, pertahankan band hari, lalu tandai T13 selesai setelah verifikasi.
-3. Tunggu Quality gates pada push terakhir. T14 menyusul setelah T13.
+1. T13 Bagian 3 — Perbesar Rasi Bintang dari 120 ke 365. Generator yang sudah ada dapat menghasilkan 53 Senin dan 52 papan untuk setiap hari lain. Pertahankan ukuran, band solver, dan 120 file lama.
+2. Jalankan gate pada katalog lengkap. Tandai T13 selesai di roadmap, push, lalu pantau Quality gates pada commit terakhir hingga hijau.
+3. T14 — Tambahkan mekanik kecil setiap 10–15 level setelah review T13.
