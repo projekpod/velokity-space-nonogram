@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-02-sample-tube",
+  "size": 14,
+  "solution": [
+    "....bb........",
+    "....bbbbbb....",
+    "....bbbbbb....",
+    "....aabbbb....",
+    "....addaa.....",
+    "....ddcda.....",
+    "...adccda.....",
+    "...adccd......",
+    "...aadcd......",
+    "...aaaaa......",
+    "...aaaaa......",
+    "..............",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Sample Tube",
+    "id": "Tabung Sampel"
+  }
+}

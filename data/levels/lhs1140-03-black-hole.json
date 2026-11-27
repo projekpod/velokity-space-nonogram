@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-03-black-hole",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..............",
+    "..............",
+    "..............",
+    "..bbaaabb.....",
+    "..baabbbabb...",
+    "..baccbbbaab..",
+    "...bbcbbbcaab.",
+    "....bbbbbccab.",
+    "......bbbbbbb.",
+    ".........bb...",
+    "..............",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Black Hole",
+    "id": "Lubang Hitam"
+  }
+}

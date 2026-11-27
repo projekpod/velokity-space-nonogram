@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-08-spiral-galaxy",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..............",
+    "..bbbbb.......",
+    ".baaabbbb.....",
+    ".baadbabbb....",
+    ".bbabdddabb...",
+    ".bbbacddbab...",
+    "..bbbaccbabb..",
+    "...bbbbacaab..",
+    "....bbbbbbb...",
+    "......bbbb....",
+    "..............",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Spiral Galaxy",
+    "id": "Galaksi Spiral"
+  }
+}

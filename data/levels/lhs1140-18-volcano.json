@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-18-volcano",
+  "size": 14,
+  "solution": [
+    "..............",
+    ".......cc.....",
+    ".......cc.....",
+    ".......cc.....",
+    "......a..a....",
+    "......adaaa...",
+    ".....aadaaa...",
+    "....aaaadaaa..",
+    "...aaaaaddaaa.",
+    "..aaaaaaadaaa.",
+    "...abbbbbbbba.",
+    "..............",
+    "..............",
+    ".............."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Shield Volcano",
+    "id": "Gunung Api Perisai"
+  }
+}

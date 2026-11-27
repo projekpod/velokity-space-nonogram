@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-09-crater-rim",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..............",
+    "..............",
+    "..............",
+    "..............",
+    "...a..........",
+    "...aa.........",
+    "...aaa..a.....",
+    "..aaaaaaaaaaa.",
+    "..aaaaaaaddaa.",
+    "..aaaddddaaa..",
+    "..abbbbaaaaa..",
+    "...aaaaaaaaa..",
+    ".............."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Crater Rim",
+    "id": "Bibir Kawah"
+  }
+}
