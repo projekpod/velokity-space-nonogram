@@ -27,5 +27,8 @@
     "en": "Uranian Equator Waves",
     "id": "Gelombang Khatulistiwa Uranus"
   },
-  "motif": "uranian-equator-waves"
+  "motif": "uranian-equator-waves",
+  "twist": {
+    "kind": "shield"
+  }
 }

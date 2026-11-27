@@ -27,5 +27,8 @@
     "en": "Ariel Canyon",
     "id": "Ngarai Ariel"
   },
-  "motif": "ariel-canyon"
+  "motif": "ariel-canyon",
+  "twist": {
+    "kind": "shield"
+  }
 }

@@ -26,5 +26,13 @@
     "en": "Ammonia Snowflake",
     "id": "Kristal Salju Amonia"
   },
-  "motif": "ammonia-snowflake"
+  "motif": "ammonia-snowflake",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      44,
+      71,
+      98
+    ]
+  }
 }

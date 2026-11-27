@@ -26,5 +26,13 @@
     "en": "Lava Tube Skylight",
     "id": "Lubang Tabung Lava"
   },
-  "motif": "lava-tube-skylight"
+  "motif": "lava-tube-skylight",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      2,
+      9,
+      11
+    ]
+  }
 }

@@ -28,5 +28,8 @@
     "en": "Orbital Umbrella",
     "id": "Payung di Orbit"
   },
-  "motif": "orbital-umbrella"
+  "motif": "orbital-umbrella",
+  "twist": {
+    "kind": "perfect"
+  }
 }

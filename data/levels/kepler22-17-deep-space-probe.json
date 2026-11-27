@@ -29,5 +29,13 @@
     "en": "Frond Sailbug",
     "id": "Serangga Bersayap Daun"
   },
-  "motif": "frond-sailbug"
+  "motif": "frond-sailbug",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      71,
+      113,
+      156
+    ]
+  }
 }

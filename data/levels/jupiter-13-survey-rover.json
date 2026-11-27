@@ -27,5 +27,8 @@
     "en": "Io Volcano",
     "id": "Gunung Api Io"
   },
-  "motif": "io-volcano"
+  "motif": "io-volcano",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -26,5 +26,8 @@
     "en": "Cloud Scooter",
     "id": "Awan Scooter"
   },
-  "motif": "neptune-scooter"
+  "motif": "neptune-scooter",
+  "twist": {
+    "kind": "perfect"
+  }
 }

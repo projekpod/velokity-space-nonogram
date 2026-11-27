@@ -24,5 +24,8 @@
     "en": "Frozen Crescent Coast",
     "id": "Pesisir Sabit Beku"
   },
-  "motif": "frozen-crescent-coast"
+  "motif": "frozen-crescent-coast",
+  "twist": {
+    "kind": "shield"
+  }
 }

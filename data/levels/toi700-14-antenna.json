@@ -28,5 +28,13 @@
     "en": "Dune Sail Skimmer",
     "id": "Peluncur Layar Bukit Pasir"
   },
-  "motif": "dune-sail-skimmer"
+  "motif": "dune-sail-skimmer",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      24,
+      56,
+      100
+    ]
+  }
 }

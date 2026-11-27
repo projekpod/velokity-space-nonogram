@@ -26,5 +26,9 @@
     "en": "Laser Sail",
     "id": "Layar Laser"
   },
-  "motif": "laser-sail"
+  "motif": "laser-sail",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

@@ -28,5 +28,13 @@
     "en": "Twin Transit",
     "id": "Transit Dua Planet"
   },
-  "motif": "twin-transit"
+  "motif": "twin-transit",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      56,
+      99,
+      137
+    ]
+  }
 }

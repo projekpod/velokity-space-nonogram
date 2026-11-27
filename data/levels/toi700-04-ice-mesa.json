@@ -27,5 +27,13 @@
     "en": "Thermal Rover",
     "id": "Rover Pemetaan Panas"
   },
-  "motif": "thermal-rover"
+  "motif": "thermal-rover",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      60,
+      95,
+      130
+    ]
+  }
 }

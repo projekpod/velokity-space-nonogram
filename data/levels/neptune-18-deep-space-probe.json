@@ -27,5 +27,13 @@
     "en": "Triton Orbital Path",
     "id": "Orbit Triton"
   },
-  "motif": "triton-orbit"
+  "motif": "triton-orbit",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      47,
+      86,
+      122
+    ]
+  }
 }

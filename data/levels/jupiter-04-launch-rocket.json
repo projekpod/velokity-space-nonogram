@@ -26,5 +26,9 @@
     "en": "Great Red Spot",
     "id": "Bintik Merah Besar"
   },
-  "motif": "great-red-spot"
+  "motif": "great-red-spot",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

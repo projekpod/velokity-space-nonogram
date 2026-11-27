@@ -25,5 +25,13 @@
     "en": "Venus Highlands",
     "id": "Dataran Tinggi Venus"
   },
-  "motif": "venus-highlands"
+  "motif": "venus-highlands",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      46,
+      72,
+      96
+    ]
+  }
 }

@@ -27,5 +27,8 @@
     "en": "Deep Ocean Submersible",
     "id": "Kapal Selam Laut Dalam"
   },
-  "motif": "deep-sea-submersible"
+  "motif": "deep-sea-submersible",
+  "twist": {
+    "kind": "shield"
+  }
 }

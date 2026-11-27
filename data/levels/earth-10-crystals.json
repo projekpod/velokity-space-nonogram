@@ -26,5 +26,13 @@
     "en": "Earthrise",
     "id": "Bumi Terbit"
   },
-  "motif": "earthrise"
+  "motif": "earthrise",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      22,
+      48,
+      69
+    ]
+  }
 }

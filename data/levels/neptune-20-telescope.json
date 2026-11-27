@@ -27,5 +27,13 @@
     "en": "Neptune Windsock",
     "id": "Kantong Angin Neptunus"
   },
-  "motif": "neptune-windsock"
+  "motif": "neptune-windsock",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      53,
+      89,
+      137
+    ]
+  }
 }

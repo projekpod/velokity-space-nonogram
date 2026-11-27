@@ -28,5 +28,8 @@
     "en": "Io Sulfur Lake",
     "id": "Danau Sulfur Io"
   },
-  "motif": "io-sulfur-lake"
+  "motif": "io-sulfur-lake",
+  "twist": {
+    "kind": "perfect"
+  }
 }

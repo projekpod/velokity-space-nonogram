@@ -28,5 +28,9 @@
     "en": "Humidity Chamber",
     "id": "Ruang Uji Kelembapan"
   },
-  "motif": "humidity-chamber"
+  "motif": "humidity-chamber",
+  "twist": {
+    "kind": "star",
+    "cell": 97
+  }
 }

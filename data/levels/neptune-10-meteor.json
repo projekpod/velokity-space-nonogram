@@ -26,5 +26,8 @@
     "en": "Neptune Equinox",
     "id": "Ekuinoks Neptunus"
   },
-  "motif": "neptune-equinox"
+  "motif": "neptune-equinox",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -26,5 +26,9 @@
     "en": "Heat Radiator",
     "id": "Radiator Panas"
   },
-  "motif": "heat-radiator"
+  "motif": "heat-radiator",
+  "twist": {
+    "kind": "star",
+    "cell": 69
+  }
 }

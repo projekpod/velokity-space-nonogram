@@ -27,5 +27,13 @@
     "en": "Tidal Ice Bridge",
     "id": "Jembatan Es Pasang Surut"
   },
-  "motif": "tidal-ice-bridge"
+  "motif": "tidal-ice-bridge",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      59,
+      95,
+      132
+    ]
+  }
 }

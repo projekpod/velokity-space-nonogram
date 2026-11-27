@@ -27,5 +27,8 @@
     "en": "Miranda Cliffs",
     "id": "Tebing Miranda"
   },
-  "motif": "miranda-cliffs"
+  "motif": "miranda-cliffs",
+  "twist": {
+    "kind": "shield"
+  }
 }

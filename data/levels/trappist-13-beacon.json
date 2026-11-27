@@ -27,5 +27,13 @@
     "en": "Clockwork Orrery",
     "id": "Model Mekanis Orbit"
   },
-  "motif": "clockwork-orrery"
+  "motif": "clockwork-orrery",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      38,
+      74,
+      109
+    ]
+  }
 }

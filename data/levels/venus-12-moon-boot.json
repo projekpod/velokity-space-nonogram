@@ -25,5 +25,13 @@
     "en": "Cloud Balloon",
     "id": "Balon Penjelajah Awan"
   },
-  "motif": "cloud-balloon"
+  "motif": "cloud-balloon",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      23,
+      41,
+      63
+    ]
+  }
 }

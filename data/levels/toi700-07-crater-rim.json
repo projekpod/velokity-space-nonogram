@@ -28,5 +28,13 @@
     "en": "Alien Burrow Mounds",
     "id": "Gundukan Liang Alien"
   },
-  "motif": "alien-burrow-mounds"
+  "motif": "alien-burrow-mounds",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      50,
+      103,
+      149
+    ]
+  }
 }

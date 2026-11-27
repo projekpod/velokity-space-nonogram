@@ -28,5 +28,13 @@
     "en": "Gliding Rockfish",
     "id": "Ikan Batu Peluncur"
   },
-  "motif": "gliding-rockfish"
+  "motif": "gliding-rockfish",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      22,
+      54,
+      163
+    ]
+  }
 }

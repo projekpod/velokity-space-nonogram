@@ -27,5 +27,9 @@
     "en": "Triple-Leaf Emblem",
     "id": "Lambang Tiga Daun"
   },
-  "motif": "triple-leaf-emblem"
+  "motif": "triple-leaf-emblem",
+  "twist": {
+    "kind": "star",
+    "cell": 78
+  }
 }

@@ -26,5 +26,13 @@
     "en": "Rift Spires",
     "id": "Menara Batu di Retakan"
   },
-  "motif": "rift-spires"
+  "motif": "rift-spires",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      68,
+      96,
+      120
+    ]
+  }
 }

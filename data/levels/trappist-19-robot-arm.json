@@ -28,5 +28,13 @@
     "en": "Tracking Mount",
     "id": "Dudukan Pelacak Langit"
   },
-  "motif": "tracking-mount"
+  "motif": "tracking-mount",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      27,
+      123,
+      166
+    ]
+  }
 }

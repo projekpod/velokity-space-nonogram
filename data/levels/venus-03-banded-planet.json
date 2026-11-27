@@ -24,5 +24,13 @@
     "en": "Ridge and Trough",
     "id": "Punggung dan Lembah"
   },
-  "motif": "ridge-trough"
+  "motif": "ridge-trough",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      24,
+      49,
+      75
+    ]
+  }
 }

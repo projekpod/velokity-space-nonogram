@@ -26,5 +26,13 @@
     "en": "International Space Station",
     "id": "Stasiun Luar Angkasa Internasional"
   },
-  "motif": "international-space-station"
+  "motif": "international-space-station",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      19,
+      84,
+      127
+    ]
+  }
 }

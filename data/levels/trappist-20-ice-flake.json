@@ -28,5 +28,13 @@
     "en": "Solar-Powered Walker",
     "id": "Penjelajah Berkaki Bertenaga Surya"
   },
-  "motif": "solar-walker"
+  "motif": "solar-walker",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      42,
+      137,
+      173
+    ]
+  }
 }

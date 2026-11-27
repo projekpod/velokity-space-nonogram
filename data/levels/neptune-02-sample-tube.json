@@ -25,5 +25,8 @@
     "en": "Triton Slope Streak",
     "id": "Jejak di Lereng Triton"
   },
-  "motif": "triton-slope-streak"
+  "motif": "triton-slope-streak",
+  "twist": {
+    "kind": "perfect"
+  }
 }

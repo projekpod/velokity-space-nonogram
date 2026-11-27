@@ -26,5 +26,8 @@
     "en": "Radar Map",
     "id": "Peta Radar"
   },
-  "motif": "mercury-radar-map"
+  "motif": "mercury-radar-map",
+  "twist": {
+    "kind": "shield"
+  }
 }

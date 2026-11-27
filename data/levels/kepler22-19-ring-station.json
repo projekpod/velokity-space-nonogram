@@ -29,5 +29,13 @@
     "en": "Spiral Weather Balcony",
     "id": "Balkon Pengamat Cuaca"
   },
-  "motif": "weather-balcony"
+  "motif": "weather-balcony",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      56,
+      107,
+      158
+    ]
+  }
 }

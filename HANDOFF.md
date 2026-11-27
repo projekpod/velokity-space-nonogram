@@ -1,12 +1,20 @@
 # Handoff — Velokity Content v1.1
 
-Branch `codex/t14-twists` berangkat dari `origin/main` setelah merge PR #14. T14 masih terbuka. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t14-twists` berangkat dari `origin/main` setelah merge PR #14. T14 selesai. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
 
 ## T14 · Bagian 0 selesai
 
 - Run Autopilot #2 membuka draft PR #14 lalu terkena batas izin token fine-grained. Autopilot kini membuka PR biasa lewat REST dan tidak lagi memakai mutasi GraphQL. PR draft yang sudah ada tetap menerima komentar sesuai status tugas.
 - Kegagalan opsional saat membuka PR dicatat sebagai warning. Autopilot mencari lagi PR yang mungkin baru dibuka dan tetap mengirim komentar jika ada target. Tes API tiruan mencakup komentar resume dan selesai sesudah kegagalan tersebut.
-- Reproduksi dengan `node --test .github/autopilot/*.test.mjs`. Bagian 1 masih terbuka.
+- Reproduksi dengan `node --test .github/autopilot/*.test.mjs`. Quality gates #56 lulus. Verifikasi alur dengan PAT repo saat perubahan sudah masuk `main`.
+
+## T14 · Bagian 1 selesai
+
+- Enam aturan bergantian dalam blok 12 level di 12 planet baru. Sel Terungkap mengisi tiga sel dan Sel Asteroid mengunci tiga silang. Bintang Bonus muncul saat selnya diisi dengan benar. Perisai menahan kesalahan pertama. Waktu Komet menghitung waktu aktif dan berhenti saat game dijeda. Main Sempurna memerlukan kemenangan tanpa kesalahan dan tanpa bantuan.
+- Bintang, Komet, dan Main Sempurna memberi masing-masing 6, 8, dan 10 koin pada kemenangan pertama. Porsi hadiah dasar dan kombo menyisakan ruang bagi bonus itu di dalam batas 60 koin. Saat timer habis, pemain tetap bisa menang dan menerima hadiah biasa untuk level tersebut.
+- Kartu level menampilkan ikon dan nama aturan di tooltip. Save v9 menyimpan tip per aturan setelah pemain menekan Mulai puzzle. Migrasi v8 mempertahankan progres dan menampilkan tip yang belum pernah dikonfirmasi.
+- `python3 tools/build_levels.py` membuat metadata dari urutan album dan gambar yang sudah ada. `python3 tools/check_levels.py` membuktikan masing-masing dari 240 level punya satu solusi memakai petunjuk dan sel awal. Posisi bintang tetap tersembunyi dari solver dan pemain.
+- Gate lokal lulus dengan 592 pemeriksaan Godot, 18 tes Python, 13 tes Node, validator, serta ekspor Web dan Web QA. Web mentah 41.412.487 byte. Chromium menangkap enam tip di `docs/qa/twists.png` (128.831 byte) lewat `?qa=twists`. CI memeriksa batas 300 KB dan bahwa build rilis membuka Moon 01 saat mendapat query itu.
 
 ## Review T13 · Gambar album
 
@@ -136,6 +144,7 @@ Dengan server berjalan, jalankan di terminal lain. Set `PLAYWRIGHT_CHROMIUM_EXEC
 
 ```sh
 node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
+node .github/qa/capture.mjs http://127.0.0.1:8765/ build/t14-qa twists
 node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
@@ -144,6 +153,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Terapkan enam twist ke katalog 12 planet baru beserta ikon, tip tersimpan, dan bonus dalam batas 60 koin.
-2. Tambahkan bukti solusi dengan sel awal, tes gameplay, dan tangkapan `?qa=twists`.
-3. Centang T14 setelah semua gate lokal lulus, push, lalu tunggu Quality gates hijau.
+1. Oz review grid `twists.png` dan run Quality gates terbaru di `codex/t14-twists`, lalu tangani PR dan merge.
+2. Jalankan Autopilot dari `main` dengan PAT repo, lalu periksa log pembuatan PR biasa dan komentar ketika ada tugas yang memenuhi syarat.
+3. Lanjutkan T11. Ukur performa, audio, dan zoom sentuh pada ponsel kelas menengah, lalu teruskan QA portal untuk T11b.

@@ -15,6 +15,13 @@ class NonogramTests(unittest.TestCase):
     def test_no_solution(self):
         self.assertEqual(count_solutions(((1,),), ((),)), 0)
 
+    def test_known_fills_and_crosses_restrict_line_candidates(self):
+        clues = ((1,), (1,))
+        self.assertEqual(count_solutions(clues, clues), 2)
+        self.assertEqual(count_solutions(clues, clues, givens={(0, 0): True}), 1)
+        self.assertEqual(count_solutions(clues, clues, givens={(0, 0): False}), 1)
+        self.assertEqual(count_solutions(clues, clues, givens={(0, 0): True, (1, 0): True}), 0)
+
     def test_all_three_by_three_pictures(self):
         counts = Counter(
             puzzle_clues((bits[:3], bits[3:6], bits[6:]))

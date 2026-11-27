@@ -26,5 +26,8 @@
     "en": "Tumbling Top",
     "id": "Gasing Sumbu Miring"
   },
-  "motif": "tumbling-top"
+  "motif": "tumbling-top",
+  "twist": {
+    "kind": "shield"
+  }
 }

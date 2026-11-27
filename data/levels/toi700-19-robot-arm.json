@@ -29,5 +29,13 @@
     "en": "Twin Worlds",
     "id": "Dua Dunia Bersaudara"
   },
-  "motif": "toi700-twin-worlds"
+  "motif": "toi700-twin-worlds",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      39,
+      119,
+      194
+    ]
+  }
 }

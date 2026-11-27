@@ -26,5 +26,13 @@
     "en": "Hubble Space Telescope",
     "id": "Teleskop Antariksa Hubble"
   },
-  "motif": "hubble-telescope"
+  "motif": "hubble-telescope",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      17,
+      45,
+      108
+    ]
+  }
 }

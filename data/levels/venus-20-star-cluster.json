@@ -26,5 +26,13 @@
     "en": "Parker Solar Shield",
     "id": "Pelindung Panas Parker"
   },
-  "motif": "parker-shield"
+  "motif": "parker-shield",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      59,
+      95,
+      131
+    ]
+  }
 }

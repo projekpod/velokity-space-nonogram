@@ -25,5 +25,8 @@
     "en": "Seed Vault",
     "id": "Brankas Benih"
   },
-  "motif": "seed-vault"
+  "motif": "seed-vault",
+  "twist": {
+    "kind": "shield"
+  }
 }

@@ -28,5 +28,13 @@
     "en": "Robotic Trail Dog",
     "id": "Robot Anjing Penjelajah"
   },
-  "motif": "trail-dog"
+  "motif": "trail-dog",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      97,
+      124,
+      175
+    ]
+  }
 }

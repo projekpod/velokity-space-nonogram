@@ -26,5 +26,9 @@
     "en": "Subsurface Lift",
     "id": "Lift Bawah Tanah"
   },
-  "motif": "subsurface-lift"
+  "motif": "subsurface-lift",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

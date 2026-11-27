@@ -28,5 +28,8 @@
     "en": "Europa Ice Rafts",
     "id": "Rakit Es Europa"
   },
-  "motif": "europa-ice-rafts"
+  "motif": "europa-ice-rafts",
+  "twist": {
+    "kind": "perfect"
+  }
 }

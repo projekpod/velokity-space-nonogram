@@ -29,5 +29,13 @@
     "en": "Far-Side Observatory",
     "id": "Observatorium Sisi Jauh"
   },
-  "motif": "far-side-observatory"
+  "motif": "far-side-observatory",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      14,
+      38,
+      119
+    ]
+  }
 }

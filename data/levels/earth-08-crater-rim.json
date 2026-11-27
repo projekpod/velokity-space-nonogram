@@ -26,5 +26,13 @@
     "en": "Orbital Cupola",
     "id": "Kubola Pengamat Bumi"
   },
-  "motif": "orbital-cupola"
+  "motif": "orbital-cupola",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      11,
+      24,
+      131
+    ]
+  }
 }

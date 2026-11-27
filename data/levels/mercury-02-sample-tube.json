@@ -24,5 +24,13 @@
     "en": "Crater Rays",
     "id": "Sinar Kawah"
   },
-  "motif": "crater-rays"
+  "motif": "crater-rays",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      4,
+      6,
+      8
+    ]
+  }
 }

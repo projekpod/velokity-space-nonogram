@@ -25,5 +25,13 @@
     "en": "Twilight Clouds",
     "id": "Awan Senja"
   },
-  "motif": "twilight-clouds"
+  "motif": "twilight-clouds",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      39,
+      70,
+      96
+    ]
+  }
 }

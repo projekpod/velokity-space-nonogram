@@ -27,5 +27,9 @@
     "en": "Parachute Splashdown",
     "id": "Kapsul Mendarat di Laut"
   },
-  "motif": "parachute-splashdown"
+  "motif": "parachute-splashdown",
+  "twist": {
+    "kind": "star",
+    "cell": 97
+  }
 }

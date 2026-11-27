@@ -224,3 +224,23 @@ PLANET_KEPLER186,Kepler-186f,Kepler-186f
 PLANET_LHS1140,LHS 1140 b,LHS 1140 b
 PLANET_KEPLER22,Kepler-22b,Kepler-22b
 PLANET_TOI700,TOI 700 d,TOI 700 d
+TWIST_GALLERY,Level rules,Aturan level
+TWIST_REVEALED,Revealed cells,Sel Terungkap
+TWIST_REVEALED_TIP,Three correct cells start filled.,Tiga sel sudah terisi dengan benar.
+TWIST_ASTEROID,Asteroid cells,Sel Asteroid
+TWIST_ASTEROID_TIP,Three empty cells start crossed and locked.,Tiga sel kosong sudah disilang dan terkunci.
+TWIST_STAR,Bonus star,Bintang Bonus
+TWIST_STAR_TIP,Fill the hidden star cell correctly for %d extra coins on your first clear.,Isi sel bintang tersembunyi dengan benar untuk bonus %d koin saat pertama kali menang.
+TWIST_SHIELD,Shield,Perisai
+TWIST_SHIELD_TIP,The shield absorbs your first mistake without costing a life.,Perisai menahan kesalahan pertama tanpa mengurangi nyawa.
+TWIST_COMET,Comet timer,Waktu Komet
+TWIST_COMET_TIP,On your first clear finish in under %d seconds for %d extra coins. Keep playing if time runs out.,Pada kemenangan pertama selesaikan dalam kurang dari %d detik untuk bonus %d koin. Kamu bisa terus bermain saat waktu habis.
+TWIST_PERFECT,Perfect run,Main Sempurna
+TWIST_PERFECT_TIP,Finish without mistakes or hints for %d extra coins on your first clear.,Menang tanpa kesalahan dan tanpa bantuan untuk bonus %d koin pada kemenangan pertama.
+TWIST_START,Start puzzle,Mulai puzzle
+TWIST_SHIELD_USED,Your shield absorbed the mistake.,Perisai menahan kesalahanmu.
+TWIST_SHIELD_SPENT,Shield used,Perisai terpakai
+TWIST_STAR_FOUND,Bonus star found,Bintang bonus ditemukan
+TWIST_COMET_CLOCK,Comet · %d s,Komet · %d dtk
+TWIST_COMET_EXPIRED,Comet bonus expired,Waktu bonus komet habis
+TWIST_EXTRA_COINS,Level rule bonus · +%d coins,Bonus aturan level · +%d koin

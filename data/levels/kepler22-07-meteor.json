@@ -28,5 +28,8 @@
     "en": "Floating Island",
     "id": "Pulau Terapung"
   },
-  "motif": "floating-island"
+  "motif": "floating-island",
+  "twist": {
+    "kind": "perfect"
+  }
 }

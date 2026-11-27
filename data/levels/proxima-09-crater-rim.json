@@ -25,5 +25,9 @@
     "en": "Alien Seedpod",
     "id": "Polong Benih Alien"
   },
-  "motif": "alien-seedpod"
+  "motif": "alien-seedpod",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

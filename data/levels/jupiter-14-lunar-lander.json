@@ -27,5 +27,8 @@
     "en": "Jupiter's Faint Ring",
     "id": "Cincin Tipis Jupiter"
   },
-  "motif": "jupiter-dust-ring"
+  "motif": "jupiter-dust-ring",
+  "twist": {
+    "kind": "perfect"
+  }
 }

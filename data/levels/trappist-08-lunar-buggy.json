@@ -27,5 +27,13 @@
     "en": "Crater Garden",
     "id": "Kebun Dalam Kawah"
   },
-  "motif": "crater-garden"
+  "motif": "crater-garden",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      60,
+      98,
+      133
+    ]
+  }
 }

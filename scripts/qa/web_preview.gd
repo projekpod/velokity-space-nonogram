@@ -16,11 +16,13 @@ const Bonus := preload("res://scripts/nonogram/bonus.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const MetaScreen := preload("res://ui/meta_screen.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
+const Twists := preload("res://scripts/nonogram/twists.gd")
+const TwistTip := preload("res://ui/twist_tip.gd")
 
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary", "zoom"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary", "zoom", "twists"]:
 		return false
 	if route not in ["playthrough", "preview"]:
 		_seed_progress(main)
@@ -59,6 +61,8 @@ static func open(main: Main) -> bool:
 			Gallery.open(main, route == "reactions")
 		"space":
 			main.get_node("Backdrop").freeze_at_events()
+		"twists":
+			_open_twists(main)
 		"streak":
 			var screen := main._play(main._planet_levels("saturn")[0])
 			if screen == null:
@@ -112,6 +116,24 @@ static func open(main: Main) -> bool:
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
+
+
+static func _open_twists(main: Main) -> void:
+	main._reset_column(630)
+	UI.label(main._column, "TWIST_GALLERY", 43, UI.MINT)
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 14)
+	grid.add_theme_constant_override("v_separation", 14)
+	main._column.add_child(grid)
+	var seconds := 0
+	for level in main._levels:
+		var twist: Dictionary = level.get("twist", {})
+		if twist.get("kind") == "comet":
+			seconds = int(twist.seconds)
+			break
+	for kind: String in Twists.KINDS:
+		grid.add_child(TwistTip.card(kind, seconds))
 
 
 static func _open_zoom(main: Main) -> void:

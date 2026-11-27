@@ -26,5 +26,9 @@
     "en": "Dust Horizon",
     "id": "Horizon Debu"
   },
-  "motif": "mercury-dust-horizon"
+  "motif": "mercury-dust-horizon",
+  "twist": {
+    "kind": "star",
+    "cell": 66
+  }
 }

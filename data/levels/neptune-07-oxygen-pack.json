@@ -26,5 +26,8 @@
     "en": "Triton Cantaloupe Terrain",
     "id": "Dataran Bermotif di Triton"
   },
-  "motif": "triton-terrain"
+  "motif": "triton-terrain",
+  "twist": {
+    "kind": "perfect"
+  }
 }

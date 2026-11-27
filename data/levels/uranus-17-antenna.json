@@ -27,5 +27,8 @@
     "en": "Off-Axis Compass",
     "id": "Kompas Sumbu Miring"
   },
-  "motif": "off-axis-compass"
+  "motif": "off-axis-compass",
+  "twist": {
+    "kind": "shield"
+  }
 }

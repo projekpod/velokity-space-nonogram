@@ -25,5 +25,13 @@
     "en": "Ocean Buoy",
     "id": "Pelampung Pengamat Laut"
   },
-  "motif": "ocean-buoy"
+  "motif": "ocean-buoy",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      62,
+      82,
+      101
+    ]
+  }
 }

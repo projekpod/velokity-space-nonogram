@@ -25,5 +25,9 @@
     "en": "Diamond Rain",
     "id": "Hujan Berlian"
   },
-  "motif": "diamond-rain"
+  "motif": "diamond-rain",
+  "twist": {
+    "kind": "star",
+    "cell": 64
+  }
 }

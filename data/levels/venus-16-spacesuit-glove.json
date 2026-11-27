@@ -26,5 +26,13 @@
     "en": "Venus in Transit",
     "id": "Venus Melintas di Depan Matahari"
   },
-  "motif": "venus-transit"
+  "motif": "venus-transit",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      11,
+      119,
+      132
+    ]
+  }
 }

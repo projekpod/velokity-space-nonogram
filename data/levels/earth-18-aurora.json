@@ -27,5 +27,9 @@
     "en": "Solar Farm",
     "id": "Kebun Panel Surya"
   },
-  "motif": "solar-farm"
+  "motif": "solar-farm",
+  "twist": {
+    "kind": "star",
+    "cell": 80
+  }
 }

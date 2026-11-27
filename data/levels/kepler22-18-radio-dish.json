@@ -29,5 +29,13 @@
     "en": "Foreign Shell",
     "id": "Cangkang Dunia Asing"
   },
-  "motif": "foreign-shell"
+  "motif": "foreign-shell",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      57,
+      100,
+      145
+    ]
+  }
 }

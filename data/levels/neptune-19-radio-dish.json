@@ -27,5 +27,13 @@
     "en": "Ring Shepherd",
     "id": "Satelit Penjaga Cincin"
   },
-  "motif": "ring-shepherd"
+  "motif": "ring-shepherd",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      42,
+      79,
+      119
+    ]
+  }
 }

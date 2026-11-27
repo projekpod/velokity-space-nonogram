@@ -25,5 +25,9 @@
     "en": "Polar Ice Crater",
     "id": "Kawah Es Kutub"
   },
-  "motif": "polar-ice-crater"
+  "motif": "polar-ice-crater",
+  "twist": {
+    "kind": "star",
+    "cell": 65
+  }
 }

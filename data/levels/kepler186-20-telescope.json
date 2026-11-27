@@ -28,5 +28,9 @@
     "en": "Frost Fern",
     "id": "Pakis Bersalju"
   },
-  "motif": "frost-fern"
+  "motif": "frost-fern",
+  "twist": {
+    "kind": "star",
+    "cell": 93
+  }
 }

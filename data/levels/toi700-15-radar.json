@@ -29,5 +29,13 @@
     "en": "Night-Side Landing Lights",
     "id": "Lampu Pendaratan Sisi Malam"
   },
-  "motif": "night-landing-lights"
+  "motif": "night-landing-lights",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      13,
+      28,
+      58
+    ]
+  }
 }

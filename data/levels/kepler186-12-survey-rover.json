@@ -27,5 +27,9 @@
     "en": "Cave Skylight Ferns",
     "id": "Pakis di Lubang Gua"
   },
-  "motif": "cave-skylight-ferns"
+  "motif": "cave-skylight-ferns",
+  "twist": {
+    "kind": "star",
+    "cell": 87
+  }
 }

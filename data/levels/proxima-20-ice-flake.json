@@ -26,5 +26,9 @@
     "en": "Relay Tower",
     "id": "Menara Relai"
   },
-  "motif": "relay-tower"
+  "motif": "relay-tower",
+  "twist": {
+    "kind": "comet",
+    "seconds": 84
+  }
 }

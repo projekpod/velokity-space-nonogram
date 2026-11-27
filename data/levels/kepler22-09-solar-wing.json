@@ -28,5 +28,8 @@
     "en": "Raft Habitat",
     "id": "Habitat Rakit"
   },
-  "motif": "raft-habitat"
+  "motif": "raft-habitat",
+  "twist": {
+    "kind": "perfect"
+  }
 }

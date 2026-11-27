@@ -25,5 +25,9 @@
     "en": "Starlight Prism",
     "id": "Prisma Cahaya Bintang"
   },
-  "motif": "starlight-prism"
+  "motif": "starlight-prism",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

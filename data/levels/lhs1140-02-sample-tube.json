@@ -27,5 +27,8 @@
     "en": "Ice Core Storage Rack",
     "id": "Rak Penyimpan Inti Es"
   },
-  "motif": "core-storage-rack"
+  "motif": "core-storage-rack",
+  "twist": {
+    "kind": "shield"
+  }
 }

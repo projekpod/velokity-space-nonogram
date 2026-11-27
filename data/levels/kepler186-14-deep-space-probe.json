@@ -27,5 +27,9 @@
     "en": "Soil Microscope",
     "id": "Mikroskop Tanah"
   },
-  "motif": "soil-microscope"
+  "motif": "soil-microscope",
+  "twist": {
+    "kind": "star",
+    "cell": 81
+  }
 }

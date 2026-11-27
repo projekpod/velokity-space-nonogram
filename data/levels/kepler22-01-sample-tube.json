@@ -27,5 +27,9 @@
     "en": "Round Wave Harvester",
     "id": "Pemanen Energi Ombak"
   },
-  "motif": "wave-harvester"
+  "motif": "wave-harvester",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

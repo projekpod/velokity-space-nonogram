@@ -26,5 +26,8 @@
     "en": "Polar Hood",
     "id": "Selubung Awan Kutub"
   },
-  "motif": "uranus-polar-hood"
+  "motif": "uranus-polar-hood",
+  "twist": {
+    "kind": "shield"
+  }
 }

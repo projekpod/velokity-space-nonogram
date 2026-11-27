@@ -25,5 +25,9 @@
     "en": "Direct-Imaging Telescope",
     "id": "Teleskop Pencitraan Langsung"
   },
-  "motif": "direct-imaging-telescope"
+  "motif": "direct-imaging-telescope",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

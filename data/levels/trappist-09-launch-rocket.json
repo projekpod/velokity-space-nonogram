@@ -27,5 +27,13 @@
     "en": "Canyon Relay Bridge",
     "id": "Jembatan Relai Ngarai"
   },
-  "motif": "canyon-relay-bridge"
+  "motif": "canyon-relay-bridge",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      42,
+      78,
+      115
+    ]
+  }
 }

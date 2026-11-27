@@ -27,5 +27,9 @@
     "en": "Total Solar Eclipse",
     "id": "Gerhana Matahari Total"
   },
-  "motif": "solar-eclipse"
+  "motif": "solar-eclipse",
+  "twist": {
+    "kind": "star",
+    "cell": 99
+  }
 }

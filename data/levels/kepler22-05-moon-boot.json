@@ -27,5 +27,8 @@
     "en": "Offshore Wind Turbine",
     "id": "Turbin Angin Lepas Pantai"
   },
-  "motif": "offshore-turbine"
+  "motif": "offshore-turbine",
+  "twist": {
+    "kind": "perfect"
+  }
 }

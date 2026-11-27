@@ -25,5 +25,8 @@
     "en": "Methane Crystal",
     "id": "Kristal Metana"
   },
-  "motif": "methane-crystal"
+  "motif": "methane-crystal",
+  "twist": {
+    "kind": "perfect"
+  }
 }

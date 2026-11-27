@@ -7,6 +7,7 @@ const Catalog := preload("res://scripts/nonogram/catalog.gd")
 const Cosmetics := preload("res://scripts/meta/cosmetics.gd")
 const Meta := preload("res://scripts/meta/progression.gd")
 const SaveSchema := preload("res://scripts/autoload/save.gd")
+const Twists := preload("res://scripts/nonogram/twists.gd")
 const FREE_COIN_AMOUNT := 25
 const FREE_COIN_LIMIT := SaveSchema.MAX_FREE_COIN_ADS
 const MAX_COINS := 2147483647
@@ -217,15 +218,15 @@ func badge_count() -> int:
 
 
 # Save the first-clear reward and any new badge in the same transaction.
-func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
+func award_nonogram(level_id: String, lives: int, combo_lines := 0, twist_kind := "", twist_earned := false, made_mistake := false) -> int:
 	await _save.wait_for_pending_writes()
 	if level_id.is_empty() or lives < 1 or lives > 3 or combo_lines < 0:
 		return -1
 	var first_clear := not is_nonogram_cleared(level_id)
-	var new_badge := lives == 3 and not has_flawless_badge(level_id)
+	var new_badge := lives == 3 and not made_mistake and not has_flawless_badge(level_id)
 	if not first_clear and not new_badge:
 		return 0
-	var amount := mini((15 + 5 * lives) * Combo.multiplier(combo_lines), MAX_FIRST_CLEAR) if first_clear else 0
+	var amount := nonogram_reward(lives, combo_lines, twist_kind, twist_earned) if first_clear else 0
 	var album_bonus := _album_coin_bonus(level_id) if first_clear else 0
 	if amount + album_bonus > MAX_COINS - balance():
 		return -1
@@ -242,6 +243,11 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 	return amount if await _commit(snapshot) else -1
 
 
+static func nonogram_reward(lives: int, combo_lines: int, twist_kind := "", twist_earned := false) -> int:
+	# Leave room for the rule bonus even when an uninterrupted combo hits the cap.
+	var bonus: int = Twists.COINS.get(twist_kind, 0)
+	var ordinary := mini((15 + 5 * lives) * Combo.multiplier(combo_lines), MAX_FIRST_CLEAR - bonus)
+	return ordinary + (bonus if twist_earned else 0)
 
 func _album_coin_bonus(level_id: String) -> int:
 	for level in levels:

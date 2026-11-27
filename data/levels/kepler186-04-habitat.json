@@ -26,5 +26,13 @@
     "en": "Canopy Glider",
     "id": "Peluncur di Atas Kanopi"
   },
-  "motif": "canopy-glider"
+  "motif": "canopy-glider",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      16,
+      81,
+      97
+    ]
+  }
 }

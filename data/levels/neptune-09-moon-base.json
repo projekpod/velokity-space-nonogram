@@ -26,5 +26,8 @@
     "en": "Great Dark Spot",
     "id": "Bintik Gelap Besar"
   },
-  "motif": "great-dark-spot"
+  "motif": "great-dark-spot",
+  "twist": {
+    "kind": "perfect"
+  }
 }

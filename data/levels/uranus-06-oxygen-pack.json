@@ -25,5 +25,9 @@
     "en": "Uranus Ring Scan",
     "id": "Pemindaian Cincin Uranus"
   },
-  "motif": "uranus-ring-scan"
+  "motif": "uranus-ring-scan",
+  "twist": {
+    "kind": "star",
+    "cell": 43
+  }
 }

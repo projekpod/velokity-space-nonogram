@@ -28,5 +28,8 @@
     "en": "Mangrove Roots",
     "id": "Akar Bakau"
   },
-  "motif": "alien-mangrove-roots"
+  "motif": "alien-mangrove-roots",
+  "twist": {
+    "kind": "perfect"
+  }
 }

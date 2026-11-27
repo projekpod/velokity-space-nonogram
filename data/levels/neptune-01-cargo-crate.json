@@ -25,5 +25,8 @@
     "en": "Triton Ice Cap",
     "id": "Tudung Es Triton"
   },
-  "motif": "triton-ice-cap"
+  "motif": "triton-ice-cap",
+  "twist": {
+    "kind": "perfect"
+  }
 }

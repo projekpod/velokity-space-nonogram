@@ -25,5 +25,13 @@
     "en": "Pressure Capsule",
     "id": "Kapsul Penahan Tekanan"
   },
-  "motif": "pressure-capsule"
+  "motif": "pressure-capsule",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      42,
+      67,
+      90
+    ]
+  }
 }

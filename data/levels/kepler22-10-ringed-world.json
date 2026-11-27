@@ -28,5 +28,8 @@
     "en": "Salinity Prism",
     "id": "Prisma Pengukur Salinitas"
   },
-  "motif": "salinity-prism"
+  "motif": "salinity-prism",
+  "twist": {
+    "kind": "perfect"
+  }
 }

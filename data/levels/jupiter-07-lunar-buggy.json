@@ -27,5 +27,9 @@
     "en": "Callisto Ringed Basin",
     "id": "Cekungan Bercincin Kalisto"
   },
-  "motif": "callisto-basin"
+  "motif": "callisto-basin",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

@@ -25,5 +25,9 @@
     "en": "Ice-Seismometer",
     "id": "Seismometer Es"
   },
-  "motif": "ice-seismometer"
+  "motif": "ice-seismometer",
+  "twist": {
+    "kind": "star",
+    "cell": 65
+  }
 }

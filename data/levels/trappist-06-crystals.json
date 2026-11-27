@@ -26,5 +26,13 @@
     "en": "Resonance Chain",
     "id": "Rantai Resonansi"
   },
-  "motif": "resonance-chain"
+  "motif": "resonance-chain",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      36,
+      67,
+      114
+    ]
+  }
 }

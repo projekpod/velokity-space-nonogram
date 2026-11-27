@@ -27,5 +27,13 @@
     "en": "Dusk Solar Tower",
     "id": "Menara Surya Senja"
   },
-  "motif": "dusk-solar-tower"
+  "motif": "dusk-solar-tower",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      39,
+      73,
+      137
+    ]
+  }
 }

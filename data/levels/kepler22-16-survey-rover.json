@@ -29,5 +29,8 @@
     "en": "Freshwater Delta",
     "id": "Delta Air Tawar"
   },
-  "motif": "freshwater-delta"
+  "motif": "freshwater-delta",
+  "twist": {
+    "kind": "perfect"
+  }
 }

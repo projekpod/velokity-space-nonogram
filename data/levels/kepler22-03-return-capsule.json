@@ -27,5 +27,9 @@
     "en": "Sun Halo at Sea",
     "id": "Halo Matahari di Laut"
   },
-  "motif": "sun-halo-at-sea"
+  "motif": "sun-halo-at-sea",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

@@ -26,5 +26,8 @@
     "en": "Habitat Airlock",
     "id": "Pintu Udara Habitat"
   },
-  "motif": "habitat-airlock"
+  "motif": "habitat-airlock",
+  "twist": {
+    "kind": "perfect"
+  }
 }

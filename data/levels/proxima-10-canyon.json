@@ -25,5 +25,9 @@
     "en": "Habitat Arch",
     "id": "Lengkung Habitat"
   },
-  "motif": "habitat-arch"
+  "motif": "habitat-arch",
+  "twist": {
+    "kind": "comet",
+    "seconds": 77
+  }
 }

@@ -26,5 +26,13 @@
     "en": "Africa and Europe",
     "id": "Afrika dan Eropa"
   },
-  "motif": "africa-europe"
+  "motif": "africa-europe",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      22,
+      119,
+      133
+    ]
+  }
 }

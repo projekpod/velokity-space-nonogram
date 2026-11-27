@@ -25,5 +25,13 @@
     "en": "Magellan Probe",
     "id": "Wahana Magellan"
   },
-  "motif": "magellan-probe"
+  "motif": "magellan-probe",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      28,
+      55,
+      88
+    ]
+  }
 }

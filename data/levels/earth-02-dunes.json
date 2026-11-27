@@ -25,5 +25,13 @@
     "en": "Amazon River",
     "id": "Sungai Amazon"
   },
-  "motif": "amazon-river"
+  "motif": "amazon-river",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      26,
+      52,
+      84
+    ]
+  }
 }

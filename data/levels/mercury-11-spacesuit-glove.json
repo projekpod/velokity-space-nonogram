@@ -25,5 +25,9 @@
     "en": "Mercury at Dawn",
     "id": "Merkurius Saat Fajar"
   },
-  "motif": "dawn-mercury"
+  "motif": "dawn-mercury",
+  "twist": {
+    "kind": "star",
+    "cell": 79
+  }
 }

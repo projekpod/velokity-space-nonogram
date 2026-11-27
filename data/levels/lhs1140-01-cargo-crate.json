@@ -27,5 +27,8 @@
     "en": "Ice Anchor",
     "id": "Jangkar Es"
   },
-  "motif": "ice-anchor"
+  "motif": "ice-anchor",
+  "twist": {
+    "kind": "shield"
+  }
 }

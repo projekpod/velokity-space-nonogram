@@ -29,5 +29,9 @@
     "en": "Floating Research Pier",
     "id": "Dermaga Riset Terapung"
   },
-  "motif": "research-pier"
+  "motif": "research-pier",
+  "twist": {
+    "kind": "comet",
+    "seconds": 105
+  }
 }

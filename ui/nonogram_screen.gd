@@ -12,6 +12,7 @@ const Mascot := preload("res://ui/mascot.gd")
 const Celebration := preload("res://ui/celebration.gd")
 const Combo := preload("res://scripts/nonogram/combo.gd")
 const Bonus := preload("res://scripts/nonogram/bonus.gd")
+const TwistTip := preload("res://ui/twist_tip.gd")
 const BOARD_WIDTH := Board.WIDTH
 const TUTORIAL_STEPS := ["TUTORIAL_FILL", "TUTORIAL_CROSS", "TUTORIAL_CLUES"]
 
@@ -21,6 +22,7 @@ const TUTORIAL_STEPS := ["TUTORIAL_FILL", "TUTORIAL_CROSS", "TUTORIAL_CLUES"]
 @onready var _analytics := get_node("/root/Analytics")
 @onready var _audio := get_node("/root/Audio")
 @onready var _ads := get_node("/root/Ads")
+@onready var _save := get_node("/root/Save")
 
 var level: Dictionary
 var can_play_next: Callable
@@ -31,6 +33,12 @@ var tutorial_step := 0
 var _tutorial: VBoxContainer
 var _tutorial_text: Label
 var _tutorial_next: Button
+var _intro: HBoxContainer
+var _twist_tip: VBoxContainer
+var _twist_label: Label
+var _played_msec := 0
+var _clock_started_msec := -1
+var _clock_seconds := -1
 var _puzzle: Puzzle
 var _board: Board
 var _lives: Label
@@ -59,6 +67,7 @@ var _saving := false
 
 
 func _ready() -> void:
+	set_process(false)
 	add_theme_constant_override("separation", 10)
 	_puzzle = Puzzle.new(level)
 	_analytics.record(&"puzzle_started")
@@ -70,21 +79,24 @@ func _ready() -> void:
 	_lives.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_coins = UI.label(header, "", 25, UI.GOLD)
 
-	var intro := UI.row(self)
+	_intro = UI.row(self)
 	var text := VBoxContainer.new()
 	text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	text.alignment = BoxContainer.ALIGNMENT_CENTER
-	intro.add_child(text)
+	_intro.add_child(text)
 	UI.label(text, "BONUS_TITLE" if bonus_index >= 0 else UI.level_title(level), 42)
 	if bonus_index >= 0:
 		var stage := Bonus.multiplier(bonus_index)
 		UI.label(text, tr("BONUS_STAGE") % [stage, Bonus.STAGES, stage], 24, UI.GOLD)
 	_status = UI.label(text, "GAME_READY", 23, UI.MUTED)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	if not _puzzle.twist_kind.is_empty():
+		var key := TwistTip.title_key(_puzzle.twist_kind)
+		_twist_label = UI.label(text, key, 20, TwistTip.COLORS[_puzzle.twist_kind])
 	_portrait = Portrait.new()
 	_portrait.compact = true
 	_portrait.idle_expression = Mascot.Face.THINKING
-	intro.add_child(_portrait)
+	_intro.add_child(_portrait)
 	if first_puzzle and tutorial_step < TUTORIAL_STEPS.size():
 		_build_tutorial()
 	_board = Board.new()
@@ -113,16 +125,97 @@ func _ready() -> void:
 	_update_balance(_economy.balance())
 	_events.coins_changed.connect(_update_balance)
 	_ads.rewarded_finished.connect(_on_rewarded_finished)
-	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
 	_puzzle.correct_fill.connect(_on_correct_fill)
 	_puzzle.correct_cross.connect(_audio.play_effect.bind(&"cross"))
 	_puzzle.mistake.connect(_on_mistake)
 	_puzzle.finished.connect(_on_finished)
-	_board.grab_focus()
+	if _puzzle.twist_kind.is_empty() or _save.data.twist_tips.has(_puzzle.twist_kind):
+		_start_board()
+	else:
+		_show_twist_tip()
 
 
 func _exit_tree() -> void:
 	_ads.set_gameplay_active(false)
+
+
+func _show_twist_tip() -> void:
+	_intro.hide()
+	_board.hide()
+	_tools.hide()
+	_twist_tip = VBoxContainer.new()
+	_twist_tip.add_theme_constant_override("separation", 14)
+	add_child(_twist_tip)
+	_twist_tip.add_child(TwistTip.card(_puzzle.twist_kind, _puzzle.target_seconds))
+	var begin := UI.button(_twist_tip, "TWIST_START", true)
+	begin.pressed.connect(_dismiss_twist_tip)
+	begin.grab_focus()
+
+
+func _dismiss_twist_tip() -> void:
+	if _saving or not is_instance_valid(_twist_tip):
+		return
+	_saving = true
+	var saved: bool = await _save.mark_twist_seen(_puzzle.twist_kind)
+	_saving = false
+	_twist_tip.hide()
+	_twist_tip.queue_free()
+	_twist_tip = null
+	_start_board()
+	if not saved:
+		_show_feedback("SAVE_FAILED")
+
+
+func _start_board() -> void:
+	_intro.show()
+	_board.show()
+	_tools.show()
+	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
+	_board.grab_focus()
+	_start_clock()
+
+
+func _notification(what: int) -> void:
+	if not is_node_ready():
+		return
+	if what == NOTIFICATION_PAUSED:
+		_stop_clock()
+	elif what == NOTIFICATION_UNPAUSED:
+		_start_clock()
+
+
+func _start_clock() -> void:
+	if _puzzle.target_seconds <= 0 or not _board.visible or _saving or get_tree().paused:
+		return
+	if _clock_started_msec >= 0 or _puzzle.state != Puzzle.State.PLAYING:
+		return
+	_clock_started_msec = Time.get_ticks_msec()
+	set_process(true)
+	_update_clock()
+
+
+func _stop_clock() -> void:
+	if _clock_started_msec >= 0:
+		_played_msec += Time.get_ticks_msec() - _clock_started_msec
+		_clock_started_msec = -1
+		set_process(false)
+
+
+func _elapsed_seconds() -> float:
+	var active_msec := Time.get_ticks_msec() - _clock_started_msec if _clock_started_msec >= 0 else 0
+	return (_played_msec + active_msec) / 1000.0
+
+
+func _process(_delta: float) -> void:
+	_update_clock()
+
+
+func _update_clock() -> void:
+	var remaining := maxi(0, ceili(_puzzle.target_seconds - _elapsed_seconds()))
+	if remaining == _clock_seconds:
+		return
+	_clock_seconds = remaining
+	_twist_label.text = tr("TWIST_COMET_CLOCK") % remaining if remaining > 0 else "TWIST_COMET_EXPIRED"
 
 
 func _build_tutorial() -> void:
@@ -186,11 +279,13 @@ func _use_paid_hint() -> void:
 	if cell.x < 0 or _saving:
 		return
 	_saving = true
+	_stop_clock()
 	_board.cancel_drag()
 	_board.process_mode = Node.PROCESS_MODE_DISABLED
 	var paid: bool = await _economy.spend(EconomyRules.HINT_COST)
 	_board.process_mode = Node.PROCESS_MODE_INHERIT
 	_saving = false
+	_start_clock()
 	if paid:
 		_apply_hint(cell)
 	else:
@@ -202,7 +297,7 @@ func _apply_hint(cell: Vector2i) -> void:
 	_feedback.hide()
 	_status.text = "GAME_READY"
 	_board.grab_focus()
-	_puzzle.mark(cell, false)
+	_puzzle.apply_hint(cell)
 
 
 func _use_paid_continue() -> void:
@@ -229,6 +324,7 @@ func _resume_game() -> void:
 	_ads.set_gameplay_active(true, bonus_index < 0 and not first_puzzle)
 	_portrait.mascot.set_idle(Mascot.Face.THINKING)
 	_puzzle.continue_game()
+	_start_clock()
 	_update_lives()
 	_board.queue_redraw()
 	if _puzzle.state == Puzzle.State.PLAYING:
@@ -273,11 +369,17 @@ func _on_mistake(_cell: Vector2i) -> void:
 	_celebration.dismiss()
 	_portrait.mascot.react(Mascot.Reaction.MISTAKE)
 	_update_lives()
-	_status.text = "GAME_MISTAKE"
+	if _puzzle.shield_used and _puzzle.lives == Puzzle.MAX_LIVES:
+		_status.text = "TWIST_SHIELD_USED"
+		_twist_label.text = "TWIST_SHIELD_SPENT"
+	else:
+		_status.text = "GAME_MISTAKE"
 	_settings.vibrate_for_mistake()
 
 
-func _on_correct_fill(_cell: Vector2i, completed_lines: int) -> void:
+func _on_correct_fill(cell: Vector2i, completed_lines: int) -> void:
+	if _puzzle.has_collected_star(cell):
+		_twist_label.text = "TWIST_STAR_FOUND"
 	_streak.fill()
 	var previous_multiplier := Combo.multiplier(_correct_lines)
 	_correct_lines += completed_lines
@@ -312,6 +414,7 @@ func _play_combo(lines: int) -> void:
 
 
 func _on_finished(won: bool) -> void:
+	_stop_clock()
 	if is_instance_valid(_tutorial):
 		_tutorial.hide()
 	_tools.hide()
@@ -351,7 +454,10 @@ func _record_win() -> void:
 
 	var had_badge: bool = _economy.has_flawless_badge(level.id)
 	var was_album_complete := album_complete.is_valid() and bool(album_complete.call())
-	_win_coins = await _economy.award_nonogram(level.id, _puzzle.lives, _peak_lines)
+	var earned := _puzzle.earned_twist_bonus(_elapsed_seconds())
+	_win_coins = await _economy.award_nonogram(
+		level.id, _puzzle.lives, _peak_lines, _puzzle.twist_kind, earned, _puzzle.made_mistake
+	)
 	_saving = false
 	_new_badge = not had_badge and _economy.has_flawless_badge(level.id)
 	_show_result(true)
@@ -367,7 +473,7 @@ func _record_win() -> void:
 		_celebration.play(4, "CELEBRATION_ALBUM", detail)
 	elif player_level > previous_level:
 		_celebration.play(4, tr("CELEBRATION_LEVEL") % player_level, detail)
-	elif _puzzle.lives == Puzzle.MAX_LIVES:
+	elif _puzzle.lives == Puzzle.MAX_LIVES and not _puzzle.made_mistake:
 		_celebration.play(3, "CELEBRATION_FLAWLESS", detail)
 
 
@@ -423,6 +529,9 @@ func _show_win_reward() -> void:
 		UI.label(_result, "GAME_ALREADY_CLEARED", 23, UI.MUTED)
 	else:
 		UI.label(_result, tr("GAME_EARNED") % (_win_coins + maxi(0, _bonus_coins)), 25, UI.GOLD)
+		var twist_coins := _win_coins - EconomyRules.nonogram_reward(_puzzle.lives, _peak_lines, _puzzle.twist_kind)
+		if twist_coins > 0:
+			UI.label(_result, tr("TWIST_EXTRA_COINS") % twist_coins, 21, UI.MINT)
 		if _bonus_granted and _bonus_coins < 0:
 			_show_feedback("SAVE_FAILED")
 			UI.button(_result, "SAVE_RETRY").pressed.connect(_save_bonus)

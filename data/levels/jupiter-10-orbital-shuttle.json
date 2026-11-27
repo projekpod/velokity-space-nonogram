@@ -27,5 +27,9 @@
     "en": "Jovian Cloud Stack",
     "id": "Lapisan Awan Jupiter"
   },
-  "motif": "jovian-cloud-stack"
+  "motif": "jovian-cloud-stack",
+  "twist": {
+    "kind": "comet",
+    "seconds": 91
+  }
 }

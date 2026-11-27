@@ -28,5 +28,8 @@
     "en": "Bioluminescent Fin",
     "id": "Sirip Bercahaya"
   },
-  "motif": "bioluminescent-fin"
+  "motif": "bioluminescent-fin",
+  "twist": {
+    "kind": "shield"
+  }
 }

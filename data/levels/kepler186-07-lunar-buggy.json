@@ -27,5 +27,13 @@
     "en": "Creek Stepping Stones",
     "id": "Batu Pijakan Sungai"
   },
-  "motif": "creek-stepping-stones"
+  "motif": "creek-stepping-stones",
+  "twist": {
+    "kind": "asteroid",
+    "cells": [
+      12,
+      38,
+      166
+    ]
+  }
 }

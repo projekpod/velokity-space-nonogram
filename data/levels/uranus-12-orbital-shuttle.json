@@ -26,5 +26,8 @@
     "en": "Tilted Magnetosphere",
     "id": "Magnetosfer Miring"
   },
-  "motif": "uranus-magnetosphere"
+  "motif": "uranus-magnetosphere",
+  "twist": {
+    "kind": "shield"
+  }
 }

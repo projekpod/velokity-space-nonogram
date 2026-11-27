@@ -28,5 +28,8 @@
     "en": "Galilean Moons",
     "id": "Satelit Galileo"
   },
-  "motif": "galilean-moons"
+  "motif": "galilean-moons",
+  "twist": {
+    "kind": "perfect"
+  }
 }

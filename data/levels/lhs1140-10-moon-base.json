@@ -28,5 +28,8 @@
     "en": "Spectral Water Lines",
     "id": "Garis Spektrum Air"
   },
-  "motif": "spectral-water-lines"
+  "motif": "spectral-water-lines",
+  "twist": {
+    "kind": "shield"
+  }
 }

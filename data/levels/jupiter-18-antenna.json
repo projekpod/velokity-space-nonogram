@@ -28,5 +28,8 @@
     "en": "Ganymede Grooves",
     "id": "Alur Ganimede"
   },
-  "motif": "ganymede-grooves"
+  "motif": "ganymede-grooves",
+  "twist": {
+    "kind": "perfect"
+  }
 }

@@ -25,5 +25,13 @@
     "en": "Sunshade",
     "id": "Peneduh Matahari"
   },
-  "motif": "sunshade"
+  "motif": "sunshade",
+  "twist": {
+    "kind": "revealed",
+    "cells": [
+      24,
+      41,
+      61
+    ]
+  }
 }
