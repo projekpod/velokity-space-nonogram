@@ -1,0 +1,29 @@
+{
+  "id": "proxima-02-banded-planet",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....aaaa....",
+    "...aaaaaaa..",
+    "..ddddddddd.",
+    "..bbbbbbbbb.",
+    "..aadaaaaaa.",
+    "..ccddccccc.",
+    "..bbbbbbbbb.",
+    "...aaaaaaa..",
+    ".....aaa....",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Banded Planet",
+    "id": "Planet Belang"
+  }
+}

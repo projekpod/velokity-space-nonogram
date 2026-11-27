@@ -1,0 +1,29 @@
+{
+  "id": "proxima-12-storm-cloud",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "...aaaa.....",
+    "...aaaa.....",
+    ".baaaaaaa...",
+    ".baaaaaaaa..",
+    ".baaaaaaaa..",
+    ".dddddddda..",
+    "....bccaa...",
+    "....cc......",
+    ".....c......",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Storm Cloud",
+    "id": "Awan Badai"
+  }
+}

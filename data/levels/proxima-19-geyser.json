@@ -1,0 +1,29 @@
+{
+  "id": "proxima-19-geyser",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "...d.c..d...",
+    "....cccd....",
+    ".....dd.....",
+    ".....d......",
+    ".....a......",
+    ".....a......",
+    "...bbabb....",
+    ".bbbbabbb...",
+    ".bbbbbbbbb..",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Ice Geyser",
+    "id": "Semburan Es"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "proxima-08-sample-tube",
+  "size": 12,
+  "solution": [
+    "............",
+    "....b.......",
+    "....bbbbbb..",
+    "....bbbbbbb.",
+    "....aaaabb..",
+    "....adddda..",
+    "....adcdd...",
+    "....accca...",
+    "....adcda...",
+    "....aaaaa...",
+    "....aaaaa...",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Sample Tube",
+    "id": "Tabung Sampel"
+  }
+}

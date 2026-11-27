@@ -1,0 +1,29 @@
+{
+  "id": "proxima-17-volcano",
+  "size": 12,
+  "solution": [
+    "............",
+    ".....cc.....",
+    ".....cc.....",
+    "......ca....",
+    "....adaa....",
+    "....adaaa...",
+    "...aaadaaa..",
+    "..aaaaadaaa.",
+    ".aaaaaadaaa.",
+    "..abbbbbbba.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Shield Volcano",
+    "id": "Gunung Api Perisai"
+  }
+}

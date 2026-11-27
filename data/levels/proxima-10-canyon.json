@@ -1,0 +1,29 @@
+{
+  "id": "proxima-10-canyon",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "............",
+    "..........a.",
+    "..a.....aaa.",
+    "..aaa..adaa.",
+    "..aaaaddaa..",
+    "..aaadaaaa..",
+    "..abbbbbbb..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Canyon Wall",
+    "id": "Dinding Ngarai"
+  }
+}

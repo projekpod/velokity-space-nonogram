@@ -1,0 +1,29 @@
+{
+  "id": "proxima-09-crater-rim",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".........a..",
+    "........aa..",
+    "..aaaa.aaaa.",
+    ".aadaaaaaaa.",
+    ".aaadddaaaa.",
+    ".aaaaaadaaa.",
+    "..bbbbbbbba.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Crater Rim",
+    "id": "Bibir Kawah"
+  }
+}
