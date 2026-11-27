@@ -1,0 +1,29 @@
+{
+  "id": "neptune-12-ringed-world",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    ".....da.....",
+    "...ddddda...",
+    "...dddddd...",
+    ".ccbbbbbccc.",
+    "ccccccccccc.",
+    "...bbbbbb...",
+    "....bbbbb...",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Ringed World",
+    "id": "Planet Bercincin"
+  }
+}

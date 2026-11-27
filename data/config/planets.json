@@ -4,5 +4,6 @@
   {"id": "saturn", "size": 10, "palette": {"a": "#ffd27b", "b": "#b492fa", "c": "#79e3d5", "d": "#fff1e2"}, "coins": 0},
   {"id": "venus", "size": 11, "palette": {"a": "#ffd39a", "b": "#f2759e", "c": "#fef5bd", "d": "#a387d7"}, "coins": 100},
   {"id": "mercury", "size": 11, "palette": {"a": "#d0b49f", "b": "#e08469", "c": "#fff0b4", "d": "#9ad9e2"}, "coins": 110},
-  {"id": "proxima", "size": 12, "palette": {"a": "#fcb099", "b": "#967bd7", "c": "#ffdc73", "d": "#c0e8ef"}, "coins": 120}
+  {"id": "proxima", "size": 12, "palette": {"a": "#fcb099", "b": "#967bd7", "c": "#ffdc73", "d": "#c0e8ef"}, "coins": 120},
+  {"id": "neptune", "size": 12, "palette": {"a": "#5b9eff", "b": "#5b73cb", "c": "#b6f0ff", "d": "#e1c7ff"}, "coins": 130}
 ]

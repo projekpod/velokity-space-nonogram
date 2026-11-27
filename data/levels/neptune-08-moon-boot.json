@@ -1,0 +1,29 @@
+{
+  "id": "neptune-08-moon-boot",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....aaaa....",
+    "....aaaa....",
+    "...addda....",
+    "...aaad.....",
+    "...abbb.....",
+    "...abbbaa...",
+    "...aaaaaaa..",
+    "....cccccca.",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Moon Boot",
+    "id": "Sepatu Bulan"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "neptune-07-oxygen-pack",
+  "size": 12,
+  "solution": [
+    "............",
+    "...bb...b...",
+    "..bbbb.bbb..",
+    "..baaaabbb..",
+    "..baddddab..",
+    "..aadcdaab..",
+    "..aaaaaaab..",
+    "..bcaaaaa...",
+    "....ccbbb...",
+    "......dd....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Oxygen Pack",
+    "id": "Tabung Oksigen"
+  }
+}

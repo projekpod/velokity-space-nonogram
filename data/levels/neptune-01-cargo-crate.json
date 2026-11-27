@@ -1,0 +1,29 @@
+{
+  "id": "neptune-01-cargo-crate",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "...adddddaa.",
+    "..adddddddd.",
+    "..aaadddddd.",
+    "..aabaaaaba.",
+    "..aabaccaaa.",
+    "..aabaaabaa.",
+    "....baaabaa.",
+    ".........a..",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Cargo Crate",
+    "id": "Peti Kargo"
+  }
+}

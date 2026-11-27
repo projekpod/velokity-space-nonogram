@@ -1,0 +1,29 @@
+{
+  "id": "neptune-11-observatory",
+  "size": 12,
+  "solution": [
+    "......d.....",
+    ".....dd.....",
+    "...addaa....",
+    "..addbbaa...",
+    ".aadaaaaa...",
+    ".aaaaaaabb..",
+    ".bbbbbbbbb..",
+    ".bbbbbbbbb..",
+    ".bbbbbbbbcc.",
+    ".cccccccc...",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Observatory",
+    "id": "Observatorium"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "neptune-16-spacesuit-glove",
+  "size": 12,
+  "solution": [
+    "............",
+    ".....aa.....",
+    ".....aa.aa..",
+    "...a.aaaaa..",
+    "..aa.aaaaa..",
+    "...aaaaaaa..",
+    "...aadddaa..",
+    "...aadddaa..",
+    "...aaddda...",
+    "...bbbbaa...",
+    ".....abb....",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Suit Glove",
+    "id": "Sarung Tangan Astronaut"
+  }
+}

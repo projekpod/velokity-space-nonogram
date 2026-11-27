@@ -1,0 +1,29 @@
+{
+  "id": "neptune-17-star-cluster",
+  "size": 12,
+  "solution": [
+    "............",
+    ".........d..",
+    "......cc.d..",
+    "......ccdd..",
+    "...cccac....",
+    "....bcaccc..",
+    "..bbbcc.....",
+    "...bbbc.....",
+    ".....c......",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Star Cluster",
+    "id": "Gugus Bintang"
+  }
+}

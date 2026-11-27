@@ -1,0 +1,29 @@
+{
+  "id": "neptune-05-eclipse",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....cccc....",
+    "..cccbbcc...",
+    "..cbaaaabc..",
+    ".ccbabbbac..",
+    ".ccbabbbbb..",
+    ".ccbaabbbc..",
+    "..cbbaabbc..",
+    "...ccbbbc...",
+    "....cccc....",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Solar Eclipse",
+    "id": "Gerhana Matahari"
+  }
+}

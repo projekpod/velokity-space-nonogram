@@ -1,0 +1,29 @@
+{
+  "id": "neptune-18-deep-space-probe",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "............",
+    "............",
+    "cc..........",
+    "...caddabb..",
+    ".bbaaddabb..",
+    "...aaaaabb..",
+    "....bbb.b...",
+    "...bbbbb....",
+    "...b........",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Deep Space Probe",
+    "id": "Wahana Antariksa Jauh"
+  }
+}

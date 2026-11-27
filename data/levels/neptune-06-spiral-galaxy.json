@@ -1,0 +1,29 @@
+{
+  "id": "neptune-06-spiral-galaxy",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....b.......",
+    "..bdaaabb...",
+    "..babbddab..",
+    "...babcdbab.",
+    "....bbaacab.",
+    "......bbbbb.",
+    "............",
+    "............",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Spiral Galaxy",
+    "id": "Galaksi Spiral"
+  }
+}

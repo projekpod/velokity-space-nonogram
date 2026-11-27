@@ -1,0 +1,29 @@
+{
+  "id": "neptune-03-banded-planet",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....aaaaa...",
+    "...aaaaaaa..",
+    "...dddddddd.",
+    "..ddabbbbbb.",
+    "..bbbbaaacc.",
+    "..cdddccccb.",
+    "...bbbbbbba.",
+    "...aaaaaaa..",
+    "....aaaaa...",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Banded Planet",
+    "id": "Planet Belang"
+  }
+}

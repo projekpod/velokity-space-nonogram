@@ -1,0 +1,29 @@
+{
+  "id": "neptune-14-crescent",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....aa......",
+    "...aaa......",
+    "...aaa......",
+    "..aacc......",
+    "..aacc......",
+    "...accaa.a..",
+    "...accaaaa..",
+    ".....caa....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Crescent Moon",
+    "id": "Bulan Sabit"
+  }
+}

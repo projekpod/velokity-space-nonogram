@@ -1,0 +1,29 @@
+{
+  "id": "neptune-02-sample-tube",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    "....bbbbbb..",
+    "....bbbbbb..",
+    ".....aaaa...",
+    ".....ddda...",
+    ".....dcca...",
+    ".....dcca...",
+    ".....dcca...",
+    ".....aaaa...",
+    ".....aaaa...",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Sample Tube",
+    "id": "Tabung Sampel"
+  }
+}

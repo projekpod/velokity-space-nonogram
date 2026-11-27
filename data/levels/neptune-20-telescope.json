@@ -1,0 +1,29 @@
+{
+  "id": "neptune-20-telescope",
+  "size": 12,
+  "solution": [
+    "............",
+    ".......ddddd",
+    ".....adddddd",
+    "..aaaadddddd",
+    "..bbaabdd...",
+    "..bb.bc.....",
+    "....bcb.....",
+    "...bbc.b....",
+    "...b.c.b....",
+    "..b..c.b....",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Telescope",
+    "id": "Teleskop"
+  }
+}

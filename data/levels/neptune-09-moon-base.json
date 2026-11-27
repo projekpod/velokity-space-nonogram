@@ -1,0 +1,29 @@
+{
+  "id": "neptune-09-moon-base",
+  "size": 12,
+  "solution": [
+    "............",
+    "........a...",
+    "...aaaaa....",
+    "..aaaaaaa...",
+    ".aaaaaaaa...",
+    ".aaaaaaaa...",
+    ".bbbbbbbbb..",
+    ".bbddddbbb..",
+    ".bbddddbbb..",
+    "cccccccccc..",
+    "............",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Moon Base",
+    "id": "Pangkalan Bulan"
+  }
+}

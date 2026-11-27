@@ -1,0 +1,29 @@
+{
+  "id": "neptune-19-radio-dish",
+  "size": 12,
+  "solution": [
+    "............",
+    "............",
+    ".c..........",
+    ".dbd........",
+    ".aabddddda..",
+    ".aaabaaaa...",
+    "..aaaaaa....",
+    "...aaba.....",
+    ".....b......",
+    ".....b......",
+    "...cccccc...",
+    "............"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Radio Dish",
+    "id": "Antena Parabola"
+  }
+}
