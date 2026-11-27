@@ -1,0 +1,28 @@
+{
+  "id": "mercury-11-spacesuit-glove",
+  "size": 11,
+  "solution": [
+    "...........",
+    ".....a.a...",
+    ".....a.aa..",
+    "..aa.aaaa..",
+    "...a.aaaa..",
+    "...aaddda..",
+    "...aaddda..",
+    "....aadaa..",
+    "....bbbb...",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Suit Glove",
+    "id": "Sarung Tangan Astronaut"
+  }
+}

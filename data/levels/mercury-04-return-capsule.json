@@ -1,0 +1,28 @@
+{
+  "id": "mercury-04-return-capsule",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....aa.....",
+    "....aaa....",
+    "....dda....",
+    "....ddda...",
+    "...aaaaca..",
+    "...accca...",
+    "....aabb...",
+    ".....b.....",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Return Capsule",
+    "id": "Kapsul Pulang"
+  }
+}

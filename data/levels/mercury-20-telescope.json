@@ -1,0 +1,28 @@
+{
+  "id": "mercury-20-telescope",
+  "size": 11,
+  "solution": [
+    "..d........",
+    ".ddd.......",
+    ".ddddd.....",
+    ".dddddaa...",
+    "...dddaaa..",
+    ".....cabb..",
+    "....bcbbb..",
+    "....bcb....",
+    "...b...b...",
+    "...b..c.b..",
+    "...b..c.b.."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Telescope",
+    "id": "Teleskop"
+  }
+}

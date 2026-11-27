@@ -1,0 +1,28 @@
+{
+  "id": "mercury-03-helmet",
+  "size": 11,
+  "solution": [
+    "....aa.....",
+    "..aaaaaa...",
+    "..bdddaa...",
+    ".adddddaa..",
+    ".addddbaa..",
+    ".abbbbbaa..",
+    "..aaaaaa...",
+    "..bbbbdd...",
+    "..bbbbb....",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Astronaut Helmet",
+    "id": "Helm Astronaut"
+  }
+}

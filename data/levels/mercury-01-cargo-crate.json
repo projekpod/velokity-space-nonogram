@@ -1,0 +1,28 @@
+{
+  "id": "mercury-01-cargo-crate",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....ddda...",
+    "..dddddda..",
+    ".ddddddaa..",
+    ".aaaaabaa..",
+    "..abccaaa..",
+    "..abaaaaa..",
+    "..aba......",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Cargo Crate",
+    "id": "Peti Kargo"
+  }
+}

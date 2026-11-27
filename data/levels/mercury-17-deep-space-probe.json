@@ -1,0 +1,28 @@
+{
+  "id": "mercury-17-deep-space-probe",
+  "size": 11,
+  "solution": [
+    ".c.........",
+    ".cc........",
+    "...........",
+    "...c.......",
+    ".b..addab..",
+    "..baaddabb.",
+    "...aaaaabb.",
+    "....bbbbbb.",
+    "...bbbb....",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Deep Space Probe",
+    "id": "Wahana Antariksa Jauh"
+  }
+}

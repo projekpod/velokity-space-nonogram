@@ -1,0 +1,28 @@
+{
+  "id": "mercury-19-ring-station",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "...aacaa...",
+    "..a.d..aa..",
+    ".bbbdd..a..",
+    ".a..ddbbb..",
+    "..a.cc.aa..",
+    "..aaccaa...",
+    "....c......",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Ring Station",
+    "id": "Stasiun Cincin"
+  }
+}

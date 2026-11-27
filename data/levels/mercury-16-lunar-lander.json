@@ -1,0 +1,28 @@
+{
+  "id": "mercury-16-lunar-lander",
+  "size": 11,
+  "solution": [
+    "...........",
+    "....aaaa...",
+    "....aadda..",
+    "...aaddda..",
+    "...aaaaaa..",
+    "...abaaba..",
+    "...b.ccbb..",
+    "..b.....b..",
+    "..c......b.",
+    ".........b.",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Lunar Lander",
+    "id": "Pendarat Bulan"
+  }
+}

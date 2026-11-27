@@ -1,0 +1,28 @@
+{
+  "id": "mercury-06-moon-boot",
+  "size": 11,
+  "solution": [
+    "...........",
+    ".....aa....",
+    "....aaa....",
+    "....ddda...",
+    "....ddda...",
+    "....aabb...",
+    ".....bbb...",
+    "...aaaaaa..",
+    "..aaacccc..",
+    "..cccc.....",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Moon Boot",
+    "id": "Sepatu Bulan"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "mercury-18-radio-dish",
+  "size": 11,
+  "solution": [
+    "....c......",
+    "....c......",
+    "..ddb......",
+    "..aabddd...",
+    "...abaaad..",
+    "...aaaaa...",
+    "....aaaa...",
+    ".....b.....",
+    ".....b.....",
+    "..cc.b.....",
+    "...cccc...."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Radio Dish",
+    "id": "Antena Parabola"
+  }
+}

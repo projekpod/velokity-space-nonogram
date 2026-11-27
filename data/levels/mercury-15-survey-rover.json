@@ -1,0 +1,28 @@
+{
+  "id": "mercury-15-survey-rover",
+  "size": 11,
+  "solution": [
+    "...........",
+    "......c....",
+    "......b....",
+    "..aaaa.....",
+    "..addda....",
+    "..adddaab..",
+    ".aaaaaaab..",
+    ".aaabbbba..",
+    ".babbc.ac..",
+    ".ac..c..a..",
+    "..a........"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Survey Rover",
+    "id": "Rover Survei"
+  }
+}

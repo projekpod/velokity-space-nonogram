@@ -1,0 +1,28 @@
+{
+  "id": "mercury-13-relay-satellite",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...c.......",
+    "....a......",
+    "...aaaa....",
+    "cccaada.dd.",
+    "cccadddbdd.",
+    "...aada.cc.",
+    "...aaaa....",
+    "...........",
+    "...........",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Relay Satellite",
+    "id": "Satelit Relai"
+  }
+}

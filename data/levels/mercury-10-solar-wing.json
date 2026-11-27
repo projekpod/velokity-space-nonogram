@@ -1,0 +1,28 @@
+{
+  "id": "mercury-10-solar-wing",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "...........",
+    ".....a.....",
+    "...aaa.....",
+    ".ccdddbcd..",
+    "cdcdddaccc.",
+    "cdcaaaa.cc.",
+    "...aaa.....",
+    "...acc.....",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Solar Wing",
+    "id": "Sayap Surya"
+  }
+}

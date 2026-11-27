@@ -1,0 +1,28 @@
+{
+  "id": "mercury-14-orbital-shuttle",
+  "size": 11,
+  "solution": [
+    "...........",
+    "...........",
+    "....aa.....",
+    "....ad.....",
+    "....ada....",
+    "....addb...",
+    "...baaabb..",
+    "...bbaabbb.",
+    "..bbbaa..b.",
+    "...b..cc...",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Orbital Shuttle",
+    "id": "Pesawat Ulang Alik"
+  }
+}

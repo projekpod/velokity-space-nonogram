@@ -1,0 +1,28 @@
+{
+  "id": "mercury-05-observatory",
+  "size": 11,
+  "solution": [
+    "...........",
+    ".......dd..",
+    "......dd...",
+    "...aadd....",
+    "..addbba...",
+    ".aaaaaaaa..",
+    ".bbbbaaaa..",
+    "bbbbbbbbb..",
+    "bbbbbbbbb..",
+    "cccccbbbb..",
+    ".....cccc.."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Observatory",
+    "id": "Observatorium"
+  }
+}

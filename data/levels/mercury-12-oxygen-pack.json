@@ -1,0 +1,28 @@
+{
+  "id": "mercury-12-oxygen-pack",
+  "size": 11,
+  "solution": [
+    "...........",
+    "......b....",
+    "..bb.bbb...",
+    "..bbaaaa...",
+    "..aadcaab..",
+    "..baddaab..",
+    "..baaaacb..",
+    "...bb.c....",
+    "....dc.....",
+    "....d......",
+    "..........."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Oxygen Pack",
+    "id": "Tabung Oksigen"
+  }
+}
