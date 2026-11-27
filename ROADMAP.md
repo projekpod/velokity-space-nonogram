@@ -23,5 +23,6 @@ Deadline: v1.0 submitted to portals by 9 Dec 2026.
   - [x] 5. Expand the direct-purchase shop with cats, skins, and costumes in four rarity tiers. Migrate existing saves.
   - [x] Capture the four new QA routes in CI and commit screenshots under 300 KB each.
 - [x] T12b Autopilot & CI hygiene: limit the Master bus, label Savannah, deduplicate CI runs, require green branch checks, and add the tested Autopilot workflow and setup guide.
-- [x] T13 Content v1.1: grow to 300 nonograms and 365 daily puzzles. Add 12x12 and 15x15 boards with zoom/pan and tune the difficulty curve.
+- [ ] T13 Content v1.1: grow to 300 nonograms and 365 daily puzzles. Add 12x12 and 15x15 boards with zoom/pan and tune the difficulty curve.
+  - rework: picture quality
 - [ ] T14 Small twists: add a new small mechanic every 10–15 levels.
