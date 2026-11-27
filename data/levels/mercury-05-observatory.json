@@ -1,0 +1,28 @@
+{
+  "id": "mercury-05-observatory",
+  "size": 10,
+  "solution": [
+    "......d...",
+    "bbbb.ddd..",
+    "bb..dddd..",
+    "..adddd...",
+    "ccaaccd...",
+    "ddaccac...",
+    "dddcaaac..",
+    "..cddaaac.",
+    "..c.d.aaac",
+    ".......aa."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "BepiColombo",
+    "id": "Wahana BepiColombo"
+  },
+  "motif": "bepicolombo-spacecraft"
+}

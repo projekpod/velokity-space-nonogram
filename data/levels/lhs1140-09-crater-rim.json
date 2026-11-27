@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-09-crater-rim",
+  "size": 14,
+  "solution": [
+    "..............",
+    "aaaaaaaaa..ddd",
+    "aaaaaaaaaaddd.",
+    "aaaaaaaaaadd..",
+    "bbbbbbddddda..",
+    "bbbbbbddddaaa.",
+    "bbbbbddbbaaaa.",
+    "bbbbbddbbbaaa.",
+    "abbccccdddbaa.",
+    "accccccddddaa.",
+    "accccddbbddaa.",
+    "ccccddbbbbdba.",
+    "cccabbbbbbbba.",
+    "acaaabbbbbbb.."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Cryobot Tether",
+    "id": "Kabel Robot Pengebor Es"
+  },
+  "motif": "cryobot-tether"
+}

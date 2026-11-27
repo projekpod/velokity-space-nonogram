@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-10-moon-base",
+  "size": 14,
+  "solution": [
+    ".....c........",
+    ".aaaccca......",
+    "ddbbbccca...aa",
+    ".ddbbbcbbbaaaa",
+    ".addbbbccbbbaa",
+    ".adddbbbcbbbba",
+    ".abdddbbcbbcbb",
+    ".abbddbbcccddd",
+    ".abbbddbccdddb",
+    ".abbccccccddbb",
+    "..accbbdccbba.",
+    "..acaabbbcc...",
+    "..ccaaaaaccc..",
+    "..c..aaaa.c..."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Spectral Water Lines",
+    "id": "Garis Spektrum Air"
+  },
+  "motif": "spectral-water-lines"
+}

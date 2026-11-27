@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-11-relay-satellite",
+  "size": 13,
+  "solution": [
+    "ccaaaa...ddd.",
+    "accccaa.cdddd",
+    "acccccacdddd.",
+    "accccccddddd.",
+    "acccccda.....",
+    "ccccaaaaa....",
+    "aaa.aaaaaaaa.",
+    "..aaaaaaaaaaa",
+    ".aaaaaaaaaaaa",
+    "aaaaaaaaaa..a",
+    "aaaaaaaaaaa..",
+    ".aaaaa.......",
+    "...a........."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Triple-Leaf Emblem",
+    "id": "Lambang Tiga Daun"
+  },
+  "motif": "triple-leaf-emblem"
+}

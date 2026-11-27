@@ -1,0 +1,30 @@
+{
+  "id": "uranus-07-launch-rocket",
+  "size": 12,
+  "solution": [
+    "bbbb........",
+    "adabbbbbbccc",
+    "adaabbbbcccb",
+    "aadacccccbbb",
+    "aadaccbbbbbb",
+    "aaaaccbaaaab",
+    "aaadacaaaaaa",
+    "aaaadccaaaaa",
+    "aaaacddaaaaa",
+    "aaaccaddaaab",
+    "acccaaaddddd",
+    "cccabbbbbbb."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Titania Fault Valley",
+    "id": "Lembah Patahan Titania"
+  },
+  "motif": "titania-fault-valley"
+}

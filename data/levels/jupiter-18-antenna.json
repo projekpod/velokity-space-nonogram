@@ -1,0 +1,32 @@
+{
+  "id": "jupiter-18-antenna",
+  "size": 14,
+  "solution": [
+    "cc............",
+    ".ccccccaaaa...",
+    "..accccdddaa..",
+    ".aabbccccdddd.",
+    ".bbbbbccaccad.",
+    ".bbbbbccaaccc.",
+    "bbbbbbcccaaaa.",
+    "bbbbbbbcccaaa.",
+    ".dbbbbbbcccaa.",
+    "dddbbbbbbcccb.",
+    ".bddbbbbbbccc.",
+    "..bdbbbbbbbcc.",
+    "...bdbbbbb..cc",
+    ".....dbb....cc"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Ganymede Grooves",
+    "id": "Alur Ganimede"
+  },
+  "motif": "ganymede-grooves"
+}

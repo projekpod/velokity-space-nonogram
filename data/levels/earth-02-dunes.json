@@ -1,0 +1,29 @@
+{
+  "id": "earth-02-dunes",
+  "size": 11,
+  "solution": [
+    "bbdbbbbbbaa",
+    "bbbbbbbbaaa",
+    "bbbddbbaaab",
+    "aaabbdaabbb",
+    "aaaabadbbbb",
+    "bbbaaadb...",
+    "ccbbbbbd...",
+    "bbcbbbbdd..",
+    "bbcbbbb.d..",
+    "bbbbbbccc..",
+    "bbbbbbbb..."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Amazon River",
+    "id": "Sungai Amazon"
+  },
+  "motif": "amazon-river"
+}

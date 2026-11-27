@@ -1,0 +1,30 @@
+{
+  "id": "jupiter-04-launch-rocket",
+  "size": 12,
+  "solution": [
+    "....aaaa....",
+    "ddddaaaaaa..",
+    ".ddddddddddd",
+    "ddaaddaaaddd",
+    "dddddaaaaaaa",
+    "aaabbbbbbaaa",
+    "aaabccccbaaa",
+    "bbbaaaaaaabb",
+    ".bbbbbbabbb.",
+    ".aaabbbbbba.",
+    "..adddddda..",
+    "....aaaa...."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Great Red Spot",
+    "id": "Bintik Merah Besar"
+  },
+  "motif": "great-red-spot"
+}

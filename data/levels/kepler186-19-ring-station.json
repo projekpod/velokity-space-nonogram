@@ -1,0 +1,32 @@
+{
+  "id": "kepler186-19-ring-station",
+  "size": 14,
+  "solution": [
+    "......ccc.....",
+    "......ccc.....",
+    ".ccccccccc....",
+    "cccccaaaacccc.",
+    "ccccaadacccccc",
+    "cccaaacccaaccc",
+    ".ccaaccbaaaccc",
+    ".ccaccbbbaaccc",
+    "..cccbbbaaaccc",
+    "ccccaabaaacc..",
+    "..cccaaaacc...",
+    "..ccc.ccccc...",
+    "..c....cccc...",
+    ".......cccc..."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Pollen Spore",
+    "id": "Spora di Udara"
+  },
+  "motif": "pollen-spore"
+}

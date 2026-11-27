@@ -1,0 +1,33 @@
+{
+  "id": "kepler22-19-ring-station",
+  "size": 15,
+  "solution": [
+    ".cbbbbbbbb.....",
+    "ccbbbbbbbbb....",
+    ".ccbbbbbbbbb...",
+    ".cccddddddbbb..",
+    ".bccddddddbbbb.",
+    ".bbccbbbbbbbaa.",
+    ".bbcccbbbbaaaa.",
+    ".bbaccaaaaaaaa.",
+    ".aaaacccaaaaaa.",
+    ".aaaaaccccc....",
+    ".aaaaaabcccc...",
+    ".aaaaabbb.ccdd.",
+    ".ddddddddddddc.",
+    ".ddddddddb..ccc",
+    ".............c."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Spiral Weather Balcony",
+    "id": "Balkon Pengamat Cuaca"
+  },
+  "motif": "weather-balcony"
+}

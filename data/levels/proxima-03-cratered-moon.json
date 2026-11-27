@@ -1,0 +1,28 @@
+{
+  "id": "proxima-03-cratered-moon",
+  "size": 10,
+  "solution": [
+    "...acbbb..",
+    "..aacbbbb.",
+    ".aaacbbbbb",
+    "aaaaccbbbb",
+    "aaaaaccbbb",
+    "adddaacbbb",
+    "aaaaaccbdb",
+    ".aaaccbbbb",
+    "..aacbbbb.",
+    "...ccbb..."
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Tidal Terminator",
+    "id": "Batas Siang dan Malam"
+  },
+  "motif": "tidal-terminator"
+}

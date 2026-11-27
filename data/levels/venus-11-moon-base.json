@@ -1,0 +1,29 @@
+{
+  "id": "venus-11-moon-base",
+  "size": 11,
+  "solution": [
+    "....ddddbb.",
+    "..ddbbbbdbb",
+    ".bbbccccddd",
+    "dddcccacddd",
+    "ddddccaacdd",
+    "....daaa...",
+    ".....aaa...",
+    ".....aaa...",
+    ".......aa..",
+    "....bbda...",
+    "......ddd.."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Sunshade",
+    "id": "Peneduh Matahari"
+  },
+  "motif": "sunshade"
+}

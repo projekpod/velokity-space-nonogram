@@ -1,0 +1,30 @@
+{
+  "id": "neptune-10-meteor",
+  "size": 12,
+  "solution": [
+    "....aaaad...",
+    "..aaaaadda..",
+    "ccbbbaddaaa.",
+    "cccccddaaadd",
+    "bbbcddcaaad.",
+    "bbbdbbcccdcc",
+    "bbbbbbbcddcc",
+    "bbbbbbbdbba.",
+    ".bbbbbdbbbbb",
+    ".bbbbdbbbbbb",
+    "..bddbbbbbb.",
+    ".dddbbbb...."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Neptune Equinox",
+    "id": "Ekuinoks Neptunus"
+  },
+  "motif": "neptune-equinox"
+}

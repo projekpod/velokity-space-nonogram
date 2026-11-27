@@ -1,0 +1,31 @@
+{
+  "id": "neptune-20-telescope",
+  "size": 13,
+  "solution": [
+    "caadd........",
+    "acadd......c.",
+    "aacddd....cc.",
+    "ccacda....c.a",
+    "accacca..caaa",
+    ".accccccccaaa",
+    "....cccccaaaa",
+    "....ddaacccca",
+    "....dd....aaa",
+    "....ddbb...aa",
+    "bbbbbbbbbbb..",
+    "bbbbbbbbbbbb.",
+    "bbbbbbbbbbbbb"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Neptune Windsock",
+    "id": "Kantong Angin Neptunus"
+  },
+  "motif": "neptune-windsock"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "earth-03-ice-mesa",
+  "size": 11,
+  "solution": [
+    "..bbaaaa...",
+    ".bbbbbaaa..",
+    "bbbbbaaaac.",
+    "dddbaaaaacc",
+    "aabbaaaadaa",
+    "aaaabbbadda",
+    "aaabbbbbaaa",
+    "aaabbbbbaaa",
+    ".aabbbbaaa.",
+    "dddddbaadd.",
+    "....dddd..."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Blue Marble",
+    "id": "Bumi Biru"
+  },
+  "motif": "blue-marble"
+}

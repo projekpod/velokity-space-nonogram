@@ -1,0 +1,30 @@
+{
+  "id": "venus-18-solar-wing",
+  "size": 12,
+  "solution": [
+    "......d.....",
+    "......da....",
+    "b....ada....",
+    "b...aadaa.b.",
+    "bb.aadddaab.",
+    "bbaaaddddab.",
+    "bbaaa..abda.",
+    "baaca.aabdd.",
+    "baaacaaaabb.",
+    "aabbccaaaab.",
+    "bbccaaaaaaa.",
+    "bbaaaaaaaaa."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Lava Fan",
+    "id": "Kipas Aliran Lava"
+  },
+  "motif": "lava-fan"
+}

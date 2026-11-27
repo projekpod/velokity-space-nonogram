@@ -1,0 +1,28 @@
+{
+  "id": "mercury-03-helmet",
+  "size": 10,
+  "solution": [
+    "a......cc.",
+    "accccccccc",
+    "acccddccc.",
+    "ddddcccc..",
+    "aacccccaa.",
+    "aaaccbbbaa",
+    "aaabbbbbba",
+    "aaabbbbbbb",
+    "aaaabbbbbb",
+    "aaaabbbbbb"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Long Shadow",
+    "id": "Bayangan Panjang"
+  },
+  "motif": "mercury-long-shadow"
+}

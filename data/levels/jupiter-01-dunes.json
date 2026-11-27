@@ -1,0 +1,30 @@
+{
+  "id": "jupiter-01-dunes",
+  "size": 12,
+  "solution": [
+    "cc..........",
+    "acccaaaa....",
+    "bbbbcaaaa...",
+    "bbbbbcaaaaa.",
+    "bbbbddccaabb",
+    "bbbdddddccbb",
+    "bbbdddddddcc",
+    "ccbdddddddbb",
+    "ccccddddbbcc",
+    "abcccccbbccc",
+    "abbbccccccaa",
+    "abbbbbaacaaa"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Cloud-Top Shadow",
+    "id": "Bayangan di Puncak Awan"
+  },
+  "motif": "jupiter-cloud-shadow"
+}

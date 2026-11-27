@@ -64,7 +64,7 @@ class StarBattleTests(unittest.TestCase):
 
     def test_generator_reproduces_catalog(self):
         generated = catalog()
-        self.assertEqual(len(generated), 120)
+        self.assertEqual(len(generated), 365)
         for name, puzzle in generated.items():
             with self.subTest(puzzle=name):
                 shipped = json.loads((OUTPUT / name).read_text(encoding="utf-8"))

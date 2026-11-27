@@ -1,0 +1,32 @@
+{
+  "id": "kepler22-14-orbital-shuttle",
+  "size": 14,
+  "solution": [
+    "cccacccccc....",
+    "ccaaaccccccc..",
+    "aaaaaaccccccc.",
+    "aaaaaacccccccc",
+    "caaaaabbccccca",
+    "caaaaabbaccaca",
+    "caaaaabbacaa..",
+    ".ccaaabbcc....",
+    "..cccddd......",
+    "....ddddd.....",
+    "...ddddddd....",
+    ".dd..ddbbdd...",
+    "........bbddd.",
+    "........bb..dd"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Orbital Umbrella",
+    "id": "Payung di Orbit"
+  },
+  "motif": "orbital-umbrella"
+}

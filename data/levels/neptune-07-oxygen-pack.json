@@ -1,0 +1,30 @@
+{
+  "id": "neptune-07-oxygen-pack",
+  "size": 12,
+  "solution": [
+    "..ddd.......",
+    "aaaadddaaaa.",
+    "abbbbadddaa.",
+    "bbbbbabbbba.",
+    "dbbbaabbbbba",
+    "ddaaaabbbbaa",
+    "adddaddaaaaa",
+    "aaaadbbddaaa",
+    "aaabbbbaadda",
+    "aabbbbaaaaad",
+    "aabbbaaaaaaa",
+    "aabbaaacccaa"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Triton Cantaloupe Terrain",
+    "id": "Dataran Bermotif di Triton"
+  },
+  "motif": "triton-terrain"
+}

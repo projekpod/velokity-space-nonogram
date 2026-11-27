@@ -1,0 +1,31 @@
+{
+  "id": "uranus-15-lunar-lander",
+  "size": 13,
+  "solution": [
+    "....bbbb.....",
+    "..bbbbbbbb...",
+    ".bbbbbbbbbb..",
+    ".bbbbbbbbbbb.",
+    "bbbbbbbbbbbb.",
+    "bbabadddddbb.",
+    "dabacccddddbb",
+    "dbbccccdddddb",
+    "ddccccddddddd",
+    "ddcccdddddddd",
+    "dccccdddddddd",
+    ".cccddddddddd",
+    "..ddddddddd.."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Oberon Central Peak",
+    "id": "Puncak Kawah Oberon"
+  },
+  "motif": "oberon-central-peak"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mercury-14-orbital-shuttle",
+  "size": 11,
+  "solution": [
+    "......ddddd",
+    "....ddddcac",
+    "....ddddccc",
+    "...dddd....",
+    "...ddbd....",
+    "ddbbbb.....",
+    "ddbbcb.....",
+    ".dbbbc.....",
+    ".dabb.c....",
+    ".ddaaa.c...",
+    "..dddaadd.."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Solar Telescope",
+    "id": "Teleskop Surya"
+  },
+  "motif": "solar-telescope"
+}

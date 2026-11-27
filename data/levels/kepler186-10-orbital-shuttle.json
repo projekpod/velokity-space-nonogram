@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-10-orbital-shuttle",
+  "size": 13,
+  "solution": [
+    "aaaaaadddd...",
+    ".aaaaaadddd..",
+    "..aaaaaaddddd",
+    "..aaaabaaaada",
+    "..cccbaaaaaaa",
+    "..cbbbaaaaaaa",
+    ".ccbbbaaaaaaa",
+    ".accccbaaaaaa",
+    "daaccaabaaaaa",
+    "dddaaaaabaddd",
+    "aadddaaaddda.",
+    ".aaadddddab..",
+    "....aaaaaabb."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Kepler Photometer",
+    "id": "Fotometer Kepler"
+  },
+  "motif": "kepler-photometer"
+}

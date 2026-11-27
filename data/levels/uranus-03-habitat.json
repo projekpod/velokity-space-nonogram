@@ -1,0 +1,29 @@
+{
+  "id": "uranus-03-habitat",
+  "size": 11,
+  "solution": [
+    "...bbbbb...",
+    "..baaaabb..",
+    ".baddaccbb.",
+    "baaddacccbb",
+    "baddaccbcbb",
+    "bddaaacccbb",
+    "bdaaaaaabbb",
+    "bbaaaaaabbb",
+    ".bbbaaddbb.",
+    "..bbbdbbdd.",
+    "....dbb...."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Umbriel Bright Ring",
+    "id": "Cincin Cerah Umbriel"
+  },
+  "motif": "umbriel-bright-ring"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "trappist-06-crystals",
+  "size": 12,
+  "solution": [
+    "..cccc......",
+    "cc...bbbb...",
+    "c...bb..bb..",
+    "c...b....bb.",
+    ".ccbb....bb.",
+    "..ccbbaaaaa.",
+    ".....a....aa",
+    ".....a.....a",
+    ".....a....aa",
+    "...dccaaaaa.",
+    "..ddd.cccc..",
+    "...d......cc"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Resonance Chain",
+    "id": "Rantai Resonansi"
+  },
+  "motif": "resonance-chain"
+}

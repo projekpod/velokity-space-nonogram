@@ -1,0 +1,32 @@
+{
+  "id": "trappist-17-aurora",
+  "size": 14,
+  "solution": [
+    "dd............",
+    "dddd...ddd....",
+    "ddddd.dddd....",
+    "daaddadddd....",
+    "ddaaaaaddd....",
+    "dddaaddaad....",
+    "dddddcccad....",
+    "ddddccccaccc..",
+    "ddddccccaccccc",
+    "dddcccccaccccc",
+    "bbbbbcccaccccc",
+    "bbbbb.ccaaccc.",
+    ".bbbbb.ccca...",
+    "..bb....c....."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Specimen Grabber",
+    "id": "Penjepit Sampel"
+  },
+  "motif": "specimen-grabber"
+}

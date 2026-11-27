@@ -1,0 +1,32 @@
+{
+  "id": "trappist-18-geyser",
+  "size": 14,
+  "solution": [
+    "......a......c",
+    "......a....ccc",
+    ".....aad...ccc",
+    ".....add..bccc",
+    ".a...add.bbccc",
+    ".aa.aadddbbccc",
+    "..aaadddddbccc",
+    "a..aadddddbccc",
+    "aaaaa.ddddbccc",
+    "aaa..dddddbccc",
+    "aaaabbddddbccc",
+    "aaaabbddddbccc",
+    "aaaabbddddbccb",
+    "aaaabbdbbbbcbb"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Basalt Organ Pipes",
+    "id": "Pilar Basalt"
+  },
+  "motif": "basalt-organ-pipes"
+}

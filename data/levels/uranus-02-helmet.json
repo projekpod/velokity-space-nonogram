@@ -1,0 +1,29 @@
+{
+  "id": "uranus-02-helmet",
+  "size": 11,
+  "solution": [
+    ".dbbbcbb...",
+    ".bdbccbbb..",
+    ".bddccbbbbb",
+    ".bbdccbbbbb",
+    ".aadaabbbbb",
+    ".aaaaaabbbb",
+    ".adaaaaccca",
+    ".adaaaacccc",
+    ".daaaaaccaa",
+    "daaaaadaaaa",
+    ".aaaadaaaaa"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Diamond Rain",
+    "id": "Hujan Berlian"
+  },
+  "motif": "diamond-rain"
+}

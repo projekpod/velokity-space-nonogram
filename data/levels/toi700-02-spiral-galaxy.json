@@ -1,0 +1,31 @@
+{
+  "id": "toi700-02-spiral-galaxy",
+  "size": 13,
+  "solution": [
+    "bbbcccb......",
+    "bbccbccb.....",
+    "bbcbbbbccc...",
+    "aaaaaaabbcccc",
+    "badddddabbb.c",
+    "baddddddaabb.",
+    "badddddddaab.",
+    "badcccddaaaab",
+    "baacccccccccc",
+    "bbacaaaaccccc",
+    ".bccaaaaaaaaa",
+    "ccccaaaaaaaa.",
+    "cccbaaaaaa..."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Permafrost Crawler",
+    "id": "Robot Perayap Tanah Beku"
+  },
+  "motif": "permafrost-crawler"
+}

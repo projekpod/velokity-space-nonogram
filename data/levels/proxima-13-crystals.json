@@ -1,0 +1,29 @@
+{
+  "id": "proxima-13-crystals",
+  "size": 11,
+  "solution": [
+    "c.....b....",
+    "cc...aab.dd",
+    ".c...aabdd.",
+    ".cc.aadddbb",
+    "ddddaddbbbb",
+    ".dddddabbbb",
+    "...aacabbbb",
+    "....acabbdd",
+    ".....acddbb",
+    "......cbbbb",
+    ".......cbbb"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Starlight Prism",
+    "id": "Prisma Cahaya Bintang"
+  },
+  "motif": "starlight-prism"
+}

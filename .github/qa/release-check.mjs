@@ -285,6 +285,68 @@ async function measurePhone() {
   }
 }
 
+async function checkBigBoard() {
+  const size = 15;
+  const zoomUrl = new URL("web-qa/index.html?qa=zoom", baseUrl);
+  const touchPage = await browser.newPage({
+    viewport: { width: 393, height: 851 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true,
+  });
+  try {
+    const errors = watchErrors(touchPage);
+    await openGame(touchPage, zoomUrl, "zoom");
+    const fitted = await waitState(touchPage, s => s.grid && s.marks === 15);
+    const { width, height } = touchPage.viewportSize();
+    const center = { x: (fitted.grid[0] + fitted.grid[2] / 2) * width, y: (fitted.grid[1] + fitted.grid[3] / 2) * height };
+    const cdp = await touchPage.context().newCDPSession(touchPage);
+    const touch = (type, points) => cdp.send("Input.dispatchTouchEvent", { type, touchPoints: points });
+    const pinch = distance => [-distance, distance].map((dx, id) => ({ x: center.x + dx, y: center.y, id }));
+    await touch("touchStart", pinch(28));
+    await touch("touchMove", pinch(46));
+    await touch("touchEnd", []);
+    const zoomed = await waitState(touchPage, s => s.zoomed);
+    assert(zoomed.zoom[2] * width / size >= 44, `Zoomed tile is ${zoomed.zoom[2] * width / size} CSS px`);
+    assert.equal(zoomed.marks, size, "Pinching never marks a square");
+
+    await touch("touchStart", [{ ...center, id: 0 }]);
+    await touch("touchMove", [{ x: center.x - 54, y: center.y - 54, id: 0 }]);
+    await touch("touchEnd", []);
+    const panned = await waitState(touchPage, eval(`s => s.zoom[0] < ${zoomed.zoom[0] - 0.03}`));
+    assert.equal(panned.marks, size, "Panning never marks a square");
+    assert.deepEqual(panned.grid, fitted.grid, "The clue/grid viewport stays in place");
+    const visible = Array.from({ length: size }, (_, i) => i).find(i => {
+      const x = panned.zoom[0] + panned.zoom[2] * (i + 0.5) / size;
+      const y = panned.zoom[1] + panned.zoom[3] * (i + 0.5) / size;
+      return x > panned.grid[0] && x < panned.grid[0] + panned.grid[2]
+        && y > panned.grid[1] && y < panned.grid[1] + panned.grid[3];
+    });
+    assert.notEqual(visible, undefined);
+    await cell(touchPage, panned.zoom, size, visible, visible);
+    const marked = await waitState(touchPage, s => s.marks === 14);
+    assert.equal(marked.lives, 3, "The zoomed touch hits the intended cell");
+    await button(touchPage, "GAME_BOARD_FIT");
+    await waitState(touchPage, s => !s.zoomed && s.marks === 14);
+    assert.deepEqual(errors, []);
+  } finally {
+    await touchPage.close();
+  }
+
+  const desktop = await browser.newPage({ viewport: { width: 1050, height: 800 } });
+  try {
+    const errors = watchErrors(desktop);
+    await openGame(desktop, zoomUrl, "zoom");
+    const view = await waitState(desktop, s => s.grid && s.marks === 15);
+    await desktop.mouse.move((view.grid[0] + view.grid[2] / 2) * 1050, (view.grid[1] + view.grid[3] / 2) * 800);
+    await desktop.mouse.wheel(0, -120);
+    await waitState(desktop, s => s.zoomed);
+    await button(desktop, "GAME_BOARD_FIT");
+    await waitState(desktop, s => !s.zoomed && s.marks === 15);
+    assert.deepEqual(errors, []);
+  } finally {
+    await desktop.close();
+  }
+  console.log("15×15 passed: pinch, pan, CSS cell size, touch accuracy, mouse wheel, and Fit.");
+}
+
 try {
   const page = await browser.newPage({ viewport: { width: 393, height: 851 }, hasTouch: true, locale: "en-US", timezoneId: "Asia/Jakarta" });
   try {
@@ -303,6 +365,7 @@ try {
   }
   await checkBridgeMigration();
   await measurePhone();
+  await checkBigBoard();
 } finally {
   await browser.close();
 }

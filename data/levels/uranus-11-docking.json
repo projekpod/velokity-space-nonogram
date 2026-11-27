@@ -1,0 +1,30 @@
+{
+  "id": "uranus-11-docking",
+  "size": 12,
+  "solution": [
+    ".ccdd.......",
+    "..cccdd.....",
+    ".bbcccdd....",
+    "bbbbccddd...",
+    "bbbbbccbdd..",
+    "bbbabccbbdd.",
+    "bbbbaaccbbb.",
+    "bbbbbaaccbbb",
+    "bbbbbbaccbbd",
+    ".bbbbbbbcbb.",
+    ".....dd.cc..",
+    ".....d..c..."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Tumbling Top",
+    "id": "Gasing Sumbu Miring"
+  },
+  "motif": "tumbling-top"
+}

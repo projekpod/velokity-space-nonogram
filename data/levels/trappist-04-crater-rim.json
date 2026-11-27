@@ -1,0 +1,30 @@
+{
+  "id": "trappist-04-crater-rim",
+  "size": 12,
+  "solution": [
+    "ccc..dd....c",
+    "cccccdd.cccc",
+    "cccccccccccc",
+    "..cccccccccc",
+    "....cdd.....",
+    ".....dd.....",
+    ".....dda...a",
+    "..aaaddaa.aa",
+    ".aaabbbbaaaa",
+    "aaabbbbbbaaa",
+    "aaacccccccca",
+    "aaabbbbbbacc"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Subsurface Antenna",
+    "id": "Antena Bawah Permukaan"
+  },
+  "motif": "subsurface-antenna"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "trappist-07-canyon",
+  "size": 13,
+  "solution": [
+    "bbbbbbbbbbb..",
+    "bbbbbaaaabbb.",
+    "bbbbbccccccbb",
+    "bbbbcaaaaaccb",
+    "ccccaaaaaaabb",
+    "bbbbaddaaaaba",
+    "bbbbaaaaaaaaa",
+    "bbbaaaaaaaaaa",
+    "cbbaaaaaaabaa",
+    "cccbaaaaabbba",
+    "bccccaaaabbb.",
+    "bbbccccccbbc.",
+    "......ccccccc"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Tide Pool Fauna",
+    "id": "Fauna Kolam Pasang"
+  },
+  "motif": "tide-pool-fauna"
+}

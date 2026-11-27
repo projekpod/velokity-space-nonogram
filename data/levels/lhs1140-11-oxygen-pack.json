@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-11-oxygen-pack",
+  "size": 14,
+  "solution": [
+    "...bbbbbbbbb..",
+    "..bbbbbbbbbbb.",
+    ".bccccccccccbb",
+    "bb....cccccccb",
+    "...ccc..cccccb",
+    "bbcca.....cccb",
+    "bbcca...aa...b",
+    "bbcaa...baac..",
+    "bbcaabbbbbbccb",
+    "bbcabbbbbbbccb",
+    "bbccbbbbbbccbb",
+    "bbccbbbbbccbbb",
+    ".bbccb.cccbbb.",
+    "..bbbbbbbbbb.."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Pressure Window",
+    "id": "Jendela Tahan Tekanan"
+  },
+  "motif": "pressure-window"
+}

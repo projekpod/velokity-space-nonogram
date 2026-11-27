@@ -1,0 +1,32 @@
+{
+  "id": "trappist-16-antenna",
+  "size": 14,
+  "solution": [
+    "....dddddd....",
+    "...ddddbbbc...",
+    "..dddbbbbbbb..",
+    ".cddbbbbbbbbb.",
+    "ccdb..bbbbbbb.",
+    "cccc...bbbbbbb",
+    "cccccccbbbbbbb",
+    "cddccccccccbbb",
+    "ccdbbbcccccccc",
+    ".cdbbbbbbbcccc",
+    ".ccdbbbbbbbbc.",
+    "..ccdbbbbbbc..",
+    "...cccccccc...",
+    ".....cccc....."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Twin Transit",
+    "id": "Transit Dua Planet"
+  },
+  "motif": "twin-transit"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "neptune-03-banded-planet",
+  "size": 11,
+  "solution": [
+    "...baabb...",
+    "..aaaaaab..",
+    ".acccccaaa.",
+    ".baaaaaccca",
+    ".bddddaaabc",
+    "bddbddaddbb",
+    "ddbbaabaddd",
+    ".bbbabbccd.",
+    "..babcccba.",
+    "..acccbbb..",
+    "..cc.b....."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Neptune Storm Bands",
+    "id": "Pita Badai Neptunus"
+  },
+  "motif": "neptune-storm-bands"
+}

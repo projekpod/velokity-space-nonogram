@@ -1,0 +1,29 @@
+{
+  "id": "venus-07-sample-tube",
+  "size": 11,
+  "solution": [
+    "bbbbbbbbccc",
+    "bbbaacccccc",
+    "bbaaccccccb",
+    "baacccccccc",
+    "baacaccaacc",
+    "baacaccaacc",
+    "baaccaaaccb",
+    "bbacccacccb",
+    "bbdaaccccb.",
+    "bddbbbbbb..",
+    "d.........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Spiral Cloud",
+    "id": "Awan Pusaran Venus"
+  },
+  "motif": "venus-cloud-vortex"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "trappist-01-dunes",
+  "size": 12,
+  "solution": [
+    "ddddddddddd.",
+    "ccccccccccc.",
+    "ccccccccccc.",
+    "aaccccccccc.",
+    "bbaaaaaaabb.",
+    "bbbbbbabbab.",
+    "bbbbbdddbab.",
+    "bbbddbbbdda.",
+    "bbdbbbbbbdd.",
+    "bbbbbbbbbbb.",
+    "bbbbbbbbbb..",
+    "bbbbbbbbb..."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Thin Atmosphere",
+    "id": "Atmosfer Tipis"
+  },
+  "motif": "trappist-thin-atmosphere"
+}

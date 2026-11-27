@@ -1,0 +1,30 @@
+{
+  "id": "mercury-18-radio-dish",
+  "size": 12,
+  "solution": [
+    "...aaaaabb..",
+    "...adaaaabb.",
+    ".daadaaaaabc",
+    ".adddaaaaacc",
+    "aaaddaaaaccc",
+    "aaaaddaacacc",
+    "aaaaccccaabb",
+    "aaaccccdbb..",
+    "bbcbdbb.d...",
+    "bcbbd...dd..",
+    ".cbdd....d..",
+    "c.bd......d."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Radar Map",
+    "id": "Peta Radar"
+  },
+  "motif": "mercury-radar-map"
+}

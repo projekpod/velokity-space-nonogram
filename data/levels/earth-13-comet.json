@@ -1,0 +1,30 @@
+{
+  "id": "earth-13-comet",
+  "size": 12,
+  "solution": [
+    "bbbb........",
+    "bbbbb.......",
+    ".ddccb......",
+    ".bbccaa.....",
+    "..b.ccda....",
+    "....acda....",
+    "....acca....",
+    "....aaaaa...",
+    ".....aabdd..",
+    ".......dbbb.",
+    "........ddbb",
+    ".........dd."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Earth Observation Satellite",
+    "id": "Satelit Pengamat Bumi"
+  },
+  "motif": "earth-observation-satellite"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "earth-15-star-cluster",
+  "size": 13,
+  "solution": [
+    "aaadd........",
+    "aaadccccc....",
+    "aaddcddccaaaa",
+    "aaddcdddddaaa",
+    "addccddddaaaa",
+    "dddccdddaaaaa",
+    "ddddccdaaaaaa",
+    "dddddccaaaabb",
+    "dddaaaaccabbb",
+    "dddaaaaaacbbb",
+    "ddaaaaaaaacbb",
+    "ddaaaaaaabbcc",
+    "daaaaaaaabbcc"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Arctic Sea Ice",
+    "id": "Es Laut Arktik"
+  },
+  "motif": "arctic-sea-ice"
+}

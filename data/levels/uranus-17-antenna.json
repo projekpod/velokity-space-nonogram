@@ -1,0 +1,31 @@
+{
+  "id": "uranus-17-antenna",
+  "size": 13,
+  "solution": [
+    ".d...dd......",
+    ".d.ddddddd...",
+    ".daacbbbbdd..",
+    ".ddaccabbddd.",
+    "dadaaccaabddc",
+    "daddacccabdc.",
+    "daaddccccadc.",
+    "dddbddccaadd.",
+    "dddbbddcaaad.",
+    ".dddbcdddaad.",
+    "..dddccdddd..",
+    "...ddcdddd...",
+    ".....ddd..d.."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Off-Axis Compass",
+    "id": "Kompas Sumbu Miring"
+  },
+  "motif": "off-axis-compass"
+}

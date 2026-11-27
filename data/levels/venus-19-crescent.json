@@ -1,0 +1,30 @@
+{
+  "id": "venus-19-crescent",
+  "size": 12,
+  "solution": [
+    "......c.....",
+    ".....ccc....",
+    ".....cdc....",
+    "....ccdc....",
+    "....ccdcc...",
+    ".cccccdcccc.",
+    "...cccdcccbb",
+    "bbbbccccabbb",
+    "aaaaaaaaaaaa",
+    "bbbbbccbbbbb",
+    "bbbbbbcbbbbb",
+    ".bbbbbbbbbbb"
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Evening Star",
+    "id": "Bintang Senja"
+  },
+  "motif": "evening-star"
+}

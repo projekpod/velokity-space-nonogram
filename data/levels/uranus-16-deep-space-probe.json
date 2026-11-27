@@ -1,0 +1,31 @@
+{
+  "id": "uranus-16-deep-space-probe",
+  "size": 13,
+  "solution": [
+    "b....aaa..d..",
+    ".b.aaaaaadd..",
+    ".baabbbbdda..",
+    ".abbbbbddaaa.",
+    "caaaabbdbaaac",
+    "ccaaabdbbaacc",
+    "acaaabdbbbaca",
+    "aacaaddbbbcc.",
+    ".accadaaccca.",
+    ".aacddcccbaa.",
+    "..aadacabba..",
+    "..ddaaaaab...",
+    "dd...aaa.b..."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Sideways Planet",
+    "id": "Planet yang Miring"
+  },
+  "motif": "sideways-planet"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "uranus-12-orbital-shuttle",
+  "size": 12,
+  "solution": [
+    ".cc..bb.....",
+    "cdccbbbbb...",
+    "cddbcbbbbbb.",
+    "dcd..c..bbb.",
+    "dcd.acaaabbb",
+    "bdcacccccccc",
+    "bdccaacaabbb",
+    "bddaaacaabbb",
+    ".bdd.aac.bb.",
+    ".bbd...ccbbc",
+    "..bbd..bccc.",
+    "....bbbbb..."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Tilted Magnetosphere",
+    "id": "Magnetosfer Miring"
+  },
+  "motif": "uranus-magnetosphere"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "kepler186-15-radar",
+  "size": 14,
+  "solution": [
+    "aabbbbb.......",
+    "aaaabbbbbb....",
+    "aaaaaabbbbbbb.",
+    "aaaaaabbbbbbbb",
+    "daaaabbbaaabbb",
+    "ddaaabbbcaaabb",
+    "adaabbbbccaaab",
+    "addccbbbccaaaa",
+    "aadcccccccaadd",
+    "aaddccccccddda",
+    "aacddccccddaaa",
+    "aacccddcddbbbb",
+    "aaccccddabbbbb",
+    ".bbbccaaabbbbb"
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Crater Lake Island",
+    "id": "Pulau di Danau Kawah"
+  },
+  "motif": "crater-lake-island"
+}

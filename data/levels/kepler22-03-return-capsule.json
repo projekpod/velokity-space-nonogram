@@ -1,0 +1,31 @@
+{
+  "id": "kepler22-03-return-capsule",
+  "size": 13,
+  "solution": [
+    "....ddddd....",
+    "...dcccccd...",
+    "..ccccccccc..",
+    ".cccccccccc..",
+    "...ccccccc...",
+    "b.......bb...",
+    "bbbbbbbccccc.",
+    "bbbbbcccccccc",
+    "bbbbcccbbaaaa",
+    "bbacddaaaaaaa",
+    "aacccadaaaaaa",
+    "ccccaaddaaaaa",
+    "bbbaaaadaabb."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Sun Halo at Sea",
+    "id": "Halo Matahari di Laut"
+  },
+  "motif": "sun-halo-at-sea"
+}

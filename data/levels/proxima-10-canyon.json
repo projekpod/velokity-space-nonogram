@@ -1,0 +1,29 @@
+{
+  "id": "proxima-10-canyon",
+  "size": 11,
+  "solution": [
+    "abbbbaa....",
+    "ccccbaaa...",
+    "cccccbaaa..",
+    "ddddcbbaaa.",
+    "ccccddbbaaa",
+    "ccccccccbba",
+    "cccca..aaaa",
+    "cccca...aaa",
+    "cccaa...aa.",
+    "ccca....a..",
+    "ccca......."
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Habitat Arch",
+    "id": "Lengkung Habitat"
+  },
+  "motif": "habitat-arch"
+}

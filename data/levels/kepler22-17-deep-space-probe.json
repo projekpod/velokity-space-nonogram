@@ -1,0 +1,33 @@
+{
+  "id": "kepler22-17-deep-space-probe",
+  "size": 15,
+  "solution": [
+    ".cccbcc........",
+    "ccbbbcc........",
+    "bbbbbccc.......",
+    "bbbbbcbcc......",
+    "bbbbbcbccaaaaaa",
+    "bbbbcccaaaaaaaa",
+    "bbbbccaaaaaaaaa",
+    "bbddddaaaaaaaaa",
+    "dddddddaaaacccc",
+    "dbbbcdddaaccccc",
+    ".bbbcdddddcccc.",
+    "..cccddddddccc.",
+    "...ccdddcdddd..",
+    "......cccccdddd",
+    "............ddd"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Frond Sailbug",
+    "id": "Serangga Bersayap Daun"
+  },
+  "motif": "frond-sailbug"
+}

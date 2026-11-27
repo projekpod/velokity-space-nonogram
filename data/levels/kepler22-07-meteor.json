@@ -1,0 +1,32 @@
+{
+  "id": "kepler22-07-meteor",
+  "size": 14,
+  "solution": [
+    "bbbbbaacc.....",
+    "bbbbbcccccc...",
+    "bbbccccccccc..",
+    "bbccccccccccc.",
+    "bbccccccccccb.",
+    "bccccccccccbaa",
+    "bcccccccccbaaa",
+    "ccbbbbbbcbaaaa",
+    "bbbbbbbbcadddd",
+    "bbddddaacadaaa",
+    "bbaaaddacdaaaa",
+    "aaaaaaddccaaa.",
+    ".aaaaaaddaca..",
+    ".aaaaaaaaaaa.."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Floating Island",
+    "id": "Pulau Terapung"
+  },
+  "motif": "floating-island"
+}

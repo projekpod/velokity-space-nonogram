@@ -1,0 +1,32 @@
+{
+  "id": "toi700-09-crystals",
+  "size": 14,
+  "solution": [
+    ".bbbaaccaaa...",
+    ".bbbbaccaaaa..",
+    ".bbbbbccccccaa",
+    ".bbbbbbcccccaa",
+    ".bbbbbbbcaacca",
+    ".bbcccccccacca",
+    ".bcccbbbccccca",
+    ".bccbbbbbcccc.",
+    ".ccbbbbbbbcca.",
+    ".ccbbbbbbbba..",
+    "ccbbbbbdbbb...",
+    "ccbbbdddddd...",
+    ".ddddbbbbbddd.",
+    "....bbbbbb..dd"
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Dust Devil Tracks",
+    "id": "Jejak Pusaran Debu"
+  },
+  "motif": "dust-devil-tracks"
+}

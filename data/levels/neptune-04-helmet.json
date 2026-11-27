@@ -1,0 +1,29 @@
+{
+  "id": "neptune-04-helmet",
+  "size": 11,
+  "solution": [
+    "...ac......",
+    "..aacc.....",
+    ".bbaccc....",
+    "bbbbccc...d",
+    "bbbcccccdda",
+    "bbbccccddda",
+    "bbbbcccddda",
+    "bbbaacaddaa",
+    "bbb.acddda.",
+    "bb..acddaa.",
+    "b....cdda.."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Methane Crystal",
+    "id": "Kristal Metana"
+  },
+  "motif": "methane-crystal"
+}

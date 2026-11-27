@@ -1,0 +1,32 @@
+{
+  "id": "jupiter-19-robot-arm",
+  "size": 14,
+  "solution": [
+    ".aaaaaaaaa....",
+    "aaaaaaaaaaa...",
+    "aaaaaaaaaaa...",
+    "aaccccaaaaa.a.",
+    "acccccaaaaa.aa",
+    "accccccaaaa.aa",
+    "acc....cccc.aa",
+    "cc......cccc.a",
+    "cc.......cccc.",
+    "cc.......ccccc",
+    "ac..dddddddddc",
+    "aacdd...cccddd",
+    "aaaaccccccaaaa",
+    "aaaaaaaaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Io Sulfur Lake",
+    "id": "Danau Sulfur Io"
+  },
+  "motif": "io-sulfur-lake"
+}

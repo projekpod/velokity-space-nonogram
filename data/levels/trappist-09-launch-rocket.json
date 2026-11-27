@@ -1,0 +1,31 @@
+{
+  "id": "trappist-09-launch-rocket",
+  "size": 13,
+  "solution": [
+    "bbbbb....aaaa",
+    "bbbbbb...aacc",
+    "bbbbbbbddccca",
+    "bbbbbbdddcddd",
+    "ccbbbdddcaaad",
+    "bcbbbddc.aaaa",
+    "bccdddccaaaaa",
+    "ddccd.c.aaaaa",
+    "bbbcccdaaaaaa",
+    "bbb.cddddaaaa",
+    "bb..dd..addda",
+    "b..dd....aaad",
+    "...d.....aaaa"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Canyon Relay Bridge",
+    "id": "Jembatan Relai Ngarai"
+  },
+  "motif": "canyon-relay-bridge"
+}

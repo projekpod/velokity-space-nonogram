@@ -1,0 +1,29 @@
+{
+  "id": "neptune-01-cargo-crate",
+  "size": 11,
+  "solution": [
+    "cccaaaaa...",
+    "ccccccaaa..",
+    "cdddccccaa.",
+    "ccccdcccca.",
+    "cccbcdccccc",
+    "bcbbbbddcbb",
+    "bbbbbbbbdbb",
+    "babbbbbbbba",
+    ".abbbbbbba.",
+    "..aaabaaa..",
+    "...aaaa...."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Triton Ice Cap",
+    "id": "Tudung Es Triton"
+  },
+  "motif": "triton-ice-cap"
+}

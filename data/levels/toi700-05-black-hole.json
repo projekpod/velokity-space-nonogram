@@ -1,0 +1,31 @@
+{
+  "id": "toi700-05-black-hole",
+  "size": 13,
+  "solution": [
+    "aaaabaaaaa...",
+    "aaaaabbbbaa..",
+    "aaaaaabbbbaa.",
+    "aaaaccccaaaaa",
+    "aaccccccca...",
+    "cccccccc....a",
+    "..cccc....aaa",
+    ".....cccccaaa",
+    "aa..cccccaaa.",
+    ".aaacccccaaa.",
+    "..aaccaaaca..",
+    "...acaaaacc..",
+    "...caaaaa...."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Dust Separator",
+    "id": "Pemisah Debu"
+  },
+  "motif": "dust-separator"
+}

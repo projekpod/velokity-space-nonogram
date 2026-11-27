@@ -1,0 +1,28 @@
+{
+  "id": "mercury-02-sample-tube",
+  "size": 10,
+  "solution": [
+    ".aa.......",
+    "aaaacaaada",
+    "aacacaadaa",
+    "aaaccadccc",
+    "cccccdcaaa",
+    "aaacdaaaaa",
+    "aaacdccaaa",
+    "aacaadacaa",
+    "adaaadaaca",
+    "daaaaaaa.c"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Crater Rays",
+    "id": "Sinar Kawah"
+  },
+  "motif": "crater-rays"
+}

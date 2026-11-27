@@ -1,0 +1,29 @@
+{
+  "id": "proxima-12-storm-cloud",
+  "size": 11,
+  "solution": [
+    "...ccc.....",
+    "..ccccc.d..",
+    "...ccc..dd.",
+    "....b......",
+    "....bb.....",
+    "...bbbbbb..",
+    ".bbbbbaaab.",
+    "bbaaccccccb",
+    "baccaaaaaac",
+    "ccaaaaaaaaa",
+    "aaaaaaaaaaa"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Binary Sunrise",
+    "id": "Fajar Dua Bintang"
+  },
+  "motif": "binary-sunrise"
+}

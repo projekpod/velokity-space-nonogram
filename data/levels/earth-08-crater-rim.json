@@ -1,0 +1,30 @@
+{
+  "id": "earth-08-crater-rim",
+  "size": 12,
+  "solution": [
+    "....dddddd..",
+    "..dddaaaad..",
+    ".daaaaaaaad.",
+    "aaaaaaaaaadd",
+    "daaadddddddd",
+    "dddadddddddd",
+    "dbbbddcccddd",
+    "bbbbcccccddd",
+    "bbdbcccccddd",
+    "dddccccccdd.",
+    ".dddccccdd..",
+    "..ddccccdd.."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Orbital Cupola",
+    "id": "Kubola Pengamat Bumi"
+  },
+  "motif": "orbital-cupola"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mercury-12-oxygen-pack",
+  "size": 11,
+  "solution": [
+    ".....aaa...",
+    "..a.bbbaa..",
+    ".a.bccccaa.",
+    "...caaaaca.",
+    "abcaaaaaaca",
+    "abccbbbacc.",
+    "abbcccccc.a",
+    ".abbbbbbb..",
+    ".aabbbbb...",
+    "..aaaaaa...",
+    ".....a....."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Caloris Basin",
+    "id": "Cekungan Caloris"
+  },
+  "motif": "caloris-basin"
+}

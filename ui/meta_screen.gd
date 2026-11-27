@@ -103,10 +103,18 @@ func _open_achievements() -> void:
 
 func _render_album() -> void:
 	UI.label(self, "META_ALBUM", 47, UI.INK)
-	var tabs := UI.row(self)
-	for id: String in Catalog.PLANETS:
-		var tab := UI.action(tabs, _planet_title(id), id == planet)
-		tab.pressed.connect(_select_planet.bind(id))
+	var planets := Catalog.planets()
+	var selector := OptionButton.new()
+	selector.custom_minimum_size.y = 64
+	selector.add_theme_font_size_override("font_size", 26)
+	selector.get_popup().add_theme_font_size_override("font_size", 24)
+	UI.style_button(selector, false)
+	for id: String in planets:
+		selector.add_item(_planet_title(id))
+	selector.select(planets.find(planet))
+	selector.item_selected.connect(func(index: int) -> void: _select_planet(planets[index]))
+	add_child(selector)
+	UI.wire_button_sound(selector)
 
 	var count: int = _economy.album_collected(planet)
 	UI.label(self, tr("ALBUM_PROGRESS") % [count, Catalog.PICTURES_PER_ALBUM], 23, UI.MUTED)
@@ -136,12 +144,11 @@ func _render_album() -> void:
 		name_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		name_label.custom_minimum_size.y = 44
 
-	var reward: String = Meta.ALBUM_REWARDS[planet]
 	var footer := _panel(self, PANEL, LINE, 13)
 	var reward_text := VBoxContainer.new()
 	footer.add_child(reward_text)
-	UI.label(reward_text, tr("ALBUM_REWARD") % tr(Meta.costume_title(reward)), 23, UI.GOLD)
-	UI.label(reward_text, "META_UNLOCKED" if _economy.owns_costume(reward) else "ALBUM_REQUIREMENT", 19, UI.MUTED)
+	UI.label(reward_text, tr("ALBUM_REWARD") % _economy.album_reward_title(planet), 23, UI.GOLD)
+	UI.label(reward_text, "META_UNLOCKED" if count >= Catalog.PICTURES_PER_ALBUM else "ALBUM_REQUIREMENT", 19, UI.MUTED)
 
 
 func _select_planet(id: String) -> void:

@@ -1,0 +1,29 @@
+{
+  "id": "venus-13-oxygen-pack",
+  "size": 11,
+  "solution": [
+    ".bbbb......",
+    "dbbbbd.....",
+    "dbbcbd.....",
+    "dbbccc.....",
+    ".ddcccc.aa.",
+    "...ccccaaab",
+    "...cccaaac.",
+    "....caaacc.",
+    "....aaccccc",
+    "ccaaa.cccc.",
+    "aaa.....c.."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Magellan Probe",
+    "id": "Wahana Magellan"
+  },
+  "motif": "magellan-probe"
+}

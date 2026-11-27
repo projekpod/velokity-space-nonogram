@@ -1,0 +1,31 @@
+{
+  "id": "uranus-19-ring-station",
+  "size": 13,
+  "solution": [
+    ".....a......a",
+    "....aa.....aa",
+    "...aaaa...aaa",
+    "..abbaaaaaaab",
+    ".bbbbbaaabccc",
+    "bbbbbbbbbccbb",
+    "bbbccccccabb.",
+    "cccbbaaaaaddd",
+    "bbbbaaddddddd",
+    "bbaaaddddaa..",
+    "aaaaddaaaa...",
+    "dddddaaaa....",
+    "ddddaaaa....."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Uranian Equator Waves",
+    "id": "Gelombang Khatulistiwa Uranus"
+  },
+  "motif": "uranian-equator-waves"
+}

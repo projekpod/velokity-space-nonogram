@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-01-cargo-crate",
+  "size": 13,
+  "solution": [
+    "......ccbb...",
+    "...cccccccc..",
+    ".ccccccccccc.",
+    "cccddddddcccc",
+    "cccdddddddccc",
+    "cccddddddddac",
+    "cccdddbbdaabb",
+    "cccaaaaaaadbb",
+    "dddaaaaabbdbb",
+    "ddcdddbbbbbbb",
+    "cdccdbbbbbbbb",
+    "cccbbbbbbbbbb",
+    "cccbbbbbbbbb."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Ice Anchor",
+    "id": "Jangkar Es"
+  },
+  "motif": "ice-anchor"
+}

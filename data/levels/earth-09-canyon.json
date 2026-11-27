@@ -1,0 +1,30 @@
+{
+  "id": "earth-09-canyon",
+  "size": 12,
+  "solution": [
+    "...bbbbbccc.",
+    "..aabbbccb..",
+    ".aaacccbbba.",
+    "aaccbbbbaaa.",
+    "bbbbbbbaaaaa",
+    "bddddddbaaaa",
+    "abbbbbbbaaaa",
+    "aabbbbbbaaaa",
+    "aaaddbbabaa.",
+    ".aabbddabaa.",
+    "..aabbaaaa..",
+    "....baaa...."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Africa and Europe",
+    "id": "Afrika dan Eropa"
+  },
+  "motif": "africa-europe"
+}

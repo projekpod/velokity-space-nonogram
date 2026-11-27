@@ -1,0 +1,32 @@
+{
+  "id": "kepler186-17-radio-dish",
+  "size": 14,
+  "solution": [
+    ".ccccccccccc..",
+    ".ccccddddcccc.",
+    "ccccddddddcccc",
+    "bccccddddccccc",
+    "bbbbcccccccccc",
+    ".ccbbbbbbccccb",
+    ".bcccccccccbbb",
+    ".bbccccccbbbbb",
+    "...bbbaabb....",
+    "....bbaab.....",
+    "...bbbaa......",
+    "..bbbbaa......",
+    "..bbbb.aa.....",
+    ".......a......"
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Thimble Bloom",
+    "id": "Bunga Berbentuk Lonceng"
+  },
+  "motif": "thimble-bloom"
+}

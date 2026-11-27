@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-03-greenhouse",
+  "size": 12,
+  "solution": [
+    ".d..ddba....",
+    "aadaadbbacc.",
+    "aaadbbdbccca",
+    "aabbdbddcbaa",
+    "abbbdbcdbbaa",
+    "dddbddcdbbaa",
+    "abbddccddaaa",
+    "abbddcbbbaaa",
+    "abbddddddaaa",
+    "abcccbbaddaa",
+    "accbbbaaaaa.",
+    "aaaabaaaa..."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Fern Fossil Tile",
+    "id": "Ubin Fosil Pakis"
+  },
+  "motif": "fern-fossil"
+}

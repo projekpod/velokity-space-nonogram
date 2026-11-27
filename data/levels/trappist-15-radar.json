@@ -1,0 +1,32 @@
+{
+  "id": "trappist-15-radar",
+  "size": 14,
+  "solution": [
+    ".......bbbbb..",
+    "bbbbbaaaaabbb.",
+    "bbbaaacccaaaaa",
+    "aaabccbbcbbbbb",
+    "abbccbbbccbbbb",
+    "bbccbbbbbcbbbb",
+    "bccbbbbbbbcbbb",
+    "bccbbbbbbbdbbb",
+    "bbcbbbbdbcbbbb",
+    "bbccbbbdccbbbb",
+    "bbbccbbccbbbbb",
+    "bbbbccccbbbbb.",
+    ".bbbbbccbbbb..",
+    "..bbbbbbbbb..."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Star Chart",
+    "id": "Peta Bintang"
+  },
+  "motif": "star-chart"
+}

@@ -67,6 +67,7 @@ func _run() -> void:
 	_test_combo_rewards_and_migration()
 	_test_xp_migration()
 	_test_costume_economy()
+	_test_coin_album_reward()
 	_test_cosmetic_migration()
 	_test_login_calendar()
 	await _test_meta_menu()
@@ -78,6 +79,7 @@ func _run() -> void:
 	_test_continue()
 	_test_hint()
 	_test_board_size()
+	await _test_board_zoom()
 	_test_drag()
 	await _test_fake_ads()
 	await _test_ads_recovery()
@@ -636,8 +638,8 @@ func _test_settings_menu() -> void:
 
 func _test_catalog() -> void:
 	var levels := Catalog.read()
-	check(levels.size() == 60, "Read all 60 puzzle files")
-	if levels.size() == 60:
+	check(levels.size() == Catalog.planets().size() * Catalog.PICTURES_PER_ALBUM, "Every registered world has twenty levels")
+	if levels.size() >= 60:
 		check(levels[0].planet == "moon" and levels[0].size == 5, "Moon album comes first")
 		check(levels[20].planet == "mars" and levels[20].size == 8, "Mars album comes second")
 		check(levels[40].planet == "saturn" and levels[40].size == 10, "Saturn album comes third")
@@ -661,6 +663,9 @@ func _test_level_progression() -> void:
 			open_levels.append(index)
 	check(open_levels == [0], "A fresh save opens only Moon 01")
 	main._show_planets()
+	if Catalog.planets().size() > main.PLANETS_PER_PAGE:
+		check(_press_button(main._column, "PLANET_NEXT") and main._planet_page == 1, "The planet list reaches the next group")
+		check(_press_button(main._column, "PLANET_PREVIOUS") and main._planet_page == 0, "Returning to the first group keeps its unlock state")
 	var planet_list: Control = main._column
 	var mars_card := planet_list.get_child(3) as Button
 	check(mars_card.disabled and "Clear 15 puzzles in Moon" in mars_card.text, "Locked Mars displays its requirement")
@@ -838,12 +843,54 @@ func _test_board_size() -> void:
 		board.free()
 
 
+func _test_board_zoom() -> void:
+	for n in [11, 12, 15]:
+		var rows: Array[String] = []
+		for y in range(n):
+			rows.append(".".repeat(y) + "a" + ".".repeat(n - y - 1))
+		var board := Board.new()
+		board.puzzle = Puzzle.new({"size": n, "solution": rows, "palette": {}})
+		root.add_child(board)
+		board.size = board.get_combined_minimum_size()
+		await process_frame
+		board._pixels_per_unit = 0.5
+		var frame := board._grid()
+		var center := frame.get_center()
+		board._zoom_at(frame.size.x / n + 1.0, center, center)
+		check(is_equal_approx((board._camera.edge - 2.0) * board._pixels_per_unit, 44.0), "The first zoom step reaches 44 screen pixels")
+		board._zoom_at(999.0, center, center)
+		var ceiling := board._camera.edge
+		board._zoom_at(999.0, center, center)
+		check(board._camera.edge == ceiling and ceiling < 999.0, "Zoom has a finite upper bound")
+		board._pan(Vector2(-9999, -9999))
+		var content := board._camera.grid(frame, n)
+		check(content.end.is_equal_approx(frame.end), "Panning clamps to the last row and column")
+		board.set_streak_dip(8.0)
+		var point := frame.end - Vector2.ONE * board._camera.edge * 0.5 + Vector2(0, 8)
+		check(board.cell_at(point) == Vector2i(n - 1, n - 1), "Tap coordinates include the pan, zoom, and streak dip")
+		check(board.cell_at(Vector2(1, frame.position.y + 12)) == Board.OUTSIDE, "Sticky row clues are outside the tap grid")
+		var tap := InputEventScreenTouch.new()
+		tap.position = point
+		tap.pressed = true
+		board._touch(tap)
+		tap.pressed = false
+		board._touch(tap)
+		check(board.puzzle.at(Vector2i(n - 1, n - 1)) == Puzzle.Cell.FILLED and board.puzzle.lives == 3, "A zoomed touch marks exactly the intended cell")
+		board.fit_zoom()
+		check(board._camera.grid(frame, n) == frame and board._camera.edge == 0.0, "Fit resets the zoom and pan")
+		board.free()
+
+
 func _test_daily_selection() -> void:
 	var monday := Daily.day_number({"year": 2026, "month": 11, "day": 23})
 	check(Daily.weekday(monday) == 0 and Daily.weekday(monday + 6) == 6, "Week runs Monday through Sunday")
-	check(Daily.puzzle_name(monday) == Daily.puzzle_name(monday + 18 * 7), "Monday rotates through 18 boards")
-	check(Daily.puzzle_name(monday + 1) == Daily.puzzle_name(monday + 17 * 7 + 1), "Tuesday rotates through 17 boards")
+	check(Daily.puzzle_name(monday) == Daily.puzzle_name(monday + 53 * 7), "Monday rotates through 53 boards")
+	check(Daily.puzzle_name(monday + 1) == Daily.puzzle_name(monday + 52 * 7 + 1), "Tuesday rotates through 52 boards")
 	check(Daily.puzzle_name(monday) != Daily.puzzle_name(monday + 7), "Same weekday changes next week")
+	var year_of_puzzles := {}
+	for offset in range(365):
+		year_of_puzzles[Daily.puzzle_name(monday + offset)] = true
+	check(year_of_puzzles.size() == 365, "Starting on Monday, 365 days visit every puzzle once")
 	var previous_effort := 0
 	for offset in range(7):
 		var puzzle := Daily.puzzle_for(monday + offset)
@@ -1147,7 +1194,7 @@ func _test_costume_economy() -> void:
 	check(economy.equip_costume("helmet", "") and economy.equipped_costumes() == {"suit": "nebula_suit"}, "Resetting one slot preserves the other")
 	check(not economy.owns_costume("pathfinder") and not economy.owns_costume("perfect_signal"), "Achievements start locked")
 
-	for planet: String in Catalog.PLANETS:
+	for planet: String in Meta.ALBUM_REWARDS:
 		var entries: Array = economy.levels.filter(func(level: Dictionary) -> bool: return level.planet == planet)
 		var reward: String = Meta.ALBUM_REWARDS[planet]
 		for level: Dictionary in entries.slice(0, 19):
@@ -1161,6 +1208,40 @@ func _test_costume_economy() -> void:
 	DirAccess.remove_absolute(path)
 	save.data = original
 	save.storage_path = original_path
+
+
+func _test_coin_album_reward() -> void:
+	var economy := root.get_node("Economy")
+	var planet := ""
+	for id: String in Catalog.planets():
+		if Catalog.album_coins(id) > 0:
+			planet = id
+			break
+	if planet.is_empty():
+		return
+	var save := root.get_node("Save")
+	var previous: Dictionary = save.data
+	var previous_path: String = save.storage_path
+	var path := "user://test-coin-album-%d.json" % OS.get_process_id()
+	save.data = SaveScript.defaults()
+	save.storage_path = path
+	var ids: Array[String] = []
+	for level: Dictionary in economy.levels:
+		if level.planet == planet:
+			ids.append(level.id)
+	var reward := Catalog.album_coins(planet)
+	for id in ids.slice(0, 19):
+		save.data.nonogram[id] = {"reward": 30, "doubled": false}
+	var last: String = ids.back()
+	save.data.coins = EconomyRules.MAX_COINS - EconomyRules.MAX_FIRST_CLEAR
+	check(economy.award_nonogram(last, 3, 8) == -1 and not economy.is_nonogram_cleared(last), "The combined level and album award respects the wallet cap")
+	save.data.coins = 0
+	check(economy.award_nonogram(last, 3, 8) == 60 and economy.balance() == 60 + reward, "The twentieth clear pays its capped reward and a separate album bonus")
+	check(save.load_game() == OK and economy.award_nonogram(last, 3, 8) == 0, "A reload and replay cannot pay the album twice")
+	check(economy.double_nonogram_reward(last) == 60 and economy.balance() == 120 + reward, "Double coins apply only to the level reward")
+	DirAccess.remove_absolute(path)
+	save.data = previous
+	save.storage_path = previous_path
 
 
 func _test_cosmetic_migration() -> void:
@@ -1254,6 +1335,11 @@ func _test_meta_menu() -> void:
 	var screen := main._column.get_child(0) as MetaScreen
 	var pictures := screen.find_children("*", "Control", true, false).filter(func(node: Node) -> bool: return node.get_script() == AlbumPicture)
 	check(pictures.size() == 20 and pictures[0].level == main._levels[0] and pictures[1].level.is_empty(), "Album cards display only pictures from cleared levels")
+	var choices := screen.find_children("*", "OptionButton", false, false)
+	check(choices.size() == 1 and choices[0].item_count == Catalog.planets().size(), "The album selector lists every registered world")
+	choices[0].item_selected.emit(1)
+	check(screen.planet == "mars", "The album selector opens another world's album")
+	screen.find_children("*", "OptionButton", false, false)[0].item_selected.emit(0)
 	check(_press_button(screen, "META_ACHIEVEMENTS") and screen.page == MetaScreen.Page.ACHIEVEMENTS, "The album links to achievement progress")
 	check(_press_button(screen, "META_BACK_ALBUM") and screen.page == MetaScreen.Page.ALBUM, "Achievements return to the album")
 	main.show_menu()

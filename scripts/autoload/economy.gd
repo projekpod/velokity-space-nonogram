@@ -56,6 +56,13 @@ func album_collected(planet: String) -> int:
 	return count
 
 
+func album_reward_title(planet: String) -> String:
+	var coins := Catalog.album_coins(planet)
+	if coins > 0:
+		return tr("COIN_BALANCE") % coins
+	return tr(Meta.costume_title(Meta.ALBUM_REWARDS.get(planet, "")))
+
+
 func achievement_progress(id: String) -> int:
 	match id:
 		"explorer":
@@ -219,7 +226,8 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 	if not first_clear and not new_badge:
 		return 0
 	var amount := mini((15 + 5 * lives) * Combo.multiplier(combo_lines), MAX_FIRST_CLEAR) if first_clear else 0
-	if amount > MAX_COINS - balance():
+	var album_bonus := _album_coin_bonus(level_id) if first_clear else 0
+	if amount + album_bonus > MAX_COINS - balance():
 		return -1
 	var snapshot: Dictionary = _save.data.duplicate(true)
 	if not levels.is_empty() and level_id == levels[0].id:
@@ -230,9 +238,17 @@ func award_nonogram(level_id: String, lives: int, combo_lines := 0) -> int:
 	if new_badge:
 		snapshot.nonogram[level_id].flawless = true
 		_add_xp(snapshot, Meta.BADGE_XP)
-	snapshot.coins += amount
+	snapshot.coins += amount + album_bonus
 	return amount if await _commit(snapshot) else -1
 
+
+
+func _album_coin_bonus(level_id: String) -> int:
+	for level in levels:
+		if level.id == level_id:
+			var coins := Catalog.album_coins(level.planet)
+			return coins if coins > 0 and album_collected(level.planet) == Catalog.PICTURES_PER_ALBUM - 1 else 0
+	return 0
 
 func next_bonus_index() -> int:
 	var index: int = _save.data.bonus_clears

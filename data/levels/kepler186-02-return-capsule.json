@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-02-return-capsule",
+  "size": 12,
+  "solution": [
+    ".aaaaacaaaa.",
+    "bbaaaaccaaa.",
+    "bbbaaccccaaa",
+    "bbbbacccccca",
+    "bbbbbcccaacd",
+    "bbbbbdddddcc",
+    "bbbbdccaaacc",
+    "bbbdccccccca",
+    "bbdccaaccaaa",
+    "ddbccaaaaaaa",
+    "dbbacccaaaa.",
+    ".....ccc...."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Meander Oxbow",
+    "id": "Danau Tapal Kuda"
+  },
+  "motif": "meander-oxbow"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "earth-20-ice-flake",
+  "size": 13,
+  "solution": [
+    ".....ccc....c",
+    "a..ccbcccc.cc",
+    "aacbbbbbbccc.",
+    ".abb....bccc.",
+    ".db......bdc.",
+    "ddb......bdc.",
+    "ddb......bdcc",
+    "ddb.....bbddd",
+    ".ddbb..bbdddd",
+    ".cddbbbbdddd.",
+    ".ddddddddcdd.",
+    "dddddddccdd..",
+    ".....dddddd.."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Total Solar Eclipse",
+    "id": "Gerhana Matahari Total"
+  },
+  "motif": "solar-eclipse"
+}

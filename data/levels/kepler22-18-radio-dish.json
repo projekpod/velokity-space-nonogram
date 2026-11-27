@@ -1,0 +1,33 @@
+{
+  "id": "kepler22-18-radio-dish",
+  "size": 15,
+  "solution": [
+    ".b...b.........",
+    "bbbbbbbaaaccc..",
+    ".bdbbbbbaaccaa.",
+    ".cddbbbbbaccaac",
+    ".cadabbbbbacaac",
+    ".caddabbbbacaaa",
+    ".aaadabbbbacaaa",
+    ".aaaddbbbbacccc",
+    ".aaaddbbbbacc..",
+    ".aaddbbabbcc...",
+    ".addabbbbcc....",
+    ".caaabbbbc.....",
+    ".ccccbbcc......",
+    ".ccccbbc.......",
+    "...ccbb........"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Foreign Shell",
+    "id": "Cangkang Dunia Asing"
+  },
+  "motif": "foreign-shell"
+}

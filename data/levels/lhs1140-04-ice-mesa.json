@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-04-ice-mesa",
+  "size": 13,
+  "solution": [
+    ".........c...",
+    "bb.....bbcc..",
+    "bbbbbbbbbbcc.",
+    "bbbbbbbbbbbbb",
+    "bbbccccbbbbbb",
+    "bbccdddccbabb",
+    ".ccdddddcaaa.",
+    "aaccddcccaaaa",
+    "aaaccccaaaaaa",
+    "aaaaaaaaaaaaa",
+    "aaaaaaaaaaaa.",
+    ".aaaaaaaddda.",
+    "...........dd"
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Deep Ocean Submersible",
+    "id": "Kapal Selam Laut Dalam"
+  },
+  "motif": "deep-sea-submersible"
+}

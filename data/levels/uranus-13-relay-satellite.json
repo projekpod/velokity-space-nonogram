@@ -1,0 +1,30 @@
+{
+  "id": "uranus-13-relay-satellite",
+  "size": 12,
+  "solution": [
+    "cccccccc....",
+    ".ccccccccc..",
+    ".ccccccccccc",
+    "ddddddcccccc",
+    ".....ddddccc",
+    "......cddd.c",
+    "......c.....",
+    "..bb.ca..bb.",
+    "bbbbcccabbbb",
+    "bbbbcccaabbb",
+    "bbbbcbbbabbb",
+    ".bbbbbbbbabb"
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Deep Atmosphere Probe",
+    "id": "Wahana Penyelam Atmosfer"
+  },
+  "motif": "uranus-deep-probe"
+}

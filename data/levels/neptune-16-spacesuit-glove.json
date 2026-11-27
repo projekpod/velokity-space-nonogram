@@ -1,0 +1,31 @@
+{
+  "id": "neptune-16-spacesuit-glove",
+  "size": 13,
+  "solution": [
+    "...ccccccccc.",
+    "..ccccccccccc",
+    "bbbbccccccccc",
+    "bbbbbbccccccc",
+    "...cbbbc.....",
+    ".....bbc.....",
+    ".cccccbb..bb.",
+    "......bbbbbb.",
+    "......cbbb.aa",
+    "..aaaaabbadda",
+    "aaaaaaaaaddaa",
+    "aaaaaaaddaaaa",
+    "aaaaaaddaaaaa"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Cold-World Drill",
+    "id": "Bor Es Dunia Dingin"
+  },
+  "motif": "cold-world-drill"
+}

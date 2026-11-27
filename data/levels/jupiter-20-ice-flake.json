@@ -1,0 +1,32 @@
+{
+  "id": "jupiter-20-ice-flake",
+  "size": 14,
+  "solution": [
+    ".ccc.....bbb..",
+    "cccc....bbbbb.",
+    ".ccc....bbbbb.",
+    "....ddd..bbbaa",
+    "....ddd.aaaadd",
+    ".....daaadddaa",
+    ".....aadddaaaa",
+    "...adddaaaaaaa",
+    "..dddaaaaaaaaa",
+    "ddaaaaaaaaaaa.",
+    "aaaaaaaaaaaccc",
+    "aaaaaaaaaaaccc",
+    "aaaaaaaaaa.ccc",
+    ".aaaaaaa...cc."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Galilean Moons",
+    "id": "Satelit Galileo"
+  },
+  "motif": "galilean-moons"
+}

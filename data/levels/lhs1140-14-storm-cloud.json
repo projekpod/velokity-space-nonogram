@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-14-storm-cloud",
+  "size": 14,
+  "solution": [
+    "..............",
+    "..aaaab.......",
+    "..aaa...c.bb..",
+    ".aaaa...bcbbb.",
+    ".aaaa...bccbb.",
+    "baaaaa...acaab",
+    "aaaaa....accaa",
+    "acc....aaaaaaa",
+    "aacc.aaaaaaaaa",
+    "ba..ccaaaaaaaa",
+    ".aa..ccaaaaaaa",
+    ".....accaaaaaa",
+    "....aaaacaaaa.",
+    ".....aaaccaa.."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Icy Nightside",
+    "id": "Sisi Malam Berlapis Es"
+  },
+  "motif": "icy-nightside"
+}

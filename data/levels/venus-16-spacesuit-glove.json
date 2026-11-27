@@ -1,0 +1,30 @@
+{
+  "id": "venus-16-spacesuit-glove",
+  "size": 12,
+  "solution": [
+    "...aaaaaa...",
+    ".aaaccccaaa.",
+    ".abccccccaa.",
+    "bbbbccdddcaa",
+    "bbbbbcccdcca",
+    "bbbbbccccdca",
+    "cbbbccccccca",
+    "caccccccccac",
+    "cccccccccccc",
+    ".cccccccccc.",
+    "..cccccccc..",
+    "...cccccc..."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Venus in Transit",
+    "id": "Venus Melintas di Depan Matahari"
+  },
+  "motif": "venus-transit"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-08-drill",
+  "size": 13,
+  "solution": [
+    "....aaaaaa...",
+    "...aaaaaaaa..",
+    "..aaaaaaaaaa.",
+    "aaaaaaaaaaaaa",
+    "aacccaaaaaaaa",
+    "ccccccddddaaa",
+    "cccccccaaabaa",
+    "ccccccaaaabbc",
+    "ccccaaaaabbcc",
+    "cbaaaaaaabbcb",
+    "bbaaaaaaabcbb",
+    "bccaaaccccbbb",
+    "bbccccccbbbb."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Exoplanet Field Station",
+    "id": "Pos Riset Eksoplanet"
+  },
+  "motif": "exoplanet-field-station"
+}

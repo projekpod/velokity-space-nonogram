@@ -1,0 +1,32 @@
+{
+  "id": "jupiter-17-aurora",
+  "size": 14,
+  "solution": [
+    "bb...aaaa....d",
+    "bb..aaaaaa.ddd",
+    "bbb.accccadddd",
+    "bbbbaccccadddd",
+    "bbbbccccccaddd",
+    ".bbbbcccccadd.",
+    "bbbbbcccccad..",
+    "bbbbbcccccaa..",
+    "bbbbcccccca.dd",
+    "bbbaaccccaa..d",
+    "bb.aacccaaa..d",
+    "....aacaaa...d",
+    "....aacaaa....",
+    ".....aaaa....."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Io Tidal Flex",
+    "id": "Tarikan Pasang Surut Io"
+  },
+  "motif": "io-tidal-flex"
+}

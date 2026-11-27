@@ -1,0 +1,32 @@
+{
+  "id": "kepler22-12-spacesuit-glove",
+  "size": 14,
+  "solution": [
+    ".cbbbbbbbbcddd",
+    "cccbbbbbddddbb",
+    ".cccaaaddccbbb",
+    ".bcccaddccabbb",
+    ".aaccddccaaaa.",
+    ".aaacdcccb....",
+    ".aaaadccb.....",
+    ".aaaadccc.....",
+    ".adaddccc.....",
+    ".aadddcccc....",
+    ".aaadccbccc...",
+    ".aaaccbbbcccc.",
+    ".aaccbbbbbbccc",
+    "...cc.......cc"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Mangrove Roots",
+    "id": "Akar Bakau"
+  },
+  "motif": "alien-mangrove-roots"
+}

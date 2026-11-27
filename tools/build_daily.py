@@ -7,7 +7,7 @@ from pathlib import Path
 from star_battle import canonical_grid, neighbors, solve
 
 OUTPUT = Path(__file__).resolve().parents[1] / "data" / "daily"
-COUNTS = (18, 17, 17, 17, 17, 17, 17)
+COUNTS = (53, 52, 52, 52, 52, 52, 52)
 # Each weekday uses a disjoint range of search effort.
 BANDS = ((13, 15), (16, 23), (24, 29), (30, 38), (39, 48), (49, 65), (66, float("inf")))
 SIZES = (6, 6, 7, 7, 8, 8, 9)

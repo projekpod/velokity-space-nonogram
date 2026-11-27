@@ -1,0 +1,30 @@
+{
+  "id": "neptune-09-moon-base",
+  "size": 12,
+  "solution": [
+    "....aaaaa...",
+    "..aaaaaaaa..",
+    ".ddddaaaaaa.",
+    "dddadddaaaaa",
+    "bbbcccccdddd",
+    "abbcccccaaaa",
+    "aaaaaaaaaaaa",
+    "aaaaaabbbbba",
+    "daaaabbbbbdb",
+    ".ddaaabdddd.",
+    "..ddddddaa..",
+    "....aaaaa..."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Great Dark Spot",
+    "id": "Bintik Gelap Besar"
+  },
+  "motif": "great-dark-spot"
+}

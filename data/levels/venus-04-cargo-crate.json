@@ -1,0 +1,28 @@
+{
+  "id": "venus-04-cargo-crate",
+  "size": 10,
+  "solution": [
+    "bbbbccb...",
+    "bcccccb...",
+    "bcccbbb...",
+    "bbaaaddd..",
+    "bbbbaaadd.",
+    ".b.cccaad.",
+    "..c..acd..",
+    "......cbb.",
+    ".......cbb",
+    "......c..b"
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Akatsuki Orbiter",
+    "id": "Pengorbit Akatsuki"
+  },
+  "motif": "akatsuki-orbiter"
+}

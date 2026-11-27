@@ -1,0 +1,29 @@
+{
+  "id": "uranus-04-moon-boot",
+  "size": 11,
+  "solution": [
+    ".......aa..",
+    "..aa..aaaaa",
+    ".aadddddaaa",
+    "aaddddddaaa",
+    "bbbbbaaaccb",
+    "bccccbccccb",
+    "bbccccccbb.",
+    "bbbbbbbbb..",
+    "bbbbbbbb...",
+    "bbbbbbbb...",
+    "bbbbbb....."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "High-Latitude Cloud",
+    "id": "Awan Lintang Tinggi"
+  },
+  "motif": "high-latitude-cloud"
+}

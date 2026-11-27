@@ -1,0 +1,30 @@
+{
+  "id": "uranus-14-survey-rover",
+  "size": 12,
+  "solution": [
+    "..cd.cc.....",
+    "...cdddc....",
+    "...cc.dcc...",
+    "..aacaadaa..",
+    ".abbcbbddba.",
+    "abbbcbbbdbba",
+    "aabbbcbbddaa",
+    ".aaaacaaada.",
+    "..aaacaaad..",
+    "...ccccccd..",
+    "....cccccd..",
+    ".....cc.cc.."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Epsilon Ring",
+    "id": "Cincin Epsilon"
+  },
+  "motif": "epsilon-ring"
+}

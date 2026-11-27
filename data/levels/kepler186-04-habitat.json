@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-04-habitat",
+  "size": 12,
+  "solution": [
+    "........d...",
+    "dddd....dd..",
+    "ddddd..dddd.",
+    "cccccd.ccccc",
+    "ddddcccccdcc",
+    "dddddcccdddd",
+    ".ddddddd....",
+    "....ddaaa...",
+    "...ddaaaaaa.",
+    "aaaaaaaaaaaa",
+    "aabbbbaaabbb",
+    "......bbb..."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Canopy Glider",
+    "id": "Peluncur di Atas Kanopi"
+  },
+  "motif": "canopy-glider"
+}

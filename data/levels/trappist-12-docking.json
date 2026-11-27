@@ -1,0 +1,31 @@
+{
+  "id": "trappist-12-docking",
+  "size": 13,
+  "solution": [
+    "bddddd..dccc.",
+    "dbbddddddd...",
+    "dbbbbddddd...",
+    "dddbbbddddd..",
+    "ddddbbbddddd.",
+    "dddddbbdbdddd",
+    "dddd..dbbbdd.",
+    "dddd..ccbddd.",
+    "ddd...cc.....",
+    ".dd....cc....",
+    ".d....aaa....",
+    "......aaaaa..",
+    ".....aaaaaaa."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Radio Array Dish",
+    "id": "Piringan Susunan Radio"
+  },
+  "motif": "radio-array-dish"
+}

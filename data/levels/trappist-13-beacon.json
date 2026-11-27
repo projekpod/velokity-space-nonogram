@@ -1,0 +1,31 @@
+{
+  "id": "trappist-13-beacon",
+  "size": 13,
+  "solution": [
+    "...bbbbbbb.aa",
+    "..bbb.bcbbaaa",
+    ".bb...cc..baa",
+    "bb...ccc...bb",
+    "b...ddcccaaab",
+    "baa.dddcaa.bb",
+    ".baaddaac..b.",
+    ".bbbaaaccbbb.",
+    "...bbbcccb...",
+    ".....cccc....",
+    "....cccc.....",
+    "...cccccc....",
+    "...ccccccc..."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Clockwork Orrery",
+    "id": "Model Mekanis Orbit"
+  },
+  "motif": "clockwork-orrery"
+}

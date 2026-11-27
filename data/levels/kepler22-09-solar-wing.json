@@ -1,0 +1,32 @@
+{
+  "id": "kepler22-09-solar-wing",
+  "size": 14,
+  "solution": [
+    "aaaaa........a",
+    "aaaaaadd....aa",
+    "aaaaaadd...aaa",
+    "aaaaaadd.aaaaa",
+    "aaaaaaddaaaaaa",
+    "aaaaaaddaaaaaa",
+    "aaaaadddddaaab",
+    "aaaaddddddbbbb",
+    "aabcccbbcccbbb",
+    "bbcccccccccbbb",
+    "ccccccccccccbb",
+    "ccccccccccccbb",
+    "bccccccccccccc",
+    "...ccccccccccc"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Raft Habitat",
+    "id": "Habitat Rakit"
+  },
+  "motif": "raft-habitat"
+}

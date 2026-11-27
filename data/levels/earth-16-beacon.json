@@ -1,0 +1,31 @@
+{
+  "id": "earth-16-beacon",
+  "size": 13,
+  "solution": [
+    "....aadaa....",
+    "..aaabdccaa..",
+    ".aabbbdccccc.",
+    ".abbaadccccc.",
+    "aabaabdcccccc",
+    "abbabbdcccccc",
+    "ddddddddddddd",
+    "abbabbdbcccca",
+    "aabaabdbaacca",
+    ".abbaadaabba.",
+    ".acccbdbbbaa.",
+    "..cccbdbaaa..",
+    "....aadaa...."
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Weather Radar",
+    "id": "Radar Cuaca"
+  },
+  "motif": "weather-radar"
+}

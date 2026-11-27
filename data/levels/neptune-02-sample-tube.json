@@ -1,0 +1,29 @@
+{
+  "id": "neptune-02-sample-tube",
+  "size": 11,
+  "solution": [
+    "bbbbaaaaaaa",
+    "bbbbaaaaaaa",
+    "bbbbbaaddaa",
+    "bbbbbddd.aa",
+    "bbbbddd...c",
+    "bbbddaa..c.",
+    "bbbadaaac..",
+    "bbbaddcc...",
+    "bbbaddcaa..",
+    "bbbaddcaa..",
+    "bbbadaaca.."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Triton Slope Streak",
+    "id": "Jejak di Lereng Triton"
+  },
+  "motif": "triton-slope-streak"
+}

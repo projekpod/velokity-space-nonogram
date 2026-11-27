@@ -1,0 +1,33 @@
+{
+  "id": "lhs1140-16-crescent",
+  "size": 15,
+  "solution": [
+    "bbbbbc.........",
+    "cccbcccccaaaaa.",
+    "cccccccccccaaa.",
+    "bbcccbbbcccaaa.",
+    "bbbbbbbbcccaaa.",
+    "bbbbbbbbccbaaa.",
+    "bbbbbbbbccccaa.",
+    "bbbbbbbbbbccca.",
+    "aabbbbbbbbbcca.",
+    "aabbbbbbbbbbcc.",
+    "addddbbbbbbbcc.",
+    "adaabdbbbddddd.",
+    "ddaaadddddbbbcc",
+    "ddaaabdbbbbbbcc",
+    "daaaaabbbbbbacc"
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Bathymetry Map",
+    "id": "Peta Kedalaman Laut"
+  },
+  "motif": "bathymetry-map"
+}

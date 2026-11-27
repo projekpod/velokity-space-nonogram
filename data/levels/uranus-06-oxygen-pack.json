@@ -1,0 +1,29 @@
+{
+  "id": "uranus-06-oxygen-pack",
+  "size": 11,
+  "solution": [
+    "cbbbbbb....",
+    "bccbbbbbb..",
+    "bbbccbbbbb.",
+    "bdbbbcccbbb",
+    "bddbbbbbccb",
+    ".....ddbbcc",
+    "......ddbbc",
+    "......bdd..",
+    "..cc..b....",
+    "b..cc.b....",
+    "...bcb....."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Uranus Ring Scan",
+    "id": "Pemindaian Cincin Uranus"
+  },
+  "motif": "uranus-ring-scan"
+}

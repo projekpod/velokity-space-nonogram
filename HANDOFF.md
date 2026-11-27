@@ -1,6 +1,37 @@
-# Handoff — Velokity Autopilot & CI hygiene
+# Handoff — Velokity Content v1.1
 
-Branch `codex/t12b-autopilot` berangkat dari `origin/main` setelah merge T12. Oz membuka atau meninjau PR dan merge setelah review Claude. Katalog puzzle saat ini berisi 60 Nonogram, 12 puzzle Ronde Bonus, dan 120 papan Rasi Bintang.
+Branch `codex/t13-content-v11` berangkat dari `origin/main` setelah merge T12b. Tindak lanjut review Claude selesai dan T13 ditandai tuntas. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+
+## Review T13 · Gambar album
+
+- Gambar ulang 240 papan pada 12 planet. Earth memuat ISS, roket, satelit pengamat Bumi, benua, dan aurora. Jupiter memuat Bintik Merah Besar, gunung api Io, dan Juno. Neptunus memuat geiser Triton dan Voyager 2. Album eksoplanet memuat alat observasi, rover, dan bentang alam bertema planet masing-masing.
+- Katalog memuat 296 motif berbeda. Cakupan kotak pembatas gambar baru minimum 86,22% dan rata-rata 99,64%. Setiap gambar baru menyisakan paling banyak satu baris dan satu kolom kosong. Ketiga album awal sama persis dengan versi sebelum review. ID seluruh 300 level tetap berlaku untuk progres tersimpan.
+- Setiap planet baru memiliki tiga ukuran berturut-turut, dengan 6, 8, lalu 6 level per ukuran. Median ambiguitas petunjuk naik antarukuran dan antarplanet. `tools/check_levels.py` memeriksa cakupan, baris dan kolom kosong, pengulangan gambar atau motif, dan progresi ukuran serta membuktikan satu solusi per papan.
+- Sumber `art/levels_src/*.txt` untuk planet baru memakai header `slug-id-lama|judul-en|judul-id|motif`, diikuti kisi persegi. Gunakan ID motif yang sama untuk varian dari gambar yang sama. Jalankan `python3 tools/build_levels.py` untuk memperbarui JSON.
+- Gate lokal lulus dengan 549 pemeriksaan Godot, 17 tes Python, 12 tes Node, dan ekspor Web serta Web QA. Web mentah 41.385.139 byte. Chromium memperbarui 12 PNG di `docs/qa/` dari build Web QA. PNG terbesar 141.069 byte. Ulangi pengambilan dengan perintah tangkapan album di bawah setelah mengubah gambar.
+
+## Review T13 · Deploy Pages
+
+- **Quality gates** dapat dipicu manual. Job `publish-pages` berjalan setelah gate Web dan Chromium lulus pada push atau dispatch dari `main`.
+- Upload dan deploy menggunakan nama artefak `github-pages-${{ github.run_attempt }}`. Setelah percobaan deploy gagal, job menunggu 30 detik dan mencoba sekali lagi dengan nama yang sama. Kegagalan pada percobaan kedua membuat job gagal.
+- YAML dan persyaratan input kedua action Pages sudah diperiksa. Uji deploy dari **Actions → Quality gates → Run workflow → main** setelah merge, lalu buka URL Pages di bawah.
+
+## T13 · Bagian 3 selesai
+
+- Generator Rasi Bintang menghasilkan 53 papan Senin dan 52 papan per hari untuk Selasa sampai Minggu. 245 papan baru ditambahkan dan 120 file lama tetap sama. Ukuran papan, band kesulitan hari, bonus harian, dan progres tanggal tersimpan tetap berlaku.
+- `python3 tools/build_daily.py` mereproduksi katalog. Validator membuktikan satu solusi per papan dan tes Godot membuktikan 365 hari dari Senin mengunjungi semua papan tepat sekali.
+- Gate lokal akhir lulus dengan 549 pemeriksaan Godot, 10 tes Python, 12 tes Node, validator puzzle, serta ekspor Web dan Web QA tanpa error atau warning. Web mentah 41.376.371 byte. ZIP itch.io 11.175.300 byte. Profil ponsel fisik tetap terbuka untuk T11.
+
+## T13 · Bagian 1 selesai
+
+- Papan 12×12 ke atas mendukung pinch, seret untuk geser, roda mouse, Shift-seret, dan tombol Fit. Saat diperbesar, sisi isi sel minimal 44 px layar. Petunjuk baris dan kolom tetap berada di tepi. Efek streak dan pose menahan papan mengikuti bidang papan, dan gambar kemenangan kembali ke Fit.
+- Tes Godot mencakup batas zoom dan akurasi tap pada 12×12 dan 15×15. `?qa=zoom` menyalakan fixture 15×15 di build Web QA untuk uji gestur Chromium melalui `.github/qa/release-check.mjs`.
+- Pada checkpoint Bagian 1, katalog masih 60 Nonogram, 12 puzzle bonus, dan 120 puzzle harian. Web Bagian 1 sekitar 41,16 MB. Jalankan gate lokal di bawah sebelum push berikutnya.
+
+## T13 · Progres dan hadiah album
+
+- Katalog berisi 15 album dengan masing-masing 20 papan. Daftar planet memakai halaman dan album memakai pemilih planet. Papan 11×11 juga mendukung zoom dan pan.
+- Buka planet setelah 15 dari 20 puzzle planet sebelumnya selesai. Album baru membayar bonus koin sekali saat puzzle ke-20 tersimpan. Hadiah per level tetap maksimum 60, dan iklan pengganda hanya menghitung hadiah level. Hadiah kostum untuk tiga album lama tetap berlaku.
 
 ## T12b · Autopilot & CI hygiene
 
@@ -57,7 +88,7 @@ Run #25 gagal saat reload terakhir. Predikat asinkron `waitForFunction` dianggap
 
 https://projekpod.github.io/velokity-space-nonogram/
 
-Job `publish-pages` mengunduh artefak Web rilis dari run yang sama dan menerbitkannya setelah job `web` dan `qa-screenshots` lulus pada push ke `main`. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Cek status job dan buka URL di atas setelah merge pertama. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
+Job `publish-pages` mengunduh artefak Web rilis dari run yang sama. Di **Settings → Pages → Build and deployment**, sumber harus **GitHub Actions**. Playwright berhasil membuka ekspor rilis dari URL direktori proyek lokal yang setara dan memuat WASM, PCK, dan SDK lewat path relatif.
 
 ## Pemeriksaan T11b
 
@@ -99,6 +130,7 @@ Dengan server berjalan, jalankan di terminal lain. Set `PLAYWRIGHT_CHROMIUM_EXEC
 
 ```sh
 node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
+node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
 node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
@@ -106,6 +138,6 @@ node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 
 ## Tiga langkah berikutnya
 
-1. Oz buka PR T12b, cek **Quality gates**, dan merge setelah review Claude. Jalankan Autopilot dari `main` untuk menguji secret dan aksesnya.
-2. T13 — Tambahkan papan 12×12 dan 15×15 dengan zoom/pan, naikkan katalog ke 300 Nonogram dan 365 puzzle harian, lalu sesuaikan kurva kesulitan. Mekanik kecil menyusul di T14.
-3. Ukur volume dan performa di ponsel kelas menengah, lalu jalankan QA Playgama dan portal lain sesuai `docs/RELEASE.md` untuk menutup T11 dan T11b.
+1. Oz review album dan run Quality gates terbaru pada `codex/t13-content-v11`, lalu tangani PR dan merge T13.
+2. Jalankan Quality gates manual dari `main` dan periksa deployment Pages.
+3. Lanjutkan T14. Uji audio, zoom, dan performa ponsel kelas menengah untuk T11 dan T11b.

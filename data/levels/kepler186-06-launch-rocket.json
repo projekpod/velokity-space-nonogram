@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-06-launch-rocket",
+  "size": 12,
+  "solution": [
+    ".........cc.",
+    ".....b..cccc",
+    ".....bb..ccc",
+    ".....bb..cc.",
+    "....dbb.....",
+    "....dbb.dd..",
+    "...ddbb.ddd.",
+    ".ddacccadddd",
+    "ddaccbbccaaa",
+    "accabbbbccaa",
+    "ccaaabbbaacd",
+    ".aaaaaabaaa."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Red Dwarf Sundial",
+    "id": "Jam Matahari Katai Merah"
+  },
+  "motif": "red-dwarf-sundial"
+}

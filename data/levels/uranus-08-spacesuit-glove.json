@@ -1,0 +1,30 @@
+{
+  "id": "uranus-08-spacesuit-glove",
+  "size": 12,
+  "solution": [
+    "....aadbbbbb",
+    "..aaaddbbbbb",
+    "daaaddbbbbbb",
+    "ddddcccccbbb",
+    "aaaacdddccbb",
+    "aaaacdddcbcb",
+    "aaaaccccbcbb",
+    "aaaaccccbcbb",
+    "aaaaaabbbbbb",
+    ".aaaaabbbbbb",
+    "..aaaabbbbbb",
+    "...aaabbbb.."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Ice Mantle Cutaway",
+    "id": "Penampang Mantel Es"
+  },
+  "motif": "uranus-mantle"
+}

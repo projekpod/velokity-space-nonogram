@@ -1,0 +1,29 @@
+{
+  "id": "neptune-05-eclipse",
+  "size": 11,
+  "solution": [
+    "...dd......",
+    "...dd......",
+    ".bbbd......",
+    "...bd......",
+    "...dddd....",
+    "..dddddda..",
+    "aaaadaaaaad",
+    "aaaaaaaaaca",
+    "aaaaaccaaaa",
+    "aaaaacaaaad",
+    ".aaaaaaaa.."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Liquid-Ice Laboratory",
+    "id": "Lab Es Bertekanan"
+  },
+  "motif": "liquid-ice-lab"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "jupiter-03-habitat",
+  "size": 12,
+  "solution": [
+    "..aaacaaa...",
+    ".aaaaaaaaa..",
+    ".aaaaaaaabb.",
+    "aaaaacabbabb",
+    "aaaacccbaaaa",
+    "aaaacdcaaaaa",
+    "aaaacccaaaaa",
+    "aaabbbbbaaab",
+    ".aabaaaaaab.",
+    ".baaaaaccaa.",
+    "ddddaaaaaaa.",
+    "....dddddddd"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Polar Cyclone Cluster",
+    "id": "Gugus Siklon Kutub"
+  },
+  "motif": "jupiter-cyclone-cluster"
+}

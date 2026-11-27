@@ -1,0 +1,30 @@
+{
+  "id": "uranus-09-solar-wing",
+  "size": 12,
+  "solution": [
+    "aaaaaa......",
+    "aaaaaaaa....",
+    "bbbaaaaaaa..",
+    "bbbbbcccccaa",
+    "ccccccccddcc",
+    "ccccbbadaaac",
+    "aaaabbdaaaaa",
+    "aaaabdaaaaaa",
+    "aaaddbbaaabb",
+    "dddaabbaabbb",
+    "aaaaaabbbbb.",
+    "aaaaaaabb..."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Shear Clouds",
+    "id": "Awan Berlapis Berlawanan"
+  },
+  "motif": "uranus-shear-clouds"
+}

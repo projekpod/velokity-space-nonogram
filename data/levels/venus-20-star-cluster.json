@@ -1,0 +1,30 @@
+{
+  "id": "venus-20-star-cluster",
+  "size": 12,
+  "solution": [
+    ".ddddddd....",
+    "ccccccccdd..",
+    "ccccccccccdd",
+    "ccccccccccc.",
+    ".aaaaaaacc..",
+    ".aaaaaaaaa..",
+    "..aaaabbaa..",
+    "..aaabbbaa..",
+    "..aaabbbcccc",
+    "..aaccccccc.",
+    "..cccaba....",
+    ".cc........."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Parker Solar Shield",
+    "id": "Pelindung Panas Parker"
+  },
+  "motif": "parker-shield"
+}

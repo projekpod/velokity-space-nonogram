@@ -1,0 +1,32 @@
+{
+  "id": "toi700-12-beacon",
+  "size": 14,
+  "solution": [
+    "....dddddd....",
+    "...ddccccdd...",
+    ".cccccccccdd..",
+    "cdcccccccccdd.",
+    ".dccccaaacccd.",
+    "ddcaac..aaccbb",
+    "ddcaa...cbbbd.",
+    "ddcaaa.bbbacd.",
+    ".dcaabbaaaacd.",
+    ".dcbbaaaaacdd.",
+    "..bbccaaccdd..",
+    ".bbddccccdd...",
+    "bb..dddddd....",
+    ".............."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Planet e Transit",
+    "id": "Transit Planet e"
+  },
+  "motif": "toi700-e-transit"
+}

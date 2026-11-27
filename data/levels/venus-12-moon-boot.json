@@ -1,0 +1,29 @@
+{
+  "id": "venus-12-moon-boot",
+  "size": 11,
+  "solution": [
+    ".bbbbbbbbb.",
+    "..aaaaaaa..",
+    "aaaaaaaaaaa",
+    "aaaccccaaaa",
+    ".cccccccca.",
+    "..dcccc.d..",
+    "..dd...dd..",
+    "...d...d...",
+    "...ddddd...",
+    "....bbb....",
+    "....bbb...."
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Cloud Balloon",
+    "id": "Balon Penjelajah Awan"
+  },
+  "motif": "cloud-balloon"
+}

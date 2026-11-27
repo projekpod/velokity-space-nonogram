@@ -1,0 +1,30 @@
+{
+  "id": "mercury-17-deep-space-probe",
+  "size": 12,
+  "solution": [
+    "baaaaaaaaaa.",
+    "bba.....aaa.",
+    "bbb......aa.",
+    "bbaaaaa..aaa",
+    "bb.....b.aaa",
+    "bbbd...bbaaa",
+    "bbbbdddabbaa",
+    "bbbbbbaaabaa",
+    "bbbbbaaaabaa",
+    "bbbbbaaaabaa",
+    "bbbbaaaabaaa",
+    "............"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Ghost Crater",
+    "id": "Jejak Kawah Purba"
+  },
+  "motif": "ghost-crater"
+}

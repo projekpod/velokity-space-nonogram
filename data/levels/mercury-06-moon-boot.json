@@ -1,0 +1,28 @@
+{
+  "id": "mercury-06-moon-boot",
+  "size": 10,
+  "solution": [
+    ".dd.......",
+    "dddaa.....",
+    ".daa......",
+    "..ac.bb.c.",
+    ".aacbbbccc",
+    ".a.bb.ccc.",
+    "a..bb.ccc.",
+    "....bccc..",
+    "....baac..",
+    "...aa....."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Mariner 10",
+    "id": "Wahana Mariner 10"
+  },
+  "motif": "mariner-ten"
+}

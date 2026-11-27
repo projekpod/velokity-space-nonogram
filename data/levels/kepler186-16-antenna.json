@@ -1,0 +1,32 @@
+{
+  "id": "kepler186-16-antenna",
+  "size": 14,
+  "solution": [
+    "bbbbbbccbb....",
+    "bbbbbbbccbb...",
+    "bbbbbbdccddd..",
+    "bdddddddccddb.",
+    "bdddddddccddbb",
+    "bdddddddcccdbb",
+    "bddaaaaacccbbb",
+    "ddaaaaaaccbbbb",
+    "ddaaaaaccaabbb",
+    "ddaaaacccabbbb",
+    "bbdaaaccaabbb.",
+    ".ddddccaabbbb.",
+    ".aaddddddbbd..",
+    ".....dddddddd."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Humidity Chamber",
+    "id": "Ruang Uji Kelembapan"
+  },
+  "motif": "humidity-chamber"
+}

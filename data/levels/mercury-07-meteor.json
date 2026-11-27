@@ -1,0 +1,29 @@
+{
+  "id": "mercury-07-meteor",
+  "size": 11,
+  "solution": [
+    "bbbbb......",
+    "bbbbbbbbbbb",
+    "abbbbbbbbbb",
+    "aaabbbbbbbb",
+    "aaaaabbbbbb",
+    "aaaaadbbbbb",
+    "baaddcdbbbb",
+    "badccccaabb",
+    "bcccccccaaa",
+    "bbbcaaaaab.",
+    "bbbbaabbb.."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Impact Melt Pool",
+    "id": "Kolam Lelehan Tumbukan"
+  },
+  "motif": "impact-melt-pool"
+}

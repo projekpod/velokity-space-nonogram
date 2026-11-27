@@ -1,0 +1,29 @@
+{
+  "id": "earth-01-cratered-moon",
+  "size": 11,
+  "solution": [
+    "dbacbbbbbb.",
+    "daaccbbbddd",
+    "bdaaddddbbb",
+    "adddccaabbb",
+    "aadaaccaabb",
+    "bbaaaccaaaa",
+    "bbbbaccaaaa",
+    "bbbbbccaaaa",
+    "bbbbbcccaaa",
+    "bbbbbacccca",
+    "........ccc"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Tectonic Plates",
+    "id": "Lempeng Tektonik"
+  },
+  "motif": "tectonic-plates"
+}

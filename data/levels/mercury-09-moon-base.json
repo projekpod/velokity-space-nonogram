@@ -1,0 +1,29 @@
+{
+  "id": "mercury-09-moon-base",
+  "size": 11,
+  "solution": [
+    ".aaa.......",
+    "bb.aaaaa...",
+    "bbbaaaaaaa.",
+    "bbbcccbbbb.",
+    "bccccccbbbb",
+    "bcccccccbbb",
+    "cccddddbbbb",
+    "ccccddbbbbb",
+    "cccccbbbbbb",
+    "bcccbbbbbbb",
+    "..bbbbbbb.."
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Polar Ice Crater",
+    "id": "Kawah Es Kutub"
+  },
+  "motif": "polar-ice-crater"
+}

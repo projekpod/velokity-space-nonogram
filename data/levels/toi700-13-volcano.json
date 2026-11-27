@@ -1,0 +1,32 @@
+{
+  "id": "toi700-13-volcano",
+  "size": 14,
+  "solution": [
+    "bbbbbbbbb.....",
+    "bbbbbbbbbbb...",
+    "bbbbbbbbcccc..",
+    "bbbbbaaaaacccc",
+    "bbbaaaaaaaaacc",
+    "baaaaabbccaacc",
+    "aaaabbbbcc....",
+    "aabbbbbc......",
+    "bbbbbb........",
+    "bbddddd.ddddd.",
+    "bddddddddddddd",
+    ".ddd....dddddd",
+    ".bdd......dddd",
+    "..d........ddd"
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Robotic Trail Dog",
+    "id": "Robot Anjing Penjelajah"
+  },
+  "motif": "trail-dog"
+}

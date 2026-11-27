@@ -1,0 +1,30 @@
+{
+  "id": "neptune-13-solar-wing",
+  "size": 12,
+  "solution": [
+    "a...acca....",
+    ".a..acca....",
+    ".aa..aa..aac",
+    "cca..aa.acaa",
+    "ccaccccaac.a",
+    ".a.ccdda..aa",
+    "a...cddcccaa",
+    "..ccaccccaca",
+    "cccaacc...ca",
+    "ccaa.cc....a",
+    "..a..cc....a",
+    ".a...cc....a"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Ammonia Snowflake",
+    "id": "Kristal Salju Amonia"
+  },
+  "motif": "ammonia-snowflake"
+}

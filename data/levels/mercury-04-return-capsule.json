@@ -1,0 +1,28 @@
+{
+  "id": "mercury-04-return-capsule",
+  "size": 10,
+  "solution": [
+    "aa........",
+    "aaabb....b",
+    "cccaabbbba",
+    "aaacaaacaa",
+    "aaacaaacaa",
+    "aaaacdddca",
+    "aaaaaacaac",
+    "aaaaaaacac",
+    ".aaaaaaacb",
+    "..aaaaaabb"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Ancient Lava Plain",
+    "id": "Dataran Lava Purba"
+  },
+  "motif": "ancient-lava-plain"
+}

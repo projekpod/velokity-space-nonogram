@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-14-deep-space-probe",
+  "size": 13,
+  "solution": [
+    ".......ddd...",
+    ".....ddddd...",
+    ".....dbbddd..",
+    "....dbbbbddd.",
+    ".dddbbbbbddd.",
+    "ddddbbbbbdddd",
+    "aaabbbbb.d...",
+    ".aaacccc.....",
+    ".bbbccccaaaa.",
+    "bbbbbb.....a.",
+    "bbbbbb.......",
+    ".ccccb.......",
+    ".cccccccc...."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Soil Microscope",
+    "id": "Mikroskop Tanah"
+  },
+  "motif": "soil-microscope"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "earth-17-radar",
+  "size": 13,
+  "solution": [
+    ".bbbbccc.....",
+    "bbbbbbcccccc.",
+    "bbbbbbbccbbbb",
+    ".cbbbbbbbbbb.",
+    "ddcccbbbbbbdd",
+    "..dd.....dd..",
+    "....d...d....",
+    ".....ddd.....",
+    "aaaaaddd..aaa",
+    "aaaadddddaaaa",
+    "bbbbbbbbaaaaa",
+    "aaaaaaabbaaaa",
+    ".aaaaaaabbbbb"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Parachute Splashdown",
+    "id": "Kapsul Mendarat di Laut"
+  },
+  "motif": "parachute-splashdown"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-07-lunar-buggy",
+  "size": 13,
+  "solution": [
+    "caaaabaaaa...",
+    "accaabbaaaa..",
+    "aaccbbbaaaaa.",
+    "aaaccbbaaaaa.",
+    "aaaaccbaaaaaa",
+    "aaaabcaaaaaaa",
+    "aaaabbcaaaaaa",
+    "aaabbaacaaaac",
+    "accbbaaacccca",
+    "aabbdddaaaaaa",
+    "abbbbbaaaaaaa",
+    "aabbbbbaaaaa.",
+    "aaabbbbbaa..."
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Creek Stepping Stones",
+    "id": "Batu Pijakan Sungai"
+  },
+  "motif": "creek-stepping-stones"
+}

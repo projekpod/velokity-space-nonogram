@@ -1,0 +1,33 @@
+{
+  "id": "lhs1140-17-solar-wing",
+  "size": 15,
+  "solution": [
+    "....ccccccccc..",
+    "......ddddd....",
+    "......cccdbbb..",
+    ".....cccccbbbb.",
+    "..bcccbbbcbbbb.",
+    "bcccbbbbbbbbbb.",
+    "ccbbbbbbbbbbbb.",
+    "bbbbbbbbbbbbbb.",
+    "bbbbbbbbaaaabb.",
+    "bbbbbbaaaaaaa..",
+    "bbbbbaaaaddaaa.",
+    "aaaaaaadddddddd",
+    "aaaaaddddaaddd.",
+    "addddddaaaaaaa.",
+    "..ddd.........."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Ocean Moonrise",
+    "id": "Bulan Terbit di Atas Samudra"
+  },
+  "motif": "ocean-moonrise"
+}

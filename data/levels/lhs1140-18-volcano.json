@@ -1,0 +1,33 @@
+{
+  "id": "lhs1140-18-volcano",
+  "size": 15,
+  "solution": [
+    ".dddddd........",
+    ".bddddddd......",
+    "bbbdddddddd....",
+    ".bbbddddddddddd",
+    ".bbbddddddddddd",
+    ".dbbddddddddd.d",
+    ".dbbbdd..ddd..d",
+    ".ddbbd....ccccc",
+    ".ddbbb..ccccaa.",
+    ".ccccbbccccccaa",
+    ".dd.cccc.cccccc",
+    ".aaa..bbaaaccaa",
+    ".aaaaaaaaaaaaaa",
+    ".aaaaaaaaaaaaaa",
+    "...aaaaaaaaaa.."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Glacier Calving",
+    "id": "Runtuhan Gletser"
+  },
+  "motif": "glacier-calving"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "neptune-06-spiral-galaxy",
+  "size": 11,
+  "solution": [
+    "dd.........",
+    ".dda.......",
+    "aaaddaa....",
+    "baaaaddddd.",
+    "ccccccaaadd",
+    "aabbacccaad",
+    "a..bbaacca.",
+    "....bbaacca",
+    "......baaaa",
+    ".......baab",
+    "........bb."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Arcs of Adams",
+    "id": "Busur Cincin Adams"
+  },
+  "motif": "adams-ring-arcs"
+}

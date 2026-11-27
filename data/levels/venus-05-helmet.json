@@ -1,0 +1,28 @@
+{
+  "id": "venus-05-helmet",
+  "size": 10,
+  "solution": [
+    "...ddbdd..",
+    "...ddbdd..",
+    ".....b....",
+    ".....b....",
+    ".aaaaacc..",
+    "dddddddddd",
+    ".ddddddddd",
+    ".b.....b..",
+    "bbcddddcb.",
+    "b..cbbb.bb"
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Venera Lander",
+    "id": "Wahana Pendarat Venera"
+  },
+  "motif": "venera-lander"
+}

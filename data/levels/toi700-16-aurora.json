@@ -1,0 +1,33 @@
+{
+  "id": "toi700-16-aurora",
+  "size": 15,
+  "solution": [
+    "bbb........bbb.",
+    "bbbddddddbbbbb.",
+    "bbbddddddddbbb.",
+    "bbbdddddddddbbb",
+    "bbdbbbdddddddbb",
+    "bbbbbbbddddddb.",
+    "bbbbbbbbbddddb.",
+    "cccbbaaabbddb..",
+    "bbccbaabbbbb...",
+    "bbbbccbbbbb....",
+    ".bbbbccaaa.....",
+    ".bbbbbbcccc....",
+    ".bbbbbbbbb.cccc",
+    ".bbbbbbbb......",
+    "cccccccc......."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "TESS Camera Array",
+    "id": "Susunan Kamera TESS"
+  },
+  "motif": "tess-cameras"
+}

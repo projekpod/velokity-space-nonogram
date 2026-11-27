@@ -1,0 +1,30 @@
+{
+  "id": "mercury-15-survey-rover",
+  "size": 12,
+  "solution": [
+    "cccccccccccc",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbbbb",
+    "bbbbbbbbbaa.",
+    ".bbbbaaccaaa",
+    "....aaccaaaa",
+    "....ccaaaaaa",
+    "....cdddaadd",
+    "..dddaadddaa",
+    "ddaaaaaaaaaa",
+    "aaaaaaaaaaaa"
+  ],
+  "palette": {
+    "a": "#d0b49f",
+    "b": "#e08469",
+    "c": "#fff0b4",
+    "d": "#9ad9e2"
+  },
+  "planet": "mercury",
+  "title": {
+    "en": "Dust Horizon",
+    "id": "Horizon Debu"
+  },
+  "motif": "mercury-dust-horizon"
+}

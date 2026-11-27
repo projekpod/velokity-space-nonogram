@@ -1,0 +1,30 @@
+{
+  "id": "earth-14-volcano",
+  "size": 12,
+  "solution": [
+    ".c..........",
+    "bbcc......c.",
+    "dbbbc....cdd",
+    "dddbbccbbddb",
+    "...ddbcdd.bb",
+    "....ddd.....",
+    "........a...",
+    "..bb...aaa..",
+    ".bbbb.abbaa.",
+    ".aaabbbaaba.",
+    "aaaabaaaaaba",
+    "aaaaaaaaaabb"
+  ],
+  "palette": {
+    "a": "#4fb8ef",
+    "b": "#6bc39e",
+    "c": "#fff1bc",
+    "d": "#cdf3f2"
+  },
+  "planet": "earth",
+  "title": {
+    "en": "Aurora Curtain",
+    "id": "Tirai Aurora"
+  },
+  "motif": "aurora-curtain"
+}

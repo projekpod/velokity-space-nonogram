@@ -1,0 +1,30 @@
+{
+  "id": "neptune-08-moon-boot",
+  "size": 12,
+  "solution": [
+    "...bbb......",
+    ".bbbbbb.....",
+    "bbbaaaabbbb.",
+    "baaaaaaaabbb",
+    "aacaaaaaaacc",
+    "acccccccccca",
+    "cccaddccccaa",
+    "ccaddddaaaaa",
+    "aaddaddaaaaa",
+    "addaaaddddaa",
+    "ddaaaaadddbb",
+    "bbaaaabbbbb."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Cloud Scooter",
+    "id": "Awan Scooter"
+  },
+  "motif": "neptune-scooter"
+}

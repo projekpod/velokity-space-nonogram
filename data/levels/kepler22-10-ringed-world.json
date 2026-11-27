@@ -1,0 +1,32 @@
+{
+  "id": "kepler22-10-ringed-world",
+  "size": 14,
+  "solution": [
+    "........dd....",
+    "aa......dcddd.",
+    "aaaa...dccbcd.",
+    "aaaadccdbbbbdd",
+    "adddddcdbbbbcd",
+    "ddddddddbbbbb.",
+    "caaaaadddbbbb.",
+    "caaaabddddbbb.",
+    "ccccccdbddddd.",
+    "cccccddbbbdddd",
+    "ccccdcccbbb...",
+    ".cddccccbbb...",
+    ".ddccccccb....",
+    "d............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Salinity Prism",
+    "id": "Prisma Pengukur Salinitas"
+  },
+  "motif": "salinity-prism"
+}

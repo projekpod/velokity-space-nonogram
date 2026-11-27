@@ -1,0 +1,31 @@
+{
+  "id": "jupiter-09-docking",
+  "size": 13,
+  "solution": [
+    "cccc.........",
+    "cccccccbbbbb.",
+    "aaaaacccbbbb.",
+    "aaaaaaaccbbbb",
+    "aaaabbacccaaa",
+    "aaaabcaacccaa",
+    "aaacccccccccc",
+    "abbcddcccaacc",
+    "bbbbbbaaaaaab",
+    "bbbbbbaaabbb.",
+    "bbbbbbbbbbb..",
+    "bbbbbbbbbb...",
+    "bbbbbbbbbb..."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Infrared Hot Spot",
+    "id": "Titik Panas Inframerah"
+  },
+  "motif": "jupiter-infrared-hot-spot"
+}

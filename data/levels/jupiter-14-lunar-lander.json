@@ -1,0 +1,31 @@
+{
+  "id": "jupiter-14-lunar-lander",
+  "size": 13,
+  "solution": [
+    "dd...aaa.....",
+    "ddccaaaaaa...",
+    "cddcc.aaaa...",
+    "ccdd..bbbaa..",
+    ".cddd..bbba..",
+    "..cddd..bba..",
+    "..bcddd..baa.",
+    "..bbcdddbba..",
+    "..abbccddda..",
+    "..aabcccddd..",
+    "...aaaccccdd.",
+    "....aaaacccdd",
+    "......a....dd"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Jupiter's Faint Ring",
+    "id": "Cincin Tipis Jupiter"
+  },
+  "motif": "jupiter-dust-ring"
+}

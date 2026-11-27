@@ -1,0 +1,33 @@
+{
+  "id": "kepler22-15-crescent",
+  "size": 15,
+  "solution": [
+    "ddddddddddddddd",
+    "ddddddddccddddd",
+    "dddddddccccdddd",
+    "dddddddccccdddd",
+    "dddddddccccddd.",
+    "..dddd.cccc....",
+    "a......ccccc..a",
+    "aaa....cccccaaa",
+    "aaaaa..ccc.aaaa",
+    "aaaaaaccaaaabaa",
+    "aaaaaacaaabbddd",
+    "ddbbaaabbbddddd",
+    "dddddddddddddbb",
+    "bbdddddddddbbbb",
+    "bbbbbddddbbbbbb"
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Ocean World Cloudbreak",
+    "id": "Celah Awan Dunia Samudra"
+  },
+  "motif": "ocean-cloudbreak"
+}

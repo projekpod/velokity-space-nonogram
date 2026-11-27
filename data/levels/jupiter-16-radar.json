@@ -1,0 +1,32 @@
+{
+  "id": "jupiter-16-radar",
+  "size": 14,
+  "solution": [
+    "bbbbcccccc....",
+    "bbbbccccccc...",
+    "bbbbcccccccc..",
+    "bbbcccccccccc.",
+    "bbbccc.cdddccc",
+    "bbbbb..ddcccc.",
+    "bbbbbbd.ccccc.",
+    "bbbbbd...ccc..",
+    "bbbbddb..cc...",
+    "dddddbb......a",
+    "ddddbbbbdd.aaa",
+    "ddddddbdddaaaa",
+    "..bbbbdddaaaaa",
+    "...bbbbddaaaaa"
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Ganymede Ice Drill",
+    "id": "Pengebor Es Ganimede"
+  },
+  "motif": "ganymede-ice-drill"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "kepler22-16-survey-rover",
+  "size": 15,
+  "solution": [
+    "aaaaaaddbaa....",
+    "aaaaaaddbbbaa..",
+    "aaaaaaddbbbbba.",
+    "bbbbbbddbbbbba.",
+    "abbbbbddbbbbba.",
+    "abbbbbdddbbbbb.",
+    "abbbbdddddbbbb.",
+    "abbbccdbccddbb.",
+    "aabccdbbbcdddb.",
+    "accbddbbbccddb.",
+    "ccabddbbbccbdd.",
+    "aadddbbbbcbbdd.",
+    "addddbbbbcbbddd",
+    "dddaabbbccbbbdd",
+    ".d............."
+  ],
+  "palette": {
+    "a": "#a9d2fd",
+    "b": "#8c79d6",
+    "c": "#e8e9a7",
+    "d": "#afefd9"
+  },
+  "planet": "kepler22",
+  "title": {
+    "en": "Freshwater Delta",
+    "id": "Delta Air Tawar"
+  },
+  "motif": "freshwater-delta"
+}

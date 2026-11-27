@@ -1,0 +1,31 @@
+{
+  "id": "lhs1140-02-sample-tube",
+  "size": 13,
+  "solution": [
+    "cbbbbaa......",
+    "ccaaaaaaab...",
+    "bcddddddddb..",
+    "bcdddddddddd.",
+    "bbcaacaaccadb",
+    "bbcaacaaccaab",
+    "bbccccaaccaab",
+    "bbdddcddccaab",
+    "bbdaccddccaab",
+    "bbbaacaaccaab",
+    ".bbaacaaccdbb",
+    "..baaaabbbddb",
+    "...babbbbbddb"
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Ice Core Storage Rack",
+    "id": "Rak Penyimpan Inti Es"
+  },
+  "motif": "core-storage-rack"
+}

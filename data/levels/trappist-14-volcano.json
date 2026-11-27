@@ -1,0 +1,31 @@
+{
+  "id": "trappist-14-volcano",
+  "size": 13,
+  "solution": [
+    "bb...........",
+    "bbb...d......",
+    ".b...ddd.....",
+    "...ccdd......",
+    "...cc...bb...",
+    ".............",
+    "...........ca",
+    "..........ccc",
+    "....dd....ccc",
+    "....dddbb.aaa",
+    "......bbbaaaa",
+    "......abaaaa.",
+    "..aaaaaaaaaa."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Seven-Planet Lineup",
+    "id": "Barisan Tujuh Planet"
+  },
+  "motif": "seven-planet-lineup"
+}

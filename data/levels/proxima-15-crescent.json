@@ -1,0 +1,30 @@
+{
+  "id": "proxima-15-crescent",
+  "size": 12,
+  "solution": [
+    "bbaaaaaaa...",
+    "bbbbbbbaaa..",
+    "bbbbbcccbaa.",
+    "bbbbcccccaa.",
+    "bbbccdbbcca.",
+    "bbbccbdbcca.",
+    "bbbcbbdbbcc.",
+    "bbccbcddbcc.",
+    "bbccccccccc.",
+    "bbccccbbaaa.",
+    "abccbbbaaaa.",
+    "aaabbbbaaa.."
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Mineral Fossil",
+    "id": "Fosil Mineral"
+  },
+  "motif": "mineral-fossil"
+}

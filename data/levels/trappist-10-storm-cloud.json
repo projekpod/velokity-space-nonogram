@@ -1,0 +1,31 @@
+{
+  "id": "trappist-10-storm-cloud",
+  "size": 13,
+  "solution": [
+    ".a...........",
+    ".aaa......ccc",
+    ".aaaa....ccca",
+    ".acccc.accaaa",
+    "cccccccccaaaa",
+    "dcaaaaacaaaaa",
+    ".daaaaaaaaaab",
+    ".daaaaaaaabbb",
+    ".adaaaaabbbbb",
+    ".aadaaabbbbbb",
+    ".aadaabbbbbbb",
+    ".aaadbbbbbbbb",
+    ".baadbbbbbbb."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Tidal Ice Bridge",
+    "id": "Jembatan Es Pasang Surut"
+  },
+  "motif": "tidal-ice-bridge"
+}

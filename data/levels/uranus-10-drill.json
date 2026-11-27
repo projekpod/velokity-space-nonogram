@@ -1,0 +1,30 @@
+{
+  "id": "uranus-10-drill",
+  "size": 12,
+  "solution": [
+    "..ccccccc...",
+    ".cddccccccc.",
+    ".cccddddddc.",
+    "ccccccccccdd",
+    "bbcccccccccc",
+    "baaaacccaaab",
+    "aaaaaaaaaaaa",
+    "aaaaaaaadaaa",
+    "baaaaaaddaa.",
+    ".ddddddabbb.",
+    "..bbbbbbbb..",
+    "...bbbbbb..."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Polar Hood",
+    "id": "Selubung Awan Kutub"
+  },
+  "motif": "uranus-polar-hood"
+}

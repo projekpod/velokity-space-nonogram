@@ -1,0 +1,31 @@
+{
+  "id": "neptune-19-radio-dish",
+  "size": 13,
+  "solution": [
+    "ddddddcc.....",
+    "dddddddc.....",
+    "dddddddcc....",
+    "ddddddddcc...",
+    "ddddddbbdcc..",
+    "ddd...bbbdcc.",
+    "dd...bbbb.dc.",
+    "d...bbbbb.dd.",
+    "dddbbbbbbaddd",
+    "..ddbbbbbaadd",
+    "....ddbbaaadd",
+    ".....ddaaa..d",
+    ".......da...."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Ring Shepherd",
+    "id": "Satelit Penjaga Cincin"
+  },
+  "motif": "ring-shepherd"
+}

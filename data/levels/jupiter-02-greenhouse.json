@@ -1,0 +1,30 @@
+{
+  "id": "jupiter-02-greenhouse",
+  "size": 12,
+  "solution": [
+    "aaaaadda....",
+    "aaaadddda...",
+    "aadaadddaa..",
+    "aaaaaaaaaaa.",
+    "aaaaaaaaddaa",
+    "aaaaaaadddaa",
+    "cccccccdddaa",
+    "bbbbaaccddab",
+    ".bbbbbadccbb",
+    ".bbbbbbddccb",
+    "..bbbbddbbbb",
+    "..bbbbdbb..."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "Atmospheric Lightning",
+    "id": "Petir di Atmosfer Jupiter"
+  },
+  "motif": "jupiter-lightning"
+}

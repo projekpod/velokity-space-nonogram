@@ -1,0 +1,31 @@
+{
+  "id": "uranus-18-radio-dish",
+  "size": 13,
+  "solution": [
+    "aaaaaaa...d..",
+    "aaaaaacc..dbb",
+    "aaaaaccc..dbb",
+    "aaaaccc...ddb",
+    "aaaa.c....bdb",
+    "aaaa.cc...bdb",
+    "aaaa.cc..bbbd",
+    "aaacccc.bbbbd",
+    "aaaccccbbbbbb",
+    "aaacc..bbbbaa",
+    "aa.cc.bbbbbaa",
+    "a..cc.bbbbabb",
+    "..........a.."
+  ],
+  "palette": {
+    "a": "#8fe7e3",
+    "b": "#7792d1",
+    "c": "#ffffc7",
+    "d": "#bff5df"
+  },
+  "planet": "uranus",
+  "title": {
+    "en": "Ariel Canyon",
+    "id": "Ngarai Ariel"
+  },
+  "motif": "ariel-canyon"
+}

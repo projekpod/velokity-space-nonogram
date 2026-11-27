@@ -1,0 +1,30 @@
+{
+  "id": "kepler186-01-helmet",
+  "size": 12,
+  "solution": [
+    "bbbbcbbbb...",
+    "bccbbcbbbbb.",
+    "accbbbcbcbbb",
+    "aaccccccccbb",
+    "aaacccccaccc",
+    "aadaaaacaddd",
+    "aadddddcdddb",
+    "aaaaaaacaaab",
+    "aaaddaacaabb",
+    "adddddacabbb",
+    "dddbaddddddd",
+    "......dddddd"
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Terraced Seedbeds",
+    "id": "Bedeng Benih Bertingkat"
+  },
+  "motif": "terraced-seedbeds"
+}

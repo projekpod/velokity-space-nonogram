@@ -85,10 +85,11 @@ func _bounced(tile: Rect2, cell: Vector2i) -> Rect2:
 	return tile.grow(-inset)
 
 
-func _paint_glow(grid: Rect2, edge: float) -> void:
+func _paint_glow(grid: Rect2, edge: float, painter: CanvasItem = null) -> void:
+	var canvas: CanvasItem = self if painter == null else painter
 	for index: int in _rows:
 		var row := Rect2(grid.position + Vector2(0, index * edge), Vector2(grid.size.x, edge))
-		draw_rect(row, Color(Color("#93f2e4"), 0.20 * _rows[index] / GLOW_SECONDS))
+		canvas.draw_rect(row, Color(Color("#93f2e4"), 0.20 * _rows[index] / GLOW_SECONDS))
 	for index: int in _columns:
 		var column := Rect2(grid.position + Vector2(index * edge, 0), Vector2(edge, grid.size.y))
-		draw_rect(column, Color(Color("#93f2e4"), 0.20 * _columns[index] / GLOW_SECONDS))
+		canvas.draw_rect(column, Color(Color("#93f2e4"), 0.20 * _columns[index] / GLOW_SECONDS))

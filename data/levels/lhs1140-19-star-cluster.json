@@ -1,0 +1,33 @@
+{
+  "id": "lhs1140-19-star-cluster",
+  "size": 15,
+  "solution": [
+    ".ddb.aaaaa.....",
+    ".ddbbbbbbaa....",
+    ".ddbbbbbbbba...",
+    ".ddaaaaaaabbb..",
+    "bddaaaaaaaabbb.",
+    "bddaaaaaaaaabc.",
+    "bddaaaaaaaacccc",
+    "bddaa.aaaaccca.",
+    "bddd...aacccaa.",
+    "aadd....cccaaa.",
+    "aadd....ccaaaa.",
+    "aadddddcccaaaa.",
+    "aaadddddccdaaa.",
+    "aaaa...cccddddd",
+    "...........ddd."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Vented Ice Cave",
+    "id": "Gua Es Berventilasi"
+  },
+  "motif": "vented-ice-cave"
+}

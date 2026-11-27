@@ -1,0 +1,33 @@
+{
+  "id": "toi700-19-robot-arm",
+  "size": 15,
+  "solution": [
+    "...bbbc.......c",
+    "..bbbcccb....c.",
+    ".bbbccccb...cc.",
+    "bbbbccccbb..c..",
+    "bbbcccccbb.cc..",
+    "bbbbcccbbbcc...",
+    "bbbbbcbaacca...",
+    ".bbbbbaaccaaa..",
+    "..bbbaaccaaaaa.",
+    "...cccccdddaaa.",
+    ".ccccadddddddaa",
+    "....aadddddddd.",
+    ".....aaddddddd.",
+    "......adddddd..",
+    ".......ddddd..."
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Twin Worlds",
+    "id": "Dua Dunia Bersaudara"
+  },
+  "motif": "toi700-twin-worlds"
+}

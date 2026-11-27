@@ -1,0 +1,31 @@
+{
+  "id": "jupiter-12-relay-satellite",
+  "size": 13,
+  "solution": [
+    "bbbbb........",
+    "bbbbbbbb.....",
+    "bbbbbbbb.....",
+    ".bbbbbbb.....",
+    ".bbbbddbb.ddd",
+    ".ddddddddddaa",
+    "...ddcdd.aaaa",
+    "..dddddddaaaa",
+    "..dddddddaaaa",
+    "..ddddddaaaa.",
+    "...ddddaaaaa.",
+    "....daaaaaaa.",
+    ".......aaaaa."
+  ],
+  "palette": {
+    "a": "#ffb68d",
+    "b": "#cb7da1",
+    "c": "#ffdf99",
+    "d": "#e4e9ff"
+  },
+  "planet": "jupiter",
+  "title": {
+    "en": "JUICE Flyby",
+    "id": "Lintasan Wahana JUICE"
+  },
+  "motif": "juice-flyby"
+}

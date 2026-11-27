@@ -1,0 +1,31 @@
+{
+  "id": "trappist-08-lunar-buggy",
+  "size": 13,
+  "solution": [
+    "..a..........",
+    ".daaaa...d...",
+    ".ddaaaaadd...",
+    "aaddaaaadda..",
+    "aaaddbbddaa..",
+    "abbddbbddbaa.",
+    "abbbddddcbaaa",
+    "abbbdddcccaaa",
+    "aabcdddcccaaa",
+    "aaccdddcccaaa",
+    "acccddcccaaaa",
+    "ccccddcccaaaa",
+    "accccccaaaaaa"
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Crater Garden",
+    "id": "Kebun Dalam Kawah"
+  },
+  "motif": "crater-garden"
+}

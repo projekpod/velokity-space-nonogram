@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-13-ringed-world",
+  "size": 14,
+  "solution": [
+    "aaaaaaaaaa....",
+    "aaaaaaaaaaaa..",
+    "aaaaaaaaaccccc",
+    "..ddd..ccccccc",
+    "..dddccccaaaaa",
+    "acccccccddaaaa",
+    "a.cccc.ddddaaa",
+    "a.ddd..ddddccc",
+    "a........cccca",
+    "a.......ccccca",
+    "aa....cccccc.a",
+    "aa.cccccccc...",
+    ".acccccccc....",
+    ".aa.ccc......."
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Harbour Float Garden",
+    "id": "Kebun Terapung di Teluk"
+  },
+  "motif": "harbour-float-garden"
+}

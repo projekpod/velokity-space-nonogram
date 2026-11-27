@@ -1,6 +1,6 @@
 extends RefCounted
 
-const WEEKDAY_COUNTS := [18, 17, 17, 17, 17, 17, 17]
+const WEEKDAY_COUNTS := [53, 52, 52, 52, 52, 52, 52]
 const REWARDS := [10, 15, 20, 25, 30, 40, 60]
 const SECONDS_PER_DAY := 86400
 const MAX_DAY := 3652059

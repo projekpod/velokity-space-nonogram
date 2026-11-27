@@ -1,0 +1,29 @@
+{
+  "id": "proxima-09-crater-rim",
+  "size": 11,
+  "solution": [
+    "...bbbbbb..",
+    ".bbbbbbbbb.",
+    "bccbbcbbbbb",
+    "ccccbcbddbb",
+    "ccccbcdaacb",
+    "baabbcdaccc",
+    "baaaadaaccc",
+    "baaaadaacc.",
+    "baaadaab...",
+    ".abbdaa....",
+    "...bbab...."
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Alien Seedpod",
+    "id": "Polong Benih Alien"
+  },
+  "motif": "alien-seedpod"
+}

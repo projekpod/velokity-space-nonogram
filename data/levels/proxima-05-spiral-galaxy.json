@@ -1,0 +1,28 @@
+{
+  "id": "proxima-05-spiral-galaxy",
+  "size": 10,
+  "solution": [
+    "d.a.......",
+    "ad........",
+    "aadd......",
+    "aaaad...dd",
+    ".aaaadddaa",
+    "....aaaaaa",
+    ".bb.baaaab",
+    "bbbb.b.bbb",
+    "bbbb......",
+    ".bbbbbbbbb"
+  ],
+  "palette": {
+    "a": "#fcb099",
+    "b": "#967bd7",
+    "c": "#ffdc73",
+    "d": "#c0e8ef"
+  },
+  "planet": "proxima",
+  "title": {
+    "en": "Horizon Spectrum",
+    "id": "Spektrum di Horizon"
+  },
+  "motif": "horizon-spectrum"
+}

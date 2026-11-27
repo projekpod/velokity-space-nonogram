@@ -1,0 +1,29 @@
+{
+  "id": "venus-09-black-hole",
+  "size": 11,
+  "solution": [
+    ".....c.....",
+    "...cccc....",
+    "ccccaaca...",
+    "bbbaaaaaa..",
+    "baaaaaaaab.",
+    "aaaaaaaaaab",
+    "aaaaadaaaab",
+    "aaaddaddaab",
+    "aadaaaaaaaa",
+    "aaaaaaaaaaa",
+    "aaaaaaaaaaa"
+  ],
+  "palette": {
+    "a": "#ffd39a",
+    "b": "#f2759e",
+    "c": "#fef5bd",
+    "d": "#a387d7"
+  },
+  "planet": "venus",
+  "title": {
+    "en": "Venus Highlands",
+    "id": "Dataran Tinggi Venus"
+  },
+  "motif": "venus-highlands"
+}

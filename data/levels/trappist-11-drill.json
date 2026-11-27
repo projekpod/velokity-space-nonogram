@@ -1,0 +1,31 @@
+{
+  "id": "trappist-11-drill",
+  "size": 13,
+  "solution": [
+    "bbbbbbb......",
+    "bbbbbbbb...c.",
+    "bbddddbbccccc",
+    "dddddddcccccc",
+    ".cc..bddccccc",
+    "..c...addcccc",
+    ".cc...acddddc",
+    ".ccc..a..dddd",
+    ".ccc.aa..d...",
+    "..caaaaadd...",
+    ".acaaaaadaa..",
+    ".acaaaaadaaa.",
+    "aacaaaadaaaa."
+  ],
+  "palette": {
+    "a": "#efa584",
+    "b": "#716ccf",
+    "c": "#a5ebd6",
+    "d": "#ffe1a6"
+  },
+  "planet": "trappist",
+  "title": {
+    "en": "Interferometer Baseline",
+    "id": "Garis Dasar Interferometer"
+  },
+  "motif": "interferometer-baseline"
+}

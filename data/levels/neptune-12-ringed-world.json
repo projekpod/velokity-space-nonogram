@@ -1,0 +1,30 @@
+{
+  "id": "neptune-12-ringed-world",
+  "size": 12,
+  "solution": [
+    "......aaa...",
+    "...ddaaaaba.",
+    "....daaabba.",
+    "..aaadaabba.",
+    "baaaaadaab..",
+    "bbbbbaada...",
+    "bbbbbaadd.dd",
+    "bbbbbbaaddd.",
+    "bbbbbba..d..",
+    "bbbbbba.....",
+    ".bbbbb......",
+    ".bbbbb......"
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Hippocamp Moonlet",
+    "id": "Bulan Kecil Hippocamp"
+  },
+  "motif": "hippocamp-moonlet"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "toi700-03-cratered-moon",
+  "size": 13,
+  "solution": [
+    "ddaddddd.....",
+    "daaabbddd....",
+    "daaabbbbdd...",
+    "dbaabbdddd...",
+    "dbabbdddddd..",
+    "dbbbbdccdddd.",
+    "bbbbbcccdddd.",
+    "bbbbbccccdddd",
+    "bbbbbcccccddd",
+    "bbbddcccccccd",
+    "bddddcccccccc",
+    "...ddcccccccc",
+    ".....cccccccc"
+  ],
+  "palette": {
+    "a": "#d4afec",
+    "b": "#7af1d2",
+    "c": "#ffd788",
+    "d": "#e2f5ff"
+  },
+  "planet": "toi700",
+  "title": {
+    "en": "Crystal Harvest Scoop",
+    "id": "Sekop Pengambil Kristal"
+  },
+  "motif": "crystal-harvest-scoop"
+}

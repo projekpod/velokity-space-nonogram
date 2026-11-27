@@ -1,0 +1,32 @@
+{
+  "id": "lhs1140-08-spiral-galaxy",
+  "size": 14,
+  "solution": [
+    "ddddddddd.....",
+    "dddddddddddd..",
+    "ddddddddddddd.",
+    "ddddddddddbbd.",
+    "dddddddddbbbb.",
+    ".dddddddbbbbbb",
+    ".dd..ddbbbbbbb",
+    "...ccccccbbbbb",
+    "...ccccccbbbbb",
+    "baaaaaacbbbbbb",
+    "baaaaaaaabbbbb",
+    "baaaaddbbbbbbb",
+    "bbbbbddbbbbbbb",
+    "bbbbbbdbbbbbbb"
+  ],
+  "palette": {
+    "a": "#71c7e4",
+    "b": "#5575bd",
+    "c": "#ffcf9d",
+    "d": "#d1e9fa"
+  },
+  "planet": "lhs1140",
+  "title": {
+    "en": "Under-Ice Lantern",
+    "id": "Lentera Bawah Es"
+  },
+  "motif": "under-ice-lantern"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "neptune-15-comet",
+  "size": 13,
+  "solution": [
+    "bbaabbbcc....",
+    "dbaaabbccccc.",
+    "ddadabbbccccc",
+    "bdadabbbccccc",
+    "bddadabbbcccc",
+    "bbdadabbbbccc",
+    ".bdaadbbbbbcc",
+    ".bbdaddbbbb..",
+    ".bbdaadbbbb..",
+    ".bbbdadbbb...",
+    "ccccdaadbcccc",
+    ".cccccbccccc.",
+    "..bbccccc...."
+  ],
+  "palette": {
+    "a": "#5b9eff",
+    "b": "#5b73cb",
+    "c": "#b6f0ff",
+    "d": "#e1c7ff"
+  },
+  "planet": "neptune",
+  "title": {
+    "en": "Cloud Spectrometer",
+    "id": "Spektrometer Awan"
+  },
+  "motif": "cloud-spectrometer"
+}

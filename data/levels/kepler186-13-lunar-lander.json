@@ -1,0 +1,31 @@
+{
+  "id": "kepler186-13-lunar-lander",
+  "size": 13,
+  "solution": [
+    "bbbbaa.......",
+    "bbaa.........",
+    "baa....cccccb",
+    "a...ccccccabb",
+    "a.ccccaaaaaaa",
+    "a....aaaaaaaa",
+    "acc..aaaaaaaa",
+    "a..caaaaaaaaa",
+    "a..caaaaaaaaa",
+    "aa..caaaaaaaa",
+    "aa..caaaaaabb",
+    "aa..caaaabbbb",
+    "aa..caaabbbbb"
+  ],
+  "palette": {
+    "a": "#a1db8f",
+    "b": "#4bada6",
+    "c": "#fff3a6",
+    "d": "#ded6fb"
+  },
+  "planet": "kepler186",
+  "title": {
+    "en": "Buried Ice Core",
+    "id": "Inti Es Terkubur"
+  },
+  "motif": "buried-ice-core"
+}
