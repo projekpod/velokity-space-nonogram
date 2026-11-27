@@ -37,6 +37,9 @@ func _process(delta: float) -> void:
 		state.result = screen._result.is_visible_in_tree()
 		state.lives = screen._puzzle.lives
 		state.marks = screen._puzzle._remaining
+		state.boardSize = screen._puzzle.size
+		state.twistTip = is_instance_valid(screen._twist_tip) and screen._twist_tip.is_visible_in_tree()
+		state.holdingBoard = screen._streak._holding
 		state.first = screen.first_puzzle
 		state.step = screen.tutorial_step
 		state.combo = screen._peak_lines

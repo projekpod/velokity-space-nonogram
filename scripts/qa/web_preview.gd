@@ -18,11 +18,13 @@ const MetaScreen := preload("res://ui/meta_screen.gd")
 const NonogramScreen := preload("res://ui/nonogram_screen.gd")
 const Twists := preload("res://scripts/nonogram/twists.gd")
 const TwistTip := preload("res://ui/twist_tip.gd")
+const STORE_BOARD := "toi700-19-robot-arm"
+const PREVIEW_FILLED_ROWS := 12
 
 
 static func open(main: Main) -> bool:
 	var route: Variant = JavaScriptBridge.eval("new URLSearchParams(window.location.search).get('qa')", true)
-	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary", "zoom", "twists"]:
+	if route not in ["menu", "game", "win", "daily", "mascot", "reactions", "combo", "bonus", "album", "shop", "celebration", "store-cover", "store-icon", "playthrough", "preview", "streak", "space", "cats", "shop-legendary", "zoom", "twists", "store-zoom", "store-twist", "store-preview"]:
 		return false
 	if route not in ["playthrough", "preview"]:
 		_seed_progress(main)
@@ -34,9 +36,27 @@ static func open(main: Main) -> bool:
 				main._play(0)
 			else:
 				_open_zoom(main)
-			var observer := Playthrough.new()
-			observer.main = main
-			main.add_child(observer)
+		"store-zoom", "store-preview":
+			var index := main._levels.find_custom(func(level: Dictionary) -> bool: return level.id == STORE_BOARD)
+			var screen := _open_store_puzzle(main, index)
+			if screen == null:
+				push_error("The store video board could not start")
+				return false
+			screen._puzzle.set_block_signals(true)
+			_fill_rows(screen, PREVIEW_FILLED_ROWS if route == "store-preview" else 8)
+			screen._puzzle.set_block_signals(false)
+			screen._board.queue_redraw()
+			if route == "store-zoom":
+				await main.get_tree().process_frame
+				await main.get_tree().process_frame
+				var frame := screen._board._grid()
+				var center := frame.get_center()
+				screen._board._zoom_at(frame.size.x / screen._puzzle.size * 1.37, center, center)
+		"store-twist":
+			var screen := _open_store_puzzle(main, main._planet_levels("venus")[0], false)
+			if screen == null:
+				push_error("The store twist tip could not start")
+				return false
 		"store-cover", "store-icon":
 			var art := StoreArt.new()
 			art.icon_only = route == "store-icon"
@@ -113,9 +133,28 @@ static func open(main: Main) -> bool:
 			if not await _open_celebration(main):
 				push_error("The QA album could not reach a tier four celebration")
 				return false
+	if route in ["playthrough", "preview", "zoom", "store-zoom", "store-twist", "store-preview", "streak", "shop-legendary"]:
+		var observer := Playthrough.new()
+		observer.main = main
+		main.add_child(observer)
 	var document := JavaScriptBridge.get_interface("document")
 	document.documentElement.setAttribute("data-velokity-qa-screen", route)
 	return true
+
+
+static func _open_store_puzzle(main: Main, index: int, skip_tip := true) -> NonogramScreen:
+	if index < 0:
+		return null
+	var level := main._levels[index]
+	var progress: Dictionary = main._save.data.nonogram
+	var previous := Catalog.previous_planet(level.planet)
+	for earlier in main._planet_levels(previous).slice(0, Catalog.PLANET_CLEAR_REQUIREMENT):
+		progress[main._levels[earlier].id] = {"reward": 30, "doubled": false}
+	if main._levels[index - 1].planet == level.planet:
+		progress[main._levels[index - 1].id] = {"reward": 30, "doubled": false}
+	if skip_tip:
+		main._save.data.twist_tips[level.twist.kind] = true
+	return main._play(index)
 
 
 static func _open_twists(main: Main) -> void:

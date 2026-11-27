@@ -7,7 +7,13 @@ Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR
 - Project dan preset Android memakai versi 1.1.0. `version/code` Android naik ke 2. Web dan Web QA membaca versi project.
 - `CHANGELOG.md` mencatat perbedaan 1.0 dan 1.1. Teks toko EN/ID menjelaskan 300 gambar di 15 dunia, zoom, enam aturan, 365 Rasi Bintang, dan toko.
 - `docs/RELEASE.md` memuat langkah mengganti build di halaman itch.io dan memilih ZIP dalam dengan `index.html` di akar.
-- Reproduksi build dan tes dengan perintah di bawah. Empat screenshot, dua preview video, dan verifikasi Bridge mock masih menjadi pekerjaan T15.
+- Reproduksi build dan tes dengan perintah di bawah.
+
+## T15 · Bagian 2 selesai
+
+- Empat PNG 720×1280 di `docs/store/` menampilkan zoom papan Twin Worlds 15×15, tip Sel Terungkap, Velokity menahan papan retak, dan Savannah Legendaris. PNG terbesar 168.249 byte.
+- Preview 1920×1080 dan 1080×1620 masing-masing berdurasi 15,27 detik. Web QA membuka papan Twin Worlds dari katalog dengan sebagian baris terisi. Chromium merekam 21 isian lewat klik biasa, kombo, dan gambar berwarna setelah menang. CI menerbitkan kedua MP4 dalam artefak `velokity-store-videos`.
+- Gate lokal lulus dan ekspor Web mentah 41.412.535 byte. Kedua video serta keempat PNG dihasilkan dan diperiksa secara lokal. Verifikasi ZIP itch.io dengan Bridge mock masih terbuka.
 
 ## T14 · Bagian 0 selesai
 
@@ -91,8 +97,8 @@ Godot 4.7.2 lulus impor, 514 pemeriksaan, serta ekspor Web dan Web QA tanpa erro
 
 - Save baru langsung membuka Moon 01. Tiga langkah tutorial bisa dilewati sambil papan tetap bisa dimainkan. Hasil kemenangan pertama menawarkan tombol Menu. Progres, hadiah, dan penyelesaian onboarding tersimpan dalam satu transaksi. Save lama masuk menu seperti sebelumnya.
 - Banner Bridge hanya diminta saat gameplay yang mendukungnya pada viewport lanskap selebar minimal 600 CSS px. Layout mengikuti tinggi strip yang diukur dari elemen DOM, termasuk perubahan ukuran saat bermain. Perubahan kelayakan banner mengikuti event resize browser. Interstitial melalui Bridge diajukan saat hasil ditutup. Bridge mengatur jeda 90 detik. FakeAds mempertahankan batas level, waktu sesi, dan cooldown.
-- `docs/store/` berisi ikon 512×512, favicon 64×64, seluruh cover CrazyGames dan itch.io, tiga thumbnail GameDistribution, empat screenshot gameplay 720×1280, dan teks EN/ID. File terbesar 160.141 byte. `docs/.gdignore` tetap aktif. `art/icon.png` bersumber dari ikon toko.
-- Playwright merekam pengisian sel, kombo, dan kemenangan Moon 01 melalui input biasa. Dua MP4 H.264 berdurasi 15,27 detik. Lanskap 1920×1080 berukuran 842.612 byte, potret 1080×1620 berukuran 1.135.515 byte. Job `qa-screenshots` membuat artefak `velokity-store-videos` saat push branch `codex/**` atau pada PR. Oz mengambilnya dari bagian **Artifacts** pada run **Quality gates** yang hijau.
+- `docs/store/` berisi ikon 512×512, favicon 64×64, seluruh cover CrazyGames dan itch.io, tiga thumbnail GameDistribution, empat screenshot gameplay 720×1280, dan teks EN/ID. `docs/.gdignore` tetap aktif. `art/icon.png` bersumber dari ikon toko.
+- Oz mengambil video T15 dari **Artifacts** → **velokity-store-videos** pada run **Quality gates** yang hijau.
 - Panduan rilis `docs/RELEASE.md` memuat file dan kolom unggahan serta cek per portal, berurutan dari itch.io hingga GameDistribution. `docs/privacy.md` menjelaskan save browser dan penggunaan SDK portal.
 - Preset Android menargetkan API 36 dan AAB arm64 dengan package `com.projekpod.velokity`. AAB bertanda tangan menunggu Android SDK dan signing key lokal. Repo tidak berisi keystore.
 
@@ -155,11 +161,12 @@ node .github/qa/capture.mjs http://127.0.0.1:8765/ build/t14-qa twists
 node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
+node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/t15-store gameplay
 node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 ```
 
 ## Tiga langkah berikutnya
 
-1. Ambil empat screenshot gameplay dan rekam dua preview dari build Web QA saat ini.
-2. Verifikasi build rilis itch.io dengan Bridge mock, lalu jalankan gate lokal.
-3. Centang T15 setelah semua bagian selesai. Push branch dan tunggu Quality gates hijau.
+1. Uji ZIP itch.io di iframe lokal dengan Bridge mock. Periksa kontrol iklan dan tautan Traktir.
+2. Jalankan gate lokal, tandai T15 selesai, push, lalu tunggu Quality gates hijau.
+3. Oz review MP4 dan screenshot dari commit yang sama sebelum memperbarui halaman itch.io.

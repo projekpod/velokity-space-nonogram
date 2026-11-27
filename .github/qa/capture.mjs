@@ -89,7 +89,7 @@ try {
     assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${screen} changed release onboarding`);
     console.log(`Captured ${screen}.png and verified the release ignores ?qa=${screen}`);
   }
-  for (const route of only ? [] : ["store-icon", "store-cover", "preview", "playthrough", "zoom"]) {
+  for (const route of only ? [] : ["store-icon", "store-cover", "preview", "playthrough", "zoom", "store-zoom", "store-twist", "store-preview"]) {
     const queriedRelease = await capture(`web/index.html?qa=${route}`);
     assert.deepEqual(queriedRelease.firstPuzzle, release.firstPuzzle, `QA ${route} changed release onboarding`);
     console.log(`Verified the release ignores ?qa=${route}`);

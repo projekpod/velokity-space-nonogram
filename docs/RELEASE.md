@@ -6,7 +6,7 @@ Urutan rilis Web adalah **itch.io → Playgama → CrazyGames Basic Launch → G
 
 1. Buka [GitHub Actions → Quality gates](https://github.com/projekpod/velokity-space-nonogram/actions/workflows/quality.yml). Pilih run hijau untuk commit yang akan dirilis, lalu gulir ke **Artifacts**. Masuk ke GitHub jika diminta.
 2. Unduh **`velokity-itch`** dan ekstrak ZIP unduhan sekali. File di dalamnya adalah **`velokity-itch.zip`**. Unggah file di dalam itu sebagai build Web. `index.html` sudah ada di akar arsip.
-3. Unduh **`velokity-store-videos`** dari run yang sama. Ekstrak `preview-landscape.mp4` dan `preview-portrait.mp4`. Keduanya menunjukkan pengisian kotak, kombo, dan kemenangan. Artefak tersedia setelah job **qa-screenshots** selesai.
+3. Unduh **`velokity-store-videos`** dari run yang sama. Ekstrak `preview-landscape.mp4` dan `preview-portrait.mp4`. Keduanya menunjukkan papan 15×15, kombo, dan gambar setelah menang. Artefak tersedia setelah job **qa-screenshots** selesai.
 4. Ambil gambar dari [`docs/store/`](store/) di commit yang sama. Buka file lalu pilih **Download raw file**. Pakai [teks EN/ID](store/TEXT.md) dan [privasi EN/ID](privacy.md). Jika ada kolom **Privacy Policy URL**, pakai [halaman privasi di main](https://github.com/projekpod/velokity-space-nonogram/blob/main/docs/privacy.md) setelah merge dan pastikan bisa dibuka tanpa login.
 5. Isi penilaian usia berdasarkan isi aktual. Target kesesuaian internal adalah **PEGI 12 / IGRS 3+**. Cantumkan klasifikasi resmi hanya setelah diterbitkan oleh lembaga atau portal yang berwenang. Deskripsi publik memakai “untuk semua kalangan”.
 
