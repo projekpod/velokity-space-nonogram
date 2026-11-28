@@ -1,12 +1,12 @@
 # Panduan rilis Web untuk Oz
 
-Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → GameDistribution**. Buat draf dan jalankan cek di bawah pada tiap portal. Jika portal meminta perubahan, selesaikan cek portal itu sebelum menerbitkannya.
+Urutan rilis Web adalah **itch.io → Playgama → CrazyGames Basic Launch → GameDistribution**. Buat draf dan jalankan cek di bawah pada tiap portal. Jika portal meminta perubahan, selesaikan cek portal itu sebelum menerbitkannya.
 
 ## Siapkan file di ponsel
 
 1. Buka [GitHub Actions → Quality gates](https://github.com/projekpod/velokity-space-nonogram/actions/workflows/quality.yml). Pilih run hijau untuk commit yang akan dirilis, lalu gulir ke **Artifacts**. Masuk ke GitHub jika diminta.
 2. Unduh **`velokity-itch`** dan ekstrak ZIP unduhan sekali. File di dalamnya adalah **`velokity-itch.zip`**. Unggah file di dalam itu sebagai build Web. `index.html` sudah ada di akar arsip.
-3. Unduh **`velokity-store-videos`** dari run yang sama. Ekstrak `preview-landscape.mp4` dan `preview-portrait.mp4`. Keduanya menunjukkan pengisian kotak, kombo, dan kemenangan. Artefak tersedia setelah job **qa-screenshots** selesai.
+3. Unduh **`velokity-store-videos`** dari run yang sama. Ekstrak `preview-landscape.mp4` dan `preview-portrait.mp4`. Keduanya menunjukkan papan 15×15, kombo, dan gambar setelah menang. Artefak tersedia setelah job **qa-screenshots** selesai.
 4. Ambil gambar dari [`docs/store/`](store/) di commit yang sama. Buka file lalu pilih **Download raw file**. Pakai [teks EN/ID](store/TEXT.md) dan [privasi EN/ID](privacy.md). Jika ada kolom **Privacy Policy URL**, pakai [halaman privasi di main](https://github.com/projekpod/velokity-space-nonogram/blob/main/docs/privacy.md) setelah merge dan pastikan bisa dibuka tanpa login.
 5. Isi penilaian usia berdasarkan isi aktual. Target kesesuaian internal adalah **PEGI 12 / IGRS 3+**. Cantumkan klasifikasi resmi hanya setelah diterbitkan oleh lembaga atau portal yang berwenang. Deskripsi publik memakai “untuk semua kalangan”.
 
@@ -22,9 +22,16 @@ Urutan rilis v1.0 adalah **itch.io → Playgama → CrazyGames Basic Launch → 
 
 - [ ] Launcher membuka Moon 01 di browser baru. Panduan bisa dilewati dan menu muncul setelah puzzle pertama.
 - [ ] Sentuhan, suara setelah input, dan save setelah muat ulang bekerja di pratinjau. Cek potret dan lanskap.
+- [ ] Saat Bridge melaporkan platform `mock` tanpa dukungan iklan, tombol iklan tidak tampil di puzzle, panel menang/kalah, atau toko. Tombol **Traktir Velokity** di menu membuka URL Trakteer yang dikonfigurasi.
 - [ ] Cover, screenshot, teks EN/ID, privasi, dan tautan Traktir tampil di halaman publik.
 
 [Dokumentasi unggah dan embed itch.io](https://itch.io/docs/creators/html5) · [Pengaturan halaman itch.io](https://itch.io/docs/creators/getting-started)
+
+### Update an existing itch.io page
+
+1. Buka **Edit game → Uploads** dan hapus ZIP build lama.
+2. Unggah `velokity-itch.zip` yang diekstrak dari artefak GitHub. **Pilih ZIP yang berisi `index.html` di akarnya. ZIP pembungkus artefak GitHub hanya berisi ZIP build.**
+3. Pastikan **This file will be played in the browser** tetap dicentang, lalu klik **Save**.
 
 ## 2. Playgama
 

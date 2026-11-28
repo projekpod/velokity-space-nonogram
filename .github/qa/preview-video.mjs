@@ -10,15 +10,21 @@ const [baseUrl, output] = process.argv.slice(2);
 assert(baseUrl && output, "Usage: node .github/qa/preview-video.mjs <base-url> <output-dir>");
 
 const duration = 15.25;
-const [moon] = await levels("", "moon-", 1);
+const revealSeconds = 2.5;
+const [level] = await levels("", "toi700-19-", 1);
+const moves = fills(level).filter(([, y]) => y >= 12);
+assert.equal(level.size, 15);
 const browser = await launch();
 
 async function record(page, directory, name, width, height) {
   const errors = watchErrors(page);
   await page.route("**/playgama-bridge.js", route => route.fulfill({ contentType: "application/javascript", body: "" }));
-  await openGame(page, new URL("web-qa/index.html?qa=preview", baseUrl), "preview");
+  await openGame(page, new URL("web-qa/index.html?qa=store-preview", baseUrl), "store-preview");
   const initial = await waitState(page, s => s.grid && s.state === 0);
-  assert.equal(initial.scene, moon.id);
+  assert.equal(initial.scene, level.id);
+  assert.equal(initial.boardSize, 15);
+  assert.equal(initial.marks, moves.length);
+  assert.equal(initial.combo, 0);
 
   const cdp = await page.context().newCDPSession(page);
   const frames = [];
@@ -32,25 +38,36 @@ async function record(page, directory, name, width, height) {
   await cdp.send("Page.startScreencast", { format: "jpeg", quality: 88, maxWidth: width, maxHeight: height, everyNthFrame: 1 });
   const start = performance.now();
   const waitUntil = ms => page.waitForTimeout(Math.max(0, start + ms - performance.now()));
-  const moves = fills(moon);
-  const combo = waitState(page, s => s.tier === 2 && s.combo >= 3 && s.state === 0);
+  const combo = waitState(page, s => s.tier === 2 && s.combo >= 3 && s.state === 0, 30_000);
+  void combo.catch(() => {}); // Surface an input or combo failure after the move loop.
   for (const [index, [x, y]] of moves.entries()) {
-    await waitUntil(850 + index * 690);
-    await cell(page, (await state(page)).grid, moon.size, x, y);
+    await waitUntil(900 + index * 400);
+    await cell(page, (await state(page)).grid, level.size, x, y);
+    const remaining = moves.length - index - 1;
+    await page.waitForFunction(expected => {
+      const snapshot = JSON.parse(document.documentElement.getAttribute("data-velokity-playthrough") ?? "{}");
+      return snapshot.marks === expected && snapshot.lives === 3;
+    }, remaining, { timeout: 12_000 });
   }
   const comboState = await combo;
-  const result = await waitState(page, s => s.state === 1 && s.result && s.tier === 0);
-  assert(result.combo >= comboState.combo && result.clears === 1);
-  await waitUntil((duration + 0.35) * 1000);
+  const result = await waitState(page, s => s.state === 1 && s.result && s.tier === 0, 25_000);
+  assert(result.combo >= comboState.combo && result.clears === initial.clears + 1);
+  await page.waitForTimeout(350); // Let the settled result reach the screencast stream.
+  const revealFrame = frames.length - 1;
+  await page.waitForTimeout((revealSeconds + 0.5) * 1000);
   await cdp.send("Page.stopScreencast");
   await Promise.all(writes);
   assert(frames.length >= 45, `Too few frames captured: ${frames.length}`);
+  assert(revealFrame > 0 && frames.length > revealFrame + 3, "The recording must include the settled win");
   assert.deepEqual(errors, []);
 
+  // Normalize runner timing while reserving the final seconds for the solved picture.
+  const beforeReveal = (duration - revealSeconds) / (frames[revealFrame].time - frames[0].time);
   const concat = frames.map((frame, index) => {
     const next = frames[index + 1];
+    const timing = index < revealFrame ? beforeReveal : 1;
     return next
-      ? `file '${frame.filename}'\nduration ${Math.max(next.time - frame.time, 0.001).toFixed(6)}`
+      ? `file '${frame.filename}'\nduration ${Math.max((next.time - frame.time) * timing, 0.001).toFixed(6)}`
       : `file '${frame.filename}'`;
   });
   await writeFile(join(directory, "frames.txt"), concat.join("\n") + "\n");

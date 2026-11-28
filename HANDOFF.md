@@ -1,6 +1,25 @@
-# Handoff — Velokity Content v1.1
+# Handoff — Velokity Release Refresh v1.1
 
-Branch `codex/t14-twists` berangkat dari `origin/main` setelah merge PR #14. T14 selesai. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+Branch `codex/t15-release-refresh` berangkat dari `origin/main` setelah merge PR #15. T15 selesai. Katalog berisi 300 Nonogram, 12 puzzle bonus, dan 365 Rasi Bintang.
+
+## T15 · Bagian 1 selesai
+
+- Project dan preset Android memakai versi 1.1.0. `version/code` Android naik ke 2. Web dan Web QA membaca versi project.
+- `CHANGELOG.md` mencatat perbedaan 1.0 dan 1.1. Teks toko EN/ID menjelaskan 300 gambar di 15 dunia, zoom, enam aturan, 365 Rasi Bintang, dan toko.
+- `docs/RELEASE.md` memuat langkah mengganti build di halaman itch.io dan memilih ZIP dalam dengan `index.html` di akar.
+- Reproduksi build dan tes dengan perintah di bawah.
+
+## T15 · Bagian 2 selesai
+
+- Empat PNG 720×1280 di `docs/store/` menampilkan zoom papan Twin Worlds 15×15, tip Sel Terungkap, Velokity menahan papan retak, dan Savannah Legendaris. PNG terbesar 168.249 byte.
+- Preview 1920×1080 dan 1080×1620 masing-masing berdurasi 15,27 detik. Web QA membuka papan Twin Worlds dari katalog dengan sebagian baris terisi. Chromium merekam 21 isian lewat klik biasa, kombo, dan gambar berwarna setelah menang. CI menerbitkan kedua MP4 dalam artefak `velokity-store-videos`.
+- Gate lokal dan Quality gates #61 lulus. Kedua video serta keempat PNG dihasilkan dan diperiksa.
+
+## T15 · Bagian 3 selesai
+
+- Chromium memakai SDK Bridge yang disertakan di build. Platform `mock` melaporkan rewarded, interstitial, dan banner tidak tersedia. Tombol iklan tersembunyi pada puzzle, panel kalah/menang, dan toko. Gameplay lanskap juga berjalan tanpa banner.
+- `velokity-itch.zip` diuji setelah diekstrak dan dimuat di iframe lokal. Tombol Traktir di build rilis membuka URL yang dikonfigurasi. Pengujian mencegat permintaan tautan agar tidak membuka situs pembayaran. Pembaruan halaman itch.io menunggu review dan merge.
+- Gate lokal lulus dengan 592 pemeriksaan Godot, 18 tes Python, 13 tes Node, validator, dan kedua ekspor Web. Web rilis berukuran 41.412.535 byte dan ZIP itch.io 11.198.065 byte. CI mengulangi uji ZIP melalui `.github/qa/itch-check.mjs`.
 
 ## T14 · Bagian 0 selesai
 
@@ -84,8 +103,8 @@ Godot 4.7.2 lulus impor, 514 pemeriksaan, serta ekspor Web dan Web QA tanpa erro
 
 - Save baru langsung membuka Moon 01. Tiga langkah tutorial bisa dilewati sambil papan tetap bisa dimainkan. Hasil kemenangan pertama menawarkan tombol Menu. Progres, hadiah, dan penyelesaian onboarding tersimpan dalam satu transaksi. Save lama masuk menu seperti sebelumnya.
 - Banner Bridge hanya diminta saat gameplay yang mendukungnya pada viewport lanskap selebar minimal 600 CSS px. Layout mengikuti tinggi strip yang diukur dari elemen DOM, termasuk perubahan ukuran saat bermain. Perubahan kelayakan banner mengikuti event resize browser. Interstitial melalui Bridge diajukan saat hasil ditutup. Bridge mengatur jeda 90 detik. FakeAds mempertahankan batas level, waktu sesi, dan cooldown.
-- `docs/store/` berisi ikon 512×512, favicon 64×64, seluruh cover CrazyGames dan itch.io, tiga thumbnail GameDistribution, empat screenshot gameplay 720×1280, dan teks EN/ID. File terbesar 160.141 byte. `docs/.gdignore` tetap aktif. `art/icon.png` bersumber dari ikon toko.
-- Playwright merekam pengisian sel, kombo, dan kemenangan Moon 01 melalui input biasa. Dua MP4 H.264 berdurasi 15,27 detik. Lanskap 1920×1080 berukuran 842.612 byte, potret 1080×1620 berukuran 1.135.515 byte. Job `qa-screenshots` membuat artefak `velokity-store-videos` saat push branch `codex/**` atau pada PR. Oz mengambilnya dari bagian **Artifacts** pada run **Quality gates** yang hijau.
+- `docs/store/` berisi ikon 512×512, favicon 64×64, seluruh cover CrazyGames dan itch.io, tiga thumbnail GameDistribution, empat screenshot gameplay 720×1280, dan teks EN/ID. `docs/.gdignore` tetap aktif. `art/icon.png` bersumber dari ikon toko.
+- Oz mengambil video T15 dari **Artifacts** → **velokity-store-videos** pada run **Quality gates** yang hijau.
 - Panduan rilis `docs/RELEASE.md` memuat file dan kolom unggahan serta cek per portal, berurutan dari itch.io hingga GameDistribution. `docs/privacy.md` menjelaskan save browser dan penggunaan SDK portal.
 - Preset Android menargetkan API 36 dan AAB arm64 dengan package `com.projekpod.velokity`. AAB bertanda tangan menunggu Android SDK dan signing key lokal. Repo tidak berisi keystore.
 
@@ -134,6 +153,7 @@ godot --headless --export-release 'Web QA' build/web-qa/index.html
 python3 tools/report_web_size.py build/web
 python3 tools/report_web_size.py build/web-qa
 python3 tools/package_itch.py build/web build/velokity-itch.zip
+python3 -m zipfile -e build/velokity-itch.zip build/itchio
 git diff --check origin/main
 npm --prefix .github/qa ci
 (cd .github/qa && npx playwright install chromium)
@@ -147,12 +167,14 @@ node .github/qa/capture.mjs http://127.0.0.1:8765/ build/qa-screenshots
 node .github/qa/capture.mjs http://127.0.0.1:8765/ build/t14-qa twists
 node .github/qa/capture-albums.mjs http://127.0.0.1:8765/ build/album-screenshots
 node .github/qa/release-check.mjs http://127.0.0.1:8765/
+node .github/qa/itch-check.mjs http://127.0.0.1:8765/
 node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/store
+node .github/qa/store-art.mjs http://127.0.0.1:8765/ build/t15-store gameplay
 node .github/qa/preview-video.mjs http://127.0.0.1:8765/ build/store-videos
 ```
 
 ## Tiga langkah berikutnya
 
-1. Oz review grid `twists.png` dan run Quality gates terbaru di `codex/t14-twists`, lalu tangani PR dan merge.
-2. Jalankan Autopilot dari `main` dengan PAT repo, lalu periksa log pembuatan PR biasa dan komentar ketika ada tugas yang memenuhi syarat.
-3. Lanjutkan T11. Ukur performa, audio, dan zoom sentuh pada ponsel kelas menengah, lalu teruskan QA portal untuk T11b.
+1. Oz review screenshot dan dua MP4 dari Quality gates terbaru, lalu tangani PR dan merge T15.
+2. Perbarui halaman itch.io dengan ZIP build dari run yang hijau dan ulangi cek di pratinjau portal.
+3. Lanjutkan T11 dengan uji performa, audio, dan zoom sentuh di ponsel kelas menengah.
